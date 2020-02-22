@@ -119,18 +119,21 @@ add_action( 'widgets_init', 'bolt_on_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
-function bolt_on_scripts() {
-	wp_enqueue_style( 'bolt-on-style', get_stylesheet_uri() );
+function bolt_on_assets() {
 
-	wp_enqueue_script( 'bolt-on-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	// Register Styles
+	$bolt_on_css_path = '/assets/css/bolt-on.min.css';
+	wp_enqueue_style( 'bolt-on-css', get_template_directory_uri() . $bolt_on_css_path, array(), filemtime( get_stylesheet_directory() . $bolt_on_css_path ), 'all' );
 
-	wp_enqueue_script( 'bolt-on-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
+	// Register Scripts
+	$bolt_on_js_path = '/assets/js/bolt-on.min.js';
+	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array(), filemtime( get_template_directory() . $bolt_on_js_path ), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'bolt_on_scripts' );
+add_action( 'wp_enqueue_scripts', 'bolt_on_assets' );
 
 /**
  * Implement the Custom Header feature.
