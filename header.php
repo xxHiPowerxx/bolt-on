@@ -25,24 +25,40 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bolt-on' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="ctnr-search-bar"></div>
+		<div class="ctnr-search-bar">
+			<input id="main-search" type="search" class="search" />
+			<button id="submit-search" type="submit" class="btn btn-submit btn-success">Search</button>
+		</div>
 		<div class="site-branding">
 			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			$custom_logo = get_custom_logo();
+			if ( $custom_logo ) :
+				echo $custom_logo;
+			else:
+				if ( is_front_page() && is_home() ) :
+					?>
+					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php
+				else :
+					?>
+					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php
+				endif;
+				$bolt_on_description = get_bloginfo( 'description', 'display' );
+				if ( $bolt_on_description || is_customize_preview() ) :
+					?>
+					<p class="site-description"><?php echo $bolt_on_description; /* WPCS: xss ok. */ ?></p>
+				<?php endif; ?>
+			<?php endif; // endif ( $custom_logo ) : ?>
+			<?php
+			/*   TODO: Create Widget Area for header-info
+			if ( is_active_sidebar( 'header-info' ) ) : ?>
+				<div class="header-info-wrapper">
+						<?php dynamic_sidebar( 'header-info' ); ?>
+				</div>
 				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$bolt_on_description = get_bloginfo( 'description', 'display' );
-			if ( $bolt_on_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $bolt_on_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
+			endif;*/
+			?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">

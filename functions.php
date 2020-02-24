@@ -122,12 +122,15 @@ add_action( 'widgets_init', 'bolt_on_widgets_init' );
 function bolt_on_assets() {
 
 	// Register Styles
-	$bolt_on_css_path = '/assets/css/bolt-on.min.css';
+	$bolt_on_css_path = '/assets/css/bolt-on.css';
 	wp_enqueue_style( 'bolt-on-css', get_template_directory_uri() . $bolt_on_css_path, array(), filemtime( get_stylesheet_directory() . $bolt_on_css_path ), 'all' );
 
 	// Register Scripts
-	$bolt_on_js_path = '/assets/js/bolt-on.min.js';
-	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array(), filemtime( get_template_directory() . $bolt_on_js_path ), true );
+	$bolt_on_navigation_path = '/assets/js/navigation.js';
+	wp_enqueue_script( 'bolt-on-navigation-js', get_theme_file_uri( $bolt_on_navigation_path ), array(), filemtime( get_template_directory() . $bolt_on_navigation_path ), true );
+
+	$bolt_on_skip_link_path = '/assets/js/skip-link-focus-fix.js';
+	wp_enqueue_script( 'bolt-on-skip-link-focus-fix-js', get_theme_file_uri( $bolt_on_skip_link_path ), array(), filemtime( get_template_directory() . $bolt_on_skip_link_path ), true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

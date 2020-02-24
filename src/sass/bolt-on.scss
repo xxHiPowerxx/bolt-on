@@ -1,0 +1,5 @@
+@import "./import/icomoon-fonts.scss";
+// color-palette.scss contains bootstrap them-color overrides.
+@import "./import/color-palette.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./import/common.scss";
