@@ -123,7 +123,7 @@ function bolt_on_assets() {
 
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
-	wp_enqueue_style( 'bolt-on-css', get_template_directory_uri() . $bolt_on_css_path, array(), filemtime( get_stylesheet_directory() . $bolt_on_css_path ), 'all' );
+	wp_enqueue_style( 'bolt-on-css', get_template_directory_uri() . $bolt_on_css_path, array(), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
 	// Register Scripts
 	$bolt_on_navigation_path = '/assets/js/navigation.js';
