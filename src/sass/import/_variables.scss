@@ -18,29 +18,29 @@ $yellow: yellow;
 $gray100: #f5f5f5;
 
 // Base Palette
-$xten-blue-700: #000d19;
-$xten-blue-600: #001a33;
-$xten-blue-500: #00264d;
-$xten-blue-400: #003366;
-$xten-blue-300: #335c85;
-$xten-blue-200: #6685a3;
-$xten-blue-100: #99adc2;
-$xten-gold-700: #332600;
-$xten-gold-600: #674c00;
-$xten-gold-500: #9a7100;
-$xten-gold-400: #cd9700;
-$xten-gold-300: #d7ac33;
-$xten-gold-200: #e1c166;
-$xten-gold-100: #ebd599;
+$bolt-on-blue-700: #000d19;
+$bolt-on-blue-600: #001a33;
+$bolt-on-blue-500: #00264d;
+$bolt-on-blue-400: #003366;
+$bolt-on-blue-300: #335c85;
+$bolt-on-blue-200: #6685a3;
+$bolt-on-blue-100: #99adc2;
+$bolt-on-gold-700: #332600;
+$bolt-on-gold-600: #674c00;
+$bolt-on-gold-500: #9a7100;
+$bolt-on-gold-400: #cd9700;
+$bolt-on-gold-300: #d7ac33;
+$bolt-on-gold-200: #e1c166;
+$bolt-on-gold-100: #ebd599;
 
 // XTEN Cool Paletta
-$xten-gray-700: #000d19;
-$xten-gray-600: #232a31;
-$xten-gray-500: #454f59;
-$xten-gray-400: #596069;
-$xten-gray-300: #9ca0a5;
-$xten-gray-200: #e5e6e8;
-$xten-gray-100: #f5f5f5;
+$bolt-on-gray-700: #000d19;
+$bolt-on-gray-600: #232a31;
+$bolt-on-gray-500: #454f59;
+$bolt-on-gray-400: #596069;
+$bolt-on-gray-300: #9ca0a5;
+$bolt-on-gray-200: #e5e6e8;
+$bolt-on-gray-100: #f5f5f5;
 
 // Neutral Palette
 $black: #000000;
@@ -58,39 +58,39 @@ $white: #ffffff;
 
 // Color Array
 $color-array: (
-  "xten-blue-700": $xten-blue-700,
-  "xten-blue-600": $xten-blue-600,
-  "xten-blue-500": $xten-blue-500,
-  "xten-blue-400": $xten-blue-400,
-  "xten-blue-300": $xten-blue-300,
-  "xten-blue-200": $xten-blue-200,
-  "xten-blue-100": $xten-blue-100,
-  "xten-gold-700": $xten-gold-700,
-  "xten-gold-600": $xten-gold-600,
-  "xten-gold-500": $xten-gold-500,
-  "xten-gold-400": $xten-gold-400,
-  "xten-gold-300": $xten-gold-300,
-  "xten-gold-200": $xten-gold-200,
-  "xten-gold-100": $xten-gold-100,
-  "xten-gray-700": $xten-gray-700,
-  "xten-gray-600": $xten-gray-600,
-  "xten-gray-500": $xten-gray-500,
-  "xten-gray-400": $xten-gray-400,
-  "xten-gray-300": $xten-gray-300,
-  "xten-gray-200": $xten-gray-200,
-  "xten-gray-100": $xten-gray-100,
-  "black": $black,
-  "gray-900": $gray-900,
-  "gray-800": $gray-800,
-  "gray-700": $gray-700,
-  "gray-600": $gray-600,
-  "gray-500": $gray-500,
-  "gray-400": $gray-400,
-  "gray-300": $gray-300,
-  "gray-200": $gray-200,
-  "gray-100": $gray-100,
-  "gray-50": $gray-50,
-  "white": $white
+	'bolt-on-blue-700': $bolt-on-blue-700,
+	'bolt-on-blue-600': $bolt-on-blue-600,
+	'bolt-on-blue-500': $bolt-on-blue-500,
+	'bolt-on-blue-400': $bolt-on-blue-400,
+	'bolt-on-blue-300': $bolt-on-blue-300,
+	'bolt-on-blue-200': $bolt-on-blue-200,
+	'bolt-on-blue-100': $bolt-on-blue-100,
+	'bolt-on-gold-700': $bolt-on-gold-700,
+	'bolt-on-gold-600': $bolt-on-gold-600,
+	'bolt-on-gold-500': $bolt-on-gold-500,
+	'bolt-on-gold-400': $bolt-on-gold-400,
+	'bolt-on-gold-300': $bolt-on-gold-300,
+	'bolt-on-gold-200': $bolt-on-gold-200,
+	'bolt-on-gold-100': $bolt-on-gold-100,
+	'bolt-on-gray-700': $bolt-on-gray-700,
+	'bolt-on-gray-600': $bolt-on-gray-600,
+	'bolt-on-gray-500': $bolt-on-gray-500,
+	'bolt-on-gray-400': $bolt-on-gray-400,
+	'bolt-on-gray-300': $bolt-on-gray-300,
+	'bolt-on-gray-200': $bolt-on-gray-200,
+	'bolt-on-gray-100': $bolt-on-gray-100,
+	'black': $black,
+	'gray-900': $gray-900,
+	'gray-800': $gray-800,
+	'gray-700': $gray-700,
+	'gray-600': $gray-600,
+	'gray-500': $gray-500,
+	'gray-400': $gray-400,
+	'gray-300': $gray-300,
+	'gray-200': $gray-200,
+	'gray-100': $gray-100,
+	'gray-50': $gray-50,
+	'white': $white
 );
 
 /*-----PAGE SPECIFIC COLORS-----*/
@@ -135,47 +135,47 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 
 /*-----FONT CALCULATIONS-----*/
 @function calculateRem($size) {
-  $remSize: $size / 16px;
-  @return #{$remSize}rem;
+	$remSize: $size / 16px;
+	@return #{$remSize}rem;
 }
 
 @function calculateLineHeight($size, $lineHeight) {
-  $heightSize: ($size / 16px) * $lineHeight;
-  //@debug "Size:#{$size}, LineHeight: #{$lineHeight}, heightSize: #{$heightSize}";
-  @return #{$heightSize}rem;
+	$heightSize: ($size / 16px) * $lineHeight;
+	//@debug "Size:#{$size}, LineHeight: #{$lineHeight}, heightSize: #{$heightSize}";
+	@return #{$heightSize}rem;
 }
 
 @mixin font-size-leading($size, $lineHeight) {
-  font-size: $size; //Fallback in px
-  font-size: calculateRem($size);
-  line-height: calculateLineHeight($size, $lineHeight);
+	font-size: $size; //Fallback in px
+	font-size: calculateRem($size);
+	line-height: calculateLineHeight($size, $lineHeight);
 }
 
 @mixin fontSize($size) {
-  font-size: $size; //Fallback in px
-  font-size: calculateRem($size);
+	font-size: $size; //Fallback in px
+	font-size: calculateRem($size);
 }
 
 @mixin leftRightPadding($size) {
-  padding-left: $size; //Fallback in px
-  padding-left: calculateRem($size);
-  padding-right: $size; //fallBack in px
-  padding-right: calculateRem($size);
+	padding-left: $size; //Fallback in px
+	padding-left: calculateRem($size);
+	padding-right: $size; //fallBack in px
+	padding-right: calculateRem($size);
 }
 
 @mixin allPadding($size) {
-  padding: $size; //Fallback in px
-  padding: calculateRem($size);
+	padding: $size; //Fallback in px
+	padding: calculateRem($size);
 }
 
 @mixin allMargins($size) {
-  margin: $size; //Fallback in px
-  margin: calculateRem($size);
+	margin: $size; //Fallback in px
+	margin: calculateRem($size);
 }
 
 @mixin containerMargins($size) {
-  margin: $size auto; //Fallback in px
-  margin: calculateRem($size) auto;
+	margin: $size auto; //Fallback in px
+	margin: calculateRem($size) auto;
 }
 
 /*-----EVERYTHING ELSE-----*/
@@ -185,5 +185,5 @@ $xten_header_height_lg: 3.68rem;
 
 /*   Smooth Transition    */
 .smooth-transition {
-  transition: all.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+	transition: all.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
