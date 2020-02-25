@@ -9,10 +9,11 @@
 
 ?>
 
-<div class="header-top display-flex align-items-center justify-content-center">
+<div class="header-top display-flex align-items-center justify-content-between">
 	<div class="ctnr-search-bar">
-		<input id="main-search" type="search" class="search" />
-		<button id="submit-search" type="submit" class="btn btn-submit btn-success">Search</button>
+		<label class="fa fa-search icon-search" for="main-search"></label>
+		<input id="main-search" type="search" class="search" required />
+		<button id="submit-search" type="submit" class="btn btn-submit btn-primary">Search</button>
 	</div>
 	<div class="site-branding">
 		<?php

@@ -118,7 +118,7 @@ function bolt_on_assets() {
 
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
-	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array(), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
+	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 	// Register Styles
 	$google_font_css_path = 'https://fonts.googleapis.com/css';
 	wp_enqueue_style( 'google-font-css', $google_font_css_path . '?family=Lora:400,400i,700,700i|Montserrat:100,200,300,300i,400,500,500i,600,600i,700,800,900', array(), '', 'all' );
