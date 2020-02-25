@@ -1,5 +1,26 @@
 @import "./import/icomoon-fonts.scss";
+@import "./import/accessibility.scss";
 // color-palette.scss contains bootstrap them-color overrides.
 @import "./import/color-palette.scss";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "./import/common.scss";
+@import "./import/header.scss";
+
+html {
+  font-size: 8px;
+  @media (min-width: 576px) {
+    font-size: 10px;
+  }
+  body {
+    font-size: 100%;
+  }
+}
+p,
+ul,
+span,
+li,
+input,
+textarea,
+button {
+  font-size: 1.6rem;
+}

@@ -44,7 +44,7 @@ if ( ! function_exists( 'bolt_on_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'bolt-on' ),
+			'primary' => esc_html__( 'Primary', 'bolt-on' ),
 		) );
 
 		/*
@@ -98,34 +98,32 @@ function bolt_on_content_width() {
 }
 add_action( 'after_setup_theme', 'bolt_on_content_width', 0 );
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function bolt_on_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'bolt-on' ),
-		'id'            => 'sidebar-1',
-		'description'   => esc_html__( 'Add widgets here.', 'bolt-on' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
-}
-add_action( 'widgets_init', 'bolt_on_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
  */
 function bolt_on_assets() {
 
+	// Register Vendor Assets
+	$handle = 'bolt-on-vendor-bootstrap-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/vendor/bootstrap/js/bootstrap.bundle.min.js' ), array( 'jquery' ), '4.4.1', true );
+	}
+
+		// Fontawesome.
+	$handle = 'bolt-on-vendor-fontawesome-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
+	}
+
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
-	wp_enqueue_style( 'bolt-on-css', get_template_directory_uri() . $bolt_on_css_path, array(), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
+	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array(), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
 	// Register Scripts
+	$bolt_on_js_path = '/assets/js/bolt-on.js';
+	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
+
 	$bolt_on_navigation_path = '/assets/js/navigation.js';
 	wp_enqueue_script( 'bolt-on-navigation-js', get_theme_file_uri( $bolt_on_navigation_path ), array(), filemtime( get_template_directory() . $bolt_on_navigation_path ), true );
 
@@ -157,6 +155,16 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Custom Nav Walker
+ */
+require get_template_directory() . '/inc/custom-nav-walker.php';
+
+/**
+ * Widget areas.
+ */
+require get_template_directory() . '/inc/widget-area.php';
 
 /**
  * Load Jetpack compatibility file.

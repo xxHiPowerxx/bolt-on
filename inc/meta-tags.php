@@ -2,7 +2,7 @@
 /**
  * Meta Tags for <head></head>.
  *
- * @package xten
+ * @package bolt-on
  */
 
 ?>

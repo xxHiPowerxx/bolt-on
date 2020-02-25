@@ -1,0 +1,60 @@
+@import "_variables.scss";
+
+.site-header {
+  padding: 1rem 2%;
+}
+
+.header-top {
+  > * {
+    flex: 1;
+  }
+}
+.site-branding {
+  text-align: center;
+}
+
+/*   Main Nav   */
+
+.main-navigation {
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .menu-item {
+    font-size: 1.8rem;
+    padding: 1em 2em;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    box-shadow: inset 0 0 #ffffff;
+    line-height: 1.6;
+    text-decoration: none;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      height: 0.7em;
+      width: 100%;
+      border: solid 0.222em #ac966e;
+      opacity: 0;
+      left: 0;
+      @extend .smooth-transition;
+    }
+    &:before {
+      top: 0.7em;
+      border-bottom: none;
+    }
+    &:after {
+      bottom: 0.7em;
+      border-top: none;
+    }
+  }
+}
+
+/*   /Main Nav   */
