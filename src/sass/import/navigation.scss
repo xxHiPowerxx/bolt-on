@@ -1,0 +1,147 @@
+/*   Main Nav   */
+.main-navigation {
+	.menu {
+		display: flex;
+		justify-content: space-between;
+		list-style-type: none;
+		padding-left: 0;
+		margin-bottom: 0;
+	}
+	/*   Menu Items   */
+	.menu-item {
+		font-size: 1.8rem;
+		padding: 1em 2em;
+		display: flex;
+		justify-content: center;
+		position: relative;
+		text-align: center;
+		box-shadow: inset 0 0 #ffffff;
+		line-height: 1.6;
+		a {
+			text-decoration: none;
+			display: block;
+			flex: 1;
+		}
+		/*   /Menu Items   */
+	}
+	/*   Sub Menus   */
+
+	.sub-menu {
+		position: fixed;
+		width: 100%;
+		background-color: rgba(255, 255, 255, 0.9);
+		left: 0;
+		right: 0;
+		display: flex;
+		padding: 8rem;
+		margin-top: 4rem;
+		pointer-events: none;
+		@extend .smooth-transition;
+		&.collapsing {
+			transform: translate3d(0, -100%, 0);
+			opacity: 0;
+			height: auto !important;
+		}
+		&.show {
+			transform: translate3d(0, 0, 0);
+			opacity: 1;
+			pointer-events: all;
+		}
+		&.collapse {
+			&:not(.show) {
+				display: none;
+			}
+		}
+		.menu-item {
+			width: 25%;
+			padding: 0 1%;
+			> a {
+				padding: 0.75em 1.5em;
+				line-height: 1;
+				border-bottom: solid 1px rgba(38, 38, 38, 0.2);
+				@extend .smooth-transition;
+				&:before {
+					content: ' ';
+					display: block;
+					width: 0;
+					height: 0;
+					position: absolute;
+					border-style: solid;
+					border-width: 0.333em 0 0.333em 0.46em;
+					border-color: transparent transparent transparent #bbb;
+					top: calc(50% - 0.333em);
+					left: 0;
+					opacity: 0;
+					@extend .smooth-transition;
+				}
+				&:hover,
+				&:focus {
+					padding-left: 2em;
+					color: #345073;
+					padding-right: 0.5em;
+					&:before {
+						opacity: 1;
+						transform: translateX(1em);
+					}
+				}
+			}
+		}
+	}
+	> .menu {
+		> .menu-item {
+			&:before,
+			&:after {
+				content: '';
+				position: absolute;
+				height: 0.7em;
+				width: 100%;
+				border: solid 0 #ac966e;
+				left: 0;
+				transition-duration: 0.1s;
+				@extend .smooth-transition;
+			}
+			&:before {
+				top: 0.7em;
+				border-bottom: none;
+			}
+			&:after {
+				bottom: 0.7em;
+				border-top: none;
+			}
+			&:hover,
+			&:focus,
+			&.active {
+				&:before,
+				&:after {
+					border-width: 0.222em;
+				}
+			}
+			> a {
+				text-transform: uppercase;
+				font-weight: 600;
+			}
+			> .sub-menu {
+				&:before,
+				&:after {
+					content: '';
+					position: absolute;
+					width: 100%;
+					height: calc(50% - 6rem);
+					left: 0;
+					border: #ac966e 0.4rem solid;
+				}
+				&:before {
+					top: 4rem;
+					border-bottom: 0;
+				}
+				&:after {
+					bottom: 4rem;
+					border-top: 0;
+				}
+			}
+		}
+	}
+	/*   /Sub Menus   */
+}
+
+/*   /Main Nav   */
