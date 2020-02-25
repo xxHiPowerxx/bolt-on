@@ -63,16 +63,19 @@ gulp.task("images", function(done) {
 });
 
 function build() {
-  return gulp.parallel("styles", "scripts" /*, "images"*/)();
+  gulp.parallel("styles", "scripts" /*, "images"*/)();
 }
-
-gulp.task("watch", function() {
-  gulp.watch(
-    ["./src/sass/**/*.scss", "./src/js/**/*.js", "./src/img/**/*"],
-    build()
-  );
-});
 gulp.task("build", function(done) {
   build();
   done();
+});
+
+gulp.task("watch", function() {
+  gulp.watch("./src/sass/**/*.scss", gulp.series("styles"));
+  gulp.watch("./src/js/**/*.js", gulp.series("scripts"));
+  gulp.watch("./src/img/**/*", gulp.series("images"));
+  // gulp.watch(
+  //   ["./src/sass/**/*.scss", "./src/js/**/*.js", "./src/img/**/*"],
+  //   build
+  // );
 });
