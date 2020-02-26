@@ -1,4 +1,4 @@
-@import './import/icomoon-fonts.scss';
+// @import './import/icomoon-fonts.scss';
 @import './import/accessibility.scss';
 // color-palette.scss contains bootstrap them-color overrides.
 @import './import/color-palette.scss';
@@ -7,14 +7,14 @@
 @import './import/header.scss';
 
 html {
-  font-size: 8px;
-  @media (min-width: 576px) {
-    font-size: 10px;
-  }
-  body {
-    font-size: 100%;
-    font-family: 'Montserrat', sans-serif;
-  }
+	font-size: 8px;
+	@media (min-width: 576px) {
+		font-size: 10px;
+	}
+	body {
+		font-size: 100%;
+		font-family: 'Montserrat', sans-serif;
+	}
 }
 p,
 ul,
@@ -23,7 +23,7 @@ li,
 input,
 textarea,
 button {
-  font-size: 1.6rem;
+	font-size: 1.6rem;
 }
 h1,
 h2,
@@ -31,5 +31,5 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lora', serif;
+	font-family: 'Lora', serif;
 }

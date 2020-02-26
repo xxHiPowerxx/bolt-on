@@ -22,13 +22,13 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class('fixed-header hide-header'); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bolt-on' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header sizeHeaderPad scrolledPastHeaderRef">
 		<?php include $template_directory . '/inc/header-top.php'; ?>
 		<?php include $template_directory . '/inc/header-nav.php'; ?>
 	</header><!-- #masthead -->
 
-	<div id="content" class="site-content">
+	<div id="content" class="site-content sizeHeaderPadTar">

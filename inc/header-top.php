@@ -11,9 +11,7 @@
 
 <div class="header-top display-flex align-items-center justify-content-between">
 	<div class="ctnr-search-bar">
-		<label class="fa fa-search icon-search" for="main-search"></label>
-		<input id="main-search" type="search" class="search" required />
-		<button id="submit-search" type="submit" class="btn btn-submit btn-primary">Search</button>
+		<?php echo get_search_form(); ?>
 	</div>
 	<div class="site-branding">
 		<?php

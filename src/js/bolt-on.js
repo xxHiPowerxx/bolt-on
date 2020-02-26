@@ -16,9 +16,42 @@ jQuery(document).ready(function($) {
 			);
 		});
 	}
+	function sizeHeaderPad() {
+		$('.sizeHeaderPad').each(function() {
+			if (getComputedStyle(this).position === 'fixed') {
+				var sizeHeaderPadTar = $('.sizeHeaderPadTar').first(),
+					thisHeight = this.getBoundingClientRect().height;
+				sizeHeaderPadTar.css('padding-top', thisHeight);
+			}
+		});
+	}
+	function scrolledPastHeader() {
+		$('.scrolledPastHeaderRef').each(function() {
+			var thisRect = this.getBoundingClientRect();
+			if ($(window).scrollTop() >= thisRect.height + thisRect.top) {
+				$('body').addClass('scrolledPastHeader');
+			} else {
+				$('body').removeClass('scrolledPastHeader');
+			}
+		});
+	}
 
 	function readyFuncs() {
 		collapseOnHover();
+		sizeHeaderPad();
+		scrolledPastHeader();
+	}
+	function resizeFuncs() {
+		sizeHeaderPad();
+	}
+	function scrollFuncs() {
+		scrolledPastHeader();
 	}
 	readyFuncs();
+	$(window).on('resize', function() {
+		resizeFuncs();
+	});
+	$(window).on('scroll', function() {
+		scrollFuncs();
+	});
 });
