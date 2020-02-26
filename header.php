@@ -21,8 +21,17 @@
 
 	<?php wp_head(); ?>
 </head>
-
-<body <?php body_class('fixed-header hide-header'); ?>>
+<?php
+	global $post;
+	if ( $post ) :
+		$post_slug = $post->post_name;
+		$post_type = $post->post_type;
+		$body_class = $post_slug . '-' . $post_type;
+	else :
+		$body_class = 'no-post';
+	endif;
+?>
+<body <?php body_class('fixed-header hide-header' . ' ' . $body_class); ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bolt-on' ); ?></a>
 
