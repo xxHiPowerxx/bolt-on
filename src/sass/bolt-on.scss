@@ -14,7 +14,6 @@ html {
 	}
 	body {
 		font-size: 100%;
-		font-family: 'Montserrat', sans-serif;
 	}
 }
 p,
@@ -26,11 +25,16 @@ textarea,
 button {
 	font-size: 1.6rem;
 }
+body,
+.font-fam-primary {
+	font-family: $font-fam-primary;
+}
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-	font-family: 'Lora', serif;
+h6,
+.font-fam-secondary {
+	font-family: $font-fam-secondary;
 }

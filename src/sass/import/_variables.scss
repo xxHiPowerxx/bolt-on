@@ -188,8 +188,10 @@ $xten_header_height_lg: 3.68rem;
 	transition: all.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-$primary: #ac966e;
-$secondary: #345073;
-$tertiary: #efeae2;
-$light: #ffffff;
-$dark: #262626;
+$primary: rgb(172, 150, 110);
+$secondary: rgb(52, 80, 115);
+$tertiary: rgb(239, 234, 226);
+$light: rgb(255, 255, 255);
+$dark: rgb(38, 38, 38);
+$font-fam-primary: 'Montserrat', sans-serif;
+$font-fam-secondary: 'Lora', serif;

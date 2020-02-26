@@ -1,5 +1,6 @@
 // Write JS here
 jQuery(document).ready(function($) {
+	var headerPad;
 	function collapseOnHover() {
 		$('.has-dropdown').each(function() {
 			var collapse = $(this).children('.collapse'),
@@ -19,9 +20,9 @@ jQuery(document).ready(function($) {
 	function sizeHeaderPad() {
 		$('.sizeHeaderPad').each(function() {
 			if (getComputedStyle(this).position === 'fixed') {
-				var sizeHeaderPadTar = $('.sizeHeaderPadTar').first(),
-					thisHeight = this.getBoundingClientRect().height;
-				sizeHeaderPadTar.css('padding-top', thisHeight);
+				var sizeHeaderPadTar = $('.sizeHeaderPadTar').first();
+				headerPad = this.getBoundingClientRect().height;
+				sizeHeaderPadTar.css('padding-top', headerPad);
 			}
 		});
 	}
@@ -35,17 +36,26 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	function bleedIntoHeader() {
+		if (headerPad !== undefined) {
+			$('.bleedIntoHeader').each(function() {
+				$(this).css('margin-top', -headerPad);
+			});
+		}
+	}
 
 	function readyFuncs() {
 		collapseOnHover();
 		sizeHeaderPad();
 		scrolledPastHeader();
+		bleedIntoHeader();
 	}
 	function resizeFuncs() {
 		sizeHeaderPad();
 	}
 	function scrollFuncs() {
 		scrolledPastHeader();
+		bleedIntoHeader();
 	}
 	readyFuncs();
 	$(window).on('resize', function() {

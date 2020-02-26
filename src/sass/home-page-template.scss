@@ -1,0 +1,47 @@
+@import './import/variables.scss';
+
+.page-template-home-page-template {
+	.hero-section {
+		background-image: url(../images/mainstage-bg.jpg);
+		background-size: cover;
+		background-position: 50% 50%;
+		position: relative;
+		&:before {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 100%;
+			width: 100%;
+			background-repeat: no-repeat;
+			background-position: bottom center;
+			background-size: contain;
+			background-image: url(../images/mainstage-attorneys-new.png);
+		}
+	}
+	.container-hero {
+		min-height: 110.77vh;
+		align-items: flex-end;
+		justify-content: center;
+		text-align: center;
+		position: relative;
+		padding-bottom: 19vh;
+	}
+	.heading {
+		text-shadow: 0 0.05em 0.15em rgba(38, 38, 38, 0.35);
+		> * {
+			display: block;
+		}
+	}
+	.subtitle {
+		font-size: 2.6rem;
+		font-weight: 700;
+		color: $white;
+		text-transform: uppercase;
+	}
+	.main-title {
+		font-size: 7.7rem;
+		font-weight: 700;
+		color: $primary;
+	}
+}
