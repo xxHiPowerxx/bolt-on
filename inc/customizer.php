@@ -53,3 +53,65 @@ function bolt_on_customize_preview_js() {
 	wp_enqueue_script( 'bolt-on-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20151215', true );
 }
 add_action( 'customize_preview_init', 'bolt_on_customize_preview_js' );
+
+
+/**
+ * Add field to accept path for SVG image instead of png image.
+ */
+function bolt_on_customize_standard_header_register( $wp_customize ) {
+	
+	// Logo SVG Path Relative or Absolute.
+	$wp_customize->add_setting(
+		'logo_svg_path_radio',
+		array(
+			'default'           => 'relative',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'logo_svg_path_radio',
+			array(
+				'priority'    => 9,
+				'label'       => __( 'Logo SVG Path Absolute or Relative?', 'bolt-on' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'logo_svg_path_radio',
+				'description' => __( 'Select Whether Logo SVG path is relative to theme directory or absolute', 'bolt-on' ),
+				'type'        => 'radio',
+				'choices' => array(
+					'relative' => __( 'example: /images/svg/logo.svg' ),
+					'absolute'  => __( 'example: https://somesite.com/images/logo.svg' ),
+				),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'logo_svg_path_radio' )->transport = 'postMessage';
+
+	// Logo SVG Path.
+	$wp_customize->add_setting(
+		'logo_svg_path',
+		array(
+			'default'           => null,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'logo_svg_path',
+			array(
+				'priority'    => 9,
+				'label'       => __( 'Logo SVG Path', 'bolt-on' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'logo_svg_path',
+				'description' => __( 'Input the Logo SVG Path', 'bolt-on' ),
+				'type'        => 'text',
+			)
+		)
+	);
+	$wp_customize->get_setting( 'logo_svg_path' )->transport = 'postMessage';
+}
+add_action( 'customize_register', 'bolt_on_customize_standard_header_register' );
