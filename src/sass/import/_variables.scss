@@ -195,3 +195,6 @@ $light: rgb(255, 255, 255);
 $dark: rgb(38, 38, 38);
 $font-fam-primary: 'Montserrat', sans-serif;
 $font-fam-secondary: 'Lora', serif;
+
+$trans-header: 'body.trans-header';
+/*   ex of variable usage: @at-root #{$trans-header} & {}   */

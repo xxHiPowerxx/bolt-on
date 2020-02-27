@@ -4,6 +4,15 @@
 	padding: 1rem 2%;
 	box-shadow: 0 0 2.2rem rgb(38, 38, 38);
 	background-color: $white;
+	@at-root #{$trans-header} & {
+		background-color: transparent;
+		background-image: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.4) 65%,
+			rgba(0, 0, 0, 0)
+		);
+		box-shadow: none;
+	}
 }
 body {
 	&.hide-header {
@@ -39,9 +48,13 @@ input[type='search'] {
 	&#main-search {
 		background-color: transparent;
 		border: 0 solid rgb(38, 38, 38);
+		color: rgb(172, 150, 110);
+		@at-root #{$trans-header} & {
+			border-color: $white;
+			color: $tertiary;
+		}
 		border-bottom-width: 2px;
 		padding: 0.5em 0;
-		color: rgb(172, 150, 110);
 		-webkit-appearance: none;
 		border-radius: 0%;
 		box-shadow: none;
@@ -63,6 +76,12 @@ input[type='search'] {
 .icon-search {
 	font-size: 2rem;
 	padding: 0.4em 0.4em 0.4em 0;
+	@at-root .site-header & {
+		color: $secondary;
+		@at-root #{$trans-header} & {
+			color: $white;
+		}
+	}
 }
 /*   /Search   */
 
@@ -70,6 +89,18 @@ input[type='search'] {
 .site-branding {
 	text-align: center;
 	max-width: 25%;
+}
+.custom-logo-link {
+	display: inline-block;
+}
+.custom-logo {
+	svg {
+		> :nth-child(-n + 2) {
+			@at-root #{$trans-header} & {
+				fill: $white;
+			}
+		}
+	}
 }
 /*   /Logo   */
 
@@ -81,6 +112,9 @@ input[type='search'] {
 		text-align: right;
 		> :first-child {
 			color: rgb(52, 80, 115);
+			@at-root #{$trans-header} & {
+				color: $white;
+			}
 			font-size: 1.7267rem;
 			padding-right: 0.25em;
 		}
@@ -89,7 +123,10 @@ input[type='search'] {
 			font-weight: 700;
 			display: block;
 			letter-spacing: 0.1em;
-			color: RGB(172, 150, 110);
+			color: rgb(172, 150, 110);
+			@at-root #{$trans-header} & {
+				color: $white;
+			}
 			* {
 				font-size: inherit;
 			}
