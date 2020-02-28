@@ -1,0 +1,17 @@
+.theme-header {
+	position: relative;
+	padding: 4.5rem 0 3.6rem 1.8rem;
+	font-size: 3.2rem;
+}
+.theme-header > :last-child {
+	margin-bottom: 0;
+}
+.theme-heading-inner {
+	margin: 2rem 0;
+	> * {
+		position: relative;
+	}
+}
+.theme-heading-subtitle * {
+	font-size: inherit;
+}

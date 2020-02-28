@@ -1,0 +1,51 @@
+.theme-content {
+	h1,
+	.bolt-on-h1,
+	h2,
+	.bolt-on-h2,
+	h3,
+	.bolt-on-h3,
+	h4,
+	.bolt-on-h4,
+	strong,
+	b {
+		+ p,
+		+ ul {
+			margin-top: 0;
+		}
+	}
+	p,
+	ul {
+		margin-top: 1.2em;
+		margin-bottom: 1.2em;
+	}
+	ul {
+		list-style: none;
+		padding-left: 0;
+		li {
+			position: relative;
+			padding: 0.1em 0 0.1em 1.5em;
+			&:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				background-color: $secondary;
+				width: 0.5em;
+				display: block;
+				height: 0.5em;
+				top: 50%;
+				transform: translate3d(0, -50%, 0);
+			}
+		}
+	}
+	p,
+	ul {
+		font-size: 1.7rem;
+		line-height: 2;
+	}
+	strong {
+		> p {
+			margin-bottom: 0.6em;
+		}
+	}
+}

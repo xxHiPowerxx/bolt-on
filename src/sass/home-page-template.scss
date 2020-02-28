@@ -38,7 +38,6 @@
 		justify-content: center;
 		text-align: center;
 		position: relative;
-		padding-bottom: 19vh;
 	}
 	.heading {
 		text-shadow: 0 0.05em 0.15em rgba(38, 38, 38, 0.35);
@@ -58,4 +57,36 @@
 		color: $primary;
 	}
 	/*   /Hero Section   */
+
+	/*   Bleeds Into Section Feature   */
+	$bleed-unit: 19vh;
+	.below-section-bleeds-in {
+		.bleed-target {
+			padding-bottom: $bleed-unit;
+		}
+		+ .bleeds-into-above-section {
+			.bleed-target {
+				margin-top: -$bleed-unit;
+			}
+		}
+	}
+
+	/*   /Bleeds Into Section Feature   */
+
+	/*   About Section   */
+	.about-section-cta-btns {
+		justify-content: space-between;
+	}
+
+	.about-section .container-about-section {
+		background-color: $white;
+		position: relative;
+	}
+	.about-section-cta-btns {
+		padding: 2rem 0.5rem;
+	}
+	.about-section-main {
+		padding: 2rem 4.3rem;
+	}
+	/*   /About Section   */
 }
