@@ -5,6 +5,10 @@ $top-left-vert: '.btn-cta-inner:before';
 $top-right-vert: '.btn-cta-inner:after';
 $bottom-left-vert: '.btn-cta-inner:after';
 $bottom-right-vert: '.btn-cta-inner:before';
+@import './stroke-border.scss';
+$btn-stroke-width: 0.25em;
+$btn-stroke-height: 0.4em;
+$btn-stroke-full-width: 100%;
 /*   /Borders   */
 
 .btn-cta-outer,
@@ -27,62 +31,39 @@ $bottom-right-vert: '.btn-cta-inner:before';
 	font-weight: 600;
 	text-transform: uppercase;
 	line-height: 1;
-	&:before {
-		top: 0;
-		left: 50%;
-		transform: translate3d(-50%, 0, 0);
-		height: 100%;
-		width: 0;
-		border: solid 0.25em $primary;
-		border-left: 0;
-		border-right: 0;
-	}
-	&:after {
-		right: 0;
-		top: 50%;
-		transform: translate3d(0, -50%, 0);
-		color: $primary;
-		content: '\f054';
-		height: 1em;
-		width: 1em;
-		font-weight: 900;
-		font-family: 'Font Awesome 5 Free';
-		font-style: normal;
-		font-variant: normal;
-		text-rendering: auto;
-	}
-	&:hover,
-	&:focus,
-	&.active {
+	color: $secondary;
+	&.stroke-border {
 		&:before {
-			width: 100%;
+			border-width: $btn-stroke-width;
+			left: 50%;
+			transform: scaleX(0) translate3d(-50%, 0, 0);
+			width: 0;
 		}
-		&:after {
-			transform: translate3d(0.3em, -50%, 0);
-		}
-		.btn-cta-inner,
-		.btn-cta-text {
-			&:before,
-			&:after {
-				transform: scaleY(1) translateZ(0);
+		&:hover,
+		&:focus,
+		&.active {
+			&:before {
+				width: $btn-stroke-full-width;
+				transform: scaleX(1) translate3d(-50%, 0, 0);
 			}
 		}
 	}
 }
 .btn-cta-inner {
 	border: none;
-	&:before,
-	&:after {
-		top: 0.24em;
-		transform-origin: 50% 0;
+	&.stroke-border-inner {
+		&:before,
+		&:after {
+			top: $btn-stroke-width - 0.01em;
+		}
 	}
 }
 .btn-cta-text {
-	margin: 0;
-	&:before,
-	&:after {
-		bottom: 0.24em;
-		transform-origin: 50% 100%;
+	&.stroke-border-lvl-three {
+		&:before,
+		&:after {
+			bottom: $btn-stroke-width - 0.01em;
+		}
 	}
 }
 .btn-cta-outer,
@@ -101,20 +82,20 @@ $bottom-right-vert: '.btn-cta-inner:before';
 	line-height: inherit;
 }
 
-.btn-cta-inner,
-.btn-cta-text {
+.btn-cta-inner.stroke-border-inner,
+.btn-cta-text.stroke-border-lvl-three {
 	&:before,
 	&:after {
-		height: 0.4em;
+		height: $btn-stroke-height;
 		max-height: 25%;
-		width: 0.25em;
-		background-color: $primary;
+		width: $btn-stroke-width;
 		transform: scaleY(0) translateZ(0);
 	}
 	&:before {
 		left: -0.1%;
 	}
 	&:after {
+		left: unset;
 		right: 0.1%;
 	}
 }
