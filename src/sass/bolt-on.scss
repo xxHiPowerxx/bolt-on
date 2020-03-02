@@ -20,15 +20,6 @@ body {
 	font-size: 100%;
 	color: $dark;
 }
-p,
-ul,
-span,
-li,
-input,
-textarea,
-button {
-	font-size: 1.6rem;
-}
 body,
 .font-fam-primary,
 h2,
@@ -63,6 +54,8 @@ h6,
 }
 h1,
 .bolt-on-h1,
+h2,
+.bolt-on-h2,
 h3,
 .bolt-on-h3,
 h4,
@@ -78,17 +71,51 @@ h1,
 .bolt-on-h1 {
 	font-size: 4.5rem;
 	color: $secondary;
+	+ h2,
+	+ .bolt-on-h2 {
+		font-size: 2.2rem;
+		color: $primary-dark;
+		font-family: $font-fam-primary;
+	}
 }
 h2,
 .bolt-on-h2 {
-	font-size: 2.2rem;
-	color: $primary-dark;
+	font-size: 4rem;
 }
 h3,
 .bolt-on-h3 {
-	font-size: 2.1rem;
+	font-size: 3.5rem;
+}
+h4,
+.bolt-on-h4 {
+	font-size: 3rem;
+}
+h5,
+.bolt-on-h5 {
+	font-size: 2.5rem;
+}
+h6,
+.bolt-on-h6 {
+	font-size: 2rem;
 }
 a {
 	text-decoration: none;
 	color: $primary-dark;
+}
+
+.pad-top {
+	padding-top: 12rem;
+}
+.pad-bottom {
+	padding-bottom: 12rem;
+}
+.container {
+	&.container-ext {
+		@media (min-width: 1660px) {
+			max-width: 160rem;
+		}
+	}
+}
+.pad-thirty {
+	padding: 3rem;
 }
