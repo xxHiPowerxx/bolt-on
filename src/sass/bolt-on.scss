@@ -119,3 +119,15 @@ a {
 .pad-thirty {
 	padding: 3rem;
 }
+.input-field {
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid rgb(38, 38, 38);
+	padding: 0.5em;
+}
+textarea {
+	&.input-field {
+		resize: none;
+		height: 9em !important;
+	}
+}

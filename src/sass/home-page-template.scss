@@ -262,3 +262,90 @@ $bleed-unit: 19vh;
 	}
 }
 /*   /How Can We Help Section   */
+
+/*   Contact Section   */
+.contact-section {
+	background-image: url('../images/bg-w.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 0% 0%;
+	position: relative;
+}
+
+.container-contact {
+	display: flex;
+	flex-wrap: wrap;
+	> :first-child {
+		padding-right: 6rem;
+	}
+	> :nth-child(2) {
+		> * {
+			padding-left: 6rem;
+		}
+	}
+}
+/*   Contact Form   */
+.ctnr-contact-form {
+	width: 66%;
+	min-width: 50rem;
+	max-width: 100%;
+}
+.wpcf7-form {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 1.8rem;
+	> * {
+		flex: 1 1 100%;
+		margin-bottom: 1em;
+	}
+	> :nth-child(-n + 5) {
+		flex-basis: 50%;
+	}
+	> :nth-child(-2n + 5) {
+		padding-left: 1em;
+	}
+	.input-field {
+		width: 100%;
+	}
+}
+/*   /Contact Form   */
+/*   Offices List   */
+
+.ctnr-contact-info {
+	width: 33%;
+	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-image: repeating-linear-gradient(
+			45deg,
+			rgb(214, 220, 227),
+			rgb(214, 220, 227) 1.623rem,
+			rgb(255, 255, 255) 19px,
+			rgb(255, 255, 255) 1px
+		);
+		z-index: -1;
+	}
+	.phone-number {
+		font-size: 3.5rem;
+		font-weight: 700;
+		display: inline-block;
+		margin-bottom: 0.5em;
+		text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
+	}
+}
+.anchor-office-location {
+	font-size: 2.2rem;
+}
+.offices-list {
+	> :not(:last-child) {
+		margin-bottom: 1.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid rgba($dark, 0.25);
+	}
+}
+/*   /Offices List   */
+/*   /Contact Section   */

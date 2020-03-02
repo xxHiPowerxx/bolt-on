@@ -48,6 +48,14 @@ $btn-stroke-full-width: 100%;
 			}
 		}
 	}
+	[type='submit'],
+	[type='button'],
+	[type='reset'],
+	button {
+		-webkit-appearance: initial;
+		background-color: transparent;
+		border: none;
+	}
 }
 .btn-cta-inner {
 	border: none;
