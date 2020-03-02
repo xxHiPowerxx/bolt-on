@@ -41,6 +41,8 @@ if ( ! function_exists( 'bolt_on_setup' ) ) :
 		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		 */
 		add_theme_support( 'post-thumbnails' );
+		add_image_size( 'archive-thumbnail', 464, 261, array( 'center', 'center' ) );
+
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
@@ -176,3 +178,17 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+	* Disable Contact Form 7 WP Auto P
+	*/
+add_filter('wpcf7_autop_or_not', '__return_false');
+
+/**
+ * Include Shortcodes
+ */
+require get_template_directory() . '/inc/shortcodes/shortcodes.php';
+
+/**
+ * Archive Excerpt.
+ */
+require get_template_directory() . '/inc/archive-excerpt.php';

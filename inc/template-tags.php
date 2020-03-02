@@ -146,3 +146,41 @@ if ( ! function_exists( 'bolt_on_post_thumbnail' ) ) :
 		endif; // End is_singular().
 	}
 endif;
+
+/**
+ * Prints a link list of the current categories for the post.
+ *
+ * If additional post types should display categories, add them to the conditional statement at the top.
+ */
+function bolt_on_post_categories() {
+	// Only show categories on post types that have categories.
+	if ( 'post' === get_post_type() ) {
+		/* translators: used between list items, there is a space after the comma */
+		$categories_list = get_the_category_list( esc_html__( ',  ', 'bolt-on' ) );
+		if ( $categories_list ) {
+			/* translators: 1: list of categories. */
+			printf( '<span class="cat-links d-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'bolt-on' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
+		}
+	}
+}
+/**
+ * Prints edit post/page link when a user with sufficient priveleges is logged in.
+ */
+function bolt_on_edit_post_link() {
+	edit_post_link(
+		sprintf(
+			wp_kses(
+				/* translators: %s: Name of current post. Only visible to screen readers */
+				__( 'Edit <span class="screen-reader-text">%s</span>', 'bolt-on' ),
+				array(
+					'span' => array(
+						'class' => array(),
+					),
+				)
+			),
+			get_the_title()
+		),
+		'<span class="edit-link">',
+		' </span>'
+	);
+}
