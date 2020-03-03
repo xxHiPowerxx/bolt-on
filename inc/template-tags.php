@@ -10,12 +10,17 @@
 if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
+	 * 
+	 * @param {bool} include_updated - Set Whether to include "Date Updated" or not. 
 	 */
-	function bolt_on_posted_on() {
+	function bolt_on_posted_on( $include_updated = false ) {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+		if ( 
+			$include_updated === true &&
+			get_the_time( 'U' ) !== get_the_modified_time( 'U' )
+		) :
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-		}
+		endif;
 
 		$time_string = sprintf( $time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
@@ -26,7 +31,7 @@ if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'bolt-on' ),
+			esc_html_x( '%s', 'post date', 'bolt-on' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 

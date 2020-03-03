@@ -7,11 +7,13 @@
  * @package bolt-on
  */
 
+wp_enqueue_style( 'bolt-on-blog-css' );
+
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'content-area d-flex flex-column' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'listed-archive content-area display-flex' ); ?>>
 	<div class="featured-image">
-		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
+		<a class="anchor-archive-thumbnail" href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 			<?php
 			if ( has_post_thumbnail() ) :
 				the_post_thumbnail( 'archive-thumbnail' );
@@ -29,7 +31,7 @@
 			?>
 		</a>
 	</div>
-	<div class="post-body d-flex flex-column">
+	<div class="post-body display-flex flex-column">
 
 		<header class="entry-header">
 			<?php
@@ -41,7 +43,7 @@
 					if ( is_singular() ) :
 						the_title( '<h1 class="entry-title">', '</h1>' );
 					else :
-						the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+						the_title( '<a class="anchor-entry-title" href="' . esc_url( get_permalink() ) . '" rel="bookmark"><h3 class="entry-title test">', '</h3></a>' );
 					endif;
 					?>
 					<div class="post-date">
@@ -83,11 +85,19 @@
 		</div><!-- .entry-content -->
 
 		<footer class="entry-footer bolt-on-highlight-font">
-			<div class="cat-link-container d-flex flex-row justify-content-between">
+			<div class="cat-link-container display-flex flex-row justify-content-between">
 				<div class="post-category">
 					<?php bolt_on_post_categories(); ?>
 				</div>
-				<a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="post-link bolt-on-theme-color-bg material-btn"><i class="fas fa-arrow-right"></i><span class="hide-me"><?php echo get_the_title(); ?></span></a>
+				<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron post-link" href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>">
+					<span class="btn-cta btn-cta-inner stroke-border-inner">
+						<span class="btn-cta-text stroke-border-lvl-three">Read More</span>
+					</span>
+				</a>
+				<?php
+				// TODO: Use the above CTA Button in child theme.
+				/* <a href="<?php echo esc_url( get_the_permalink( $post->ID ) ); ?>" title="<?php echo get_the_title(); ?>" class="post-link bolt-on-theme-color-bg material-btn"><i class="fas fa-arrow-right"></i><span class="hide-me">Read More</span></a> */
+				?>
 			</div>
 			<?php
 			bolt_on_edit_post_link();

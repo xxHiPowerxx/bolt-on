@@ -39,7 +39,7 @@ get_header(); ?>
 
 						?>
 
-						<div class="archive-container d-flex flex-row flex-wrap align-items-stretch">
+						<div class="ctnr-archive archive-container d-flex flex-row flex-wrap align-items-stretch">
 							<?php
 
 							/* Start the Loop */
