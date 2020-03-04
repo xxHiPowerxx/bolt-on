@@ -43,12 +43,20 @@ jQuery(document).ready(function($) {
 			});
 		}
 	}
+	function initSlick() {
+		$('.slickSlider').each(function() {
+			if ($.isFunction($(this).slick)) {
+				$(this).slick();
+			}
+		});
+	}
 
 	function readyFuncs() {
 		collapseOnHover();
 		sizeHeaderPad();
 		scrolledPastHeader();
 		bleedIntoHeader();
+		initSlick();
 	}
 	function resizeFuncs() {
 		sizeHeaderPad();
