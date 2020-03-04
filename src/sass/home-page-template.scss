@@ -349,3 +349,56 @@ $bleed-unit: 19vh;
 }
 /*   /Offices List   */
 /*   /Contact Section   */
+
+/*   Why Us Section   */
+.container-why-us-content {
+	padding-top: 6rem;
+}
+/*   Fraction Wrap Feature   */
+.fraction-wrap {
+	display: flex;
+	.one-half {
+		width: 50%;
+		$pad-val: 6rem;
+		&:first-child {
+			padding-right: $pad-val;
+		}
+		&:last-child {
+			padding-left: $pad-val;
+		}
+	}
+}
+/*   Fraction Wrap Feature   */
+$gradient-percentage: 40.4%;
+.why-us-content {
+	background-image: linear-gradient(
+		to right,
+		white $gradient-percentage,
+		rgb(239, 234, 226) $gradient-percentage
+	);
+}
+.highlights-list {
+	list-style: none;
+	font-size: 2.4rem;
+	font-weight: 700;
+}
+.listed-highlights {
+	position: relative;
+	padding: 1em;
+	&:before {
+		content: '';
+		position: absolute;
+		height: 1px;
+		width: 0.75em;
+		top: 50%;
+		left: calc(0% - 1em);
+		transform: translate3d(0, -50%, 0);
+		background-color: $primary;
+	}
+}
+.ctnr-highlights-list {
+	.anchor-btn-cta {
+		margin-left: 3rem;
+	}
+}
+/*   Why Us Section   */
