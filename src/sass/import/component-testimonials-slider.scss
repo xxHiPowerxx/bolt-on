@@ -1,0 +1,39 @@
+.component-testimonials-slider {
+	&.slick-dotted {
+		margin-bottom: 0;
+	}
+	.slick-dots {
+		position: static;
+		margin-top: 3rem;
+	}
+	li {
+		width: auto;
+		height: auto;
+		font-size: 2.2rem;
+		&.slick-active {
+			button {
+				&:before {
+					color: $secondary;
+				}
+			}
+		}
+		button {
+			width: 1em;
+			height: 1em;
+			padding: 0.25em;
+			font-size: inherit;
+			&:before {
+				width: auto;
+				height: auto;
+				font-size: inherit;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate3d(-50%, -50%, 0);
+				line-height: 1;
+				color: $primary;
+				@extend .smooth-transition;
+			}
+		}
+	}
+}
