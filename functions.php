@@ -107,20 +107,34 @@ add_action( 'after_setup_theme', 'bolt_on_content_width', 0 );
 function bolt_on_assets() {
 
 	// Register Vendor Assets
+	// Bootstrap Vendor
 	$handle = 'bolt-on-vendor-bootstrap-js';
 	if ( ! wp_script_is( $handle, 'registered' ) ) {
 		wp_register_script( $handle, get_theme_file_uri( '/vendor/bootstrap/js/bootstrap.bundle.min.js' ), array( 'jquery' ), '4.4.1', true );
 	}
 
-		// Fontawesome.
+	// Fontawesome Vendor
 	$handle = 'bolt-on-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
 		wp_register_style( $handle, get_theme_file_uri( '/vendor/fontawesome/css/all.min.css' ), array(), ' 5.7.1', 'all' );
 	}
 
+	// Slick Slider Vendor
+	// Slick JS
+	$slick_version = '1.8.0';
+	$handle = 'bolt-on-vendor-slick-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/vendor/slick/slick.min.js' ), array( 'jquery' ), $slick_version, true );
+	}
+	// Slick CSS
+	$handle = 'bolt-on-vendor-slick-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/vendor/slick/slick.min.css' ), array(), $slick_version, 'all' );
+	}
+
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
-	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
+	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css', 'bolt-on-vendor-slick-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
 	$bolt_on_blog_css_path = '/assets/css/bolt-on-blog.css';
 	wp_register_style( 'bolt-on-blog-css', get_theme_file_uri( $bolt_on_blog_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $bolt_on_blog_css_path ), 'all' );
@@ -130,7 +144,7 @@ function bolt_on_assets() {
 
 	// Register Scripts
 	$bolt_on_js_path = '/assets/js/bolt-on.js';
-	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
+	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js', 'bolt-on-vendor-slick-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
 
 	$bolt_on_navigation_path = '/assets/js/navigation.js';
 	wp_enqueue_script( 'bolt-on-navigation-js', get_theme_file_uri( $bolt_on_navigation_path ), array(), filemtime( get_template_directory() . $bolt_on_navigation_path ), true );
