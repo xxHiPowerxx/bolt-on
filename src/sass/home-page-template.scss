@@ -31,7 +31,7 @@
 		);
 	}
 	.heading {
-		text-shadow: 0 0.05em 0.15em rgba(38, 38, 38, 0.35);
+		text-shadow: 0 0.05em 0.15em rgba($dark, 0.35);
 		> * {
 			display: block;
 		}
@@ -108,8 +108,8 @@ $bleed-unit: 19vh;
 		width: 100%;
 		background-image: linear-gradient(
 			to right,
-			rgb(214, 220, 227) 50%,
-			rgb(255, 255, 255) 50%
+			$secondary-light 50%,
+			$white 50%
 		);
 	}
 }
@@ -270,6 +270,7 @@ $bleed-unit: 19vh;
 	background-size: contain;
 	background-position: 0% 0%;
 	position: relative;
+	overflow-x: hidden;
 }
 
 .container-contact {
@@ -322,10 +323,10 @@ $bleed-unit: 19vh;
 		height: 100%;
 		background-image: repeating-linear-gradient(
 			45deg,
-			rgb(214, 220, 227),
-			rgb(214, 220, 227) 1.623rem,
-			rgb(255, 255, 255) 19px,
-			rgb(255, 255, 255) 1px
+			$secondary-light,
+			$secondary-light 1.623rem,
+			$white 19px,
+			$white 1px
 		);
 		z-index: -1;
 	}
@@ -373,8 +374,8 @@ $gradient-percentage: 40.4%;
 .why-us-content {
 	background-image: linear-gradient(
 		to right,
-		white $gradient-percentage,
-		rgb(239, 234, 226) $gradient-percentage
+		$white $gradient-percentage,
+		$primary-light $gradient-percentage
 	);
 }
 .highlights-list {
@@ -402,3 +403,52 @@ $gradient-percentage: 40.4%;
 	}
 }
 /*   Why Us Section   */
+
+/*   Testimonials Section   */
+.container-tesimonials {
+	box-shadow: 0px 1.1rem 2rem rgba(88, 89, 91, 0.6);
+	background-color: $white;
+	&:before {
+		content: '\f10d';
+		font-family: 'Font Awesome 5 Free';
+		font-style: normal;
+		font-variant: normal;
+		text-rendering: auto;
+		font-weight: 900;
+		display: block;
+		text-align: center;
+		font-size: 3rem;
+		color: $secondary;
+		padding-top: 3rem;
+	}
+}
+.component-testimonials-slider {
+	padding: 3rem;
+}
+.testimonial-quote {
+	font-size: 2.4rem;
+	font-weight: 400;
+	margin-bottom: 1em;
+}
+.testimonial-blockquote {
+	text-align: center;
+	margin: 0;
+}
+.testimonial-cite {
+	font-size: 2rem;
+}
+.testimonial-cite-text {
+	position: relative;
+	&:before {
+		content: '';
+		width: 1em;
+		height: 0.2em;
+		position: absolute;
+		left: -1.5em;
+		top: 50%;
+		transform: translate3d(0, -50%, 0);
+		background-color: $primary;
+	}
+}
+@import './import/component-testimonials-slider.scss';
+/*   Testimonials Section   */
