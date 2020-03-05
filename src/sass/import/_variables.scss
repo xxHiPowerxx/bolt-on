@@ -201,3 +201,5 @@ $font-fam-secondary: 'Lora', serif;
 
 $trans-header: 'body.trans-header';
 /*   ex of variable usage: @at-root #{$trans-header} & {}   */
+
+$active: '&:hover,&:focus,&.active';
