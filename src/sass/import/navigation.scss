@@ -1,5 +1,5 @@
 /*   Main Nav   */
-.main-navigation {
+.navbar-nav {
 	.menu {
 		display: flex;
 		justify-content: space-between;
@@ -89,13 +89,19 @@
 			}
 		}
 	}
-	> .menu {
-		> .menu-item {
-			@at-root #{$trans-header} & {
-				> a {
-					color: $white;
+	&.main-navigation {
+		> .menu {
+			> .menu-item {
+				@at-root #{$trans-header} & {
+					> a {
+						color: $white;
+					}
 				}
 			}
+		}
+	}
+	> .menu {
+		> .menu-item {
 			&:before,
 			&:after {
 				content: '';
