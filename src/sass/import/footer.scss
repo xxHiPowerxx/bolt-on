@@ -1,0 +1,97 @@
+.site-footer {
+	.footer-navigation {
+		padding: 1rem 2%;
+	}
+	.custom-logo svg > * {
+		fill: $white;
+	}
+	a {
+		color: $primary;
+	}
+	.anchor-social-icon {
+		padding: 0.75em;
+		border: solid 0.15em $white;
+		line-height: 1;
+		text-align: center;
+		margin-left: 1em;
+		margin-right: 1em;
+		@extend .smooth-transition;
+		#{$active} {
+			color: $white;
+		}
+	}
+	.social-icons {
+		justify-content: space-between;
+		font-size: 2.2rem;
+		margin-left: -1em;
+		margin-right: -1em;
+	}
+	.site-branding {
+		margin-bottom: 3rem;
+	}
+	.offices-list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-bottom: -6rem;
+	}
+	.listed-office {
+		flex: 1 1 33.33%;
+		margin-bottom: 6rem;
+	}
+	.office-title {
+		font-family: $font-fam-primary;
+		font-weight: 700;
+		font-size: 2.2rem;
+		color: $white;
+	}
+	.anchor-office-location {
+		font-size: 1.8rem;
+		text-decoration: none;
+		@extend .smooth-transition;
+		color: rgba($white, 0.8);
+		#{$active} {
+			color: $white;
+		}
+	}
+}
+.footer-main {
+	background-color: $secondary;
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+}
+.anchor-social-icon {
+	.social-icon {
+		width: 1em;
+		height: 1em;
+	}
+}
+.container-footer-main {
+	> :first-child {
+		margin-right: 6rem;
+	}
+	> :last-child {
+		margin-left: 6rem;
+		flex: 1;
+	}
+}
+.site-info-footer-wrapper {
+	background-color: $dark;
+	color: rgba($white, 0.6);
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+	font-size: 1.4rem;
+}
+.site-info {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	> * {
+		flex: 1;
+		max-width: 80rem;
+	}
+	> :first-child {
+		padding-bottom: 1.5em;
+		margin-bottom: 1.5em;
+		border-bottom: 1px solid rgba($white, 0.2);
+	}
+}

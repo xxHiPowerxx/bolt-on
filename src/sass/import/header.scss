@@ -8,6 +8,10 @@
 		background-color: transparent;
 		box-shadow: none;
 	}
+	.site-branding {
+		text-align: center;
+		max-width: 25%;
+	}
 }
 body {
 	&.hide-header {
@@ -81,10 +85,6 @@ input[type='search'] {
 /*   /Search   */
 
 /*   Logo   */
-.site-branding {
-	text-align: center;
-	max-width: 25%;
-}
 .custom-logo-link {
 	display: inline-block;
 }

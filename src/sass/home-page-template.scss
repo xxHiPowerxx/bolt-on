@@ -310,8 +310,8 @@ $bleed-unit: 19vh;
 	}
 }
 /*   /Contact Form   */
-/*   Offices List   */
 
+/*   Offices List   */
 .ctnr-contact-info {
 	width: 33%;
 	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
@@ -337,15 +337,15 @@ $bleed-unit: 19vh;
 		margin-bottom: 0.5em;
 		text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
 	}
-}
-.anchor-office-location {
-	font-size: 2.2rem;
-}
-.offices-list {
-	> :not(:last-child) {
-		margin-bottom: 1.5rem;
-		padding-bottom: 1.5rem;
-		border-bottom: 1px solid rgba($dark, 0.25);
+	.anchor-office-location {
+		font-size: 2.2rem;
+	}
+	.offices-list {
+		> :not(:last-child) {
+			margin-bottom: 1.5rem;
+			padding-bottom: 1.5rem;
+			border-bottom: 1px solid rgba($dark, 0.25);
+		}
 	}
 }
 /*   /Offices List   */
