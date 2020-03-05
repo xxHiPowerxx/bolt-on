@@ -44,9 +44,11 @@ if ( ! function_exists( 'bolt_on_setup' ) ) :
 		add_image_size( 'archive-thumbnail', 464, 261, array( 'center', 'center' ) );
 
 
-		// This theme uses wp_nav_menu() in one location.
+		// This theme uses wp_nav_menu() in two locations.
+		// primary and footer-menu.
 		register_nav_menus( array(
-			'primary' => esc_html__( 'Primary', 'bolt-on' ),
+			'primary-menu-location' => esc_html__( 'Primary Menu Location', 'bolt-on' ),
+			'footer-menu-location' => esc_html__( 'Footer Menu Location', 'bolt-on' ),
 		) );
 
 		/*
