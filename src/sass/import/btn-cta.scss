@@ -39,9 +39,7 @@ $btn-stroke-full-width: 100%;
 			transform: scaleX(0) translate3d(-50%, 0, 0);
 			width: 0;
 		}
-		&:hover,
-		&:focus,
-		&.active {
+		#{$active} {
 			&:before {
 				width: $btn-stroke-full-width;
 				transform: scaleX(1) translate3d(-50%, 0, 0);

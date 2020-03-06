@@ -76,8 +76,7 @@
 					opacity: 0;
 					@extend .smooth-transition;
 				}
-				&:hover,
-				&:focus {
+				#{$active} {
 					padding-left: 2em;
 					color: $secondary;
 					padding-right: 0.5em;
@@ -121,9 +120,7 @@
 				bottom: 0.7em;
 				border-top: none;
 			}
-			&:hover,
-			&:focus,
-			&.active {
+			#{$active} {
 				&:before,
 				&:after {
 					border-width: 0.222em;

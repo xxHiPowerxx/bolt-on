@@ -253,9 +253,7 @@ $bleed-unit: 19vh;
 		min-height: 100%;
 		@extend .smooth-transition;
 	}
-	&:hover,
-	&:focus,
-	&.active {
+	#{$active} {
 		.accreditation-description {
 			transform: scaleY(1) translate3d(0, -50%, 0);
 		}
