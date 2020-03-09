@@ -9,6 +9,38 @@
 
 if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 	/**
+	 * Prints the header of the current displayed page based on its contents.
+	 */
+	function bolt_on_index_header() {
+		if ( is_home() && ! is_front_page() ) {
+			?>
+			<header>
+				<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+			</header>
+			<?php
+		} elseif ( is_search() ) {
+			?>
+			<header class="page-header">
+				<h1 class="page-title">
+				<?php
+					/* translators: %s: search query. */
+					printf( esc_html__( 'Search Results for: %s', 'xten' ), '<span>' . get_search_query() . '</span>' );
+				?>
+				</h1>
+			</header><!-- .page-header -->
+			<?php
+		} elseif ( is_archive() ) {
+			?>
+			<header class="page-header content-area card-style">
+				<?php
+					the_archive_title( '<h1 class="page-title">', '</h1>' );
+					the_archive_description( '<div class="archive-description">', '</div>' );
+				?>
+			</header><!-- .page-header -->
+			<?php
+		}
+	}
+	/**
 	 * Prints HTML with meta information for the current post-date/time.
 	 * 
 	 * @param {bool} include_updated - Set Whether to include "Date Updated" or not. 
