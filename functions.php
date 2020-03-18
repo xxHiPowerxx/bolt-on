@@ -211,3 +211,8 @@ require get_template_directory() . '/inc/shortcodes/shortcodes.php';
  * Archive Excerpt.
  */
 require get_template_directory() . '/inc/archive-excerpt.php';
+
+/**
+ * Custom Post Types.
+ */
+require get_template_directory() . '/inc/custom-post-types.php';
