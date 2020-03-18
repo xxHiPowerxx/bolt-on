@@ -1,0 +1,16 @@
+/*   Offices List   */
+.offices-list {
+	.anchor-office-location {
+		font-size: 2.2rem;
+		display: inline-block;
+		margin-top: auto;
+		margin-right: auto;
+		@extend .smooth-transition;
+	}
+	.anchor-office-phone-number {
+		font-size: 3rem;
+		font-weight: 600;
+		@extend .smooth-transition;
+	}
+}
+/*   /Offices List   */

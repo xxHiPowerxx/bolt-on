@@ -199,7 +199,15 @@ $dark: rgb(38, 38, 38);
 $font-fam-primary: 'Montserrat', sans-serif;
 $font-fam-secondary: 'Lora', serif;
 
-$trans-header: 'body.trans-header';
+$trans-header: 'body.trans-header:not(.scrolledPastHeader)';
 /*   ex of variable usage: @at-root #{$trans-header} & {}   */
 
 $active: '&:hover,&:focus,&.active';
+
+$stripes: repeating-linear-gradient(
+	45deg,
+	$secondary-light,
+	$secondary-light 1.623rem,
+	$white 19px,
+	$white 1px
+);

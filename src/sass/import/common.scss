@@ -6,3 +6,19 @@
 	text-transform: uppercase;
 	font-weight: 600;
 }
+
+/*   Fraction Wrap Feature   */
+.fraction-wrap {
+	display: flex;
+	.one-half {
+		width: 50%;
+		$pad-val: 6rem;
+		&:first-child {
+			padding-right: $pad-val;
+		}
+		&:last-child {
+			padding-left: $pad-val;
+		}
+	}
+}
+/*   Fraction Wrap Feature   */

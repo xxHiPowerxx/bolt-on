@@ -262,6 +262,11 @@ $bleed-unit: 19vh;
 /*   /How Can We Help Section   */
 
 /*   Contact Section   */
+.ctnr-contact-form {
+	width: 66%;
+	min-width: 50rem;
+	max-width: 100%;
+}
 .contact-section {
 	background-image: url('../images/bg-w.png');
 	background-repeat: no-repeat;
@@ -283,33 +288,7 @@ $bleed-unit: 19vh;
 		}
 	}
 }
-/*   Contact Form   */
-.ctnr-contact-form {
-	width: 66%;
-	min-width: 50rem;
-	max-width: 100%;
-}
-.wpcf7-form {
-	display: flex;
-	flex-wrap: wrap;
-	font-size: 1.8rem;
-	> * {
-		flex: 1 1 100%;
-		margin-bottom: 1em;
-	}
-	> :nth-child(-n + 5) {
-		flex-basis: 50%;
-	}
-	> :nth-child(-2n + 5) {
-		padding-left: 1em;
-	}
-	.input-field {
-		width: 100%;
-	}
-}
-/*   /Contact Form   */
-
-/*   Offices List   */
+@import './import/contact-form';
 .ctnr-contact-info {
 	width: 33%;
 	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
@@ -319,13 +298,7 @@ $bleed-unit: 19vh;
 		top: 0;
 		width: 100%;
 		height: 100%;
-		background-image: repeating-linear-gradient(
-			45deg,
-			$secondary-light,
-			$secondary-light 1.623rem,
-			$white 19px,
-			$white 1px
-		);
+		background-image: $stripes;
 		z-index: -1;
 	}
 	.phone-number {
@@ -335,39 +308,21 @@ $bleed-unit: 19vh;
 		margin-bottom: 0.5em;
 		text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
 	}
-	.anchor-office-location {
-		font-size: 2.2rem;
-	}
-	.offices-list {
-		> :not(:last-child) {
-			margin-bottom: 1.5rem;
-			padding-bottom: 1.5rem;
-			border-bottom: 1px solid rgba($dark, 0.25);
-		}
+}
+@import './import/offices-list';
+.offices-list {
+	> :not(:last-child) {
+		margin-bottom: 1.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid rgba($dark, 0.25);
 	}
 }
-/*   /Offices List   */
 /*   /Contact Section   */
 
 /*   Why Us Section   */
 .container-why-us-content {
 	padding-top: 6rem;
 }
-/*   Fraction Wrap Feature   */
-.fraction-wrap {
-	display: flex;
-	.one-half {
-		width: 50%;
-		$pad-val: 6rem;
-		&:first-child {
-			padding-right: $pad-val;
-		}
-		&:last-child {
-			padding-left: $pad-val;
-		}
-	}
-}
-/*   Fraction Wrap Feature   */
 $gradient-percentage: 40.4%;
 .why-us-content {
 	background-image: linear-gradient(
