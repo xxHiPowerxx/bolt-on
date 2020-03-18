@@ -31,12 +31,6 @@ function custom_post_types() {
 												$post_description;
 		$menu_icon        = 'dashicons-' . $icon;
 		$post_handle      = str_replace( ' ','-', strtolower( $post_plural ) );
-		$rewrite          = ! $hierarchical ?
-												false :
-												array(
-													'slug'       => $post_handle,
-													'with_front' => true,
-												);
 		$theme            = 'bolt-on';
 		// Set UI labels for Custom Post Type
 		$post_labels = array(
@@ -91,7 +85,10 @@ function custom_post_types() {
 			'capability_type'     => 'post',
 			'show_in_rest'        => true,
 			'menu_icon'           => $menu_icon,
-			'rewrite'             => $rewrite,
+			'rewrite'             => array(
+															 	'slug'       => $post_handle,
+															 	'with_front' => true,
+															 ),
 		);
 		// Registering your Custom Post Type
 		return register_post_type( $post_handle, $args );
