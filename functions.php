@@ -216,3 +216,12 @@ require get_template_directory() . '/inc/archive-excerpt.php';
  * Custom Post Types.
  */
 require get_template_directory() . '/inc/custom-post-types.php';
+
+/**
+ * Only Show Parent-Level Practice Areas in Attorney's Practice Areas Post Types ACF Relationship Field.
+ */
+function change_posts_order_relationship( $args, $field, $post ) {
+	$args['post_parent'] = 0;
+	return $args;
+}
+add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change_posts_order_relationship', 10, 3);
