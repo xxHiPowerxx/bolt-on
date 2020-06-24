@@ -1,27 +1,60 @@
 // Write JS here
 jQuery(document).ready(function($) {
-	var headerPad;
+	var headerHeight,
+		fixedHeader = false,
+		$body = $('body'),
+		transitionEnd =
+			'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
+	var count = 0;
 	function collapseOnHover() {
 		$('.has-dropdown').each(function() {
 			var collapse = $(this).children('.collapse'),
-				className = 'active';
+				className1 = 'active',
+				className2 = 'header-dropdown-active',
+				dropDownHovered = false;
 			$(this).hover(
 				function() {
-					$(this).addClass(className);
-					collapse.collapse('show');
+					$(this).addClass(className1);
+					collapse.collapse('show').one('shown.bs.collapse', function() {
+						console.log('Im shown');
+						$(this).one(transitionEnd, function() {
+							$(this)
+								.one('mouseenter', function() {
+									count++;
+									console.log('count', count);
+									dropDownHovered = true;
+									if ($(this).closest('#masthead').length) {
+										$body.addClass(className2);
+									}
+								})
+								.one('mouseleave', function() {
+									count--;
+									console.log('count', count);
+									dropDownHovered = false;
+									collapse.collapse('hide');
+									if ($(this).closest('#masthead').length) {
+										$body.removeClass(className2);
+									}
+								});
+						});
+					});
 				},
 				function() {
-					$(this).removeClass(className);
-					collapse.collapse('hide');
+					$(this).removeClass(className1);
+					if (!dropDownHovered) {
+						collapse.collapse('hide');
+					}
 				}
 			);
 		});
 	}
 	function sizeHeaderPad() {
 		$('.sizeHeaderPad').each(function() {
-			if (getComputedStyle(this).position === 'fixed') {
+			fixedHeader = getComputedStyle(this).position === 'fixed';
+			if (fixedHeader) {
 				var sizeHeaderPadTar = $('.sizeHeaderPadTar').first();
-				headerPad = this.getBoundingClientRect().height;
+				headerHeight = headerHeight || this.getBoundingClientRect().height;
+				headerPad = headerHeight;
 				sizeHeaderPadTar.css('padding-top', headerPad);
 			}
 		});
@@ -29,17 +62,62 @@ jQuery(document).ready(function($) {
 	function scrolledPastHeader() {
 		$('.scrolledPastHeaderRef').each(function() {
 			var thisRect = this.getBoundingClientRect();
-			if ($(window).scrollTop() >= thisRect.height + thisRect.top) {
-				$('body').addClass('scrolledPastHeader');
+			console.log($(window).scrollTop());
+			console.log(thisRect.height + this.offsetTop);
+			if ($(window).scrollTop() >= thisRect.height + this.offsetTop) {
+				$body.addClass('scrolledPastHeader');
 			} else {
-				$('body').removeClass('scrolledPastHeader');
+				$body.removeClass('scrolledPastHeader');
 			}
 		});
 	}
+	function getHeaderHeight() {
+		$('.getHeaderHeight').each(function() {
+			headerHeight = this.getBoundingClientRect().height;
+		});
+	}
+	// utility function that returns mouse Postion.
+	function getMousePosition(event) {
+		var eventDoc, doc, body;
+		event = event || window.event; // IE-ism
+		// If pageX/Y aren't available and clientX/Y are,
+		// calculate pageX/Y - logic taken from jQuery.
+		// (This is to support old IE)
+		if (event.pageX == null && event.clientX != null) {
+			eventDoc = (event.target && event.target.ownerDocument) || document;
+			doc = eventDoc.documentElement;
+			body = eventDoc.body;
+			event.pageX =
+				event.clientX +
+				((doc && doc.scrollLeft) || (body && body.scrollLeft) || 0) -
+				((doc && doc.clientLeft) || (body && body.clientLeft) || 0);
+			event.pageY =
+				event.clientY +
+				((doc && doc.scrollTop) || (body && body.scrollTop) || 0) -
+				((doc && doc.clientTop) || (body && body.clientTop) || 0);
+		}
+		return event;
+	}
+	function mouseInHeaderArea() {
+		if (fixedHeader) {
+			document.onmousemove = handleMouseMove;
+			function handleMouseMove(event) {
+				var headerHeightFromTop = headerHeight + $('#masthead')[0].offsetTop;
+				event = getMousePosition(event);
+				// Get Mouse Y Position relative to window and compare to Header Height.
+				if (fixedHeader && event.clientY <= headerHeightFromTop) {
+					$body.addClass('mouseInHeaderArea');
+				} else {
+					$body.removeClass('mouseInHeaderArea');
+				}
+				// Use event.pageX / event.pageY here
+			}
+		}
+	}
 	function bleedIntoHeader() {
-		if (headerPad !== undefined) {
+		if (fixedHeader) {
 			$('.bleedIntoHeader').each(function() {
-				$(this).css('margin-top', -headerPad);
+				$(this).css('margin-top', -headerHeight);
 			});
 		}
 	}
@@ -51,12 +129,22 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+	function preventExpandedCollapse() {
+		$('.preventExpandedCollapse').on('click', function(e) {
+			if ($(this).attr('aria-expanded') == 'true') {
+				e.stopImmediatePropagation();
+				e.preventDefault();
+			}
+		});
+	}
 	function readyFuncs() {
 		collapseOnHover();
 		sizeHeaderPad();
 		scrolledPastHeader();
 		bleedIntoHeader();
 		initSlick();
+		mouseInHeaderArea();
+		preventExpandedCollapse();
 	}
 	function resizeFuncs() {
 		sizeHeaderPad();

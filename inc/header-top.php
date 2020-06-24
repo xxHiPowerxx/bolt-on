@@ -55,7 +55,7 @@
 	<?php
 	if ( is_active_sidebar( 'header-info' ) ) : ?>
 		<div class="ctnr-header-info">
-			<?php dynamic_sidebar( 'header-info' ); ?>
+			<?php do_shortcode( dynamic_sidebar( 'header-info' ) ); ?>
 		</div>
 		<?php
 	endif;

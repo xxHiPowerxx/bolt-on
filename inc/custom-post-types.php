@@ -96,8 +96,8 @@ function custom_post_types() {
 	// Use our utility function to render different Custom Post Types.
 	create_custom_post_type( 
 		'Attorney',
-		'Attornies',
-		'Attornies and Staff',
+		null,
+		'Attorneys and Staff',
 		false,
 		'businessman'
 	);

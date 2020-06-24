@@ -1,3 +1,4 @@
+@import './variables';
 /*   Commonly Used Classes   */
 .display-flex {
 	display: flex;
@@ -5,6 +6,11 @@
 .btn {
 	text-transform: uppercase;
 	font-weight: 600;
+}
+
+.btn-no-style {
+	border: none;
+	background-color: transparent;
 }
 
 /*   Fraction Wrap Feature   */
@@ -22,3 +28,40 @@
 	}
 }
 /*   Fraction Wrap Feature   */
+
+/*   Stripes   */
+.stripes-banner {
+	position: relative;
+	&:before {
+		content: '';
+		background-image: $stripes;
+		padding: 9rem 14.4rem;
+		background-size: cover;
+		background-position: 50% 50%;
+		width: 100%;
+		display: block;
+		position: absolute;
+	}
+	> * {
+		position: relative;
+	}
+}
+/*   /Stripes   */
+
+/*   Has Chevron   */
+.has-chevron {
+	&:after {
+		content: '\f054';
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translate3d(0, -50%, 0);
+		color: $primary;
+		font-weight: 900;
+		font-family: 'Font Awesome 5 Free';
+		font-style: normal;
+		font-variant: normal;
+		text-rendering: auto;
+	}
+}
+/*   /Has Chevron   */

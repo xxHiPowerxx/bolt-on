@@ -1,0 +1,217 @@
+<?php
+/**
+ * Template part for displaying an Attorney
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package bolt-on
+ */
+$attorney_full_name       = get_the_title();
+$attorney_full_name_array = explode(' ', $attorney_full_name );
+$attorney_first_name      = $attorney_full_name_array[0];
+$attorney_last_name       = end($attorney_full_name_array);
+$attorney_middle_initial  = isset( $attorney_full_name_array[2] ) ?
+													 $attorney_full_name_array[1] :
+													 '';
+$attorney_title           = esc_attr( get_field( 'attorney_title' ) );
+$attorney_practice_areas  = get_field( 'attorney_practice_areas' );
+$site_phone_number        = get_theme_mod( 'site_phone_number', '' );
+
+// Content Sections.
+// Only store these for now, the rest are repeaters and require validation.
+// Before getting their sub_fields().
+$attorney_bio                  = wp_kses_post( get_field( 'attorney_bio' ) );
+$attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
+
+
+?>
+<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+	<div class="row main-row">
+		<aside id="attorney-sidebar" class="left-sidebar col-3 pad-bottom">
+			<?php bolt_on_post_thumbnail(370); ?>
+			<nav class="attorney-attributes-nav side-bar-nav">
+
+				<?php
+				if ( $attorney_bio ) :
+					$attorney_bio_id = 'attorney-bio';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_bio_id; ?>" aria-expanded="true" aria-controls="<?php echo $attorney_bio_id; ?>">Bio</button>
+				<?php endif; // endif ( $attorney_bio ) : ?>
+
+				<?php
+				if ( have_rows( 'attorney_education_repeater' ) ) :
+					$attorney_education_id = 'attorney-education';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_education_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_education_id; ?>">Education</button>
+				<?php endif; // endif ( have_rows( 'attorney_education_repeater' ) ) : ?>
+
+				<?php
+				if ( have_rows( 'attorney_awards_repeater' ) ) :
+					$attorney_awards_id = 'attorney-awards';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_awards_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_awards_id; ?>">Awards</button>
+				<?php endif; // endif ( have_rows( 'attorney_awards_repeater' ) ) : ?>
+
+				<?php
+				if ( have_rows( 'attorney_professional_associations_repeater' ) ) :
+					$attorney_professional_associations_id = 'attorney-professional-associations';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_professional_associations_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_professional_associations_id; ?>">Professional Associations</button>
+				<?php endif; // endif ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+
+				<?php
+				if ( $attorney_speaking_engagements ) :
+					$attorney_speaking_engagements_id = 'attorney-speaking-engagements';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_speaking_engagements_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_speaking_engagements_id; ?>">Speaking Engagements</button>
+				<?php endif; // endif ( $attorney_speaking_engagements ) : ?>
+
+				<?php
+				if ( have_rows( 'attorney_videos_repeater' ) ) :
+					$attorney_videos_id = 'attorney-videos';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_videos_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_videos_id; ?>">Videos</button>
+				<?php endif; // endif ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+
+			</nav>
+			<?php if ( shortcode_exists( 'contact-form-7' ) ) : ?>
+				<div class="ctnr-contact-form theme-style-border">
+					<h4 class="contact-form-title">Connect With <?php echo $attorney_first_name; ?></h4>
+					<?php
+					$contact_form_shortcode = '[contact-form-7 id="110" title="Main Contact Form"]';
+					echo do_shortcode( $contact_form_shortcode );
+					?>
+				</div>
+			<?php endif; ?>
+		</aside>
+		<div class="col-1"></div>
+		<main class="main-content col-8 theme-content pad-bottom">
+			<header class="entry-header">
+				<h1 class="entry-title attorney-name"><?php echo $attorney_full_name; ?></h1>
+				<h2 class="attorney-title"><?php echo $attorney_title; ?></h2>
+			</header><!-- .entry-header -->
+
+			<div class="practice-areas">
+				<h3 class="practice-areas-title">Practice Areas:</h3>
+				<?php
+				ob_start();
+				// Loop Through Attorney Practice Areas.
+				$last = end($attorney_practice_areas);
+				foreach ($attorney_practice_areas as $key=>$attorney_practice_area) :
+					$practice_area_link  = get_permalink( $attorney_practice_area );
+					$practice_area_title = get_the_title( $attorney_practice_area );
+					?>
+					<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>"><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
+					<?php
+					// Seperate Each Anchor tag with comma if not last.
+					if ( $last !== $attorney_practice_area ) :
+						?>
+						<span class="comma-sperator">,&nbsp;</span>
+						<?php
+					endif;
+				endforeach; //endforeach ($attorney_practice_areas as $attorney_practice_area) :
+				$content = ob_get_clean();
+				echo preg_replace('/>\s+</m', '><', $content);
+				?>
+			</div><!-- /.practice-areas -->
+
+			<div id="attorney-attributes-sections">
+
+				<?php if ( $attorney_bio ) : ?>
+					<section id="<?php echo $attorney_bio_id; ?>" class="attorney-attributes-section collapse show" data-parent="#attorney-attributes-sections">
+						<?php echo $attorney_bio; ?>
+					</section><!-- /#<?php echo $attorney_bio_id; ?> -->
+				<?php endif; // endif ( $attorney_bio ) : ?>
+
+				<?php if ( have_rows( 'attorney_education_repeater' ) ) : ?>
+					<section id="<?php echo $attorney_education_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<ul class="attorney-education-list">
+							<?php
+							while ( have_rows( 'attorney_education_repeater' ) ) :
+								the_row();
+								$attorney_education = esc_html( get_sub_field( 'attorney_education' ) );
+								?>
+								<li class="listed-education"><?php echo $attorney_education; ?></li>
+							<?php endwhile; // endwhile ( have_rows( 'attorney_education_repeater' ) ) : ?>
+						</ul><!-- ./attorney-education-list -->
+					</section><!-- /#<?php echo $attorney_education_id; ?> -->
+				<?php endif; // endif ( have_rows( 'attorney_education_repeater' ) ) : ?>
+
+				<?php if ( have_rows( 'attorney_awards_repeater' ) ) : ?>
+					<section id="<?php echo $attorney_awards_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<ul class="attorney-awards-list">
+							<?php
+							while ( have_rows( 'attorney_awards_repeater' ) ) :
+								the_row();
+								$attorney_award = esc_html( get_sub_field( 'attorney_award' ) );
+								?>
+								<li class="listed-award"><?php echo $attorney_award; ?></li>
+							<?php endwhile; // endwhile ( have_rows( 'attorney_awards_repeater' ) ) : ?>
+						</ul><!-- ./attorney-awards-list -->
+					</section><!-- /#<?php echo $attorney_awards_id; ?> -->
+				<?php endif; // endif ( have_rows( 'attorney_awards_repeater' ) ) : ?>
+
+				<?php if ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+					<section id="<?php echo $attorney_professional_associations_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<ul class="attorney-professional-associations-list">
+							<?php
+							while ( have_rows( 'attorney_professional_associations_repeater' ) ) :
+								the_row();
+								$attorney_professional_association = esc_html( get_sub_field( 'attorney_professional_association' ) );
+								?>
+								<li class="listed-professional-association"><?php echo $attorney_professional_association; ?></li>
+							<?php endwhile; // endwhile ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+						</ul><!-- ./attorney-professional-associations-list -->
+					</section><!-- /#<?php echo $attorney_professional_associations_id; ?> -->
+				<?php endif; // endif ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+
+				<?php if ( $attorney_speaking_engagements ) : ?>
+					<section id="<?php echo $attorney_speaking_engagements_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<?php echo $attorney_speaking_engagements; ?>
+					</section><!-- /#<?php echo $attorney_speaking_engagements_id; ?> -->
+				<?php endif; // endif ( $attorney_speaking_engagements ) : ?>
+
+				<?php if ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+					<section id="<?php echo $attorney_videos_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<ul class="attorney-videos-list">
+							<?php
+							while ( have_rows( 'attorney_videos_repeater' ) ) :
+								the_row();
+								$attorney_video = esc_html( get_sub_field( 'attorney_video' ) );
+								?>
+								<li class="listed-video"><?php echo $attorney_videos; ?></li>
+							<?php endwhile; // endwhile ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+						</ul><!-- ./attorney-videos-list -->
+					</section><!-- /#<?php echo $attorney_videos_id; ?> -->
+				<?php endif; // endif ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+
+			</div><!-- #attorney-attributes-sections -->
+			<footer class="attorney-footer">
+				<a href="tel:<?php echo $site_phone_number ?>" class="anchor-attorney-footer-phone-number">
+					Contact <?php echo $attorney_first_name . ' ' . $attorney_last_name; ?> today by calling <span class="attorney-footer-phone-number"><?php echo $site_phone_number ?></span>
+				</a>
+				<?php bolt_on_entry_footer(); ?>
+			</footer><!-- ./attorney-footer -->
+			<?php if ( trim( get_the_content() ) !== '' ) : ?>
+				<div class="entry-content">
+					<?php
+					the_content( sprintf(
+						wp_kses(
+							/* translators: %s: Name of current post. Only visible to screen readers */
+							__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'bolt-on' ),
+							array(
+								'span' => array(
+									'class' => array(),
+								),
+							)
+						),
+						get_the_title()
+					) );
+					?>
+				</div><!-- /.entry-content -->
+				<?php
+			endif; // endif ( trim( get_the_content() ) !== '' ) :
+			?>
+		</main><!-- /.main-content -->
+	</div><!-- ./main-row -->
+</article><!-- /#post-<?php the_ID(); ?> -->

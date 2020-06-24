@@ -24,3 +24,13 @@
 .theme-heading-subtitle * {
 	font-size: inherit;
 }
+
+.entry-header {
+	h1 {
+		margin-bottom: 0;
+		+ h2 {
+			font-size: 3rem;
+			margin-top: 0;
+		}
+	}
+}

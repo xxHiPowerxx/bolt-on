@@ -1,0 +1,123 @@
+@import './import/variables';
+@import './import/common';
+
+@import './import/contact-form';
+.site-content {
+	@extend .stripes-banner;
+}
+
+.main-container {
+	padding-top: 9rem;
+}
+.main-content {
+	padding-top: 18rem;
+}
+.entry-title {
+	&.attorney-name {
+		text-transform: uppercase;
+	}
+}
+.practice-areas {
+	font-size: 1.8rem;
+	padding-bottom: 1em;
+	> * {
+		display: inline;
+	}
+}
+.practice-areas-title {
+	font-size: 2.4rem;
+	margin-right: 0.25em;
+}
+.anchor-attorney-practice-area {
+	font-weight: 600;
+}
+.anchor-attorney-footer-phone-number {
+	font-size: 1.8rem;
+	font-weight: 600;
+	@extend .smooth-transition;
+	.attorney-footer-phone-number {
+		color: $secondary;
+	}
+}
+
+/*   Left Sidebar   */
+.left-sidebar {
+	> :not(:last-child) {
+		margin-bottom: 3rem;
+	}
+	/*   Sidebar Thumbnail   */
+	.post-thumbnail {
+		text-align: center;
+		&,
+		img {
+			max-width: 100%;
+		}
+	}
+	/*   /Sidebar Thumbnail   */
+	/*   Contact Form   */
+	.ctnr-contact-form {
+		padding-left: 3rem;
+		padding-right: 3rem;
+		.btn-cta-outer {
+			width: 100%;
+		}
+	}
+	.contact-form-title {
+		text-align: center;
+	}
+	.wpcf7-form > * {
+		flex-basis: 100%;
+		padding: 0;
+	}
+	/*   /Contact Form   */
+}
+
+/*   Sidebar Nav   */
+.attorney-attributes-nav {
+	display: flex;
+	flex-direction: column;
+}
+.btn-sidebar-nav {
+	font-size: 1.8rem;
+	text-align: left;
+	color: $secondary;
+	position: relative;
+	padding: 0.5em 1.5em;
+	transform: translate3d(0, 0, 0);
+	&:before {
+		content: ' ';
+		position: absolute;
+		width: 1em;
+		height: 2px;
+		top: 50%;
+		left: 0;
+		background-color: $primary;
+		z-index: -1;
+		transform: translate3d(0, -50%, 0);
+	}
+	&,
+	&:before,
+	&:after {
+		@extend .smooth-transition;
+	}
+	#{$active},
+	&[aria-expanded='true'] {
+		transform: translate3d(1em, 0, 0);
+		box-shadow: none;
+	}
+	&[aria-expanded='true'] {
+		color: $primary;
+		&:before {
+			background-color: $secondary;
+		}
+		&:after {
+			color: $secondary;
+		}
+	}
+}
+/*   /Sidebar Nav   */
+
+/*   /Left Sidebar   */
+
+/*   Attorneys Archive   */
+@import './import/_component-attorneys-archive';

@@ -37,7 +37,11 @@
 		flex-wrap: wrap;
 		padding: 8rem;
 		margin-top: 4rem;
-		pointer-events: none;
+		transition-property: transform, opacity;
+		&,
+		* {
+			pointer-events: none;
+		}
 		@extend .smooth-transition;
 		&.collapsing {
 			transform: translate3d(0, -100%, 0);
@@ -47,7 +51,10 @@
 		&.show {
 			transform: translate3d(0, 0, 0);
 			opacity: 1;
-			pointer-events: all;
+			&,
+			* {
+				pointer-events: all;
+			}
 		}
 		&.collapse {
 			&:not(.show) {

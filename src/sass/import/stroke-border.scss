@@ -32,22 +32,6 @@ $full-stroke-width: 37.235rem;
 		border-right: 0;
 		width: $full-stroke-width;
 	}
-	&.has-chevron {
-		&:after {
-			right: 0;
-			top: 50%;
-			transform: translate3d(0, -50%, 0);
-			color: $primary;
-			content: '\f054';
-			height: 1em;
-			width: 1em;
-			font-weight: 900;
-			font-family: 'Font Awesome 5 Free';
-			font-style: normal;
-			font-variant: normal;
-			text-rendering: auto;
-		}
-	}
 	&[class*='btn']:hover,
 	&[class*='btn']:focus,
 	&.active {
@@ -95,5 +79,27 @@ $full-stroke-width: 37.235rem;
 	}
 	&:after {
 		left: calc(0px + #{$full-stroke-width} - #{$stroke-width});
+	}
+}
+
+.theme-style-border {
+	padding: 3rem 6rem;
+	position: relative;
+	&:before,
+	&:after {
+		content: '';
+		position: absolute;
+		left: 0;
+		height: 6rem;
+		border: solid 0.8rem $primary;
+		width: 100%;
+	}
+	&:before {
+		top: 0;
+		border-bottom: none;
+	}
+	&:after {
+		bottom: 0;
+		border-top: none;
 	}
 }

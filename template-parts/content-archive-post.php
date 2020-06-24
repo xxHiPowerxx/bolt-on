@@ -48,7 +48,7 @@ wp_enqueue_style( 'bolt-on-blog-css' );
 					?>
 					<div class="post-date">
 						<?php
-							bolt_on_posted_on();
+						bolt_on_posted_on();
 						?>
 					</div>
 				</div><!-- .entry-meta -->

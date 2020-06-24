@@ -19,9 +19,13 @@ body {
 			@extend .smooth-transition;
 			transform: translate3d(0, 0, 0);
 		}
-		&.scrolledPastHeader {
-			.site-header {
-				transform: translate3d(0, -110%, 0);
+		&:not(.mouseInHeaderArea) {
+			&:not(.header-dropdown-active) {
+				&.scrolledPastHeader {
+					.site-header {
+						transform: translate3d(0, -110%, 0);
+					}
+				}
 			}
 		}
 	}

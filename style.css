@@ -983,3 +983,7 @@ object {
 .gallery-caption {
 	display: block;
 }
+
+.edit-link {
+	display: block;
+}

@@ -9,17 +9,7 @@
 }
 
 .site-content {
-	position: relative;
-	&:before {
-		content: '';
-		background-image: $stripes;
-		padding: 9rem 14.4rem;
-		background-size: cover;
-		background-position: 50% 50%;
-		width: 100%;
-		display: block;
-		position: absolute;
-	}
+	@extend .stripes-banner;
 	> * {
 		position: relative;
 		background-color: $white;
@@ -29,27 +19,6 @@
 .contact-us-section {
 	.section-header {
 		margin-bottom: 3rem;
-	}
-}
-.theme-style-border {
-	padding: 3rem 6rem;
-	position: relative;
-	&:before,
-	&:after {
-		content: '';
-		position: absolute;
-		left: 0;
-		height: 6rem;
-		border: solid 0.8rem $primary;
-		width: 100%;
-	}
-	&:before {
-		top: 0;
-		border-bottom: none;
-	}
-	&:after {
-		bottom: 0;
-		border-top: none;
 	}
 }
 

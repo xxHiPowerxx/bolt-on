@@ -1,0 +1,33 @@
+#component-attorneys-archive {
+	display: flex;
+	> * {
+		width: 50%;
+	}
+	.left-side {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		justify-content: center;
+		padding-left: 6rem;
+		padding-right: 6rem;
+		background-image: url(../images/bg-w.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: top center;
+	}
+	.left-side-inner {
+		max-width: 60rem;
+		> :not(:last-child) {
+			margin-bottom: 3rem;
+			display: block;
+		}
+	}
+	.anchor-site-phone-number {
+		font-size: 4.8rem;
+		font-weight: 700;
+	}
+	.tagline {
+		font-size: 2.2rem;
+	}
+}
+@import './attrorneys-archive-slider';
