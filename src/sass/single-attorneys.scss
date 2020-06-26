@@ -48,9 +48,9 @@
 	/*   Sidebar Thumbnail   */
 	.post-thumbnail {
 		text-align: center;
-		&,
 		img {
 			max-width: 100%;
+			height: auto;
 		}
 	}
 	/*   /Sidebar Thumbnail   */
