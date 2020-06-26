@@ -7,6 +7,11 @@
  * @package bolt-on
  */
 
+ /**
+ * Utility Functions.
+ */
+require get_template_directory() . '/inc/utility-functions.php';
+
 if ( ! function_exists( 'bolt_on_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
