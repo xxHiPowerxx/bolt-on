@@ -20,15 +20,16 @@ $site_phone_number        = get_theme_mod( 'site_phone_number', '' );
 // Content Sections.
 // Only store these for now, the rest are repeaters and require validation.
 // Before getting their sub_fields().
-$attorney_bio                  = wp_kses_post( get_field( 'attorney_bio' ) );
-$attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
+$attorney_bio                       = wp_kses_post( get_field( 'attorney_bio' ) );
+$attorney_professional_associations = wp_kses_post( get_field( 'attorney_professional_associations' ) );
+$attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
 
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="row main-row">
 		<aside id="attorney-sidebar" class="left-sidebar col-3 pad-bottom">
-			<?php bolt_on_post_thumbnail(370); ?>
+			<?php the_post_thumbnail( array( 370, null ), array( 'class' => 'card-style' ) ); ?>
 			<nav class="attorney-attributes-nav side-bar-nav">
 
 				<?php
@@ -53,11 +54,11 @@ $attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_eng
 				<?php endif; // endif ( have_rows( 'attorney_awards_repeater' ) ) : ?>
 
 				<?php
-				if ( have_rows( 'attorney_professional_associations_repeater' ) ) :
+				if ( $attorney_professional_associations ) :
 					$attorney_professional_associations_id = 'attorney-professional-associations';
 					?>
 					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_professional_associations_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_professional_associations_id; ?>">Professional Associations</button>
-				<?php endif; // endif ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+				<?php endif; // endif ( $attorney_professional_associations ) : ?>
 
 				<?php
 				if ( $attorney_speaking_engagements ) :
@@ -86,34 +87,41 @@ $attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_eng
 		</aside>
 		<div class="col-1"></div>
 		<main class="main-content col-8 theme-content pad-bottom">
-			<header class="entry-header">
-				<h1 class="entry-title attorney-name"><?php echo $attorney_full_name; ?></h1>
-				<h2 class="attorney-title"><?php echo $attorney_title; ?></h2>
-			</header><!-- .entry-header -->
-
-			<div class="practice-areas">
-				<h3 class="practice-areas-title">Practice Areas:</h3>
-				<?php
-				ob_start();
-				// Loop Through Attorney Practice Areas.
-				$last = end($attorney_practice_areas);
-				foreach ($attorney_practice_areas as $key=>$attorney_practice_area) :
-					$practice_area_link  = get_permalink( $attorney_practice_area );
-					$practice_area_title = get_the_title( $attorney_practice_area );
-					?>
-					<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>"><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
+			<?php if ( $attorney_full_name || $attorney_title ) : ?>
+				<header class="entry-header">
+					<?php if ( $attorney_full_name ) : ?>
+						<h1 class="entry-title attorney-name"><?php echo $attorney_full_name; ?></h1>
+					<?php endif; ?>
+					<?php if ( $attorney_title ) : ?>
+						<h2 class="attorney-title"><?php echo $attorney_title; ?></h2>
+					<?php endif; ?>
+				</header><!-- .entry-header -->
+			<?php endif; //endif ( $attorney_full_name || $attorney_title ) : ?>
+			<?php if ( $attorney_practice_areas ) : ?>
+				<div class="practice-areas">
+					<h3 class="practice-areas-title">Practice Areas:</h3>
 					<?php
-					// Seperate Each Anchor tag with comma if not last.
-					if ( $last !== $attorney_practice_area ) :
+					ob_start();
+					// Loop Through Attorney Practice Areas.
+					$last = end($attorney_practice_areas);
+					foreach ( $attorney_practice_areas as $key=>$attorney_practice_area ) :
+						$practice_area_link  = get_permalink( $attorney_practice_area );
+						$practice_area_title = get_the_title( $attorney_practice_area );
 						?>
-						<span class="comma-sperator">,&nbsp;</span>
+						<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>"><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
 						<?php
-					endif;
-				endforeach; //endforeach ($attorney_practice_areas as $attorney_practice_area) :
-				$content = ob_get_clean();
-				echo preg_replace('/>\s+</m', '><', $content);
-				?>
-			</div><!-- /.practice-areas -->
+						// Seperate Each Anchor tag with comma if not last.
+						if ( $last !== $attorney_practice_area ) :
+							?>
+							<span class="comma-sperator">,&nbsp;</span>
+							<?php
+						endif;
+					endforeach; //endforeach ($attorney_practice_areas as $attorney_practice_area) :
+					$content = ob_get_clean();
+					echo preg_replace('/>\s+</m', '><', $content);
+					?>
+				</div><!-- /.practice-areas -->
+			<?php endif; // endif ( $attorney_practice_areas ) : ?>
 
 			<div id="attorney-attributes-sections">
 
@@ -151,19 +159,11 @@ $attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_eng
 					</section><!-- /#<?php echo $attorney_awards_id; ?> -->
 				<?php endif; // endif ( have_rows( 'attorney_awards_repeater' ) ) : ?>
 
-				<?php if ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+				<?php if ( $attorney_professional_associations ) : ?>
 					<section id="<?php echo $attorney_professional_associations_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<ul class="attorney-professional-associations-list">
-							<?php
-							while ( have_rows( 'attorney_professional_associations_repeater' ) ) :
-								the_row();
-								$attorney_professional_association = esc_html( get_sub_field( 'attorney_professional_association' ) );
-								?>
-								<li class="listed-professional-association"><?php echo $attorney_professional_association; ?></li>
-							<?php endwhile; // endwhile ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
-						</ul><!-- ./attorney-professional-associations-list -->
+						<?php echo $attorney_professional_associations; ?>
 					</section><!-- /#<?php echo $attorney_professional_associations_id; ?> -->
-				<?php endif; // endif ( have_rows( 'attorney_professional_associations_repeater' ) ) : ?>
+				<?php endif; // endif ( $attorney_professional_associations ) : ?>
 
 				<?php if ( $attorney_speaking_engagements ) : ?>
 					<section id="<?php echo $attorney_speaking_engagements_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
@@ -192,26 +192,6 @@ $attorney_speaking_engagements = wp_kses_post( get_field( 'attorney_speaking_eng
 				</a>
 				<?php bolt_on_entry_footer(); ?>
 			</footer><!-- ./attorney-footer -->
-			<?php if ( trim( get_the_content() ) !== '' ) : ?>
-				<div class="entry-content">
-					<?php
-					the_content( sprintf(
-						wp_kses(
-							/* translators: %s: Name of current post. Only visible to screen readers */
-							__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'bolt-on' ),
-							array(
-								'span' => array(
-									'class' => array(),
-								),
-							)
-						),
-						get_the_title()
-					) );
-					?>
-				</div><!-- /.entry-content -->
-				<?php
-			endif; // endif ( trim( get_the_content() ) !== '' ) :
-			?>
 		</main><!-- /.main-content -->
 	</div><!-- ./main-row -->
 </article><!-- /#post-<?php the_ID(); ?> -->
