@@ -39,6 +39,11 @@
 		}
 		ul {
 			margin: 0;
+			li {
+				&:before {
+					background-color: $primary-dark;
+				}
+			}
 		}
 	}
 	p,
