@@ -56,13 +56,9 @@ function custom_post_types() {
 			// Features this CPT supports in Post Editor
 			'supports'            => array(
 																'title',
-																'editor',
-																'excerpt',
 																'thumbnail',
-																'revisions',
 																'custom-fields',
 																'page-attributes',
-																'post-formats'
 															),
 			// You can associate this CPT with a taxonomy or custom taxonomy. 
 			'taxonomies'          => array( 'practice-areas' ),
