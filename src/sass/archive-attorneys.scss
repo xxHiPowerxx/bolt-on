@@ -1,0 +1,111 @@
+@import './import/variables';
+@import './import/common';
+
+
+#attorneys-archive-image-swap-section {
+	.section-header {
+		margin-bottom: 6rem;
+	}
+	.attorneys-list {
+		display: flex;
+		flex-wrap: wrap;
+		font-size: 2.4rem;
+		padding-bottom: 6rem;
+		flex: 1 1 30%;
+	}
+	.listed-attorney {
+		flex: 1 0 50%;
+		display: flex;
+		align-items: center;
+		.archive-attorney-name {
+			color: $dark;
+		}
+	}
+}
+.anchor-attorney.line-left {
+  margin-left: 1.5em;
+}
+/*   Image Swap   */
+#attorneys-archive-image-swap-section {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.container-attorneys-archive-image-swap-section {
+	padding-right: 0;
+	padding-bottom: 0;
+}
+.image-swap {
+	display: flex;
+	.image-swap-imgs {
+		// flex: 1 0 58.4rem;
+		flex: 1 0 63.4rem;
+		position: relative;
+	}
+}
+.image-swap-imgs {
+	position: relative;
+	.ctnr-image-swap-img {
+		position: absolute;
+		left: 50%;
+		transform: translate3d(-50%, 0, 0);
+		bottom: 0;
+		text-align: center;
+		&:first-child {
+			position: relative;
+		}
+	}
+}
+@import './import/attorneys-archive-img';
+
+.ctnr-archive-attorney-name-title {
+  display: inline-block;
+	left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: auto;
+  text-shadow: 0 .05em .1em black;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0) 70%);
+  padding: 3rem;
+  white-space: nowrap;
+}
+.imageSwap {
+	.imgSwapController {
+		transition: $smooth-transition;
+		text-shadow: 0 0 transparent;
+		transform: translateZ(0);
+		backface-visibility: hidden;
+		a {
+			text-decoration: none;
+		}
+		&.active {
+			color: $secondary;
+			text-shadow: .05em 0 $secondary;
+			transform: translate3d(1em, 0, 0);
+		}
+	}
+	.imageSwapTar {
+		transition: $smooth-transition;
+		backface-visibility: hidden;
+		opacity: 0;
+		&:not(:first-child) {
+			// display: none;
+		}
+		&.shown,
+		&.showing,
+		&.hiding {
+			// display: block;
+		}
+		&.shown {
+			opacity: 1;
+		}
+		&,
+		&.hiding {
+			opacity: 0;
+		}
+		&.show {
+			opacity: 1;
+		}
+
+	}
+}
+/*   /Image Swap   */

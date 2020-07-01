@@ -57,22 +57,6 @@
 }
 /*   /Hero Section   */
 
-/*   Bleeds Into Section Feature   */
-$bleed-unit: 19vh;
-.below-section-bleeds-in {
-	.bleed-target {
-		padding-bottom: $bleed-unit;
-	}
-	+ .bleeds-into-above-section {
-		.bleed-target {
-			margin-top: -$bleed-unit;
-			position: relative;
-		}
-	}
-}
-
-/*   /Bleeds Into Section Feature   */
-
 /*   About Section   */
 .about-section-cta-btns {
 	justify-content: space-between;
@@ -261,64 +245,6 @@ $bleed-unit: 19vh;
 }
 /*   /How Can We Help Section   */
 
-/*   Contact Section   */
-.ctnr-contact-form {
-	width: 66%;
-	min-width: 50rem;
-	max-width: 100%;
-}
-.contact-section {
-	background-image: url('../images/bg-w.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: 0% 0%;
-	position: relative;
-	overflow-x: hidden;
-}
-
-.container-contact {
-	display: flex;
-	flex-wrap: wrap;
-	> :first-child {
-		padding-right: 6rem;
-	}
-	> :nth-child(2) {
-		> * {
-			padding-left: 6rem;
-		}
-	}
-}
-@import './import/contact-form';
-.ctnr-contact-info {
-	width: 33%;
-	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
-	&:before {
-		content: '';
-		position: absolute;
-		top: 0;
-		width: 100%;
-		height: 100%;
-		background-image: $stripes;
-		z-index: -1;
-	}
-	.phone-number {
-		font-size: 3.5rem;
-		font-weight: 700;
-		display: inline-block;
-		margin-bottom: 0.5em;
-		text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
-	}
-}
-@import './import/offices-list';
-.offices-list {
-	> :not(:last-child) {
-		margin-bottom: 1.5rem;
-		padding-bottom: 1.5rem;
-		border-bottom: 1px solid rgba($dark, 0.25);
-	}
-}
-/*   /Contact Section   */
-
 /*   Why Us Section   */
 .container-why-us-content {
 	padding-top: 6rem;
@@ -389,19 +315,6 @@ $gradient-percentage: 40.4%;
 }
 .testimonial-cite {
 	font-size: 2rem;
-}
-.testimonial-cite-text {
-	position: relative;
-	&:before {
-		content: '';
-		width: 1em;
-		height: 0.2em;
-		position: absolute;
-		left: -1.5em;
-		top: 50%;
-		transform: translate3d(0, -50%, 0);
-		background-color: $primary;
-	}
 }
 @import './import/component-testimonials-slider.scss';
 /*   Testimonials Section   */

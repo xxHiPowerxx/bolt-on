@@ -52,32 +52,12 @@
 	}
 	/*   /Slick Nav Overrides   */
 }
+@import './attorneys-archive-img';
 .ctnr-archive-attorney-img {
-	position: relative;
 	> img {
 		max-height: 50rem;
-		width: auto;
-		margin-left: auto;
-		margin-right: auto;
 	}
 }
-.archive-attorney {
-	position: relative;
-	.anchor-btn-cta {
-		color: $white;
-	}
+.ctnr-archive-attorney-name-title {
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0));
 }
-.ctnr-btn-cta-archive-attorney {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-	text-align: center;
-	padding: 3rem 1.5rem;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0));
-}
-.archive-attorney-name {
-  font-size: 2.2rem;
-  margin-bottom: .25em;
-}
-
-

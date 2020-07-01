@@ -103,7 +103,7 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 										<span class="office-address-line-1">3281 East Guasti Road</span>
 										<span class="office-address-line-2">Suite 100</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">Ontario,</span>
 										&nbsp;
 										<span class="office-state">CA</span>
@@ -119,7 +119,7 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 										<span class="office-address-line-1">18565 Jamboree Road</span>
 										<span class="office-address-line-2">Suite 550</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">Irvine,</span>
 										&nbsp;
 										<span class="office-state">CA</span>
@@ -129,13 +129,13 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 								</a>
 							</div>
 							<div class="listed-office">
-								<h4 class="office-title">Inland Empire – East Office:</h4>
+								<h4 class="office-title nowrap-parent"><span>Inland Empire</span> – <span>East Office:</span></h4>
 								<a class="anchor-office-location" title="View Location on Google Maps." href="https://www.google.com/maps/place/McCune+Wright+Arevalo,+LLP/@34.0662623,-117.2887363,17z/data=!3m1!4b1!4m5!3m4!1s0x80dcad0c099da5c7:0xa29e6e639e5745e!8m2!3d34.0662623!4d-117.2865476" target="_blank">
 									<div class="office-address">
 										<span class="office-address-line-1">164 W. Hospitality Lane</span>
 										<span class="office-address-line-2">Suite 109</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">San Bernardino,</span>
 										&nbsp;
 										<span class="office-state">CA</span>
@@ -151,7 +151,7 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 										<span class="office-address-line-1">73255 El Paseo</span>
 										<span class="office-address-line-2">Suite 10</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">Palm Desert,</span>
 										&nbsp;
 										<span class="office-state">CA</span>
@@ -167,7 +167,7 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 										<span class="office-address-line-1">231 North Main Street</span>
 										<span class="office-address-line-2">Suite 20</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">Edwardsville,</span>
 										&nbsp;
 										<span class="office-state">IL</span>
@@ -183,7 +183,7 @@ $site_info_default    = do_shortcode( wp_kses_post( '© ' . '[year] ' . $site_na
 										<span class="office-address-line-1">One Gateway Center</span>
 										<span class="office-address-line-2">Suite 2600</span>
 									</div>
-									<div class="office-city-state-zip">
+									<div class="office-city-state-zip nowrap-parent">
 										<span class="office-city">Newark,</span>
 										&nbsp;
 										<span class="office-state">NJ</span>

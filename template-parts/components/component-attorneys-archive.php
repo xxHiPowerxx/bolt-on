@@ -18,10 +18,10 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 							'order' => 'ASC'
 						);
 		$post_query = new WP_Query($args);
-		if($post_query->have_posts() ) :
+		if( $post_query->have_posts() ) :
 			// Get the current Post ID for a later comparison.
 			$current_post_id = get_the_id();
-			while($post_query->have_posts() ) :
+			while( $post_query->have_posts() ) :
 				$post_query->the_post();
 
 				$this_post_id = get_the_id();
@@ -35,13 +35,13 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 					$attorney_title             = esc_attr( get_field( 'attorney_title' ) );
 					$attorney_permalink         = get_permalink();
 					$attorneys_isolated_picture = get_field( 'attorneys_isolated_picture' );
-					$attorney_pic               = wp_get_attachment_image( $attorneys_isolated_picture['id'], array(450, '') );
+					$attorney_pic               = wp_get_attachment_image( $attorneys_isolated_picture['id'], array(null, 500) );
 					?>
-					<div id="archive-attorney-<?php echo $attorney_id; ?>" class="archive-attorney">
+					<div id="archive-attorney-<?php echo $attorney_id; ?>" data-post-id="<?php echo $this_post_id; ?>" class="archive-attorney">
 						<div class="ctnr-archive-attorney-img">
 							<?php echo $attorney_pic; ?>
 						</div>
-						<div class="ctnr-btn-cta-archive-attorney">
+						<div class="ctnr-btn-cta-archive-attorney ctnr-archive-attorney-name-title">
 							<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron" href="<?php echo $attorney_permalink; ?>">
 								<span class="btn-cta btn-cta-inner stroke-border-inner">
 									<span class="btn-cta-text stroke-border-lvl-three">
@@ -54,8 +54,8 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 					</div>
 					<?php
 				endif; // endif ( $current_post_id !== $this_post_id ) :
-			endwhile; // endwhile($post_query->have_posts() ) :
-		endif; // endif($post_query->have_posts() ) :
+			endwhile; // endwhile( $post_query->have_posts() ) :
+		endif; // endif( $post_query->have_posts() ) :
 
 		wp_reset_query();
 		return ob_get_clean();

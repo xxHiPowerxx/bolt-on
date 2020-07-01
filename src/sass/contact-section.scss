@@ -1,0 +1,54 @@
+@import './import/variables';
+
+/*   Contact Section   */
+.ctnr-contact-form {
+	min-width: 50rem;
+	max-width: 100%;
+}
+.contact-section {
+	background-image: url('../images/bg-w.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 0% 0%;
+	position: relative;
+	overflow-x: hidden;
+}
+
+.container-contact {
+	display: flex;
+	flex-wrap: wrap;
+	> * {
+		flex: 1 0 50%;
+		max-width: 50%;
+	}
+	> :first-child {
+		padding-right: 6rem;
+	}
+	> :nth-child(2) {
+		> * {
+			padding-left: 6rem;
+		}
+	}
+}
+@import './import/contact-form';
+.ctnr-contact-info {
+	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-image: $stripes;
+		z-index: -1;
+	}
+	.phone-number {
+		font-size: 3.5rem;
+		font-weight: 700;
+		display: inline-block;
+		margin-bottom: 0.5em;
+		text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
+	}
+}
+@import './import/offices-list';
+/*   /Contact Section   */

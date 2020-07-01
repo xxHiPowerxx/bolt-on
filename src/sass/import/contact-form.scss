@@ -9,6 +9,7 @@
 	}
 	> :nth-child(-n + 5) {
 		flex-basis: 50%;
+		max-width: 50%;
 	}
 	> :nth-child(-2n + 5) {
 		padding-left: 1em;

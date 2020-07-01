@@ -62,8 +62,11 @@
 			}
 		}
 		.menu-item {
-			width: 25%;
-			padding: 0 1%;
+			$width: 25%;
+			$pad: 1%;
+			flex: 1 1 $width;
+			max-width: $width -  ( $pad * 2 );
+			padding: 0 $pad;
 			> a {
 				padding: 1em 1.5em;
 				line-height: 1;
@@ -118,6 +121,7 @@
 				left: 0;
 				transition-duration: 0.1s;
 				@extend .smooth-transition;
+				z-index: -1;
 			}
 			&:before {
 				top: 0.7em;
@@ -146,6 +150,7 @@
 					height: calc(50% - 6rem);
 					left: 0;
 					border: #ac966e 0.4rem solid;
+					z-index: -1;
 				}
 				&:before {
 					top: 4rem;

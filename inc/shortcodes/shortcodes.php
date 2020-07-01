@@ -55,4 +55,36 @@ function get_site_phone_number_func( $atts = '' ) {
 add_shortcode( 'site_phone_number', 'get_site_phone_number_func' );
 add_filter( 'widget_text', 'do_shortcode' );
 
-?>
+/**
+ * Contact Section Shortcode
+ * Renders Contact Form and Offices List
+ */
+function get_contact_section( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// If no Contact Form Provided, default to first.
+	if ( ! isset( $atts['contact_form'] ) ) :
+		$contact_form = get_posts(
+			array(
+				'post_type' => 'wpcf7_contact_form',
+				'numberposts' => 1
+			)
+		)[0];
+		// var_dump($contact_form);
+		$contact_form_id    = $contact_form->ID;
+		$contact_form_title = $contact_form->post_title;
+		$contact_form_shortcode_string = 'contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"';
+		$atts['contact_form'] = $contact_form_shortcode_string;
+	endif;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/contact-section.php';
+	require_once( $file_path );
+
+	if ( $atts['contact_form'] ) :
+		return component_contact_section( $atts['contact_form'] );
+	endif;
+}
+add_shortcode( 'contact_section', 'get_contact_section' );

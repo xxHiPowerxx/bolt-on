@@ -1,16 +1,41 @@
 /*   Offices List   */
 .offices-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	.anchor-office-location {
 		font-size: 2.2rem;
 		display: inline-block;
 		margin-top: auto;
 		margin-right: auto;
 		@extend .smooth-transition;
+		* {
+			text-decoration: inherit;
+		}
 	}
 	.anchor-office-phone-number {
 		font-size: 3rem;
 		font-weight: 600;
 		@extend .smooth-transition;
 	}
+}
+.ctnr-contact-info {
+	.listed-office {
+		background-color: rgba(255, 255, 255, 0.5);
+		backdrop-filter: blur(1px);
+		box-shadow: 0 .1rem 0.5rem .05rem rgba(0, 0, 0, 0.11);
+		border-radius: .5rem;
+		padding: 1.5rem;
+		width: calc(50% - .75rem);
+		margin-bottom: 1.5rem;
+	}
+}
+.listed-office {
+	.office-address > * {
+		display: block;
+	}
+}
+.office-title {
+  font-size: 2.8rem;
 }
 /*   /Offices List   */

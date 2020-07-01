@@ -1,5 +1,9 @@
 @import './variables';
 /*   Commonly Used Classes   */
+// TODO: Create function that sets colors and bg-colors in classes.
+.bg-white {
+	background-color: $white;
+}
 .display-flex {
 	display: flex;
 }
@@ -68,4 +72,47 @@
 
 .card-style {
 	box-shadow: 0 .25rem 0.25rem rgba(0, 0, 0, 0.25);
+}
+.line-left {
+	position: relative;
+	&:before {
+		content: '';
+		width: 1em;
+		height: 0.2em;
+		position: absolute;
+		left: -1.5em;
+		top: 50%;
+		transform: translate3d(0, -50%, 0);
+		background-color: $primary;
+	}
+}
+
+.bolt-on-banner {
+	&:before {
+		content: '';
+		display: block;
+		padding-bottom: 20.9%;
+		background-size: 100% auto;
+		background-repeat: no-repeat;
+		background-position: 50% 0;
+	}
+}
+
+/*   Bleeds Into Section Feature   */
+$bleed-unit: 19vh;
+.below-section-bleeds-in {
+	.bleed-target {
+		padding-bottom: $bleed-unit;
+	}
+}
+.bleeds-into-above-section {
+	.bleed-target {
+		margin-top: -$bleed-unit;
+		position: relative;
+	}
+}
+/*   /Bleeds Into Section Feature   */
+
+.nowrap-parent > * {
+  display: inline-block;
 }
