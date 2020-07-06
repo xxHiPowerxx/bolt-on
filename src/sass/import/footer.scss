@@ -15,7 +15,7 @@
 		text-align: center;
 		margin-left: 1em;
 		margin-right: 1em;
-		@extend .smooth-transition;
+		transition: $smooth-transition;
 		#{$active} {
 			color: $white;
 		}
@@ -47,7 +47,7 @@
 	.anchor-office-location {
 		font-size: 1.8rem;
 		text-decoration: none;
-		@extend .smooth-transition;
+		transition: $smooth-transition;
 		color: rgba($white, 0.8);
 		#{$active} {
 			color: $white;

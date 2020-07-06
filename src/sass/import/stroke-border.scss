@@ -21,7 +21,7 @@ $full-stroke-width: 37.235rem;
 }
 
 .stroke-border {
-	@extend .smooth-transition;
+	transition: $smooth-transition;
 	position: relative;
 	&:before {
 		left: 0;

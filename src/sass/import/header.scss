@@ -16,7 +16,7 @@
 body {
 	&.hide-header {
 		.site-header {
-			@extend .smooth-transition;
+			transition: $smooth-transition;
 			transform: translate3d(0, 0, 0);
 		}
 		&:not(.mouseInHeaderArea) {
@@ -68,7 +68,7 @@ input[type='search'] {
 			}
 		}
 		+ .btn-submit {
-			@extend .smooth-transition;
+			transition: $smooth-transition;
 			font-size: 1.6rem;
 			margin-left: 0.5em;
 			transform: translate3d(0, 50%, 0);

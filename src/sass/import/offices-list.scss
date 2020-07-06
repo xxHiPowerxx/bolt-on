@@ -8,7 +8,7 @@
 		display: inline-block;
 		margin-top: auto;
 		margin-right: auto;
-		@extend .smooth-transition;
+		transition: $smooth-transition;
 		* {
 			text-decoration: inherit;
 		}
@@ -16,7 +16,7 @@
 	.anchor-office-phone-number {
 		font-size: 3rem;
 		font-weight: 600;
-		@extend .smooth-transition;
+		transition: $smooth-transition;
 	}
 }
 .ctnr-contact-info {

@@ -32,7 +32,7 @@
 				transform: translate3d(-50%, -50%, 0);
 				line-height: 1;
 				color: $primary;
-				@extend .smooth-transition;
+				transition: $smooth-transition;
 			}
 		}
 	}

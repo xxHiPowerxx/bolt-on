@@ -235,7 +235,7 @@
 		box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.35);
 		transform-origin: 0 0;
 		min-height: 100%;
-		@extend .smooth-transition;
+		transition: $smooth-transition;
 	}
 	#{$active} {
 		.accreditation-description {
