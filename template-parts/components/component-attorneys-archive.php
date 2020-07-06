@@ -18,10 +18,10 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 							'order' => 'ASC'
 						);
 		$post_query = new WP_Query($args);
-		if( $post_query->have_posts() ) :
+		if ( $post_query->have_posts() ) :
 			// Get the current Post ID for a later comparison.
 			$current_post_id = get_the_id();
-			while( $post_query->have_posts() ) :
+			while ( $post_query->have_posts() ) :
 				$post_query->the_post();
 
 				$this_post_id = get_the_id();
@@ -54,8 +54,8 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 					</div>
 					<?php
 				endif; // endif ( $current_post_id !== $this_post_id ) :
-			endwhile; // endwhile( $post_query->have_posts() ) :
-		endif; // endif( $post_query->have_posts() ) :
+			endwhile; // endwhile ( $post_query->have_posts() ) :
+		endif; // endif ( $post_query->have_posts() ) :
 
 		wp_reset_query();
 		return ob_get_clean();
