@@ -1,0 +1,24 @@
+{
+	"browserSyncOptions": {
+		"proxy": "127.0.0.1:8888/xten-child",
+		"browser": "C:/Program Files/Mozilla Firefox/firefox.exe",
+		"notify": false
+	},
+	"browserSyncWatchFiles": [
+		"./assets/css/*.min.css",
+		"./assets/js/*.min.js",
+		"./**/*.php"
+	],
+	"paths": {
+		"js": "./assets/js",
+		"css": "./assets/css",
+		"img": "./assets/images",
+		"imgsrc": "./src/images",
+		"sass": "./src/sass",
+		"es6": "./src/js",
+		"node": "./node_modules/**",
+		"src": "./src/**",
+		"dist": "./dist",
+		"media": "./media"
+	}
+}

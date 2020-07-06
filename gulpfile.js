@@ -8,6 +8,11 @@ var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
+var del = require("del");
+
+// Configuration file to keep your code DRY
+var cfg = require("./gulpconfig.json");
+var paths = cfg.paths;
 
 // Styles/CSS
 gulp.task('styles', function(done) {
@@ -63,7 +68,7 @@ gulp.task('images', function(done) {
 });
 
 function build() {
-	gulp.parallel('styles', 'scripts', 'images')();
+	gulp.series('styles', 'scripts', 'images')();
 }
 gulp.task('build', function(done) {
 	build();
@@ -75,3 +80,56 @@ gulp.task('watch', function() {
 	gulp.watch('./src/js/**/*.js', gulp.series('scripts'));
 	gulp.watch('./src/images/**/*', gulp.series('images'));
 });
+
+// Deleting any file inside the /src folder
+gulp.task("clean-assets", function() {
+	return del(["assets/**/*"]);
+});
+
+// Run:
+// Deleting any file inside the /dist folder
+gulp.task("clean-dist", function() {
+	return del([`${paths.dist}/**`]);
+});
+
+// Run:
+// gulp dist
+// Copies the files to the /dist folder for distribution as simple theme
+gulp.task(
+	"create-dist",
+	gulp.series("clean-dist", function copyToDistFolder() {
+		const ignorePaths = [
+				`!${paths.node}`,
+				`!${paths.src}`,
+				`!${paths.media}`,
+				`!${paths.dist}`,
+				`!${paths.dist}/**`
+			],
+			ignoreFiles = [
+				"!package.json",
+				"!package-lock.json",
+				"!gulpfile.js",
+				"!gulpconfig.json",
+				"!jshintignore",
+				"!.gitignore"
+			];
+
+		console.log({ ignorePaths, ignoreFiles });
+
+		return gulp
+			.src(["**/*", "assets/**/**.*", "*", ...ignorePaths, ...ignoreFiles], {
+				buffer: false
+			})
+			.pipe(gulp.dest(paths.dist));
+	})
+);
+
+// Dist project
+gulp.task(
+	"dist",
+	gulp.series(
+		"clean-assets",
+		"images",
+		gulp.series("styles", "scripts", "create-dist")
+	)
+);
