@@ -181,6 +181,10 @@
 	font-size: 4rem;
 	max-width: 4rem;
 	max-height: 4rem;
+	> svg {
+		display: block;
+		width: 1em;
+	}
 }
 .cast-category-title {
 	margin-left: 0.5em;
