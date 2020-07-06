@@ -7,7 +7,7 @@ $bottom-left-vert: '.btn-cta-inner:after';
 $bottom-right-vert: '.btn-cta-inner:before';
 @import './stroke-border.scss';
 $btn-stroke-width: 0.25em;
-$btn-stroke-height: 0.4em;
+$btn-stroke-height: 0.7em;
 $btn-stroke-full-width: 100%;
 /*   /Borders   */
 
@@ -19,6 +19,8 @@ $btn-stroke-full-width: 100%;
 		content: '';
 		position: absolute;
 		transition: $smooth-transition;
+		transform: translateZ(0);
+		backface-visibility: hidden;
 	}
 }
 
@@ -60,7 +62,7 @@ $btn-stroke-full-width: 100%;
 	&.stroke-border-inner {
 		&:before,
 		&:after {
-			top: $btn-stroke-width - 0.01em;
+			top: 0;
 		}
 	}
 }
@@ -68,7 +70,7 @@ $btn-stroke-full-width: 100%;
 	&.stroke-border-lvl-three {
 		&:before,
 		&:after {
-			bottom: $btn-stroke-width - 0.01em;
+			bottom: 0;
 		}
 	}
 }
@@ -98,10 +100,10 @@ $btn-stroke-full-width: 100%;
 		transform: scaleY(0) translateZ(0);
 	}
 	&:before {
-		left: -0.1%;
+		left: 0;
 	}
 	&:after {
 		left: unset;
-		right: 0.1%;
+		right: 0;
 	}
 }
