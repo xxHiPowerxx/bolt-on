@@ -110,7 +110,7 @@ function bolt_on_custom_post_types() {
 		true,
 		'welcome-learn-more',
 		array(
-			'slug'       => 'practice-area',
+			'slug'       => '/',
 			'with_front' => false,
 		)
 	);
