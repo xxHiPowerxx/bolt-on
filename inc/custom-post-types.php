@@ -8,9 +8,9 @@
  */
 
 /**
- * A Function that will render our custom post types.
+ * A Function that will register our custom post types.
  */
-function custom_post_types() {
+function bolt_on_custom_post_types() {
 	/**
 	 * Utility Function that creates a single post type.
 	 * This way we don't have to rewrite the code more than once,
@@ -21,16 +21,25 @@ function custom_post_types() {
 		$post_plural      = null,
 		$post_description = null,
 		$hierarchical     = false,
-		$icon             = 'admin-post'
+		$icon             = 'admin-post',
+		$rewrite          = null
 	) {
+		// Defaults
 		$post_plural      = $post_plural === null ?
 												$post_singular . 's' :
 												$post_plural;
 		$post_description = $post_description === null ?
 												$post_plural :
 												$post_description;
-		$menu_icon        = 'dashicons-' . $icon;
 		$post_handle      = str_replace( ' ','-', strtolower( $post_plural ) );
+		if ( $rewrite === null ) :
+			$rewrite = array(
+				'slug       '=> $post_handle,
+				'with_front' => true,
+			);
+		endif;
+
+		$menu_icon        = 'dashicons-' . $icon;
 		$theme            = 'bolt-on';
 		// Set UI labels for Custom Post Type
 		$post_labels = array(
@@ -81,10 +90,7 @@ function custom_post_types() {
 			'capability_type'     => 'post',
 			'show_in_rest'        => true,
 			'menu_icon'           => $menu_icon,
-			'rewrite'             => array(
-															 	'slug'       => $post_handle,
-															 	'with_front' => true,
-															 ),
+			'rewrite'             => $rewrite,
 		);
 		// Registering your Custom Post Type
 		return register_post_type( $post_handle, $args );
@@ -102,7 +108,11 @@ function custom_post_types() {
 		null,
 		null,
 		true,
-		'welcome-learn-more'
+		'welcome-learn-more',
+		array(
+			'slug'       => 'practice-area',
+			'with_front' => false,
+		)
 	);
 	
 }
@@ -113,4 +123,4 @@ function custom_post_types() {
 	 * unnecessarily executed.
 	 */
 	 
-	add_action( 'init', 'custom_post_types', 0 );
+	add_action( 'init', 'bolt_on_custom_post_types', 0 );
