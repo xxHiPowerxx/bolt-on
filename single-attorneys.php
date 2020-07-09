@@ -24,14 +24,14 @@ wp_enqueue_style( $handle );
 
 get_header();
 ?>
-	<div class="container container-ext main-container">
-		<?php
-		while ( have_posts() ) :
-			the_post();
-			get_template_part( 'template-parts/content', get_post_type() );
-		endwhile; // End of the loop.
-		?>
-	</div><!-- /.main-container -->
+<div class="container container-ext main-container">
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		get_template_part( 'template-parts/content', get_post_type() );
+	endwhile; // End of the loop.
+	?>
+</div><!-- /.main-container -->
 <?php
 // Get Attorney Archive Component.
 require_once get_template_directory() . '/template-parts/components/component-attorneys-archive.php';

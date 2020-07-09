@@ -12,8 +12,11 @@
 	padding: 4.5rem 1.8rem 3.6rem;
 	font-size: 3.2rem;
 }
-.theme-heading > :last-child {
-	margin-bottom: 0;
+.theme-heading,
+.theme-heading-inner {
+	> :last-child {
+		margin-bottom: 0;
+	}
 }
 .theme-heading-inner {
 	margin: 2rem 0;

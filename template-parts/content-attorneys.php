@@ -86,7 +86,7 @@ $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speakin
 			<?php endif; ?>
 		</aside>
 		<div class="col-1"></div>
-		<main class="main-content col-8 theme-content pad-bottom">
+		<main class="site-main col-8 theme-content pad-bottom">
 			<?php if ( $attorney_full_name || $attorney_title ) : ?>
 				<header class="entry-header">
 					<?php if ( $attorney_full_name ) : ?>
@@ -192,6 +192,6 @@ $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speakin
 				</a>
 				<?php bolt_on_entry_footer(); ?>
 			</footer><!-- ./attorney-footer -->
-		</main><!-- /.main-content -->
+		</main><!-- /.site-main -->
 	</div><!-- ./main-row -->
 </article><!-- /#post-<?php the_ID(); ?> -->

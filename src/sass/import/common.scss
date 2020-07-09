@@ -116,3 +116,12 @@ $bleed-unit: 19vh;
 .nowrap-parent > * {
   display: inline-block;
 }
+
+img {
+	&.float-right {
+		margin: 1em 0 1em 1em;
+	}
+	&.float-left {
+		margin: 1em 1em 1em 0;
+	}
+}

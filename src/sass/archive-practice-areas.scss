@@ -1,0 +1,51 @@
+@import './import/variables';
+@import './import/common';
+@import './import/sidebar-menu';
+
+#listed-practice-areas-section {
+	.container-listed-practice-areas-header {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.practice-areas-list {
+		padding: 6rem 6rem 6rem 0;
+		width: 55%;
+		max-width: 60rem;
+		background-color: $white;
+		position: relative;
+		z-index: 1;
+	}
+	.listed-practice-area {
+		font-size: 2.4rem;
+		display: block;
+		line-height: 1;
+		padding: .5em;
+		text-decoration: none;
+		transition: $smooth-transition;
+		backface-visibility: hidden;
+		transform: translateZ(0);
+		#{$active} {
+			transform: translate3d(1em,0,0);
+		}
+		&.line-left {
+			margin-left: 1.5em;
+		}
+	}
+}
+
+/*   BG Image Swap   */
+#practice-areas-image-swap {
+	position: relative;
+	.bg-image-swap-tar {
+		position: absolute;
+		width: 60%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		transition: $smooth-transition;
+	}
+}
+/*   /BG Image Swap   */
