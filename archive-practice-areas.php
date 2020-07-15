@@ -10,14 +10,14 @@
  */
 
 // Enqueue Styles
-$single_practice_areas_css_path = '/assets/css/archive-practice-areas.css';
+$archive_practice_areas_css_path = '/assets/css/archive-practice-areas.css';
 wp_register_style(
 	'archive-practice-areas-css',
-	get_theme_file_uri( $single_practice_areas_css_path ),
+	get_theme_file_uri( $archive_practice_areas_css_path ),
 	array(
 		'bolt-on-css',
 	),
-	filemtime( get_template_directory() . $single_practice_areas_css_path ),
+	filemtime( get_template_directory() . $archive_practice_areas_css_path ),
 	'all'
 );
 wp_enqueue_style( 'archive-practice-areas-css' );
@@ -53,8 +53,12 @@ $styles .= bolt_on_add_inline_style(
 <div id="primary" class="content-area bolt-on-banner">
 	<main id="main" class="site-main">
 		<?php
+		$queried_object = get_queried_object();
+		$post_type      = $queried_object->name;
+		$post_type_name = esc_attr( $queried_object->label );
+
 		$args = array(
-			'post_type'      =>'practice-areas',
+			'post_type'      => $post_type,
 			'posts_per_page' => -1,
 			'post_parent'    => 0,
 			'orderby'        => array(
@@ -71,7 +75,7 @@ $styles .= bolt_on_add_inline_style(
 				<div class="container container-ext container-practice-areas-archive-intro-section bleed-target pad-onetwenty bg-white">
 					<div class="row row-practice-areas-archive-intro-section">
 						<aside id="practice-areas-sidebar" class="left-sidebar col-3 pad-bottom">
-							<h3 class="sidebar-heading">Practice Area</h3>
+							<h3 class="sidebar-heading"><?php echo $post_type_name; ?></h3>
 							<?php dynamic_sidebar( 'practice-areas-archive-sidebar' ); ?>
 						</aside>
 						<div class="col-1"></div>
@@ -174,4 +178,5 @@ $inline_style = 'inline-archive-practice-areas-css';
 wp_register_style( $inline_style, false );
 wp_enqueue_style( $inline_style );
 wp_add_inline_style( $inline_style, $styles );
+
 get_footer();

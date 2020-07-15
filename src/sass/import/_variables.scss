@@ -135,6 +135,20 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 .smooth-transition {
 	transition: $smooth-transition;
 }
+@mixin smoother-transition {
+	transform: translateZ(0);
+	backface-visibility: hidden;
+}
+@mixin smoothest-transition {
+	transition: $smooth-transition;
+	@include smoother-transition;
+}
+.smoother-transition {
+	@include smoother-transition;
+}
+.smoothest-transition {
+	@include smoothest-transition;
+}
 
 /*-----FONT CALCULATIONS-----*/
 @function calculateRem($size) {
@@ -187,10 +201,12 @@ $xten_header_height_m: 4.5rem;
 $xten_header_height_lg: 3.68rem;
 
 $primary: rgb(172, 150, 110);
-$primary-light: rgb(239, 234, 226);
+$primary-lighter: rgb(239, 234, 226);
+$primary-light: rgb(219, 190, 137);
 $primary-dark: rgb(137, 115, 75);
 $secondary: rgb(52, 80, 115);
 $secondary-light: rgb(214, 220, 227);
+$secondary-dark: rgb(39, 59, 83);
 $tertiary: rgb(239, 234, 226);
 $light: rgb(255, 255, 255);
 $dark: rgb(38, 38, 38);
@@ -200,7 +216,7 @@ $font-fam-secondary: 'Lora', serif;
 $trans-header: 'body.trans-header:not(.scrolledPastHeader)';
 /*   ex of variable usage: @at-root #{$trans-header} & {}   */
 
-$active: '&:hover,&:focus,&.active';
+$active: '&:hover,&:focus,&:focus-within,&.active';
 
 $stripes: repeating-linear-gradient(
 	45deg,

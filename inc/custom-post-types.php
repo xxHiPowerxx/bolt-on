@@ -103,7 +103,7 @@ function bolt_on_custom_post_types() {
 		'show_in_rest'        => true,
 		'menu_icon'           => $menu_icon,
 		'rewrite'             => array(
-			'slug       '=> $post_handle,
+			'slug'       => $post_handle,
 			'with_front' => true,
 		),
 	);
@@ -172,9 +172,9 @@ function bolt_on_custom_post_types() {
 		'publicly_queryable'  => true,
 		'capability_type'     => 'post',
 		'show_in_rest'        => true,
-		'menu_icon'           => 'businessman',
+		'menu_icon'           => $menu_icon,
 		'rewrite'             => array(
-			'slug'       => '/',
+			'slug'       => $post_handle,
 			'with_front' => false,
 		),
 	);

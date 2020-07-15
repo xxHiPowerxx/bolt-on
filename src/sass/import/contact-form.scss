@@ -9,10 +9,10 @@
 	}
 	> :nth-child(-n + 5) {
 		flex-basis: 50%;
-		max-width: 50%;
+		max-width: calc( 50% - .5em );
 	}
 	> :nth-child(-2n + 5) {
-		padding-left: 1em;
+		margin-left: 1em;
 	}
 	.input-field {
 		width: 100%;

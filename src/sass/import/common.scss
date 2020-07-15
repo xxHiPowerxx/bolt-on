@@ -7,6 +7,9 @@
 .display-flex {
 	display: flex;
 }
+[data-toggle="collapse"] {
+	cursor: pointer;
+}
 .btn {
 	text-transform: uppercase;
 	font-weight: 600;
@@ -15,6 +18,9 @@
 .btn-no-style {
 	border: none;
 	background-color: transparent;
+}
+a[href="#"] {
+	cursor: default;
 }
 
 /*   Fraction Wrap Feature   */
@@ -52,26 +58,72 @@
 }
 /*   /Stripes   */
 
+/*   Font Awesome Mixins   */
+@mixin font-awesome-font {
+	font-weight: 900;
+	font-family: 'Font Awesome 5 Free';
+	font-style: normal;
+	font-variant: normal;
+	text-rendering: auto;
+}
+@mixin has-fontawesome-icon {
+	display: flex;
+	&:after {
+		position: relative;
+		margin-left: .5em;
+	}
+}
+/*   /Font Awesome Mixins   */
+
 /*   Has Chevron   */
 .has-chevron {
+	@include has-fontawesome-icon;
 	&:after {
 		content: '\f054';
+		color: $primary;
+		@include font-awesome-font;
+	}
+	&.absolute-chevron {
 		position: absolute;
+		margin-left: 0;
 		right: 0;
 		top: 50%;
 		transform: translate3d(0, -50%, 0);
-		color: $primary;
-		font-weight: 900;
-		font-family: 'Font Awesome 5 Free';
-		font-style: normal;
-		font-variant: normal;
-		text-rendering: auto;
 	}
 }
 /*   /Has Chevron   */
 
+/*   Collapse Control Indicator   */
+.collapse-control-indicator {
+	margin-left: .5em;
+	transform-style: preserve-3d;
+	transition: $smooth-transition;
+	backface-visibility: hidden;
+}
+[data-toggle="collapse"] {
+	.collapse-control-indicator {
+		transform: scaleY(1) translateZ(0);
+	}
+	&:hover {
+		.collapse-control-indicator {
+			transform: scaleY(1) translate3d(0, .25em, 0);
+		}
+	}
+	&[aria-expanded="true"] {
+		.collapse-control-indicator {
+			transform: scaleY(-1) translateZ(0);
+		}
+		&:hover {
+			.collapse-control-indicator {
+				transform: scaleY(-1) translate3d(0, .25em, 0);
+			}
+		}
+	}
+}
+/*   /Collapse Control Indicator   */
+
 .card-style {
-	box-shadow: 0 .25rem 0.25rem rgba(0, 0, 0, 0.25);
+	box-shadow: 0 .5rem .5rem rgba(0, 0, 0, 0.5);
 }
 .line-left {
 	position: relative;
@@ -94,12 +146,13 @@
 		padding-bottom: 20.9%;
 		background-size: 100% auto;
 		background-repeat: no-repeat;
-		background-position: 50% 0;
+		background-position: 50% 50%;
 	}
 }
 
 /*   Bleeds Into Section Feature   */
 $bleed-unit: 19vh;
+// $bleed-unit: 6rem;
 .below-section-bleeds-in {
 	.bleed-target {
 		padding-bottom: $bleed-unit;

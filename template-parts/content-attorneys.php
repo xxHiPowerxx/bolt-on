@@ -24,13 +24,14 @@ $attorney_bio                       = wp_kses_post( get_field( 'attorney_bio' ) 
 $attorney_professional_associations = wp_kses_post( get_field( 'attorney_professional_associations' ) );
 $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
 
+$contact_form_title = 'Connect With ' . $attorney_first_name;
 
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="row main-row">
 		<aside id="attorney-sidebar" class="left-sidebar col-3 pad-bottom">
 			<?php the_post_thumbnail( array( 370, null ), array( 'class' => 'card-style' ) ); ?>
-			<nav class="attorney-attributes-nav side-bar-nav">
+			<nav class="attorney-attributes-nav sidebar-nav">
 
 				<?php
 				if ( $attorney_bio ) :
@@ -75,15 +76,12 @@ $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speakin
 				<?php endif; // endif ( have_rows( 'attorney_videos_repeater' ) ) : ?>
 
 			</nav>
-			<?php if ( shortcode_exists( 'contact-form-7' ) ) : ?>
-				<div class="ctnr-contact-form theme-style-border">
-					<h4 class="contact-form-title">Connect With <?php echo $attorney_first_name; ?></h4>
-					<?php
-					$contact_form_shortcode = '[contact-form-7 id="110" title="Main Contact Form"]';
-					echo do_shortcode( $contact_form_shortcode );
-					?>
-				</div>
-			<?php endif; ?>
+			<?php
+			$contact_form_atts = array(
+				'contact_form_title' => $contact_form_title,
+			);
+			echo get_sidebar_contact($contact_form_atts);
+			?>
 		</aside>
 		<div class="col-1"></div>
 		<main class="site-main col-8 theme-content pad-bottom">

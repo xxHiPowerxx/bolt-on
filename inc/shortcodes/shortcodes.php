@@ -88,3 +88,89 @@ function get_contact_section( $atts = '' ) {
 	endif;
 }
 add_shortcode( 'contact_section', 'get_contact_section' );
+
+/**
+ * Dynamic Post Type Menu Shortcode
+ * Gets list of Post Type and Children
+ */
+function get_dynamic_post_menu( $atts = '' ) {
+
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/dynamic-post-menu.php';
+	require_once( $file_path );
+
+	return component_dynamic_post_menu( $atts );
+}
+add_shortcode( 'dynamic_post_menu', 'get_dynamic_post_menu' );
+
+/**
+ * Sidebar Nav that Shows a Title Dynamically Generated Title
+ * and a Dynamic Post Menu
+ * uses get_dynamic_post_menu()
+ */
+function get_dynamic_sidebar_nav() {
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/dynamic-sidebar-nav.php';
+	require_once( $file_path );
+
+	return component_dynamic_sidebar_nav();
+}
+add_shortcode( 'dynamic_sidebar_nav', 'get_dynamic_sidebar_nav' );
+
+/**
+ * Section that Displays a Case Result 
+ * and a Dynamically Generated Menu with Only the Second Level
+ * Children as Menu Items.
+ * uses get_dynamic_post_menu()
+ */
+function get_dynamic_post_menu_section( $atts = '' ) {
+
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/dynamic-post-menu-section.php';
+	require_once( $file_path );
+
+	return component_dynamic_post_menu_section( $atts );
+}
+add_shortcode( 'dynamic_post_menu_section', 'get_dynamic_post_menu_section' );
+
+/**
+ * Sidebar Contact Shortcode
+ * Renders Contact Form in Sidebar
+ */
+function get_sidebar_contact( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// If no Contact Form Provided, default to first.
+	if ( ! isset( $atts['contact_form'] ) ) :
+		$contact_form = get_posts(
+			array(
+				'post_type' => 'wpcf7_contact_form',
+				'numberposts' => 1
+			)
+		)[0];
+		$contact_form_id    = $contact_form->ID;
+		$contact_form_title = $contact_form->post_title;
+		$contact_form_shortcode_string = 'contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"';
+		$atts['contact_form'] = $contact_form_shortcode_string;
+	endif;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/sidebar-contact.php';
+	require_once( $file_path );
+
+	if ( $atts['contact_form'] ) :
+		return component_sidebar_contact( $atts );
+	endif;
+}
+add_shortcode( 'sidebar_contact', 'get_sidebar_contact' );

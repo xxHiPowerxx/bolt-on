@@ -103,6 +103,10 @@ a {
 	text-decoration: none;
 	color: $primary-dark;
 }
+b,
+strong {
+	font-weight: 700;
+}
 
 .pad-top {
 	padding-top: 12rem;

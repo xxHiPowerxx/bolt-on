@@ -38,7 +38,8 @@
 	}
 }
 .container-hero {
-	min-height: 110.77vh;
+	// min-height: 110.77vh;
+	min-height: calc( 100vh - 6rem );
 	align-items: flex-end;
 	justify-content: center;
 	text-align: center;
@@ -258,7 +259,7 @@ $gradient-percentage: 40.4%;
 	background-image: linear-gradient(
 		to right,
 		$white $gradient-percentage,
-		$primary-light $gradient-percentage
+		$primary-lighter $gradient-percentage
 	);
 }
 .highlights-list {

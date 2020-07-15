@@ -1,15 +1,10 @@
 
-.sidebar-heading {
-  text-align: center;
-  padding: 0.5em;
-  background-color: $primary;
-  color: $white;
-  text-transform: uppercase;
-  font-size: 3.2rem;
-  margin-bottom: 3rem;
-}
-
 /*   Sidebar Nav   */
+.left-sidebar .menu,
+.sidebar-nav {
+	display: flex;
+	flex-direction: column;
+}
 .btn-sidebar-nav {
 	font-size: 1.8rem;
 	text-align: left;
@@ -51,18 +46,85 @@
 /*   /Sidebar Nav   */
 
 .left-sidebar {
+	.sidebar-nav {
+		margin-bottom: 3rem;
+	}
 	.menu {
 		list-style-type: none;
 		padding-left: 0;
+		margin-bottom: 0;
 	}
 	.menu-item {
 		a {
 			font-weight: 600;
 			text-transform: uppercase;
 			text-decoration: none;
-			display: block;
 			@extend .btn-sidebar-nav;
 			@extend .has-chevron;
+		}
+		&.current-post {
+			a {
+				color: $primary;
+				&:before {
+					background-color: $secondary;
+				}
+				&:after {
+					color: $secondary;
+				}
+			}
+		}
+		#{$active} {
+			> .sub-menu {
+				> .menu-item {
+					a {
+						height: 2.5em;
+					}
+				}
+				height: auto;
+				transform: scaleY(1) translateZ(0);
+			}
+		}
+	}
+	.sub-menu {
+		list-style-type: none;
+		padding: 0;
+		overflow-y: hidden;
+		.menu-item {
+			a {
+				display: flex;
+				align-items: center;
+				transition: $smooth-transition;
+				transform: translateZ(0);
+				backface-visibility: hidden;
+				padding-top: 0;
+				padding-bottom: 0;
+				height: 0;
+				background-color: $primary-light;
+				color: $secondary-dark;
+				&:before,
+				&:after {
+					content: none;
+				}
+				#{$active} {
+					transform: none;
+					background-color: $secondary-dark;
+					color: $primary-light;
+				}
+			}
+			.sub-menu {
+				padding-left: 1.5em;
+				background-color: $secondary-dark;
+				.menu-item {
+					a {
+						background-color: $secondary-light;
+						color: $primary-dark;
+						#{$active} {
+							background-color: $primary-dark;
+							color: $secondary-light;
+						}
+					}
+				}
+			}
 		}
 	}
 }

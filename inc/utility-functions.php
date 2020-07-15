@@ -97,13 +97,13 @@ if ( ! function_exists( 'bolt_on_add_inline_style' ) ) :
 							$media_string .= ' and (' . $single_media_query . ')';
 						endif;
 					endforeach;
-					$media_string .= '){' .
+					$media_string .= ') {' .
 						$rule .
 					'}';
 					$rule = $media_string;
 				endif;
 				if ( is_string( $media_query ) ) :
-				$rule = '@media (' . $media_query . '){' .
+				$rule = '@media (' . $media_query . ') {' .
 									$rule .
 								'}';
 				endif;
@@ -112,3 +112,45 @@ if ( ! function_exists( 'bolt_on_add_inline_style' ) ) :
 		endif;
 	}
 endif; // endif ( ! function_exists( 'bolt_on_add_inline_style' ) ) :
+
+if ( ! function_exists( 'bolt_on_minify_css' ) ) :
+	require_once get_template_directory() . '/inc/minify-css.php';
+	$singleQuoteSequenceFinder = new QuoteSequenceFinder('\'');
+	$doubleQuoteSequenceFinder = new QuoteSequenceFinder('"');
+	$blockCommentFinder = new StringSequenceFinder('/*', '*/');
+	/**
+	 * Minify CSS
+	 *
+	 * @param string $css - CSS Rules to be minified
+	 * @return string $css - Minified Style.
+	 */
+	function bolt_on_minify_css( $css ) {
+		global $minificationStore, $singleQuoteSequenceFinder, $doubleQuoteSequenceFinder, $blockCommentFinder;
+		$css_special_chars = array(
+			$blockCommentFinder, // CSS Comment
+			$singleQuoteSequenceFinder, // single quote escape, e.g. :before{ content: '-';}
+			$doubleQuoteSequenceFinder // double quote
+		);
+		// pull out everything that needs to be pulled out and saved
+		while ( $sequence = getNextSpecialSequence( $css, $css_special_chars ) ) {
+			switch ( $sequence->type ) {
+				case '/*': // remove comments
+					$css = substr( $css, 0, $sequence->start_idx ) . substr( $css, $sequence->end_idx );
+					break;
+				default: // strings that need to be preservered
+				$placeholder = getNextMinificationPlaceholder();
+				$minificationStore[$placeholder] = substr( $css, $sequence->start_idx, $sequence->end_idx - $sequence->start_idx );
+				$css = substr( $css, 0, $sequence->start_idx ) . $placeholder . substr( $css, $sequence->end_idx );
+			}
+		}
+			// minimize the string
+			$css = preg_replace('/\s{2,}/s', ' ', $css);
+			$css = preg_replace('/\s*([:;{}])\s*/', '$1', $css);
+			$css = preg_replace('/;}/', '}', $css);
+			// put back the preserved strings
+			foreach ( $minificationStore as $placeholder => $original ) {
+				$css = str_replace($placeholder, $original, $css);
+			}
+		return trim($css);
+	}
+endif; // endif ( ! function_exists( 'bolt_on_minify_css' ) ) :

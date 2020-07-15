@@ -43,8 +43,11 @@ get_header();
 	<main id="main" class="site-main bolt-on-banner">
 
 	<?php
+	$queried_object = get_queried_object();
+	$post_type      = $queried_object->name;
+
 	$args = array(
-		'post_type'      =>'attorneys',
+		'post_type'      => $post_type,
 		'posts_per_page' => -1,
 		'orderby'        => 'menu_order',
 		'order'          => 'ASC'

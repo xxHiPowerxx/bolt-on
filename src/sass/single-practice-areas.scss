@@ -1,0 +1,44 @@
+@import './import/variables';
+@import './import/common';
+@import './import/sidebar-menu';
+
+/*   Call To Action Section   */
+.practice-areas-call-to-action-section {
+	.theme-content {
+		max-width: 90rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+/*   /Call To Action Section   */
+
+/*   FAQs Section   */
+.faq-section {
+	.container-faq-section-header {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.faq-section-lower {
+		background-image: linear-gradient(90deg, $white 40.4%, $secondary-light 0);
+	}
+}
+
+.ctnr-faqs-image {
+	display: flex;
+}
+.faq-q {
+	font-size: 3rem;
+	line-height: 1.25;
+	padding: 0.5em 0;
+	font-weight: 500;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	.collapse-control-indicator {
+		color: $primary-dark;
+	}
+}
+.faq-a {
+	font-size: 2rem;
+}
+/*   /FAQs Section   */

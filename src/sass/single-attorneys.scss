@@ -1,7 +1,6 @@
 @import './import/variables';
 @import './import/common';
 
-@import './import/contact-form';
 .site-content {
 	@extend .stripes-banner;
 }
@@ -54,29 +53,9 @@
 		}
 	}
 	/*   /Sidebar Thumbnail   */
-	/*   Contact Form   */
-	.ctnr-contact-form {
-		padding-left: 3rem;
-		padding-right: 3rem;
-		.btn-cta-outer {
-			width: 100%;
-		}
-	}
-	.contact-form-title {
-		text-align: center;
-	}
-	.wpcf7-form > * {
-		flex-basis: 100%;
-		padding: 0;
-	}
-	/*   /Contact Form   */
 }
 
 /*   Sidebar Nav   */
-.attorney-attributes-nav {
-	display: flex;
-	flex-direction: column;
-}
 @import './import/sidebar-menu.scss';
 /*   /Sidebar Nav   */
 

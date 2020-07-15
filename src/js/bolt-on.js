@@ -137,6 +137,11 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	function configureBleedSections() {
+		$('.bleeds-into-above-section').each(function() {
+			$(this).prev().addClass('below-section-bleeds-in').children().first().addClass('bleed-target');
+		});
+	}
 	function readyFuncs() {
 		collapseOnHover();
 		sizeHeaderPad();
@@ -145,6 +150,7 @@ jQuery(document).ready(function($) {
 		initSlick();
 		mouseInHeaderArea();
 		preventExpandedCollapse();
+		configureBleedSections();
 	}
 	function resizeFuncs() {
 		sizeHeaderPad();
