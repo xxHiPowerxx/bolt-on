@@ -230,3 +230,54 @@ function change_posts_order_relationship( $args, $field, $post ) {
 	return $args;
 }
 add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change_posts_order_relationship', 10, 3);
+add_filter('acf/fields/relationship/query/name=case_practice_area', 'change_posts_order_relationship', 10, 3);
+
+/**
+ * Get Number from Case Result String and Store it as Post Meta
+ */
+function save_post_callback( $post_id ) {
+	if ( function_exists( 'get_field' ) ) :
+		global $post;
+		if ( $post ) :
+			if ( $post->post_type != 'cases' ) :
+					return;
+			endif;
+			$case_result = get_field( 'case_result' );
+			if ( ! $case_result ) :
+				return;
+			endif;
+			// $case_result = '$5.55 Million';
+			$lower_case_result = strtolower( $case_result );
+
+			// Convert String to Number without currency or comma.
+			function get_amount( $money ) {
+				$clean_string = preg_replace('/([^0-9\.,])/i', '', $money);
+				$only_numbers_string = preg_replace('/([^0-9])/i', '', $money);
+
+				$separators_count_to_be_erased = strlen($clean_string) - strlen($only_numbers_string) - 1;
+
+				$string_with_comma_or_dot = preg_replace('/([,\.])/', '', $clean_string, $separators_count_to_be_erased);
+				$removed_thousand_separator = preg_replace('/(\,)(?=[0-9]{3,}$)/', '',  $string_with_comma_or_dot);
+
+				return (float) str_replace(',', '.', $removed_thousand_separator);
+			}
+
+			$case_result_number = get_amount($lower_case_result);
+			if ( strpos( $lower_case_result, 'billion' ) ) :
+				$case_result_number *= 1000000000;
+			elseif ( strpos( $lower_case_result, 'million' ) ) :
+				// var_dump($case_result_number);
+				$case_result_number *= 1000000;
+				// var_dump($case_result_number);
+			elseif ( strpos( $lower_case_result, 'thousand' ) ) :
+				$case_result_number *= 1000;
+			endif;
+			// delete_post_meta( $post->ID, 'case_result_number' );
+			update_post_meta( $post->ID, 'case_result_number', $case_result_number );
+			$post_meta = get_post_meta($post->ID,'case_result_number');
+			// var_dump($post_meta, $case_result_number);
+			// die;
+		endif;
+	endif;
+}
+add_action('save_post','save_post_callback');

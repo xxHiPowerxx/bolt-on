@@ -1,0 +1,32 @@
+@import './import/variables';
+@import './import/common';
+
+#cases-archive-section {
+	background-color: $primary-lighter;
+}
+.cases {
+	display: flex;
+	align-items: center;
+	padding: 6rem 12rem;
+	&:not(:first-child) {
+		margin-top: 6rem;
+	}
+}
+.ctnr-case-result-practice-area {
+  text-align: center;
+  font-weight: 500;
+  flex-basis: 10em;
+  font-size: 3.2rem;
+}
+.anchor-case-practice-area {
+  font-size: 2.5rem;
+}
+.ctnr-case-title {
+  flex: 1;
+  margin-left: 1em;
+  font-size: 3rem;
+}
+.case-title {
+  font-size: inherit;
+  margin-bottom: 0;
+}
