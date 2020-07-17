@@ -67,10 +67,10 @@ a[href="#"] {
 	text-rendering: auto;
 }
 @mixin has-fontawesome-icon {
-	display: flex;
 	&:after {
 		position: relative;
-		margin-left: .5em;
+		margin-left: auto;
+		padding-left: .5em;
 	}
 }
 /*   /Font Awesome Mixins   */
@@ -81,6 +81,7 @@ a[href="#"] {
 	&:after {
 		content: '\f054';
 		color: $primary;
+		display: inline-block;
 		@include font-awesome-font;
 	}
 	&.absolute-chevron {
