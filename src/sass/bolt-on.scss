@@ -142,3 +142,7 @@ textarea {
 		height: 9em !important;
 	}
 }
+.anchor-site-phone-number {
+	@include smoothest-transition;
+
+}
