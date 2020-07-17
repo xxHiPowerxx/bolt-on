@@ -21,6 +21,7 @@ $site_phone_number        = get_theme_mod( 'site_phone_number', '' );
 // Only store these for now, the rest are repeaters and require validation.
 // Before getting their sub_fields().
 $attorney_bio                       = wp_kses_post( get_field( 'attorney_bio' ) );
+$attorney_successes                 = get_field( 'attorney_successes' );
 $attorney_professional_associations = wp_kses_post( get_field( 'attorney_professional_associations' ) );
 $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
 
@@ -39,6 +40,13 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 					?>
 					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_bio_id; ?>" aria-expanded="true" aria-controls="<?php echo $attorney_bio_id; ?>">Bio</button>
 				<?php endif; // endif ( $attorney_bio ) : ?>
+
+				<?php
+				if ( $attorney_successes ) :
+					$attorney_successes_id = 'attorney-successes';
+					?>
+					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_successes_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_successes_id; ?>">Successes</button>
+				<?php endif; // endif ( $attorney_successes ) : ?>
 
 				<?php
 				if ( have_rows( 'attorney_education_repeater' ) ) :
@@ -128,6 +136,27 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 						<?php echo $attorney_bio; ?>
 					</section><!-- /#<?php echo $attorney_bio_id; ?> -->
 				<?php endif; // endif ( $attorney_bio ) : ?>
+
+				<?php if ( $attorney_successes ) : ?>
+					<section id="<?php echo $attorney_successes_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
+						<div class="attorney-successes-list">
+							<?php
+							foreach ( $attorney_successes as $case ) :
+								$case_result        = esc_attr( $case->case_result );
+								$case_title         = esc_attr( $case->post_title );
+								?>
+								<div class="listed-success case">
+									<div class="case-result">
+										<h3><?php echo $case_result; ?><h3>
+									</div>
+									<div class="case-title theme-style-border">
+										<?php echo $case_title; ?>
+									</div>
+								</div>
+							<?php endforeach; // foreach ( $attorney_successes as $case ) : ?>
+						</div><!-- ./attorney-successes-list -->
+					</section><!-- /#<?php echo $attorney_successes_id; ?> -->
+				<?php endif; // endif ( $attorney_successes ) : ?>
 
 				<?php if ( have_rows( 'attorney_education_repeater' ) ) : ?>
 					<section id="<?php echo $attorney_education_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
