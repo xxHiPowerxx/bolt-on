@@ -7,7 +7,7 @@
  * @package bolt-on
  */
 
-$case_result        = esc_attr(get_field( 'case_result' ) );
+$case_result        = esc_attr( get_field( 'case_result' ) );
 $case_practice_area = get_field( 'case_practice_area' );
 $case_title         = get_the_title();
 ?>
