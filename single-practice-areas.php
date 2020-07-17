@@ -94,7 +94,7 @@ $styles .= bolt_on_add_inline_style(
 		if ( $call_to_action_section ) :
 			?>
 			<!--   Call to Action Section   --->
-			<section class="practice-areas-call-to-action-section bleeds-into-above-section ">
+			<section class="practice-areas-call-to-action-section bleeds-into-above-section">
 				<div class="container container-ext practice-areas-call-to-action-section pad-onetwenty bleed-target bg-white">
 					<div class="theme-content">
 						<?php echo $call_to_action_section; ?>
