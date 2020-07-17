@@ -30,6 +30,9 @@
 .anchor-attorney-practice-area {
 	font-weight: 600;
 }
+.attorney-footer {
+	margin-top: 6rem;
+}
 .anchor-attorney-footer-phone-number {
 	font-size: 1.8rem;
 	font-weight: 600;
@@ -60,6 +63,38 @@
 /*   /Sidebar Nav   */
 
 /*   /Left Sidebar   */
+
+/*   Attorney Successes (cases)  */
+.attorney-successes-list {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  list-style-type: none;
+  flex-wrap: wrap;
+  margin-left: -.75rem;
+  margin-right: -.75rem;
+}
+.listed-success.case {
+  flex: 0 1 30rem;
+  padding: 0;
+  text-align: center;
+  margin: .75rem;
+  display: flex;
+  flex-direction: column;
+}
+.case-title {
+	&.theme-style-border {
+		padding-left: 3rem;
+		padding-right: 3rem;
+		line-height: 1.25;
+		font-size: 2rem;
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+/*   /Attorney Successes (cases)  */
 
 /*   Attorneys Archive   */
 @import './import/_component-attorneys-archive';
