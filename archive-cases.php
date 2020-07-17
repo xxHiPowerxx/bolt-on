@@ -28,7 +28,7 @@ get_header();
 // Start Inline Styles.
 // TODO: Set this bg-image through CMS.
 // When this page becomes a page template, use the Featured Image
-$bg_banner_src = 'url(' . get_template_directory_uri() . '/assets/images/sub-banner.jpg' . ')';
+$bg_banner_src = 'url(' . get_template_directory_uri() . '/assets/images/banners/commercial-litigation-banner.jpg' . ')';
 $styles .= bolt_on_add_inline_style(
 	'.bolt-on-banner:before',
 	array(
