@@ -233,9 +233,9 @@ add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change
 add_filter('acf/fields/relationship/query/name=case_practice_area', 'change_posts_order_relationship', 10, 3);
 
 /**
- * Get Number from Case Result String and Store it as Post Meta
+ * Parse Number from Case Result String and Store it as Post Meta
  */
-function save_post_callback( $post_id ) {
+function parse_case_result_ammount( $post_id ) {
 	if ( function_exists( 'get_field' ) ) :
 		global $post;
 		if ( $post ) :
@@ -246,7 +246,6 @@ function save_post_callback( $post_id ) {
 			if ( ! $case_result ) :
 				return;
 			endif;
-			// $case_result = '$5.55 Million';
 			$lower_case_result = strtolower( $case_result );
 
 			// Convert String to Number without currency or comma.
@@ -264,20 +263,29 @@ function save_post_callback( $post_id ) {
 
 			$case_result_number = get_amount($lower_case_result);
 			if ( strpos( $lower_case_result, 'billion' ) ) :
-				$case_result_number *= 1000000000;
+				$case_result_number *= pow(10, 9);
 			elseif ( strpos( $lower_case_result, 'million' ) ) :
-				// var_dump($case_result_number);
-				$case_result_number *= 1000000;
-				// var_dump($case_result_number);
+				$case_result_number *= pow(10, 6);
 			elseif ( strpos( $lower_case_result, 'thousand' ) ) :
-				$case_result_number *= 1000;
+				$case_result_number *= pow(10, 3);
 			endif;
-			// delete_post_meta( $post->ID, 'case_result_number' );
 			update_post_meta( $post->ID, 'case_result_number', $case_result_number );
 			$post_meta = get_post_meta($post->ID,'case_result_number');
-			// var_dump($post_meta, $case_result_number);
-			// die;
+
 		endif;
 	endif;
 }
-add_action('save_post','save_post_callback');
+add_action('save_post','parse_case_result_ammount');
+
+/**
+ * Redirect Single Case Results to Cases Archive Page.
+ */
+function redirect_case_results() {
+	$post_type = 'cases';
+	if ( is_singular( $post_type ) ) :
+		$archive_link = get_post_type_archive_link( $post_type );
+    wp_redirect( $archive_link, 301 );
+    exit;
+	endif;
+}
+add_action( 'template_redirect', 'redirect_case_results' );
