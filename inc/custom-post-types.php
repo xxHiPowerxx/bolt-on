@@ -240,11 +240,11 @@ function bolt_on_custom_post_types() {
 		'capability_type'     => 'post',
 		'show_in_rest'        => true,
 		'menu_icon'           => $menu_icon,
-		// 'rewrite'             => array(
-		// 	'slug'       => $post_handle,
-		// 	'with_front' => false,
-		// ),
-		'rewrite'             => false,
+		'rewrite'             => array(
+			'slug'       => $post_handle,
+			'with_front' => false,
+		),
+		// 'rewrite'             => false,
 	);
 	// Registering your Custom Post Type
 	register_post_type( $post_handle, $args );
