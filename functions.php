@@ -232,50 +232,69 @@ function change_posts_order_relationship( $args, $field, $post ) {
 add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change_posts_order_relationship', 10, 3);
 add_filter('acf/fields/relationship/query/name=case_practice_area', 'change_posts_order_relationship', 10, 3);
 
-/**
- * Parse Number from Case Result String and Store it as Post Meta
- */
-function parse_case_result_ammount( $post_id ) {
+
+function save_additional_post_meta_to_cases( $post_id ) {
 	if ( function_exists( 'get_field' ) ) :
 		global $post;
 		if ( $post ) :
 			if ( $post->post_type != 'cases' ) :
 					return;
 			endif;
-			$case_result = get_field( 'case_result' );
-			if ( ! $case_result ) :
-				return;
-			endif;
-			$lower_case_result = strtolower( $case_result );
+			/**
+			 * Parse Number from Case Result String and Store it as Post Meta
+			 */
+			function parse_case_result_ammount( $post ) {
+				$case_result = get_field( 'case_result' );
+				if ( ! $case_result ) :
+					return;
+				endif;
+				$lower_case_result = strtolower( $case_result );
 
-			// Convert String to Number without currency or comma.
-			function get_amount( $money ) {
-				$clean_string = preg_replace('/([^0-9\.,])/i', '', $money);
-				$only_numbers_string = preg_replace('/([^0-9])/i', '', $money);
+				// Convert String to Number without currency or comma.
+				function get_amount( $money ) {
+					$clean_string = preg_replace('/([^0-9\.,])/i', '', $money);
+					$only_numbers_string = preg_replace('/([^0-9])/i', '', $money);
 
-				$separators_count_to_be_erased = strlen($clean_string) - strlen($only_numbers_string) - 1;
+					$separators_count_to_be_erased = strlen($clean_string) - strlen($only_numbers_string) - 1;
 
-				$string_with_comma_or_dot = preg_replace('/([,\.])/', '', $clean_string, $separators_count_to_be_erased);
-				$removed_thousand_separator = preg_replace('/(\,)(?=[0-9]{3,}$)/', '',  $string_with_comma_or_dot);
+					$string_with_comma_or_dot = preg_replace('/([,\.])/', '', $clean_string, $separators_count_to_be_erased);
+					$removed_thousand_separator = preg_replace('/(\,)(?=[0-9]{3,}$)/', '',  $string_with_comma_or_dot);
 
-				return (float) str_replace(',', '.', $removed_thousand_separator);
+					return (float) str_replace(',', '.', $removed_thousand_separator);
+				}
+
+				$case_result_number = get_amount($lower_case_result);
+				if ( strpos( $lower_case_result, 'billion' ) ) :
+					$case_result_number *= pow(10, 9);
+				elseif ( strpos( $lower_case_result, 'million' ) ) :
+					$case_result_number *= pow(10, 6);
+				elseif ( strpos( $lower_case_result, 'thousand' ) ) :
+					$case_result_number *= pow(10, 3);
+				endif;
+				return update_post_meta( $post->ID, 'case_result_number', $case_result_number );
+				// $post_meta = get_post_meta($post->ID,'case_result_number');
+
 			}
+			parse_case_result_ammount( $post );
 
-			$case_result_number = get_amount($lower_case_result);
-			if ( strpos( $lower_case_result, 'billion' ) ) :
-				$case_result_number *= pow(10, 9);
-			elseif ( strpos( $lower_case_result, 'million' ) ) :
-				$case_result_number *= pow(10, 6);
-			elseif ( strpos( $lower_case_result, 'thousand' ) ) :
-				$case_result_number *= pow(10, 3);
-			endif;
-			update_post_meta( $post->ID, 'case_result_number', $case_result_number );
-			$post_meta = get_post_meta($post->ID,'case_result_number');
-
-		endif;
-	endif;
+			/**
+			 * The ACF Relationship Field stores Serialized Data
+			 * This is not easily or safely queryable, so we will store
+			 * the string ourselves so that we easily query it.
+			 */
+			function save_case_practice_area( $post ) {
+				$case_practice_area = get_field( 'case_practice_area' );
+				if ( empty( $case_practice_area ) ) :
+					return;
+				endif;
+				
+				return update_post_meta( $post->ID, '_case_practice_area', $case_practice_area[0]->ID );
+			}
+			save_case_practice_area( $post );
+		endif; // endif ( $post ) :
+	endif; // endif ( function_exists( 'get_field' ) ) :
 }
-add_action('save_post','parse_case_result_ammount');
+add_action('save_post','save_additional_post_meta_to_cases');
 
 /**
  * Redirect Single Case Results to Cases Archive Page.

@@ -39,11 +39,64 @@ function component_dynamic_post_menu_section( $args ) {
 	$section_title     = esc_attr( $section_title );
 	$dynamic_post_menu = $dynamic_post_menu_array['markup'];
 
+	// Get highest level Case of This Practice Area.
+	global $post;
+	// Current Post Class defaults to null.
+	$post_ancestors = get_post_ancestors( $post );
+	if ( $post_ancestors ) :
+		$last_ancestor      = get_post( end( $post_ancestors ) );
+		$last_ancestor_link = get_the_permalink( $last_ancestor );
+	else :
+		$last_ancestor      = $post;
+		$last_ancestor_link = '#';
+	endif;
+
+	// Get First Case WHERE _case_practice_area is EQUAL TO Highest Parent Practice Area
+	$greatest_case_result_args = array(
+		'posts_per_page' => 1,
+		'post_type'      => 'cases',
+		'meta_query'     => array(
+			'case_result_number',
+			array (
+				'key' => '_case_practice_area',
+				'value' => $last_ancestor->ID,
+			)
+		),
+		'meta_key'       => 'case_result_number',
+		'orderby'        => 'meta_value_num',
+	);
+	$greatest_case_result = get_posts( $greatest_case_result_args );
+
 	ob_start();
 	?>
 	<!--   Dynamic Post Menu Section   -->
 	<section class="dynamic-post-menu-section pad-bottom">
 		<div class="container container-ext dynamic-post-menu-section pad-onetwenty">
+			<?php
+			if ( ! empty( $greatest_case_result ) ) :
+				$greatest_case_result_id  = esc_attr( $greatest_case_result[0]->ID );
+				$case_title               = esc_attr( $greatest_case_result[0]->post_title );
+				$case_result              = esc_attr( get_field(
+					'case_result',
+					$greatest_case_result_id
+				) );
+				$case_practice_area_title = esc_attr( $last_ancestor->post_title );
+				$case_practice_area_link  = esc_url( $last_ancestor_link );
+				?>
+				<div class="featured-case-result card-style bg-white">
+					<div class="featured-case-result-inner theme-style-border">
+						<div class="case-result bolt-on-h2">
+							<?php echo $case_result; ?>
+						</div>
+						<div class="case-title">
+							<?php echo $case_title; ?>
+						</div>
+						<div class="case-practice-area">
+							<a href="<?php echo $case_practice_area_link; ?>"class="anchor-case-practice-area"><?php echo $case_practice_area_title ?></a>
+						</div>
+					</div>
+				</div>
+			<?php endif; // endif ( ! empty( $greatest_case_result ) ) : ?>
 			<?php if ( $section_title || $dynamic_post_menu ) : ?>
 				<div class="ctnr-section-title-dynamic-post-nav">
 					<?php if ( $section_title ) : ?>

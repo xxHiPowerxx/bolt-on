@@ -85,6 +85,9 @@ $full-stroke-width: 37.235rem;
 .theme-style-border {
 	padding: 3rem 6rem;
 	position: relative;
+	> * {
+		position: relative;
+	}
 	&:before,
 	&:after {
 		content: '';
@@ -94,7 +97,6 @@ $full-stroke-width: 37.235rem;
 		max-height: 25%;
 		border: solid 0.8rem $primary;
 		width: 100%;
-		z-index: -1;
 	}
 	&:before {
 		top: 0;
