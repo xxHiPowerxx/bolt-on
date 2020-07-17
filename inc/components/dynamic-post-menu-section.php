@@ -51,14 +51,14 @@ function component_dynamic_post_menu_section( $args ) {
 		$last_ancestor_link = '#';
 	endif;
 
-	// Get First Case WHERE _case_practice_area is EQUAL TO Highest Parent Practice Area
+	// Get First Case WHERE _case_practice_area_id is EQUAL TO Highest Parent Practice Area
 	$greatest_case_result_args = array(
 		'posts_per_page' => 1,
 		'post_type'      => 'cases',
 		'meta_query'     => array(
 			'case_result_number',
 			array (
-				'key' => '_case_practice_area',
+				'key' => '_case_practice_area_id',
 				'value' => $last_ancestor->ID,
 			)
 		),

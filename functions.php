@@ -288,7 +288,7 @@ function save_additional_post_meta_to_cases( $post_id ) {
 					return;
 				endif;
 				
-				return update_post_meta( $post->ID, '_case_practice_area', $case_practice_area[0]->ID );
+				return update_post_meta( $post->ID, '_case_practice_area_id', $case_practice_area[0]->ID );
 			}
 			save_case_practice_area( $post );
 		endif; // endif ( $post ) :
