@@ -9,11 +9,11 @@
 /**
  * Year shortcode.
  */
-function get_year_func() {
-	$year = date( 'Y' );
-	return $year;
+function get_archives_func() {
+	$archives = date( 'Y' );
+	return $archives;
 }
-add_shortcode( 'year', 'get_year_func' );
+add_shortcode( 'archives', 'get_archives_func' );
 
 /**
  * Recent Posts shortcode.
@@ -108,17 +108,64 @@ function get_dynamic_post_menu( $atts = '' ) {
 add_shortcode( 'dynamic_post_menu', 'get_dynamic_post_menu' );
 
 /**
+ * Dynamic Post Type Menu Shortcode
+ * Gets Post Categories.
+ */
+function get_dynamic_category_menu( $atts = '' ) {
+
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/dynamic-category-menu.php';
+	require_once( $file_path );
+
+	return component_dynamic_category_menu( $atts );
+}
+add_shortcode( 'dynamic_category_menu', 'get_dynamic_category_menu' );
+
+/**
+ * Dynamic Post Type Menu Shortcode
+ * Gets Post Archives in Years and Months.
+ */
+function get_dynamic_archive_menu( $atts = '' ) {
+
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/dynamic-archive-menu.php';
+	require_once( $file_path );
+
+	return component_dynamic_archive_menu( $atts );
+}
+add_shortcode( 'dynamic_archive_menu', 'get_dynamic_archive_menu' );
+
+/**
  * Sidebar Nav that Shows a Title Dynamically Generated Title
  * and a Dynamic Post Menu
  * uses get_dynamic_post_menu()
  */
-function get_dynamic_sidebar_nav() {
+function get_dynamic_sidebar_nav( $atts = '' ) {
+
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	$type_of_nav = null;
+	if ( is_string( $atts ) ) :
+		$type_of_nav = $atts;
+	elseif ( isset( $atts['type_of_nav'] ) ) :
+		$type_of_nav = $atts['type_of_nav'];
+	endif;
 
 	// Get Component Function.
 	$file_path = get_template_directory() . '/inc/components/dynamic-sidebar-nav.php';
 	require_once( $file_path );
 
-	return component_dynamic_sidebar_nav();
+	return component_dynamic_sidebar_nav( $type_of_nav );
 }
 add_shortcode( 'dynamic_sidebar_nav', 'get_dynamic_sidebar_nav' );
 

@@ -96,7 +96,7 @@ if ( ! function_exists( 'bolt_on_entry_footer' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'bolt-on' ) );
+			$categories_list = get_the_category_list( esc_html__( ',&nbsp;', 'bolt-on' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
 				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'bolt-on' ) . '</span>', $categories_list ); // WPCS: XSS OK.
@@ -193,7 +193,7 @@ function bolt_on_post_categories() {
 	// Only show categories on post types that have categories.
 	if ( 'post' === get_post_type() ) {
 		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list( esc_html__( ',  ', 'bolt-on' ) );
+		$categories_list = get_the_category_list( esc_html__( ', ', 'bolt-on' ) );
 		if ( $categories_list ) {
 			/* translators: 1: list of categories. */
 			printf( '<span class="cat-links d-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'bolt-on' ) . ' </span>', $categories_list ); // WPCS: XSS OK.

@@ -7,86 +7,119 @@
  * @package bolt-on
  */
 
-get_header(); ?>
+// Enqueue Styles
+$archive_css_path = '/assets/css/archive.css';
+wp_register_style(
+	'archive-css',
+	get_theme_file_uri( $archive_css_path ),
+	array(
+		'bolt-on-css',
+	),
+	filemtime( get_template_directory() . $archive_css_path ),
+	'all'
+);
+wp_enqueue_style( 'archive-css' );
 
-<?php /* wp_print_styles( array( 'bolt-on-archive-css' ) ); */?>
+// Start Inline Styles.
+$styles = '';
 
-	<?php
-	$sidebar_location = get_theme_mod( 'sidebar_location', 'sidebar_right' );
-	$column           = '';
-	if ( 'none' !== $sidebar_location ) {
-		$column = '-lg-8';
-	};
-	?>
+$bg_banner_src = get_the_post_thumbnail_url( get_queried_object()
+, 'full' );
+$styles .= bolt_on_add_inline_style(
+	'.bolt-on-banner:before',
+	array(
+		'background-image' => 'url(' . $bg_banner_src . ')',
+	)
+);
 
-	<div class="sizeContent container container-ext main-container">
-		<div class="row">
-			<div class="col<?php echo esc_attr( $column ); ?> order-lg-1 content-area" id="primary">
-				<main id="main" class="site-main archive-page">
+get_header();
 
-					<?php
+?>
+<div id="primary" class="content-area bolt-on-banner">
+	<main id="main" class="site-main">
 
-					if ( have_posts() ) :
-						/*
-						* Include the component stylesheet for the content.
-						* This call runs only once on index and archive pages.
-						* At some point, override functionality should be built in similar to the template part below.
-						*/
-						// wp_print_styles( array( 'bolt-on-content-css' ) ); // Note: If this was already done it will be skipped.
-
-						/* Display the appropriate header when required. */
-						bolt_on_index_header();
-
-						?>
-
-						<div class="ctnr-archive archive-container d-flex flex-row flex-wrap align-items-stretch">
-							<?php
-
-							/* Start the Loop */
-							while ( have_posts() ) :
-								the_post();
-
-								/*
-								* Include the Post-Type-specific template for the content.
-								* If you want to override this in a child theme, then include a file
-								* called content-___.php (where ___ is the Post Type name) and that will be used instead.
-								*/
-								get_template_part( 'template-parts/content-archive', get_post_type() );
-
-							endwhile;
-
-							?>
-						</div>
+		<!--   Blog List Section   --->
+		<section id="archive-list-section" class="archive-list-section bleeds-into-above-section">
+			<div class="container container-ext container-archive-list-section bleed-target pad-onetwenty bg-white">
+				<div class="row row-archive-list-section">
+					<aside id="archive-sidebar" class="left-sidebar col-3">
 						<?php
+						// Get Categories Sidebar Nav.
+						echo get_dynamic_sidebar_nav( 'categories' );
+						echo get_dynamic_sidebar_nav( 'archives' );
+						?>
+					</aside>
+					<div class="col-1"></div>
+					<div id="post-content" class="col-8 theme-content">
+						<?php
+						// TODO: Create Settings Page for Site or for Blog Archive
+						// and CMS this ACF.
+						?>
+						<header class="entry-header page-header">
+							<h1 class="entry-title page-title">McCune Wright Arevalo, LLP Blog</h1>
+						</header>
+						<?php
+						if ( have_posts() ) :
+							?>
+							<div class="archive-list">
+								<?php
+								/* Start the Loop */
+								while ( have_posts() ) :
+									the_post();
 
-						the_posts_navigation(
-							array(
-								'prev_text'          => __( '<i class="fas fa-arrow-left"></i> Older posts', 'bolt-on' ),
-								'next_text'          => __( 'Newer posts <i class="fas fa-arrow-right"></i>', 'bolt-on' ),
-								'screen_reader_text' => __( 'Posts navigation', 'bolt-on' ),
-							)
-						);
+									/*
+									* Include the Post-Type-specific template for the content.
+									* If you want to override this in a child theme, then include a file
+									* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+									*/
+									get_template_part( 'template-parts/content-archive', get_post_type() );
 
-					else :
+								endwhile;
+								?>
+							</div><!-- /.archive-list -->
+							<?php
+							the_posts_pagination(
+								array(
+									'prev_text'          => __( '<i class="fas fa-chevron-left"></i> Newer Posts', 'bolt-on' ),
+									'next_text'          => __( 'Older Posts <i class="fas fa-chevron-right"></i>', 'bolt-on' ),
+									'screen_reader_text' => __( 'Posts Navigation', 'bolt-on' ),
+								)
+							);
+							?>
+					</div><!-- /#post-content -->
+				</div><!-- /.row-archive-intro-section -->
+			</div><!-- /.container-archive-intro-section -->
+		</section>
+		<!--   /Blog List Section   --->
 
-						get_template_part( 'template-parts/content', 'none' );
+		<?php
 
-					endif;
+		/*   Contact Section   */
+		echo get_contact_section();
+		/*   Contact Section   */
 
-					?>
+		else :
 
-				</main><!-- #primary -->
-			</div> <!-- end column -->
-			<?php
-			/**
-			 * Customizer Ordered sidebar.
-			 */
-			// require get_template_directory() . '/inc/sidebar-display-order.php';
-			?>
-		</div> <!-- end row -->
-	</div> <!-- end sizeContent -->
+			get_template_part( 'template-parts/content', 'none' );
+
+		endif;
+
+		?>
+
+	</main><!-- #primary -->
+</div> <!-- end column -->
+
 <?php
 
+// Add Inline Styles
+$post_custom_css = esc_attr( get_field( 'post_custom_css' ) );
+$styles .= $post_custom_css;
 
+bolt_on_minify_css( $styles );
+
+$inline_style = 'inline-archive-css';
+wp_register_style( $inline_style, false );
+wp_enqueue_style( $inline_style );
+wp_add_inline_style( $inline_style, $styles );
 
 get_footer();

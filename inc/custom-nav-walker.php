@@ -149,3 +149,30 @@ class BoltOn_Walker extends Walker_Nav_Menu {
 		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
 }
+
+
+class BoltOn_Walker_Category extends Walker_Category {
+ 
+	function start_lvl( &$output, $depth=0, $args=array() ) {
+		$output .= "\n<ul class='sub-menu'>\n";
+	}
+	 
+	function end_lvl( &$output, $depth=0, $args=array() ) {
+		$output .= "</ul>\n";
+	}
+	 
+	function start_el(
+		&$output,
+		$item,
+		$depth=0,
+		$args=array(),
+		$current_object_id = 0
+	) {
+		$item_link = get_category_link($item);
+		$output.= "<li class='menu-item listed-category has-count'><a class='cat-link' href='" . $item_link . "'><span class='cat-name'>" . esc_attr($item->name) . "</span><span class='cat-count count'>(" . $item->count . ")</span></a>";
+	}
+	 
+	function end_el( &$output, $item, $depth=0, $args=array() ) {
+		$output .= "</li>\n";
+	}
+}

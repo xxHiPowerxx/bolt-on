@@ -1,19 +1,34 @@
-@import './import/variables.scss';
+@import './import/variables';
+
+.archive-list {
+	align-items: stretch;
+}
+$archive-list-margin: 3rem;
+.blog-archive-section{
+	.archive-list {
+		@include flexLayout( $archive-list-margin );
+		justify-content: space-between;
+		> * {
+			max-width: 46.4rem;
+			@at-root .blog-archive-section & {
+				width: 33%;
+			}
+		}
+	}
+}
 
 .listed-archive {
-  flex-direction: column;
 	.entry-title {
 		font-family: $font-fam-primary;
+		font-size: 2.4rem;
+		font-weight: 600;
+		margin-top: 0;
 	}
 	.featured-image {
 		text-align: center;
 	}
 	.post-date {
 		font-size: 2rem;
-	}
-	.entry-title {
-		font-size: 2.4rem;
-		font-weight: 600;
 	}
 	.entry-content{
 		p,
@@ -23,15 +38,26 @@
 	}
 	.post-body {
 		flex: 1;
+		padding: 1.5rem;
 	}
 	.entry-footer {
 		margin-top: auto;
 	}
+	.anchor-btn-cta {
+		margin-top: auto;
+	}
+}
+.listed-archive-inner {
+	height: 100%;
+	border: 1px solid $primary-lighter;
+	display: flex;
+  flex-direction: column;
 }
 
 .anchor-archive-thumbnail {
   position: relative;
 	display: block;
+	overflow: hidden;
 	&:before {
 		content: '';
 		width: 100%;
@@ -43,27 +69,15 @@
 		top: 50%;
 		left: 50%;
 		transform: translate3d(-50%, -50% , 0);
-		max-width: 100%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 } 
 
-$archive-list-margin: 3rem;
-.archive-list {
-	margin-left: -$archive-list-margin;
-  margin-right: -$archive-list-margin;
-  margin-top: -$archive-list-margin;
-  justify-content: space-between;
-	> * {
-		margin: $archive-list-margin;
-		max-width: 46.4rem;
-		@at-root .blog-archive-section & {
-			width: 33%;
-		}
-	}
-}
-
 .post-category {
-  font-size: 1.6rem;
+	font-size: 1.6rem;
+	flex: 1;
 }
 
 .ctnr-view-all-posts-btn {

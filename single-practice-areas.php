@@ -7,7 +7,7 @@
  * @package bolt-on
  */
 
- // Enqueue Styles
+// Enqueue Styles
 $single_practice_areas_css_path = '/assets/css/single-practice-areas.css';
 wp_register_style(
 	'single-practice-areas-css',
@@ -19,24 +19,11 @@ wp_register_style(
 	'all'
 );
 wp_enqueue_style( 'single-practice-areas-css' );
+// Start Inline Styles.
 $styles = '';
-
-// Enqueue Scripts
-// $js_handle          = 'image-swap-js'; 
-// $image_swap_js_path = '/assets/js/image-swap.js';
-// wp_enqueue_script(
-// 	$js_handle, 
-// 	get_theme_file_uri( $image_swap_js_path ),
-// 	array(
-// 		'jquery',
-// 	),
-// 	filemtime( get_template_directory() . $image_swap_js_path ),
-// 	true
-// );
 
 get_header();
 
-// Start Inline Styles.
 
 $bg_banner_src = get_the_post_thumbnail_url( null, 'full' );
 $styles .= bolt_on_add_inline_style(

@@ -225,3 +225,14 @@ $stripes: repeating-linear-gradient(
 	$white 19px,
 	$white 1px
 );
+
+/*   Flex Layout   */
+@mixin flexLayout( $margin ) {
+	margin-left: -$margin;
+  margin-right: -$margin;
+	margin-top: -$margin;
+	> * {
+		padding: $margin;
+	}
+}
+/*   Flex Layout   */

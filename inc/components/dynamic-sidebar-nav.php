@@ -4,8 +4,16 @@
  * 
  * @package bolt-on
  */
-function component_dynamic_sidebar_nav() {
 
+/**
+ * Get Type of Sidebar Nav requested.
+ * 
+ * @param string $type_of_nav - The Type of Nav to return
+ * Options are ancestor (default), category|categories, and year
+ */
+function component_dynamic_sidebar_nav( $type_of_nav = null ) {
+
+	$type_of_nav =  $type_of_nav === null ? 'ancestor' : $type_of_nav;
 	// Enqueue Component Stylesheet.
 	$dynamic_sidebar_nav_css_path = '/assets/css/dynamic-sidebar-nav.css';
 	wp_register_style(
@@ -19,29 +27,64 @@ function component_dynamic_sidebar_nav() {
 	);
 	wp_enqueue_style( 'dynamic-sidebar-nav-css' );
 
-	// Get Dynamic Post Menu.
-	$dynamic_post_menu_array = get_dynamic_post_menu();
-	if ( ! $dynamic_post_menu_array ) :
-		return;
-	endif;
-	$last_ancestor_title = $dynamic_post_menu_array['last_ancestor_title'];
-	$last_ancestor_link  = $dynamic_post_menu_array['last_ancestor_link'];
-	$dynamic_post_menu   = $dynamic_post_menu_array['markup'];
+	// Ancestor Menu
+	if ( $type_of_nav === 'ancestor' ) :
+		// Get Dynamic Post Menu.
+		$dynamic_post_menu_array = get_dynamic_post_menu();
+		if ( ! $dynamic_post_menu_array ) :
+			return;
+		endif;
+		$sidebar_nav_title      = $dynamic_post_menu_array['last_ancestor_title'];
+		$sidebar_nav_title_link = $dynamic_post_menu_array['last_ancestor_link'];
+		$sidebar_nav_content    = $dynamic_post_menu_array['markup'];
+	endif; // endif ( $type_of_nav === 'ancestor' ) :
 
-	ob_start();
-	if ( $last_ancestor_title ) :
-		?>
-		<h3 class="sidebar-heading"><a href="<?php echo $last_ancestor_link; ?>"><?php echo $last_ancestor_title; ?></a></h3>
-		<?php
-	endif; // endif ( $last_ancestor_title ) :
-	if ( $dynamic_post_menu ) :
-		?>
-		<nav class="sidebar-nav">
-			<?php echo $dynamic_post_menu;?>
-		</nav>
-		<?php
-	endif; //endif ( $dynamic_post_menu ) :
+	if ( $type_of_nav === 'categories' ) :
+		// Get Dynamic Post Menu.
+		$dynamic_category_menu = get_dynamic_category_menu();
+		if ( ! $dynamic_category_menu ) :
+			return;
+		endif;
+		$sidebar_nav_title      = ucfirst( $type_of_nav );
+		$sidebar_nav_title_link = '#';
+		$sidebar_nav_content    = $dynamic_category_menu;
+	endif; // endif ( $type_of_nav === 'category' ) :
 
-	return ob_get_clean();
+	if ( $type_of_nav === 'archives' ) :
+		// Get Dynamic Post Menu.
+		$dynamic_archive_menu = get_dynamic_archive_menu();
+		if ( ! $dynamic_archive_menu ) :
+			return;
+		endif;
+		$sidebar_nav_title      = ucfirst( $type_of_nav );
+		$sidebar_nav_title_link = '#';
+		$sidebar_nav_content    = $dynamic_archive_menu;
+	endif; // endif ( $type_of_nav === 'archives' ) :
+
+	$sidebar_nav_title_tabindex = $sidebar_nav_title_link === '#' ? '-1' : '0';
+
+	if ( $sidebar_nav_title || $sidebar_nav_content ) :
+		ob_start();
+		?>
+		<div class="dynamic-sidebar-nav <?php echo esc_attr( $type_of_nav ); ?>-dynamic-sidebar">
+			<?php
+			if ( $sidebar_nav_title ) :
+				?>
+				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" tabindex="<?php echo $sidebar_nav_title_tabindex ?>"><?php echo $sidebar_nav_title; ?></a></h3>
+				<?php
+			endif; // endif ( $last_ancestor_title ) :
+			if ( $sidebar_nav_content ) :
+				?>
+				<nav class="sidebar-nav">
+					<?php echo $sidebar_nav_content;?>
+				</nav>
+				<?php
+			endif; //endif ( $sidebar_nav_content ) :
+		?>
+		</div>
+		<?php
+
+		return ob_get_clean();
+	endif; // endif ( $sidebar_nav_title || $sidebar_nav_content ) :
 
 }

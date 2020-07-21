@@ -14,8 +14,10 @@
     font-size: 3.2rem;
     text-decoration: none;
     @include smoothest-transition;
-    #{$active} {
-      background-color: $secondary;
+    &:not([href="#"]) {
+      #{$active} {
+        background-color: $secondary;
+      }
     }
   }
 }
