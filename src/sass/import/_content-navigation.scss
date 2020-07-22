@@ -1,0 +1,129 @@
+/*--------------------------------------------------------------
+# Content navigation
+--------------------------------------------------------------*/
+$nav-link-bp: 475px;
+
+.site-main .comment-navigation,
+.site-main .posts-navigation,
+.site-main .post-navigation {
+	margin-top: 3rem;
+	overflow: hidden;
+}
+
+.nav-links {
+	display: flex;
+	justify-content: space-between;
+	font-size: 2rem;
+	line-height: 1;
+	> [class*="nav"] {
+		max-width: 35rem;
+		a {
+			transition: $smooth-transition;
+			padding: 3rem 2rem;
+			display: block;
+			text-decoration: none;
+			min-height: 100%;
+		}
+	}
+}
+
+.nav-link-label {
+	width: 100%;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 0.1em solid $gray-100;
+	display: flex;
+	align-items: center;
+	line-height: 1;
+	@media ( min-width: $nav-link-bp ) {
+		// display: block;
+	}
+}
+.nav-link-label-text {
+	display: inline-block;
+	max-width: 7.5em;
+	margin-left: auto;
+	margin-right: auto;
+	@media ( min-width: $nav-link-bp ) {
+		max-width: none;
+	}
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	width: 50%;
+	flex: 1 0 50%;
+	margin-right: auto;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	text-align: end;
+	flex: 1 0 50%;
+	margin-left: auto;
+}
+
+.post-navigation-sub span {
+	color: $white;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.posts-navigation,
+.post-navigation {
+	overflow: visible !important;
+
+	.nav-links {
+		.nav-link-label-icon {
+			transition: $smooth-transition;
+		}
+
+		.nav-previous {
+			a {
+				#{$active} {
+					.nav-link-label-icon {
+						transform: translateX(-0.25em);
+					}
+				}
+				.nav-link-label-icon {
+					padding-right: 0.25em;
+					float: left;
+				}
+			}
+		}
+		.nav-next {
+			a {
+				justify-content: flex-end;
+				#{$active} {
+					.nav-link-label-icon {
+						transform: translateX(0.25em);
+					}
+				}
+
+				.nav-link-label-icon {
+					float: right;
+					padding-left: 0.25em;
+				}
+			}
+		}
+		.ctnr-nav-title {
+			display: flex;
+			align-items: center;
+			text-align: center;
+			// flex: 1;
+			min-height: 100%;
+			.nav-title {
+				margin-left: auto;
+				margin-right: auto;
+				word-break: normal;
+			}
+		}
+	}
+}
+/*--------------------------------------------------------------
+# /Content navigation
+--------------------------------------------------------------*/

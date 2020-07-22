@@ -24,7 +24,7 @@ if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 				<h1 class="page-title">
 				<?php
 					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'xten' ), '<span>' . get_search_query() . '</span>' );
+					printf( esc_html__( 'Search Results for: %s', 'bolt_on' ), '<span>' . get_search_query() . '</span>' );
 				?>
 				</h1>
 			</header><!-- .page-header -->
@@ -54,6 +54,9 @@ if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
 		endif;
 
+		$archive_year  = get_the_time('Y');
+		$archive_month = get_the_time('m');
+
 		$time_string = sprintf( $time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
 			esc_html( get_the_date() ),
@@ -64,7 +67,7 @@ if ( ! function_exists( 'bolt_on_posted_on' ) ) :
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
 			esc_html_x( '%s', 'post date', 'bolt-on' ),
-			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+			'<a href="' . esc_url( get_month_link( $archive_year, $archive_month ) ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
 		echo '<span class="posted-on">' . $posted_on . '</span>'; // WPCS: XSS OK.
@@ -154,35 +157,68 @@ if ( ! function_exists( 'bolt_on_post_thumbnail' ) ) :
 	 *
 	 * Wraps the post thumbnail in an anchor element on index views, or a div
 	 * element when on single views.
+	 * 
+	 * @param string|array $size = 'full' - Optional Argument, Accepts same arguements as wp_get_attachment_image()
+	 * @see https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
+	 * 
 	 */
-	function bolt_on_post_thumbnail() {
-		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+	function bolt_on_post_thumbnail( $size = 'full' ) {
+		if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) :
 			return;
-		}
+		endif;
+		$image_id = get_post_thumbnail_id();
+		$wide_tall;
+		if ( $image_id ) :
+			$size = bolt_on_get_optimal_image_size( $image_id, $size, array( 16, 9 ) );
+			if ( is_array( $size ) ) :
+				$wide_tall = bolt_on_wide_tall_image( $size );
+			else :
+				$wide_tall = bolt_on_wide_tall_image( get_post_thumbnail_id() );
+			endif;
+		endif;
 
 		if ( is_singular() ) :
 			?>
 
 			<div class="post-thumbnail">
-				<?php the_post_thumbnail(); ?>
+				<?php the_post_thumbnail( $size, array( 'class' => 'skip-lazy ' . $wide_tall ) ); ?>
 			</div><!-- .post-thumbnail -->
 
 		<?php else : ?>
 
-		<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
-			<?php
-			the_post_thumbnail( 'post-thumbnail', array(
-				'alt' => the_title_attribute( array(
-					'echo' => false,
-				) ),
-			) );
-			?>
-		</a>
+			<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
+				<?php
+				global $wp_query;
+				if ( 0 === $wp_query->current_post ) :
+					the_post_thumbnail(
+						'full',
+						array(
+							'class' => 'skip-lazy',
+							'alt'   => the_title_attribute(
+								array(
+									'echo' => false,
+								)
+							),
+						)
+					);
+				else :
+					the_post_thumbnail(
+						'post-thumbnail', array(
+							'alt' => the_title_attribute(
+								array(
+									'echo' => false,
+								)
+							),
+						)
+					);
+				endif;
+				?>
+			</a>
 
-		<?php
+			<?php
 		endif; // End is_singular().
 	}
-endif;
+endif; // if ( ! function_exists( 'bolt_on_post_thumbnail' ) ) :
 
 /**
  * Prints a link list of the current categories for the post.
@@ -196,7 +232,7 @@ function bolt_on_post_categories() {
 		$categories_list = get_the_category_list( esc_html__( ', ', 'bolt-on' ) );
 		if ( $categories_list ) {
 			/* translators: 1: list of categories. */
-			printf( '<span class="cat-links d-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'bolt-on' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
+			printf( '<span class="cat-links display-flex flex-row flex-wrap">' . esc_html__( '%1$s', 'bolt-on' ) . ' </span>', $categories_list ); // WPCS: XSS OK.
 		}
 	}
 }
@@ -219,5 +255,25 @@ function bolt_on_edit_post_link() {
 		),
 		'<span class="edit-link">',
 		' </span>'
+	);
+}
+
+function bolt_on_post_navigation() {
+	// Add Class Name to Post Navigation Links.
+	function posts_link_class($format){
+		$format = str_replace('href=', 'class="theme-style-border" href=', $format);
+		return $format;
+	}
+	add_filter('next_post_link', 'posts_link_class');
+	add_filter('previous_post_link', 'posts_link_class');
+
+	$post_type_name = esc_attr( get_post_type_object( get_post_type() )->labels->singular_name );
+
+	the_post_navigation(
+		array(
+			'prev_text'          => __( '<div class="nav-link-label"><i class="nav-link-label-icon fas fa-chevron-left"></i> <span class="nav-link-label-text">Previous ' . $post_type_name . '</span></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
+			'next_text'          => __( '<div class="nav-link-label"><span class="nav-link-label-text">Next ' . $post_type_name . '</span> <i class="nav-link-label-icon fas fa-chevron-right"></i></div><div class="ctnr-nav-title"><span class="nav-title">%title</span></div>' ),
+			'screen_reader_text' => __( 'Posts navigation' ),
+		)
 	);
 }

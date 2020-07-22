@@ -21,15 +21,12 @@
 		if ( 'post' === get_post_type() ) :
 			?>
 			<div class="entry-meta">
-				<?php
-				bolt_on_posted_on();
-				bolt_on_posted_by();
-				?>
+				<?php bolt_on_posted_on(); ?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php bolt_on_post_thumbnail(); ?>
+	<?php bolt_on_post_thumbnail( array(1920, null) ); ?>
 
 	<div class="entry-content">
 		<?php
@@ -53,7 +50,15 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-		<?php bolt_on_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	<footer class="entry-footer bolt-on-highlight-font">
+				<div class="cat-link-container display-flex flex-row justify-content-between">
+					<div class="post-category">
+						<h5 class="post-category-label">Categories:</h5>
+						<?php bolt_on_post_categories(); ?>
+					</div>
+				</div>
+				<?php
+				bolt_on_edit_post_link();
+				?>
+			</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

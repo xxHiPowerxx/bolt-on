@@ -1,0 +1,43 @@
+@import './import/variables';
+@import './import/common';
+@import './import/content-navigation';
+
+.entry-meta {
+  font-size: 1.8rem;
+  margin-top: 1em;
+}
+.entry-header {
+  margin-bottom: 3rem;
+}
+.post-thumbnail {
+  float: right;
+  max-width: 42rem;
+	margin: 1rem 0 1.5rem 1.5rem;
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+.post-category-label {
+	font-family: $font-fam-primary;
+}
+.entry-footer {
+	margin-top: 3rem;
+}
+.cat-links {
+  font-size: 1.8rem;
+	color: transparent;
+	> a {
+		background-color: $primary-lighter;
+		font-weight: 500;
+		color: $primary-darker;
+		padding: 0.5em .75em;
+		line-height: 1;
+		text-decoration: none;
+		@include smoothest-transition;
+		#{$active} {
+			background-color: $primary-dark;
+			color: $white;
+		}
+	}
+}
