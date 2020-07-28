@@ -1,0 +1,29 @@
+@import './import/variables';
+@import './import/common';
+
+.breadcrumb {
+  font-size: 1.8rem;
+	padding: 0;
+	margin-bottom: 3rem;
+}
+.breadcrumb-item {
+	padding: .5em 1em;
+	text-decoration: none !important;
+	&.current-breadcrumb-item {
+		> * {
+			border-bottom: 1px solid;
+		}
+	}
+	+ .breadcrumb-item {
+		padding-left: .5em;
+		&:not(:last-child) {
+			padding-right: .5em;
+		}
+		&:before {
+			content: '\f054';
+			@include font-awesome-font;
+			padding-right: 0;
+			margin-right: .5em;
+		}
+	}
+}

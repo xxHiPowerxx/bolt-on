@@ -290,7 +290,7 @@ function bolt_on_custom_post_types() {
 															'page-attributes',
 														),
 		// You can associate this CPT with a taxonomy or custom taxonomy. 
-		'taxonomies'          => array( 'video-categories' ),
+		'taxonomies'          => array( 'video-category' ),
 		/* A hierarchical CPT is like Pages and can have
 		* Parent and child items. A non-hierarchical CPT
 		* is like Posts.
@@ -303,16 +303,16 @@ function bolt_on_custom_post_types() {
 		'show_in_admin_bar'   => true,
 		'menu_position'       => 5,
 		'can_export'          => true,
-		'has_archive'         => true,
+		'has_archive'         => $post_handle,
 		'exclude_from_search' => false,
 		'publicly_queryable'  => true,
 		'capability_type'     => 'post',
 		'show_in_rest'        => false,
 		'menu_icon'           => $menu_icon,
 		'rewrite'             => array(
-			'slug'       => $post_handle,
+			'slug'       => $post_handle . '/%video-category%',
 			'with_front' => true,
-		),
+		)
 	);
 	// Registering your Custom Post Type
 	register_post_type( $post_handle, $args );

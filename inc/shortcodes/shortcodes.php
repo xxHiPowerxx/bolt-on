@@ -221,3 +221,37 @@ function get_sidebar_contact( $atts = '' ) {
 	endif;
 }
 add_shortcode( 'sidebar_contact', 'get_sidebar_contact' );
+
+/**
+ * Video Archives
+ * Renders a List of Most Recent Videos
+ */
+function get_video_archive( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/video-archive.php';
+	require_once( $file_path );
+
+	return component_video_archive();
+}
+add_shortcode( 'video_archive', 'get_video_archive' );
+
+/**
+ * Video Breadcrumbs
+ * Renders a Breadcrumb Nav
+ */
+function get_breadcrumbs( $atts = '' ) {
+	// When Shortcode is used $atts defaults to ''.
+	// Ensure that this gets converted to an array.
+	$atts = $atts === '' ? array() : $atts;
+
+	// Get Component Function.
+	$file_path = get_template_directory() . '/inc/components/breadcrumbs.php';
+	require_once( $file_path );
+
+	return component_breadcrumbs();
+}
+add_shortcode( 'breadcrumbs', 'get_breadcrumbs' );

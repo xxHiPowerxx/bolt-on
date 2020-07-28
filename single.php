@@ -86,7 +86,7 @@ $styles .= $post_custom_css;
 
 bolt_on_minify_css( $styles );
 
-$inline_style = 'inline-archive-css';
+$inline_style = 'inline-single-css';
 wp_register_style( $inline_style, false );
 wp_enqueue_style( $inline_style );
 wp_add_inline_style( $inline_style, $styles );

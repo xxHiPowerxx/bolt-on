@@ -120,6 +120,19 @@ function bolt_on_assets() {
 		wp_register_script( $handle, get_theme_file_uri( '/vendor/bootstrap/js/bootstrap.bundle.min.js' ), array( 'jquery' ), '4.4.1', true );
 	}
 
+	// Fancybox Vendor
+	// Fancybox JS
+	$fancybox_version = '3.5.7';
+	$handle = 'bolt-on-vendor-fancybox-js';
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		wp_register_script( $handle, get_theme_file_uri( '/vendor/fancybox/jquery.fancybox.min.js' ), array( 'jquery' ), $fancybox_version, true );
+	}
+	// Fancybox CSS
+	$handle = 'bolt-on-vendor-fancybox-css';
+	if ( ! wp_style_is( $handle, 'registered' ) ) {
+		wp_register_style( $handle, get_theme_file_uri( '/vendor/fancybox/jquery.fancybox.min.css' ), array(), $fancybox_version, 'all' );
+	}
+
 	// Fontawesome Vendor
 	$handle = 'bolt-on-vendor-fontawesome-css';
 	if ( ! wp_style_is( $handle, 'registered' ) ) {
@@ -143,8 +156,8 @@ function bolt_on_assets() {
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
 	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css', 'bolt-on-vendor-slick-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
-	$bolt_on_blog_css_path = '/assets/css/bolt-on-blog.css';
-	wp_register_style( 'bolt-on-blog-css', get_theme_file_uri( $bolt_on_blog_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $bolt_on_blog_css_path ), 'all' );
+	$bolt_on_blog_css_path = '/assets/css/content-archive.css';
+	wp_register_style( 'content-archive-css', get_theme_file_uri( $bolt_on_blog_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $bolt_on_blog_css_path ), 'all' );
 
 	$google_font_css_path = 'https://fonts.googleapis.com/css';
 	wp_enqueue_style( 'google-font-css', $google_font_css_path . '?family=Lora:400,400i,700,700i|Montserrat:100,200,300,300i,400,500,500i,600,600i,700,800,900', array(), '', 'all' );
@@ -218,9 +231,15 @@ require get_template_directory() . '/inc/shortcodes/shortcodes.php';
 require get_template_directory() . '/inc/archive-excerpt.php';
 
 /**
+ * Custom Taxonomies.
+ */
+require get_template_directory() . '/inc/custom-taxonomies.php';
+
+/**
  * Custom Post Types.
  */
 require get_template_directory() . '/inc/custom-post-types.php';
+
 
 /**
  * Only Show Parent-Level Practice Areas in Attorney's Practice Areas Post Types ACF Relationship Field.
@@ -308,3 +327,52 @@ function redirect_case_results() {
 	endif;
 }
 add_action( 'template_redirect', 'redirect_case_results' );
+
+/**
+ * Prepend First Found Video Category to Video Permalink.
+ */ 
+function add_video_category_to_post_link($permalink, $post_id, $leavename) {
+	if ( strpos( $permalink, '%video-category%' ) === FALSE) :
+		return $permalink;
+	endif;
+
+	// Get post
+	$post = get_post( $post_id );
+	if ( ! $post ) :
+		return $permalink;
+	endif;
+
+	// Get taxonomy terms
+	$terms = wp_get_object_terms( $post->ID, 'video-category' );
+	if (
+		! is_wp_error( $terms ) &&
+		! empty( $terms )       &&
+		is_object( $terms[0] )
+	) :
+		$taxonomy_slug = $terms[0]->slug;
+	else :
+		$taxonomy_slug = 'other';
+	endif;
+
+	return str_replace('%video-category%', $taxonomy_slug, $permalink);
+}
+add_filter( 'post_type_link', 'add_video_category_to_post_link', 10, 3 );
+
+/**
+ * Define default terms for custom taxonomies in WordPress
+ */
+function bolt_on_set_default_video_terms( $post_id, $post ) {
+	if ( 'publish' === $post->post_status ) :
+		$defaults = array(
+			'video-category' => array( 'other' ),
+		);
+		$taxonomies = get_object_taxonomies( $post->post_type );
+		foreach ( (array) $taxonomies as $taxonomy ) :
+			$terms = wp_get_post_terms( $post_id, $taxonomy );
+			if ( empty( $terms ) && array_key_exists( $taxonomy, $defaults ) ) :
+				wp_set_object_terms( $post_id, $defaults[$taxonomy], $taxonomy );
+			endif;
+		endforeach;
+	endif;
+}
+add_action( 'save_post', 'bolt_on_set_default_video_terms', 100, 2 );

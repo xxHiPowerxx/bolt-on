@@ -7,7 +7,7 @@
  * @package bolt-on
  */
 
-wp_enqueue_style( 'bolt-on-blog-css' );
+wp_enqueue_style( 'content-archive-css' );
 
 ?>
 
