@@ -29,3 +29,10 @@
 		flex: 1;
 	}
 }
+.single-videos-entry-section {
+	+ .related-videos-section {
+		> .pad-onetwenty {
+			padding-top: 0;
+		}
+	}
+}

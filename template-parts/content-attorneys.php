@@ -24,6 +24,7 @@ $attorney_bio                       = wp_kses_post( get_field( 'attorney_bio' ) 
 $attorney_successes                 = get_field( 'attorney_successes' );
 $attorney_professional_associations = wp_kses_post( get_field( 'attorney_professional_associations' ) );
 $attorney_speaking_engagements      = wp_kses_post( get_field( 'attorney_speaking_engagements' ) );
+$attorney_videos                    = get_field( 'attorney_videos' );
 
 $contact_form_title = 'Connect With ' . $attorney_first_name;
 
@@ -77,11 +78,11 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 				<?php endif; // endif ( $attorney_speaking_engagements ) : ?>
 
 				<?php
-				if ( have_rows( 'attorney_videos_repeater' ) ) :
+				if ( $attorney_videos ) :
 					$attorney_videos_id = 'attorney-videos';
 					?>
 					<button class="btn-attorney-attributes-nav btn-no-style has-chevron btn btn-sidebar-nav preventExpandedCollapse" type="button" data-toggle="collapse" data-target="#<?php echo $attorney_videos_id; ?>" aria-expanded="false" aria-controls="<?php echo $attorney_videos_id; ?>">Videos</button>
-				<?php endif; // endif ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+				<?php endif; // endif ( $attorney_videos ) : ?>
 
 			</nav>
 			<?php
@@ -198,19 +199,65 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 					</section><!-- /#<?php echo $attorney_speaking_engagements_id; ?> -->
 				<?php endif; // endif ( $attorney_speaking_engagements ) : ?>
 
-				<?php if ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+				<?php if ( $attorney_videos ) : ?>
 					<section id="<?php echo $attorney_videos_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<ul class="attorney-videos-list">
-							<?php
-							while ( have_rows( 'attorney_videos_repeater' ) ) :
-								the_row();
-								$attorney_video = esc_html( get_sub_field( 'attorney_video' ) );
+						<?php
+						$get_posts_args      = array(
+							'post_type'      => 'videos',
+							'posts_per_page' => count( $attorney_videos ),
+							'post__in '      => $attorney_videos,
+						);
+						$posts_of_category   = new WP_Query( $get_posts_args );
+						if ( $posts_of_category->have_posts() ) :
+							?>
+							<div class="archive-list archive-video-list">
+								<?php
+								while ( $posts_of_category->have_posts() ) :
+									$posts_of_category->the_post();
+										get_template_part( 'template-parts/content-archive', get_post_type() );
+								endwhile;
+								wp_reset_query();
 								?>
-								<li class="listed-video"><?php echo $attorney_videos; ?></li>
-							<?php endwhile; // endwhile ( have_rows( 'attorney_videos_repeater' ) ) : ?>
-						</ul><!-- ./attorney-videos-list -->
+							</div><!-- /.archive-video-list -->
+							<?php
+							// If There are more posts than can be shown, 
+							// $post_of_category->max_num_pages will be greater than 0
+							// Note that $posts_of_category->max_num_pages is always > 0
+							// If the current post has been excluded from the Query.
+							$max_num_pages = $posts_of_category->max_num_pages;
+							if ( $max_num_pages ) :
+								//render a CTA btn.
+								$more_videos_link = get_field( 'more_videos_link' );
+								// var_dump($more_videos_link);
+								if( $more_videos_link ) :
+									$more_videos_link_url  = get_category_link( $more_videos_link );
+									$more_videos_link_name = $more_videos_link->name;
+								else :
+									$more_videos_link_url  = get_post_type_archive_link( 'videos' );
+									$more_videos_link_name = null;
+								endif;
+
+								?>
+								<div class="ctnr-btn-view-more-videos">
+									<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron btn-view-more-videos" href="<?php echo $more_videos_link_url; ?>">
+										<span class="btn-cta btn-cta-inner stroke-border-inner">
+											<span class="btn-cta-text stroke-border-lvl-three">
+												<span>View All</span>&nbsp;
+												<span>Videos</span>
+												<?php if( $more_videos_link_name ) : ?>
+													&nbsp;<span>of</span>&nbsp;
+													<span><?php echo $more_videos_link_name; ?></span>
+												<?php endif;?>
+											</span>
+										</span>
+									</a>
+								</div>
+								<?php
+							endif; // endif ( $found_posts > $videos_to_show ) :
+						endif; // endif ( have_posts( $posts_of_category ) ) :
+						?>
 					</section><!-- /#<?php echo $attorney_videos_id; ?> -->
-				<?php endif; // endif ( have_rows( 'attorney_videos_repeater' ) ) : ?>
+				<?php endif; // endif ( $attorney_videos ) : ?>
 
 			</div><!-- #attorney-attributes-sections -->
 			<footer class="attorney-footer">

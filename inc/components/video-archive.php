@@ -2,23 +2,33 @@
 /**
  * This Component Renders the Video Archive.
  * 
- * @param int $videos_to_show - Number of Videos to Show.
+ * @param array $args {
+ * 	@property int [videos_to_show] - Number of Videos to Show.
+ * 	@property array [videos_to_get] - List of Post IDs to get.
+ * }
+ * 
  * 
  * @package bolt-on
  */
-function component_video_archive( $videos_to_show = null ) {
+function component_video_archive( $args = array() ) {
+	$videos_to_show = isset( $args['videos_to_show'] ) ?
+		$args['videos_to_show'] :
+		-1;
+	$videos_to_get = isset( $args['videos_to_get'] ) ?
+		$args['videos_to_get'] :
+		null;
+	
 	global $post;
 	$is_tax     = is_tax();
-	// var_dump($is_tax);
 	$is_archive = is_archive();
 	if ( ! $post && ! $is_archive ) :
 		return;
 	endif;
-	if ( $is_tax || ! $videos_to_show ) :
+	if ( $is_tax ) :
 		$videos_to_show = -1;
 	endif;
 
-	$post_type        = get_post_type();
+	$post_type = get_post_type();
 	// Determine if this is A Taxonomy Archive, The Post Type Archive or a single post.
 	if ( $is_tax ) :
 		$video_categories = array( get_queried_object() );
@@ -37,6 +47,7 @@ function component_video_archive( $videos_to_show = null ) {
 				'post_type'      => $post_type,
 				'posts_per_page' => $videos_to_show,
 				'video-category' => $video_category_slug,
+				'post__in '      => $videos_to_get,
 				'post__not_in'   => array( $excluded ),
 			);
 			$posts_of_category   = new WP_Query( $get_posts_args );
@@ -73,8 +84,7 @@ function component_video_archive( $videos_to_show = null ) {
 					// $post_of_category->max_num_pages will be greater than 0
 					// Note that $posts_of_category->max_num_pages is always > 0
 					// If the current post has been excluded from the Query.
-					$max_num_pages    = $posts_of_category->max_num_pages;
-					/* ?><pre><?php var_dump($posts_of_category); ?></pre><?php */
+					$max_num_pages = $posts_of_category->max_num_pages;
 					if ( $max_num_pages ) :
 						//render a CTA btn.
 						$videos_category_url = esc_url( get_category_link( $video_category ) );
@@ -82,7 +92,7 @@ function component_video_archive( $videos_to_show = null ) {
 						<div class="ctnr-btn-view-more-videos">
 							<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron btn-view-more-videos" href="<?php echo $videos_category_url; ?>">
 								<span class="btn-cta btn-cta-inner stroke-border-inner">
-									<span class="btn-cta-text stroke-border-lvl-three"><span>View More</span>&nbsp;<span><?php echo $video_category_name; ?></span>&nbsp;<span>Videos</span></span>
+									<span class="btn-cta-text stroke-border-lvl-three"><span>View All</span>&nbsp;<span><?php echo $video_category_name; ?></span>&nbsp;<span>Videos</span></span>
 								</span>
 							</a>
 						</div>

@@ -46,8 +46,6 @@ $video_width       = 773;
 					if ( get_row_layout() === 'external_source' ) :
 						$video_url = esc_url( get_sub_field( 'url' ) );
 						if ( $video_url ) :
-							// $youtube_id = bolt_on_get_youtube_video_id( $video_url );
-							// $video_img  = 'https://img.youtube.com/vi/' . $youtube_id . '/hqdefault.jpg';
 							$video_img = bolt_on_get_video_thumbnail( $video_url );
 							$video_class_name = 'external';
 						endif; // endif ( $external_video ) :
@@ -58,7 +56,6 @@ $video_width       = 773;
 						$video_array = get_sub_field('video');
 						if ( $video_array ) :
 							$video_url = esc_url( $video_array['url'] );
-							// $video_img = bolt_on_get_video_thumbnail( $video_url );
 							$video_img = get_the_post_thumbnail_url( $video_array['id'] );
 						endif; // endif ( $video_array ) :
 					endif; // endif ( get_row_layout() === 'media' ) :
@@ -89,7 +86,7 @@ $video_width       = 773;
 
 			<?php if ( $video_description ) : ?>
 				<div class="entry-content">
-					<p class="video-description"><?php echo $video_description; ?></p>
+				<p class="video-description"><?php echo wp_trim_all_excerpt( $video_description ); ?></p>
 				</div><!-- .entry-content -->
 			<?php endif; ?>
 
