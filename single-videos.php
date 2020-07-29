@@ -39,7 +39,7 @@ get_header();
 						get_template_part( 'template-parts/content', get_post_type() );
 					endwhile; // End of the loop.
 					?>
-				</div><!-- /#post-content -->
+				</div><!-- /#single-videos-entry-section -->
 			</div><!-- /.container-single-videos-intro-section -->
 		</section>
 		<!--   /Single Videos Section   --->
@@ -49,9 +49,10 @@ get_header();
 			<div class="container container-ext container-related-videos-section pad-onetwenty">
 				<?php
 				// Videos Archive
-				get_video_archive();
+				$args = array( 'videos_to_show' => 6 );
+				echo get_video_archive( $args );
 				?>
-			</div><!-- /.container-single-videos-intro-section -->
+			</div><!-- /.container-related-videos-section -->
 		</section>
 		<!--   /Related Videos Section   --->
 
@@ -61,8 +62,8 @@ get_header();
 		echo get_contact_section();
 		/*   Contact Section   */
 	?>
-</main><!-- #primary -->
-</div> <!-- end column -->
+</main><!--   /#main   -->
+</div> <!--   /#primary   -->
 
 <?php
 

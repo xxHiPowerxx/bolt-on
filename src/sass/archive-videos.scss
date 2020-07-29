@@ -1,0 +1,15 @@
+@import './import/variables';
+@import './import/common';
+
+section {
+	&:first-child {
+		> .pad-onetwenty {
+			padding-bottom: 0;
+		}
+		+ section {
+			> .pad-onetwenty {
+				padding-top: 6rem;
+			}
+		}
+	}
+}

@@ -75,8 +75,8 @@ get_header();
 		echo get_contact_section();
 		/*   Contact Section   */
 	?>
-</main><!-- #primary -->
-</div> <!-- end column -->
+</main><!--   /#main   -->
+</div> <!--   /#primary   -->
 
 <?php
 

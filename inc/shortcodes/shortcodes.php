@@ -231,11 +231,15 @@ function get_video_archive( $atts = '' ) {
 	// Ensure that this gets converted to an array.
 	$atts = $atts === '' ? array() : $atts;
 
+	$videos_to_show = isset( $atts['videos_to_show'] ) ?
+		$atts['videos_to_show'] :
+		null;
+
 	// Get Component Function.
 	$file_path = get_template_directory() . '/inc/components/video-archive.php';
 	require_once( $file_path );
 
-	return component_video_archive();
+	return component_video_archive( $videos_to_show );
 }
 add_shortcode( 'video_archive', 'get_video_archive' );
 

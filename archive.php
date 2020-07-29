@@ -106,8 +106,8 @@ get_header();
 
 		?>
 
-	</main><!-- #primary -->
-</div> <!-- end column -->
+	</main><!--   /#main   -->
+</div> <!--   /#primary   -->
 
 <?php
 
