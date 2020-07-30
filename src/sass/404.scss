@@ -1,0 +1,72 @@
+@import "./import/variables";
+
+/*--------------------------------------------------------------
+# 404 Styles
+--------------------------------------------------------------*/
+#primary {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+.error-404 {
+	text-align: center;
+}
+.site-content {
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+.error-404 {
+	color: $white;
+	* {
+		color: inherit;
+	}
+	min-height: 40rem;
+	> * {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 90rem;
+	}
+	&.not-found {
+		background-color: rgba($dark, .5);
+		box-shadow: 0 0 1em 0.15em rgba($dark, .5);
+		padding: 3rem;
+	}
+	.search {
+		width: 100%;
+		margin: 3rem 0;
+	}
+	input[type="search"] {
+		&.input-search {
+			color: inherit;
+			font-size: 2rem;
+			border-color: $white;
+		}
+	}
+	.btn-submit {
+		color: inherit;
+	}
+}
+
+.big-404 {
+	font-family: $font-fam-primary;
+	font-size: 10rem;
+	font-weight: 700;
+}
+
+
+.message,
+.page-header {
+	@include fontSize(25.6px);
+}
+
+.widget_404-left,
+.widget_404-right {
+	text-align: left;
+	@include fontSize(25.6px);
+}
+
+/*# sourceMappingURL=../../maps/dev/css/404.css.map */

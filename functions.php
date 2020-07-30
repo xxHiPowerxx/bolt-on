@@ -156,11 +156,14 @@ function bolt_on_assets() {
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
 	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css', 'bolt-on-vendor-slick-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
-	$bolt_on_blog_css_path = '/assets/css/content-archive.css';
-	wp_register_style( 'content-archive-css', get_theme_file_uri( $bolt_on_blog_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $bolt_on_blog_css_path ), 'all' );
+	$content_archive_css_path = '/assets/css/content-archive.css';
+	wp_register_style( 'content-archive-css', get_theme_file_uri( $content_archive_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $content_archive_css_path ), 'all' );
 
 	$google_font_css_path = 'https://fonts.googleapis.com/css';
 	wp_enqueue_style( 'google-font-css', $google_font_css_path . '?family=Lora:400,400i,700,700i|Montserrat:100,200,300,300i,400,500,500i,600,600i,700,800,900', array(), '', 'all' );
+
+	$content_archive_css_path = '/assets/css/404.css';
+	wp_register_style( 'bolt-on-404-css', get_theme_file_uri( $content_archive_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $content_archive_css_path ), 'all' );
 
 	// Register Scripts
 	$bolt_on_js_path = '/assets/js/bolt-on.js';

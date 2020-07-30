@@ -78,8 +78,13 @@ a[href="#"] {
 /*   Has Chevron   */
 .has-chevron {
 	@include has-fontawesome-icon;
+	&,
+	&.btn-cta-outer {
+		&:after {
+			content: '\f054';
+		}
+	}
 	&:after {
-		content: '\f054';
 		color: $primary;
 		display: inline-block;
 		@include font-awesome-font;
