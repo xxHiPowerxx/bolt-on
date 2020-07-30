@@ -2,34 +2,30 @@
 /**
  * Template part for displaying results in search pages
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package bolt-on
  */
 
+$allsearch = new WP_Query( "s=$s&showposts=-1" );
+$key       = esc_html( $s, 1 );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-
-		<?php if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php
-			bolt_on_posted_on();
-			bolt_on_posted_by();
-			?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
-
-	<?php bolt_on_post_thumbnail(); ?>
-
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
-
-	<footer class="entry-footer">
-		<?php bolt_on_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+<article id="post-<?php the_ID(); ?>" class="search-result">
+	<a class="anchor-search-result" href="<?php the_permalink(); ?>" rel="bookmark">
+		<header class="entry-header">
+			<h5 class="entry-title"><?php search_term( get_the_title(), $key ); ?></h5>
+		</header><!-- .entry-header -->
+		<br />
+		<span class="page-url">
+			<?php echo esc_url( get_permalink() ); ?>
+		</span>
+	</a>
+	<?php
+	if ( get_the_excerpt() ) :
+		?>
+		<div class="entry-summary">
+			<?php search_term( get_the_excerpt(), $key ); ?>
+		</div><!-- .entry-summary -->
+	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->

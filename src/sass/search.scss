@@ -1,0 +1,55 @@
+@import './import/variables';
+
+.search-wrapper {
+	padding-top: 2em; //5em
+	padding-bottom: 2em; //5em
+	> :not(:first-child) {
+		margin-top: 3rem;
+	}
+	.result-count {
+		margin-top: 1em;
+		font-family: $font-fam-primary;
+	}
+	.search-result:last-child {
+		border-bottom: none;
+	}
+	.no-results,
+	.not-found {
+		margin: 1.5rem auto;
+	}
+}
+.anchor-search-result {
+	display: inline;
+	@include smoothest-transition;
+	.entry-header {
+		margin-bottom: 0;
+		display: inline-block;
+		.entry-title {
+			margin-bottom: 0;
+			font-family: $font-fam-primary;
+		}
+	}
+}
+.search-result {
+	// padding-top: 3rem;
+	padding-bottom: 3rem;
+	border-bottom: 1px solid $primary-lighter;
+	.page-url {
+		color: $gray;
+		font-size: 1.8rem;
+	}
+	.entry-summary {
+		font-size: 1.7rem;
+	}
+	.entry-content {
+		margin: 1em 0 0;
+	}
+	span {
+		&.yellow {
+			background-color: $yellow;
+		}
+		&.bold {
+			font-weight: bold;
+		}
+	}
+}

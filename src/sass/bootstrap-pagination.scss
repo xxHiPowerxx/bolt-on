@@ -1,0 +1,25 @@
+@import './import/variables';
+
+
+.page-link {
+	@include smoothest-transition;
+	&.current {
+		background-color: $secondary;
+		color: $white;
+	}
+	&.theme-style-border {
+		padding: .5em;
+		border: 0;
+		min-width: 1.5em;
+		text-align: center;
+		&:before,
+		&:after {
+			border-width: 0.25em;
+		}
+	}
+}
+.pagination {
+	> :not(:first-child) {
+		margin-left: .5em;
+	}
+} 

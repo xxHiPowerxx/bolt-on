@@ -14,7 +14,7 @@ wp_register_style(
 	get_theme_file_uri( $content_archive_video_css_path ),
 	array(
 		'bolt-on-css',
-		'content-archive-css',
+		'bolt-on-content-archive-css',
 		'bolt-on-vendor-fancybox-css',
 	),
 	filemtime( get_template_directory() . $content_archive_video_css_path ),

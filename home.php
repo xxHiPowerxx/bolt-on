@@ -7,19 +7,6 @@
  * @package bolt-on
  */
 
-// Enqueue Styles
-$archive_css_path = '/assets/css/archive.css';
-wp_register_style(
-	'archive-css',
-	get_theme_file_uri( $archive_css_path ),
-	array(
-		'bolt-on-css',
-	),
-	filemtime( get_template_directory() . $archive_css_path ),
-	'all'
-);
-wp_enqueue_style( 'archive-css' );
-
 // Start Inline Styles.
 $styles = '';
 
@@ -33,6 +20,8 @@ $styles .= bolt_on_add_inline_style(
 );
 
 get_header();
+
+wp_enqueue_style( 'bolt-on-archive-css' );
 
 ?>
 <div id="primary" class="content-area bolt-on-banner">
@@ -50,7 +39,7 @@ get_header();
 						?>
 					</aside>
 					<div class="col-1"></div>
-					<div id="post-content" class="col-8 theme-content">
+					<div id="post-content" class="col-8">
 						<?php
 						// TODO: Create Settings Page for Site or for Blog Archive
 						// and CMS this ACF.
@@ -61,7 +50,7 @@ get_header();
 						<?php
 						if ( have_posts() ) :
 							?>
-							<div class="archive-list">
+							<div class="archive-list theme-content">
 								<?php
 								/* Start the Loop */
 								while ( have_posts() ) :
@@ -78,13 +67,17 @@ get_header();
 								?>
 							</div><!-- /.archive-list -->
 							<?php
-							the_posts_pagination(
-								array(
-									'prev_text'          => __( '<i class="fas fa-chevron-left"></i> Newer Posts', 'bolt-on' ),
-									'next_text'          => __( 'Older Posts <i class="fas fa-chevron-right"></i>', 'bolt-on' ),
-									'screen_reader_text' => __( 'Posts Navigation', 'bolt-on' ),
-								)
-							);
+							// the_posts_pagination(
+							// 	array(
+							// 		'prev_text'          => __( '<i class="fas fa-chevron-left"></i> Newer Posts', 'bolt-on' ),
+							// 		'next_text'          => __( 'Older Posts <i class="fas fa-chevron-right"></i>', 'bolt-on' ),
+							// 		'screen_reader_text' => __( 'Posts Navigation', 'bolt-on' ),
+							// 	)
+							// );
+							bootstrap_pagination();
+							else :
+								get_template_part( 'template-parts/content', 'none' );
+							endif; // endif ( have_posts() ) :
 							?>
 					</div><!-- /#post-content -->
 				</div><!-- /.row-archive-intro-section -->
@@ -93,17 +86,9 @@ get_header();
 		<!--   /Blog List Section   --->
 
 		<?php
-
 		/*   Contact Section   */
 		echo get_contact_section();
 		/*   Contact Section   */
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-
 		?>
 
 	</main><!--   /#main   -->

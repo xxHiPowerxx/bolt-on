@@ -7,18 +7,7 @@
  * @package bolt-on
  */
 
-// Enqueue Styles
-$archive_css_path = '/assets/css/archive.css';
-wp_register_style(
-	'archive-css',
-	get_theme_file_uri( $archive_css_path ),
-	array(
-		'bolt-on-css',
-	),
-	filemtime( get_template_directory() . $archive_css_path ),
-	'all'
-);
-wp_enqueue_style( 'archive-css' );
+
 
 // Start Inline Styles.
 $styles = '';
@@ -33,6 +22,8 @@ $styles .= bolt_on_add_inline_style(
 );
 
 get_header();
+wp_enqueue_style( 'bolt-on-archive-css' );
+
 
 ?>
 <div id="primary" class="content-area bolt-on-banner">

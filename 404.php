@@ -62,9 +62,6 @@ $styles .= bolt_on_add_inline_style(
 <?php
 
 // Add Inline Styles
-$post_custom_css = esc_attr( get_field( 'post_custom_css' ) );
-$styles .= $post_custom_css;
-
 bolt_on_minify_css( $styles );
 
 $inline_style = 'inline-404-css';
