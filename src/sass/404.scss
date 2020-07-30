@@ -4,19 +4,21 @@
 # 404 Styles
 --------------------------------------------------------------*/
 #primary {
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+#main {
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 3rem;
 	padding-bottom: 3rem;
+	background-color: rgba($dark, .5);
+	box-shadow: 0 0 1em 0.15em rgba($dark, .5);
 }
 
 .error-404 {
 	text-align: center;
-}
-.site-content {
-	background-size: cover;
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
 }
 
 .error-404 {
@@ -31,8 +33,6 @@
 		max-width: 90rem;
 	}
 	&.not-found {
-		background-color: rgba($dark, .5);
-		box-shadow: 0 0 1em 0.15em rgba($dark, .5);
 		padding: 3rem;
 	}
 	.search {

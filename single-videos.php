@@ -57,12 +57,11 @@ get_header();
 		<!--   /Related Videos Section   --->
 
 		<?php
-
 		/*   Contact Section   */
 		echo get_contact_section();
 		/*   Contact Section   */
-	?>
-</main><!--   /#main   -->
+		?>
+	</main><!--   /#main   -->
 </div> <!--   /#primary   -->
 
 <?php

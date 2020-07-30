@@ -16,16 +16,15 @@ wp_enqueue_style( 'bolt-on-404-css' );
 
 $bg_banner_src = get_template_directory_uri() . '/assets/images/404-page-image.jpg';
 $styles .= bolt_on_add_inline_style(
-	'.site-content',
+	'#primary',
 	array(
 		'background-image' => 'url(' . $bg_banner_src . ')',
 	)
 );
 ?>
 
-<?php  ?>
-	<div class="sizeContent page-full-width container container-ext main-container">
-		<main class="content-area" id="primary">
+	<div id="primary" class="content-area">
+		<main class="site-main" id="main">
 
 			<section class="error-404 not-found">
 				<header class="page-header">
@@ -58,8 +57,8 @@ $styles .= bolt_on_add_inline_style(
 
 				</div><!-- .page-content -->
 			</section><!-- .error-404 -->
-		</main><!-- #primary -->
-	</div><!-- sizeContent -->
+		</main><!--   /#main   -->
+	</div> <!--   /#primary   -->
 <?php
 
 // Add Inline Styles
