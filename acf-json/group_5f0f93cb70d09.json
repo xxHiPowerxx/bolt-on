@@ -1,0 +1,70 @@
+{
+    "key": "group_5f0f93cb70d09",
+    "title": "Case Attributes",
+    "fields": [
+        {
+            "key": "field_5f0f93f61189b",
+            "label": "Case Result",
+            "name": "case_result",
+            "type": "text",
+            "instructions": "The Amount of Money the Case Settlement Resulted in.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5f0f949c1189c",
+            "label": "Case Practice Area",
+            "name": "case_practice_area",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "practice-areas"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": [
+                "featured_image"
+            ],
+            "min": "",
+            "max": 1,
+            "return_format": "object"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cases"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "Configure the Cases with these Attributes.",
+    "modified": 1596141477
+}

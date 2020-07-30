@@ -188,6 +188,11 @@ function bolt_on_assets() {
 add_action( 'wp_enqueue_scripts', 'bolt_on_assets' );
 
 /**
+ * Include ACF Functions
+ */
+require get_template_directory() . '/inc/acf-functions.php';
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';

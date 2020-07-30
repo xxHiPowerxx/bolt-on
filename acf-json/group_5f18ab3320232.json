@@ -1,0 +1,117 @@
+{
+    "key": "group_5f18ab3320232",
+    "title": "Video Attributes",
+    "fields": [
+        {
+            "key": "field_5f18ad44b9801",
+            "label": "Video Source",
+            "name": "video_source",
+            "type": "flexible_content",
+            "instructions": "Choose Whether Video is From <b>Media<\/b> or <b>External Source<\/b>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_5f18ad5e60694": {
+                    "key": "layout_5f18ad5e60694",
+                    "name": "media",
+                    "label": "Media",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5f18adecb9802",
+                            "label": "Video",
+                            "name": "video",
+                            "type": "file",
+                            "instructions": "Select Video From Media Uploads",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "library": "all",
+                            "min_size": "",
+                            "max_size": "",
+                            "mime_types": "mp4, mwv"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5f18aea6b9803": {
+                    "key": "layout_5f18aea6b9803",
+                    "name": "external_source",
+                    "label": "External Source",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5f18aebab9804",
+                            "label": "URL",
+                            "name": "url",
+                            "type": "url",
+                            "instructions": "Enter URL of External Video Source",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": ""
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Add Video Source",
+            "min": "",
+            "max": 1
+        },
+        {
+            "key": "field_5f1a1d5d3a6f7",
+            "label": "Video Description",
+            "name": "video_description",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "videos"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1596141497
+}
