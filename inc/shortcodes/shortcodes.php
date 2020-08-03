@@ -80,7 +80,7 @@ function get_contact_section( $atts = '' ) {
 	endif;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/contact-section.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-contact-section.php';
 	require_once( $file_path );
 
 	if ( $atts['contact_form'] ) :
@@ -100,7 +100,7 @@ function get_dynamic_post_menu( $atts = '' ) {
 	$atts = $atts === '' ? array() : $atts;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/dynamic-post-menu.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-dynamic-post-menu.php';
 	require_once( $file_path );
 
 	return component_dynamic_post_menu( $atts );
@@ -118,7 +118,7 @@ function get_dynamic_category_menu( $atts = '' ) {
 	$atts = $atts === '' ? array() : $atts;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/dynamic-category-menu.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-dynamic-category-menu.php';
 	require_once( $file_path );
 
 	return component_dynamic_category_menu( $atts );
@@ -136,7 +136,7 @@ function get_dynamic_archive_menu( $atts = '' ) {
 	$atts = $atts === '' ? array() : $atts;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/dynamic-archive-menu.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-dynamic-archive-menu.php';
 	require_once( $file_path );
 
 	return component_dynamic_archive_menu( $atts );
@@ -162,7 +162,7 @@ function get_dynamic_sidebar_nav( $atts = '' ) {
 	endif;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/dynamic-sidebar-nav.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-dynamic-sidebar-nav.php';
 	require_once( $file_path );
 
 	return component_dynamic_sidebar_nav( $type_of_nav );
@@ -182,7 +182,7 @@ function get_dynamic_post_menu_section( $atts = '' ) {
 	$atts = $atts === '' ? array() : $atts;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/dynamic-post-menu-section.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-dynamic-post-menu-section.php';
 	require_once( $file_path );
 
 	return component_dynamic_post_menu_section( $atts );
@@ -213,7 +213,7 @@ function get_sidebar_contact( $atts = '' ) {
 	endif;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/sidebar-contact.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-sidebar-contact.php';
 	require_once( $file_path );
 
 	if ( $atts['contact_form'] ) :
@@ -236,7 +236,7 @@ function get_video_archive( $atts = '' ) {
 	// 	null;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/video-archive.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-video-archive.php';
 	require_once( $file_path );
 
 	return component_video_archive( $atts );
@@ -253,7 +253,7 @@ function get_breadcrumbs( $atts = '' ) {
 	$atts = $atts === '' ? array() : $atts;
 
 	// Get Component Function.
-	$file_path = get_template_directory() . '/inc/components/breadcrumbs.php';
+	$file_path = get_template_directory() . '/template-parts/components/component-breadcrumbs.php';
 	require_once( $file_path );
 
 	return component_breadcrumbs();
