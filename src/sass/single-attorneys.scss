@@ -61,6 +61,11 @@
 
 /*   /Left Sidebar   */
 
+.attorney-attributes-title {
+	font-family: $font-fam-primary;
+	color: $secondary;
+}
+
 /*   Attorney Successes (cases)  */
 .attorney-successes-list {
   display: flex;
@@ -78,6 +83,9 @@
   margin: .75rem;
   display: flex;
   flex-direction: column;
+}
+.case-result {
+	color: $secondary;
 }
 .case-title {
 	&.theme-style-border {

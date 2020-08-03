@@ -42,7 +42,7 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 							<?php echo $attorney_pic; ?>
 						</div>
 						<div class="ctnr-btn-cta-archive-attorney ctnr-archive-attorney-name-title">
-							<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron" href="<?php echo $attorney_permalink; ?>">
+							<a class="anchor-btn-cta btn-cta-outer stroke-border" href="<?php echo $attorney_permalink; ?>">
 								<span class="btn-cta btn-cta-inner stroke-border-inner">
 									<span class="btn-cta-text stroke-border-lvl-three">
 										<div class="archive-attorney-name"><?php echo $attorney_full_name; ?></div>

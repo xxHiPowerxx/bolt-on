@@ -134,13 +134,17 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 
 				<?php if ( $attorney_bio ) : ?>
 					<section id="<?php echo $attorney_bio_id; ?>" class="attorney-attributes-section collapse show" data-parent="#attorney-attributes-sections">
-						<?php echo $attorney_bio; ?>
+						<h2 class="attorney-attributes-title">Biography</h2>
+						<div class="attorney-attributes-content">
+							<?php echo $attorney_bio; ?>
+						</div>
 					</section><!-- /#<?php echo $attorney_bio_id; ?> -->
 				<?php endif; // endif ( $attorney_bio ) : ?>
 
 				<?php if ( $attorney_successes ) : ?>
 					<section id="<?php echo $attorney_successes_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<div class="attorney-successes-list">
+						<h2 class="attorney-attributes-title">Featured Successes</h2>
+						<div class="attorney-attributes-content attorney-successes-list">
 							<?php
 							foreach ( $attorney_successes as $case ) :
 								$case_result        = esc_attr( $case->case_result );
@@ -148,7 +152,7 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 								?>
 								<div class="listed-success case">
 									<div class="case-result">
-										<h3><?php echo $case_result; ?><h3>
+										<h3><?php echo $case_result; ?></h3>
 									</div>
 									<div class="case-title theme-style-border">
 										<?php echo $case_title; ?>
@@ -161,99 +165,116 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 
 				<?php if ( have_rows( 'attorney_education_repeater' ) ) : ?>
 					<section id="<?php echo $attorney_education_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<ul class="attorney-education-list">
-							<?php
-							while ( have_rows( 'attorney_education_repeater' ) ) :
-								the_row();
-								$attorney_education = esc_html( get_sub_field( 'attorney_education' ) );
-								?>
-								<li class="listed-education"><?php echo $attorney_education; ?></li>
-							<?php endwhile; // endwhile ( have_rows( 'attorney_education_repeater' ) ) : ?>
-						</ul><!-- ./attorney-education-list -->
+						<h2 class="attorney-attributes-title">Education</h2>
+						<div class="attorney-attributes-content">
+							<ul class="attorney-education-list">
+								<?php
+								while ( have_rows( 'attorney_education_repeater' ) ) :
+									the_row();
+									$attorney_education = esc_html( get_sub_field( 'attorney_education' ) );
+									?>
+									<li class="listed-education"><?php echo $attorney_education; ?></li>
+								<?php endwhile; // endwhile ( have_rows( 'attorney_education_repeater' ) ) : ?>
+							</ul><!-- ./attorney-education-list -->
+						</div>
 					</section><!-- /#<?php echo $attorney_education_id; ?> -->
 				<?php endif; // endif ( have_rows( 'attorney_education_repeater' ) ) : ?>
 
 				<?php if ( have_rows( 'attorney_awards_repeater' ) ) : ?>
 					<section id="<?php echo $attorney_awards_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<ul class="attorney-awards-list">
-							<?php
-							while ( have_rows( 'attorney_awards_repeater' ) ) :
-								the_row();
-								$attorney_award = esc_html( get_sub_field( 'attorney_award' ) );
-								?>
-								<li class="listed-award"><?php echo $attorney_award; ?></li>
-							<?php endwhile; // endwhile ( have_rows( 'attorney_awards_repeater' ) ) : ?>
-						</ul><!-- ./attorney-awards-list -->
+						<h2 class="attorney-attributes-title">Awards</h2>
+						<div class="attorney-attributes-content">
+							<ul class="attorney-awards-list">
+								<?php
+								while ( have_rows( 'attorney_awards_repeater' ) ) :
+									the_row();
+									$attorney_award = esc_html( get_sub_field( 'attorney_award' ) );
+									?>
+									<li class="listed-award"><?php echo $attorney_award; ?></li>
+								<?php endwhile; // endwhile ( have_rows( 'attorney_awards_repeater' ) ) : ?>
+							</ul><!-- ./attorney-awards-list -->
+						</div>
 					</section><!-- /#<?php echo $attorney_awards_id; ?> -->
 				<?php endif; // endif ( have_rows( 'attorney_awards_repeater' ) ) : ?>
 
 				<?php if ( $attorney_professional_associations ) : ?>
 					<section id="<?php echo $attorney_professional_associations_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<?php echo $attorney_professional_associations; ?>
+						<h2 class="attorney-attributes-title">Professional Associations</h2>
+						<div class="attorney-attributes-content">
+							<?php echo $attorney_professional_associations; ?>
+						</div>
 					</section><!-- /#<?php echo $attorney_professional_associations_id; ?> -->
 				<?php endif; // endif ( $attorney_professional_associations ) : ?>
 
 				<?php if ( $attorney_speaking_engagements ) : ?>
 					<section id="<?php echo $attorney_speaking_engagements_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<?php echo $attorney_speaking_engagements; ?>
+						<h2 class="attorney-attributes-title">Speaking Engagements</h2>
+						<div class="attorney-attributes-content">
+							<?php echo $attorney_speaking_engagements; ?>
+						</div>
 					</section><!-- /#<?php echo $attorney_speaking_engagements_id; ?> -->
 				<?php endif; // endif ( $attorney_speaking_engagements ) : ?>
 
 				<?php if ( $attorney_videos ) : ?>
 					<section id="<?php echo $attorney_videos_id; ?>" class="attorney-attributes-section collapse" data-parent="#attorney-attributes-sections">
-						<?php
-						$get_posts_args      = array(
-							'post_type'      => 'videos',
-							'posts_per_page' => count( $attorney_videos ),
-							'post__in '      => $attorney_videos,
-						);
-						$posts_of_category   = new WP_Query( $get_posts_args );
-						if ( $posts_of_category->have_posts() ) :
-							?>
-							<div class="archive-list archive-video-list">
-								<?php
-								while ( $posts_of_category->have_posts() ) :
-									$posts_of_category->the_post();
-										get_template_part( 'template-parts/content-archive', get_post_type() );
-								endwhile;
-								wp_reset_query();
-								?>
-							</div><!-- /.archive-video-list -->
+						<h2 class="attorney-attributes-title">Featured Videos</h2>
+							<div class="attorney-attributes-content">
 							<?php
-							// If There are more posts than can be shown, 
-							// $post_of_category->max_num_pages will be greater than 0
-							// Note that $posts_of_category->max_num_pages is always > 0
-							// If the current post has been excluded from the Query.
-							$max_num_pages = $posts_of_category->max_num_pages;
-							if ( $max_num_pages ) :
-								//render a CTA btn.
-								$more_videos_link = get_field( 'more_videos_link' );
-								// var_dump($more_videos_link);
-								if( $more_videos_link ) :
-									$more_videos_link_url  = get_category_link( $more_videos_link );
-									$more_videos_link_name = $more_videos_link->name;
-								else :
-									$more_videos_link_url  = get_post_type_archive_link( 'videos' );
-									$more_videos_link_name = null;
-								endif;
-
+							$get_posts_args      = array(
+								'post_type'      => 'videos',
+								'posts_per_page' => count( $attorney_videos ),
+								'post__in '      => $attorney_videos,
+							);
+							$posts_of_category   = new WP_Query( $get_posts_args );
+							if ( $posts_of_category->have_posts() ) :
 								?>
-								<div class="ctnr-btn-view-more-videos">
-									<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron btn-view-more-videos" href="<?php echo $more_videos_link_url; ?>">
-										<span class="btn-cta btn-cta-inner stroke-border-inner">
-											<span class="btn-cta-text stroke-border-lvl-three">
-												<span>View All</span>&nbsp;
-												<span>Videos</span>
-												<?php if( $more_videos_link_name ) : ?>
-													&nbsp;<span>of</span>&nbsp;
-													<span><?php echo $more_videos_link_name; ?></span>
-												<?php endif;?>
-											</span>
-										</span>
-									</a>
-								</div>
+								<div class="archive-list archive-video-list">
+									<?php
+									while ( $posts_of_category->have_posts() ) :
+										$posts_of_category->the_post();
+											get_template_part( 'template-parts/content-archive', get_post_type() );
+									endwhile;
+									wp_reset_query();
+									?>
+								</div><!-- /.archive-video-list -->
 								<?php
-							endif; // endif ( $found_posts > $videos_to_show ) :
+								// If There are more posts than can be shown, 
+								// $post_of_category->max_num_pages will be greater than 0
+								// Note that $posts_of_category->max_num_pages is always > 0
+								// If the current post has been excluded from the Query.
+								$max_num_pages = $posts_of_category->max_num_pages;
+								if ( $max_num_pages ) :
+									//render a CTA btn.
+									$more_videos_link = get_field( 'more_videos_link' );
+									// var_dump($more_videos_link);
+									if( $more_videos_link ) :
+										$more_videos_link_url  = get_category_link( $more_videos_link );
+										$more_videos_link_name = $more_videos_link->name;
+									else :
+										$more_videos_link_url  = get_post_type_archive_link( 'videos' );
+										$more_videos_link_name = null;
+									endif;
+
+									?>
+									<div class="ctnr-btn-view-more-videos">
+										<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron btn-view-more-videos" href="<?php echo $more_videos_link_url; ?>">
+											<span class="btn-cta btn-cta-inner stroke-border-inner">
+												<span class="btn-cta-text stroke-border-lvl-three">
+													<span>View All</span>&nbsp;
+													<span>Videos</span>
+													<?php if( $more_videos_link_name ) : ?>
+														&nbsp;<span>of</span>&nbsp;
+														<span><?php echo $more_videos_link_name; ?></span>
+													<?php endif;?>
+												</span>
+											</span>
+										</a>
+									</div>
+									<?php
+								endif; // endif ( $found_posts > $videos_to_show ) :
+								?>
+							</div><!-- /.attorney-attributes-content -->
+							<?php
 						endif; // endif ( have_posts( $posts_of_category ) ) :
 						?>
 					</section><!-- /#<?php echo $attorney_videos_id; ?> -->

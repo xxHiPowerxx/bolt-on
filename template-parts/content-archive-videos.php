@@ -8,7 +8,7 @@
  */
 
 // Enqueue Styles
-$content_archive_video_css_path = '/assets/css/content-archive-video.css';
+$content_archive_video_css_path = '/assets/css/content-archive-videos.css';
 wp_register_style(
 	'content-archive-video-css',
 	get_theme_file_uri( $content_archive_video_css_path ),

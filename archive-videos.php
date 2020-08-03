@@ -14,6 +14,7 @@ wp_register_style(
 	get_theme_file_uri( $archive_videos_css_path ),
 	array(
 		'bolt-on-css',
+		'bolt-on-archive-css',
 	),
 	filemtime( get_template_directory() . $archive_videos_css_path ),
 	'all'
