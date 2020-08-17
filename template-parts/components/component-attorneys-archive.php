@@ -12,10 +12,10 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 	function get_attorneys_archive() {
 		ob_start();
 		$args = array(
-							'post_type'=>'attorneys',
-							'posts_per_page'   => -1,
-							'orderby' => 'menu_order',
-							'order' => 'ASC'
+							'post_type'      =>'attorneys',
+							'posts_per_page' => -1,
+							'orderby'        => 'menu_order',
+							'order'          => 'ASC'
 						);
 		$post_query = new WP_Query($args);
 		if ( $post_query->have_posts() ) :

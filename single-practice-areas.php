@@ -24,8 +24,8 @@ $styles = '';
 
 get_header();
 
-
-$bg_banner_src = get_the_post_thumbnail_url( null, 'full' );
+$default_banner = get_template_directory_uri() . '/assets/images/Banners/banner.jpg';
+$bg_banner_src  = get_the_post_thumbnail_url( null, 'full' ) ? : $default_banner;
 $styles .= bolt_on_add_inline_style(
 	'.bolt-on-banner:before',
 	array(

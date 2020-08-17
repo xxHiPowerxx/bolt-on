@@ -60,4 +60,7 @@
 }
 .ctnr-archive-attorney-name-title {
 	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0));
+	.btn-cta-text {
+		flex-direction: column;
+	}
 }

@@ -101,5 +101,15 @@
 }
 /*   /Attorney Successes (cases)  */
 
+/*   Attorneys Videos   */
+#attorney-videos {
+	.archive-list {
+		> .listed-archive {
+			max-width: 50%;
+		}
+	}
+} 
+/*   /Attorneys Videos   */
+
 /*   Attorneys Archive   */
 @import './import/_component-attorneys-archive';

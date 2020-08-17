@@ -17,6 +17,7 @@
     &:not([href="#"]) {
       #{$active} {
         background-color: $secondary;
+        box-shadow: 0 0.25rem 0.25rem rgba($black, 75%)
       }
     }
   }

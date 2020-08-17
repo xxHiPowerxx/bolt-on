@@ -34,6 +34,8 @@ function component_dynamic_post_menu( $args ) {
 		'posts_per_page' => -1,
 		'post_parent'    => $last_ancestor->ID,
 		'post_type'      => get_post_type(),
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC'
 	);
 	$imm_children        = get_children( $imm_children_args );
 
@@ -44,7 +46,9 @@ function component_dynamic_post_menu( $args ) {
 		<ul class="menu">
 			<?php
 			foreach ( $imm_children as $imm_child ) :
-				$post_title         = esc_attr( $imm_child->post_title );
+				$long_title  = esc_attr( $imm_child->post_title );
+				$short_title = esc_attr( $imm_child->short_title );
+				$post_title  = $short_title ? : $long_title;
 				// Check If Child is Current Post.
 				if ( $imm_child->ID === $post->ID ) :
 					$current_post_class = ' current-post';
@@ -57,16 +61,20 @@ function component_dynamic_post_menu( $args ) {
 					'posts_per_page' => -1,
 					'post_parent'    => $imm_child->ID,
 					'post_type'      => get_post_type(),
+					'orderby'        => 'menu_order',
+					'order'          => 'ASC'
 				);
 				$_imm_children = get_children( $_imm_children_args );
 				?>
 				<li class="menu-item<?php echo $current_post_class; ?>">
-					<a href="<?php echo $post_link; ?>" title="<?php echo $post_title; ?>"><?php echo $post_title; ?></a>
+					<a href="<?php echo $post_link; ?>" title="<?php echo $long_title; ?>"><?php echo $post_title; ?></a>
 					<?php if ( $_imm_children && $args['child_level'] > 0 ) : ?>
 						<ul class="sub-menu">
 							<?php
 							foreach ( $_imm_children as $_imm_child ) :
-								$_post_title         = esc_attr( $_imm_child->post_title );
+								$_long_title  = esc_attr( $_imm_child->post_title );
+								$_short_title = esc_attr( $_imm_child->short_title );
+								$_post_title  = $_short_title ? : $_long_title;
 								// Check If Child is Current Post.
 								if ( $_imm_child->ID === $post->ID ) :
 									$current_post_class = ' current-post';
@@ -79,16 +87,20 @@ function component_dynamic_post_menu( $args ) {
 									'posts_per_page' => -1,
 									'post_parent'    => $_imm_child->ID,
 									'post_type'      => get_post_type(),
+									'orderby'        => 'menu_order',
+									'order'          => 'ASC'
 								);
 								$__imm_children = get_children( $__imm_children_args );
 								?>
 								<li class="menu-item<?php echo $current_post_class; ?>">
-									<a href="<?php echo $_post_link; ?>" title="<?php echo $_post_title; ?>"><?php echo $_post_title; ?></a>
+									<a href="<?php echo $_post_link; ?>" title="<?php echo $_long_title; ?>"><?php echo $_post_title; ?></a>
 									<?php if ( $__imm_children && $args['child_level'] > 1 ) : ?>
 										<ul class="sub-menu">
 											<?php
 											foreach ( $__imm_children as $__imm_child ) :
-												$__post_title = esc_attr( $__imm_child->post_title );
+												$__long_title  = esc_attr( $__imm_child->post_title );
+												$__short_title = esc_attr( $__imm_child->short_title );
+												$__post_title  = $__short_title ? : $__long_title;
 												// Check If Child is Current Post.
 												if ( $_imm_child->ID === $post->ID ) :
 													$current_post_class = ' current-post';
@@ -99,7 +111,7 @@ function component_dynamic_post_menu( $args ) {
 												endif;
 												?>
 												<li class="menu-item<?php echo $current_post_class; ?>">
-													<a href="<?php echo $__post_link; ?>" title="<?php echo $__post_title; ?>"><?php echo $__post_title; ?></a>
+													<a href="<?php echo $__post_link; ?>" title="<?php echo $__long_title; ?>"><?php echo $__post_title; ?></a>
 												</li>
 											<?php endforeach; ?>
 										</ul>

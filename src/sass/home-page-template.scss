@@ -254,6 +254,13 @@
 .container-why-us-content {
 	padding-top: 6rem;
 }
+.ctnr-why-us-video {
+	display: flex;
+	align-items: center;
+	> * {
+		margin: 0;
+	}
+}
 $gradient-percentage: 40.4%;
 .why-us-content {
 	background-image: linear-gradient(

@@ -262,11 +262,9 @@ if ( ! function_exists( 'bolt_on_get_optimal_image_size' ) ) :
 			$actual_missing_dimension *
 			$calc_missing_dimension;
 
-		if ( $calc_min_provided_dimension < $provided_min_dimension ) :
-			$optimal_missing_dimension = $calc_missing_dimension /
-				$calc_min_provided_dimension *
-				$provided_min_dimension;
-		endif;
+		$optimal_missing_dimension = $calc_missing_dimension /
+			$calc_min_provided_dimension *
+			$provided_min_dimension;
 
 		$size_array[$provided_dimension_index] = $optimal_provided_dimension;
 		$size_array[$missing_dimension_index]  = $optimal_missing_dimension;
@@ -274,6 +272,34 @@ if ( ! function_exists( 'bolt_on_get_optimal_image_size' ) ) :
 		return $size_array;
 	}
 endif; // endif ( ! function_exists( 'bolt_on_get_optimal_image_size' ) ) :
+
+if ( ! function_exists( 'bolt_on_get_youtube_video_id' ) ) :
+	/**
+	 * Get Youtube ID from URL String.
+	 * 
+	 * @param string $page_vid_url - The Video URL
+	 * 
+	 * @return string Youtube Video ID.
+	 */
+	function bolt_on_get_youtube_video_id( $youtube_url ) {
+		$link     = $youtube_url;
+		$video_id = explode( "?v=", $link );
+		if ( ! isset( $video_id[1] ) ) :
+			$video_id = explode( "youtu.be/", $link );
+		endif;
+		$youtubeID = $video_id[1];
+		if ( empty( $video_id[1] ) ) :
+			$video_id = explode( "/v/", $link );
+		endif;
+		$video_id       = explode( "&", $video_id[1] );
+		$youtube_video_id = $video_id[0];
+		if ( $youtube_video_id ) :
+			return $youtube_video_id;
+		else :
+			return false;
+		endif;
+}
+endif; // endif ( ! function_exists( 'bolt_on_get_youtube_video_id' ) ) :
 
 if ( ! function_exists( 'bolt_on_get_video_thumbnail' ) ) :
 	/**
@@ -287,11 +313,10 @@ if ( ! function_exists( 'bolt_on_get_video_thumbnail' ) ) :
 		if ( ! $video_url ) :
 			return false;
 		else:
-			$oembed= new WP_oEmbed;
-			//As noted in the comments below, you can auto-detect the video provider with the following
-			$provider = $oembed->discover($video_url);
-			$video = $oembed->fetch($provider, $video_url, array('width' => 300, 'height' => 175));
-			return $video->thumbnail_url;
-		endif;
+
+		$youtube_video_id = bolt_on_get_youtube_video_id( $video_url );
+		$img = 'https://img.youtube.com/vi/' . $youtube_video_id . '/hqdefault.jpg';
+		return $img;
+	endif;
 }
 endif; // endif ( ! function_exists( 'bolt_on_get_video_thumbnail' ) ) :

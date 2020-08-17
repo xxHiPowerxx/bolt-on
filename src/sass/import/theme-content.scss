@@ -11,12 +11,14 @@
 	b {
 		margin-top: 0.5em;
 		+ p,
-		+ ul {
+		+ ul,
+		+ ol {
 			margin-top: 0;
 		}
 	}
 	p,
-	ul {
+	ul,
+	ol {
 		margin-top: 1.2em;
 		margin-bottom: 1.2em;
 	}
@@ -37,7 +39,8 @@
 				top: 0.85em;
 			}
 		}
-		ul {
+		ul,
+		ol {
 			margin: 0;
 			li {
 				&:before {
@@ -47,7 +50,8 @@
 		}
 	}
 	p,
-	ul {
+	ul,
+	ol {
 		font-size: 1.7rem;
 		line-height: 2;
 	}
@@ -56,6 +60,26 @@
 			margin-bottom: 0.6em;
 		}
 	}
+
+	/*   Wordpress Block Overrides   */
+	.wp-block-image {
+		figure {
+			margin-bottom: 1.5rem;
+		}
+		.alignleft {
+			margin-right: 1.5rem;
+		}
+		.alignright {
+			margin-right: 1.5rem;
+		}
+		figcaption {
+			font-size: 1.6rem;
+			text-align: center;
+			margin-top: .5em;
+			margin-bottom: .5em;
+		}
+	}
+	/*   Wordpress Block Overrides   */
 }
 
 .page-header {
@@ -84,6 +108,7 @@
 			&:before {
 				content: '';
 				width: 8rem;
+				min-width: 8rem;
 				height: 10rem;
 				background-image: url('../images/callout-1-icon.png');
 				background-size: contain;

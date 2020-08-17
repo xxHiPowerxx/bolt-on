@@ -2,6 +2,14 @@
 @import './import/common';
 @import './import/sidebar-menu';
 
+.entry-content {
+	h1 {
+		+ h2 {
+			margin-bottom: 3rem;
+		}
+	}
+}
+
 /*   Call To Action Section   */
 .practice-areas-call-to-action-section {
 	.theme-content {

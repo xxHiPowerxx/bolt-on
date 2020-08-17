@@ -17,7 +17,6 @@ function component_video_archive( $args = array() ) {
 	$videos_to_get = isset( $args['videos_to_get'] ) ?
 		$args['videos_to_get'] :
 		null;
-	
 	global $post;
 	$is_tax     = is_tax();
 	$is_archive = is_archive();
@@ -47,8 +46,9 @@ function component_video_archive( $args = array() ) {
 				'post_type'      => $post_type,
 				'posts_per_page' => $videos_to_show,
 				'video-category' => $video_category_slug,
-				'post__in '      => $videos_to_get,
+				'post__in'      => $videos_to_get,
 				'post__not_in'   => array( $excluded ),
+				'order'          => 'ASC',
 			);
 			$posts_of_category   = new WP_Query( $get_posts_args );
 

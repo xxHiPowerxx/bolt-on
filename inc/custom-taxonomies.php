@@ -48,7 +48,7 @@ function bolt_on_custom_taxonomies() {
 			'show_in_rest'       => true,
 			'rewrite'            => array(
 				'slug'       => 'videos',
-				'with_front' => true,
+				'with_front' => false,
 			),
 			// 'rewrite'           => false,
 		)

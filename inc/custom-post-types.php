@@ -103,7 +103,7 @@ function bolt_on_custom_post_types() {
 		'menu_icon'           => $menu_icon,
 		'rewrite'             => array(
 			'slug'       => $post_handle,
-			'with_front' => true,
+			'with_front' => false,
 		),
 	);
 	// Registering your Custom Post Type
@@ -311,7 +311,7 @@ function bolt_on_custom_post_types() {
 		'menu_icon'           => $menu_icon,
 		'rewrite'             => array(
 			'slug'       => $post_handle . '/%video-category%',
-			'with_front' => true,
+			'with_front' => false,
 		)
 	);
 	// Registering your Custom Post Type

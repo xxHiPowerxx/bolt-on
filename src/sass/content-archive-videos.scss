@@ -71,6 +71,7 @@
 $archive-list-margin: 1.5rem;
 .archive-list {
 	display: flex;
+	flex-wrap: wrap;
 	@include flexLayout( $archive-list-margin );
 }
 .listed-archive {

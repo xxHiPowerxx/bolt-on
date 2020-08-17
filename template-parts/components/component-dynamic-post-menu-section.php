@@ -30,7 +30,10 @@ function component_dynamic_post_menu_section( $args ) {
 		'child_level' => 0,
 	);
 	$dynamic_post_menu_array = get_dynamic_post_menu( $dynamic_post_menu_args );
-	if ( ! $dynamic_post_menu_array ) :
+	if (
+		isset( $dynamic_post_menu_array['markup'] ) &&
+		! $dynamic_post_menu_array['markup']
+	) :
 		return;
 	endif;
 	

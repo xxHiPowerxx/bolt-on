@@ -223,7 +223,7 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 							$get_posts_args      = array(
 								'post_type'      => 'videos',
 								'posts_per_page' => count( $attorney_videos ),
-								'post__in '      => $attorney_videos,
+								'post__in'       => $attorney_videos,
 							);
 							$posts_of_category   = new WP_Query( $get_posts_args );
 							if ( $posts_of_category->have_posts() ) :
