@@ -36,8 +36,15 @@ $full-stroke-width: 37.235rem;
 	&[class*='btn']:focus,
 	&.active {
 		color: $primary;
-		&.has-chevron:after {
-			transform: translate3d(0.3em, 0, 0);
+		&.has-chevron {
+			&:after {
+				transform: translate3d(0.3em, 0, 0);
+			}
+			&.absolute-chevron {
+				&:after {
+					transform: translate3d(0.3em, -50%, 0);
+				}
+			}
 		}
 		.stroke-border-inner,
 		.stroke-border-lvl-three {

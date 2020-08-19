@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
 	var headerHeight,
 		fixedHeader = false,
 		$body = $('body'),
+		$header = $('#masthead').first(),
 		transitionEnd =
 			'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 	var count = 0;
@@ -47,6 +48,18 @@ jQuery(document).ready(function($) {
 				}
 			);
 		});
+	}
+	function activateMobileMenu() {
+		var breakPoint = $body.attr("data-mobile-nav-breakpoint"),
+		windowWidth = window.innerWidth,
+		activeClassName = "bolt-on-mobile-menu-active",
+		inactiveClassName = "bolt-on-mobile-menu-inactive";
+
+		if (windowWidth < breakPoint) {
+			$body.addClass(activeClassName).removeClass(inactiveClassName);
+		} else {
+			$body.removeClass(activeClassName).addClass(inactiveClassName);
+		}
 	}
 	function sizeHeaderPad() {
 		$('.sizeHeaderPad').each(function() {
@@ -98,16 +111,24 @@ jQuery(document).ready(function($) {
 		}
 		return event;
 	}
+	function checkIfMouseIsOverHeader() {
+		$header.on('mouseover', function(){
+			this.mouseIsOver = true;
+		}).on('mouseout', function(){
+			this.mouseIsOver = false;
+		});
+	}
 	function mouseInHeaderArea() {
 		if (fixedHeader) {
 			document.onmousemove = handleMouseMove;
 			function handleMouseMove(event) {
-				var headerHeightFromTop = headerHeight + $('#masthead')[0].offsetTop;
+				// var headerHeightFromTop = headerHeight + $header[0].offsetTop;
+				var headerHeightFromTop = window.innerHeight * .10;
 				event = getMousePosition(event);
 				// Get Mouse Y Position relative to window and compare to Header Height.
-				if (fixedHeader && event.clientY <= headerHeightFromTop) {
+				if (fixedHeader && event.clientY <= headerHeightFromTop ) {
 					$body.addClass('mouseInHeaderArea');
-				} else {
+				} else if ($header[0].mouseIsOver === false) {
 					$body.removeClass('mouseInHeaderArea');
 				}
 				// Use event.pageX / event.pageY here
@@ -139,20 +160,37 @@ jQuery(document).ready(function($) {
 	}
 	function configureBleedSections() {
 		$('.bleeds-into-above-section').each(function() {
-			$(this).prev().addClass('below-section-bleeds-in').children().first().addClass('bleed-target');
+			$(this).prev().addClass('below-section-bleeds-in').children(':not(.ignore-bleed)').first().addClass('bleed-target');
 		});
 	}
+	function mobileMenuToggler() {
+		var activeClassName = 'mobile-primary-menu-shown';
+		$('#nav-primary-menu').on('shown.bs.collapse', function(e){
+			if ( $(e.target).is( $(this) ) ) {
+				$body.addClass(activeClassName);
+			}
+		}).on('hide.bs.collapse', function (e){
+			if ( $(e.target).is( $(this) ) ) {
+				$body.removeClass(activeClassName);
+			}
+		});
+	}
+
 	function readyFuncs() {
 		collapseOnHover();
+		activateMobileMenu();
 		sizeHeaderPad();
 		scrolledPastHeader();
 		bleedIntoHeader();
 		initSlick();
+		checkIfMouseIsOverHeader();
 		mouseInHeaderArea();
 		preventExpandedCollapse();
 		configureBleedSections();
+		mobileMenuToggler();
 	}
 	function resizeFuncs() {
+		activateMobileMenu();
 		sizeHeaderPad();
 	}
 	function scrollFuncs() {

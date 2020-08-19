@@ -49,12 +49,36 @@ if ( ! function_exists( 'bolt_on_setup' ) ) :
 		add_image_size( 'archive-thumbnail', 464, 261, array( 'center', 'center' ) );
 
 
-		// This theme uses wp_nav_menu() in two locations.
-		// primary and footer-menu.
+		// This theme uses wp_nav_menu() in three locations.
+		// primary, mobile, and footer-menu.
 		register_nav_menus( array(
 			'primary-menu-location' => esc_html__( 'Primary Menu Location', 'bolt-on' ),
+			'mobile-menu-location' => esc_html__( 'Mobile Menu Location', 'bolt-on' ),
 			'footer-menu-location' => esc_html__( 'Footer Menu Location', 'bolt-on' ),
 		) );
+
+		// /**
+		//  * Limit the Number of Items we can place in the Mobile Menu.
+		//  */
+		// function limit_mobile_menu_items($items, $args) {
+		// 		// want our Mobile Menu to have MAX of 3 items
+		// 		if ( $args->theme_location == 'mobile-menu-location' ) {
+		// 				$toplinks = 0;
+		// 				foreach ( $items as $k => $v ) {
+		// 						if ( $v->menu_item_parent == 0 ) {
+		// 								// count how many top-level links we have so far...
+		// 								$toplinks++;
+		// 						}
+		// 						// if we've passed our max # ...
+		// 						if ( $toplinks > 3 ) {
+		// 								unset($items[$k]);
+		// 						}
+		// 				}
+		// 		}
+		// 		return $items;
+		// }
+		// add_filter( 'wp_nav_menu_objects', 'limit_mobile_menu_items', 10, 2 );
+
 
 		/*
 		 * Switch default core markup for search form, comment form, and comments
@@ -245,6 +269,11 @@ require get_template_directory() . '/inc/shortcodes/shortcodes.php';
 require get_template_directory() . '/inc/archive-excerpt.php';
 
 /**
+ * Inline Styles.
+ */
+require get_template_directory() . '/inc/inline-styles.php';
+
+/**
  * Bootstrap pagination.
  */
 require get_template_directory() . '/inc/bootstrap-pagination.php';
@@ -395,3 +424,8 @@ function bolt_on_set_default_video_terms( $post_id, $post ) {
 	endif;
 }
 add_action( 'save_post', 'bolt_on_set_default_video_terms', 100, 2 );
+
+/**
+ * Store mobile_nav_breakpoint in GLOBAL variable.
+ */
+$GLOBALS['mobile_nav_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );

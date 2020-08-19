@@ -28,12 +28,17 @@ $btn-stroke-full-width: 100%;
 	position: relative;
 	text-align: center;
 	cursor: pointer;
-	padding: 0.75em 2em;
+	padding: 0.75em 1em;
+	@media (min-width: $vp_sm) {
+		padding-left: 2em;
+		padding-right: 2em;
+	}
 	font-size: 1.8rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	line-height: 1;
 	color: $secondary;
+	border: 0;
 	&.stroke-border {
 		&:before {
 			border-width: $btn-stroke-width;
@@ -55,6 +60,10 @@ $btn-stroke-full-width: 100%;
 		-webkit-appearance: initial;
 		background-color: transparent;
 		border: none;
+	}
+	.fa-chevron-left {
+		position: absolute;
+		left: .5em;
 	}
 }
 .btn-cta-inner {

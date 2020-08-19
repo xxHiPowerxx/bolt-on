@@ -30,8 +30,10 @@
 	else :
 		$body_class = 'no-post';
 	endif;
+	$mobile_nav_breakpoint = esc_attr( $GLOBALS['mobile_nav_breakpoint'] );
+	$mobile_nav_breakpoint_attr = 'data-mobile-nav-breakpoint="' . $mobile_nav_breakpoint . '"';
 ?>
-<body <?php body_class('fixed-header hide-header' . ' ' . $body_class); ?>>
+<body <?php body_class('fixed-header hide-header' . ' ' . $body_class); ?> <?php echo $mobile_nav_breakpoint_attr; ?>>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'bolt-on' ); ?></a>
 

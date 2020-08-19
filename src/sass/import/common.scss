@@ -90,11 +90,13 @@ a[href="#"] {
 		@include font-awesome-font;
 	}
 	&.absolute-chevron {
-		position: absolute;
-		margin-left: 0;
-		right: 0;
-		top: 50%;
-		transform: translate3d(0, -50%, 0);
+		&:after {
+			position: absolute;
+			margin-left: 0;
+			right: 0;
+			top: 50%;
+			transform: translate3d(0, -50%, 0);
+		}
 	}
 }
 /*   /Has Chevron   */

@@ -112,6 +112,7 @@ input[type='search'] {
 	display: inline-block;
 }
 .custom-logo {
+	max-width: 32.6rem;
 	svg {
 		> :nth-child(-n + 2) {
 			@at-root #{$trans-header} & {

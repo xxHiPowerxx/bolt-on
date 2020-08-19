@@ -9,11 +9,11 @@
 /**
  * Year shortcode.
  */
-function get_archives_func() {
-	$archives = date( 'Y' );
-	return $archives;
+function get_year_func() {
+	$year = date( 'Y' );
+	return $year;
 }
-add_shortcode( 'archives', 'get_archives_func' );
+add_shortcode( 'year', 'get_year_func' );
 
 /**
  * Recent Posts shortcode.

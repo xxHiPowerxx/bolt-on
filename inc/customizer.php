@@ -29,6 +29,16 @@ function bolt_on_customize_register( $wp_customize ) {
 add_action( 'customize_register', 'bolt_on_customize_register' );
 
 /**
+ * New Fields.
+ */
+require get_template_directory() . '/inc/customizer/new-fields.php';
+
+/**
+ * Header Options.
+ */
+require get_template_directory() . '/inc/customizer/header-options.php';
+
+/**
  * Render the site title for the selective refresh partial.
  *
  * @return void
@@ -50,93 +60,17 @@ function bolt_on_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function bolt_on_customize_preview_js() {
-	wp_enqueue_script( 'bolt-on-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20151215', true );
+	$bolt_on_customizer_path = '/assets/js/customizer.js';
+	wp_enqueue_script( 'bolt-on-customizer', get_theme_file_uri( $bolt_on_customizer_path ), array( 'customize-preview' ), filemtime( get_template_directory() . $bolt_on_customizer_path ), true );
+
+	// Send theme Directory to customizer.js.
+	wp_localize_script(
+		'bolt-on-customizer',
+		'wpScriptVars',
+		array(
+			'themeDirectory' => get_template_directory_uri(),
+		),
+		true
+	);
 }
 add_action( 'customize_preview_init', 'bolt_on_customize_preview_js' );
-
-
-/**
- * Add field to accept path for SVG image instead of png image.
- */
-function bolt_on_customize_standard_header_register( $wp_customize ) {
-	
-	// Logo SVG Path Relative or Absolute.
-	$wp_customize->add_setting(
-		'logo_svg_path_radio',
-		array(
-			'default'           => 'relative',
-			'transport'         => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'logo_svg_path_radio',
-			array(
-				'priority'    => 9,
-				'label'       => __( 'Logo SVG Path Absolute or Relative?', 'bolt-on' ),
-				'section'     => 'title_tagline',
-				'settings'    => 'logo_svg_path_radio',
-				'description' => __( 'Select Whether Logo SVG path is relative to theme directory or absolute', 'bolt-on' ),
-				'type'        => 'radio',
-				'choices' => array(
-					'relative' => __( 'example: /images/svg/logo.svg' ),
-					'absolute'  => __( 'example: https://somesite.com/images/logo.svg' ),
-				),
-			)
-		)
-	);
-	$wp_customize->get_setting( 'logo_svg_path_radio' )->transport = 'postMessage';
-
-	// Logo SVG Path.
-	$wp_customize->add_setting(
-		'logo_svg_path',
-		array(
-			'default'           => null,
-			'transport'         => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'logo_svg_path',
-			array(
-				'priority'    => 9,
-				'label'       => __( 'Logo SVG Path', 'bolt-on' ),
-				'section'     => 'title_tagline',
-				'settings'    => 'logo_svg_path',
-				'description' => __( 'Input the Logo SVG Path', 'bolt-on' ),
-				'type'        => 'text',
-			)
-		)
-	);
-	$wp_customize->get_setting( 'logo_svg_path' )->transport = 'postMessage';
-
-	// Site Phone Number.
-	$wp_customize->add_setting(
-		'site_phone_number',
-		array(
-			'default'           => null,
-			'transport'         => 'postMessage',
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Control(
-			$wp_customize,
-			'site_phone_number',
-			array(
-				'priority'    => 12,
-				'label'       => __( 'Site Phone Number', 'bolt-on' ),
-				'section'     => 'title_tagline',
-				'settings'    => 'site_phone_number',
-				'description' => __( 'The Site Phone Number Will Be displayed in multple areas', 'bolt-on' ),
-				'type'        => 'text',
-			)
-		)
-	);
-	$wp_customize->get_setting( 'site_phone_number' )->transport = 'postMessage';
-}
-add_action( 'customize_register', 'bolt_on_customize_standard_header_register' );

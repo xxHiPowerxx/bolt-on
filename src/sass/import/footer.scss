@@ -31,12 +31,31 @@
 	}
 	.offices-list {
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
+		@media (min-width: $vp_xxs) {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
 		margin-bottom: -6rem;
 	}
 	.listed-office {
-		flex: 1 1 33.33%;
-		margin-bottom: 6rem;
+		flex: 1 1 100%;
+		@media (min-width: $vp_xxs) {
+			flex-basis: 50%;
+		}
+		@media (min-width: $vp_lg) {
+			flex-basis: 33.33%;
+		}
+		@media (min-width: $vp_xl) {
+			margin-bottom: 6rem;
+		}
+		margin-bottom: 3rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		@media (min-width: $vp_sm) {
+			padding-left: 0;
+			padding-right: 0;
+		}
 	}
 	.office-title {
 		font-family: $font-fam-primary;
@@ -59,6 +78,9 @@
 	padding-top: 6rem;
 	padding-bottom: 6rem;
 }
+.footer-logo-social {
+  max-width: 32.6rem;
+}
 .anchor-social-icon {
 	.social-icon {
 		width: 1em;
@@ -66,11 +88,23 @@
 	}
 }
 .container-footer-main {
+	flex-direction: column;
+	align-items: center;
+	@media (min-width: $vp_m) {
+		flex-direction: row;
+		align-items: initial;
+	}
 	> :first-child {
-		margin-right: 6rem;
+		margin-bottom: 6rem;
+		@media (min-width: $vp_m) {
+			margin-right: 6rem;
+			margin-bottom: 0;
+		}
 	}
 	> :last-child {
-		margin-left: 6rem;
+		@media (min-width: $vp_m) {
+			margin-left: 6rem;
+		}
 		flex: 1;
 	}
 }
