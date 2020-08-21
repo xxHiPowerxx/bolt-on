@@ -1,9 +1,12 @@
+@import './import/variables';
 @import './import/contact-form';
 
 /*   Contact Form   */
 .ctnr-contact-form {
-	padding-left: 3rem;
-	padding-right: 3rem;
+	padding: 1.5rem;
+	@media (min-width: $vp_lg) {
+		padding: 3rem;
+	}
 	.btn-cta-outer {
 		width: 100%;
 	}

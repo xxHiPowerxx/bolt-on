@@ -1,14 +1,6 @@
 @import './import/variables';
 
 /*   Contact Section   */
-.ctnr-contact-form {
-	@media (min-width: $vp_lg) {
-		padding-left: 6rem;
-		padding-right: 6rem;
-	}
-	min-width: 50rem;
-	max-width: 100%;
-}
 .contact-section {
 	background-image: url('../images/bg-w.png');
 	background-repeat: no-repeat;
@@ -21,6 +13,14 @@
 	@media (min-width: $vp_lg) {
 		padding-top: 0;
 		padding-bottom: 0;
+	}
+	.ctnr-contact-form {
+		@media (min-width: $vp_lg) {
+			padding-left: 6rem;
+			padding-right: 6rem;
+		}
+		min-width: 50rem;
+		max-width: 100%;
 	}
 }
 

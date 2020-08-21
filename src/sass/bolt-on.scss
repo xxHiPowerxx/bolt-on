@@ -116,16 +116,23 @@ strong {
 .pad-bottom {
 	padding-bottom: 12rem;
 }
-.container,
-.container-xxl,
-.container-xl,
-.container-lg,
-.container-md,
-.container-sm {
-	&.container-ext {
-		@media (min-width: 1660px) {
+@media (min-width: $vp_xl) {
+	.container,
+	.container-xxl,
+	.container-xl,
+	.container-lg,
+	.container-md,
+	.container-sm {
+		&.container-ext {
 			max-width: 160rem;
 		}
+	}
+	.d-xxl-block {
+		display: block !important;
+	}
+	.col-xxl-3 {
+		flex: 0 0 25%;
+		max-width: 25%;
 	}
 }
 .pad-thirty {

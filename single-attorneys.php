@@ -24,7 +24,7 @@ wp_enqueue_style( $handle );
 
 get_header();
 ?>
-<div class="container container-ext main-container">
+<div class="container-fluid container-xl container-ext main-container">
 	<?php
 	while ( have_posts() ) :
 		the_post();
@@ -35,5 +35,9 @@ get_header();
 <?php
 // Get Attorney Archive Component.
 require_once get_template_directory() . '/template-parts/components/component-attorneys-archive.php';
+
+/*   Contact Section   */
+echo get_contact_section();
+/*   /Contact Section   */
 
 get_footer();

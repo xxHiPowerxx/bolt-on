@@ -65,7 +65,7 @@ endif; // endif ( ! function_exists( 'get_attorneys_archive' ) ) :
 ?>
 
 <section id="component-attorneys-archive" class="bolt-on-component theme-content">
-	<div class="left-side pad-top pad-bottom">
+	<div class="left-side">
 		<div class="left-side-inner">
 			<header class="section-header theme-header">
 				<div class="theme-heading stroke-border">
@@ -88,11 +88,11 @@ endif; // endif ( ! function_exists( 'get_attorneys_archive' ) ) :
 			</div>
 		</div>
 	</div><!-- ./left-side -->
-	<div class="right-side pad-bottom">
+	<div class="right-side">
 		<div
 			id="attorneys-archive-slider"
 			class="slickSlider"
-			data-slick='{"dots": false,"arrows": true,"infinite": true,"autoplay": true,"autoplaySpeed": 5000,"slidesToShow": 2,"speed": 350,"cssEase": "cubic-bezier(0.22, 0.61, 0.36, 1)"}'
+			data-slick='{"dots": false,"arrows": true,"infinite": true,"autoplay": true,"autoplaySpeed": 5000,"slidesToShow": 2,"speed": 350,"cssEase": "cubic-bezier(0.22, 0.61, 0.36, 1)","responsive": [{"breakpoint": 576,"settings": {"slidesToShow": 1}}]}'
 		>
 			<?php echo get_attorneys_archive(); ?>
 		</div>

@@ -88,6 +88,34 @@
 	}
 }
 @import './import/attorneys-archive-img';
+.ctnr-archive-attorney-img {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	align-items: flex-end;
+	height: 100%;
+	left: 0;
+	right: 0;
+	@media (min-width: 1100px) {
+		height: auto;
+	}
+	max-height: 50vh;
+	@media (min-width: $vp_m) {
+		max-height: none;
+	}
+	@at-root .ctnr-image-swap-img:first-child & {
+		position: relative;
+	}
+	> img {
+		// max-height: 50rem;
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		max-height: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
 
 .ctnr-archive-attorney-name-title {
   display: inline-block;

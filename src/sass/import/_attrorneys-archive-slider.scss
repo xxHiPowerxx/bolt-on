@@ -2,10 +2,14 @@
 	background-image: url(../images/attorneys-bg.jpg);
 	background-size: cover;
 	background-position: 50% 50%;
-	min-height: 85.25vh;
+	min-height: 71.25vh;
 	display: flex;
 	align-items: flex-end;
 	margin-bottom: 5rem;
+	.slick-track {
+		display: flex;
+		align-items: flex-end;
+	}
 	/*   Slick Nav Overrides  */
 	.slick-arrow {
 		bottom: calc(-1em - 1.5rem);
@@ -34,7 +38,10 @@
 		}
 	}
 	.slick-prev {
-		left: 0;
+		left: 3rem;
+		@media (min-width: 1400px) {
+			left: 0;
+		}
 		&:before {
 			content: '\f053';
 			left: 0;
@@ -42,7 +49,10 @@
 		}
 	}
 	.slick-next {
-		right: 0;
+		right: 3rem;
+		@media (min-width: 1400px) {
+			right: 0;
+		}
 		&:before {
 			content: '\f054';
 			right: 0;
@@ -51,11 +61,38 @@
 		}
 	}
 	/*   /Slick Nav Overrides   */
+	.anchor-btn-cta {
+		#{$active} {
+			background-color: rgba(0, 0, 0, 0.85);
+		}
+	}
 }
 @import './attorneys-archive-img';
 .ctnr-archive-attorney-img {
 	> img {
-		max-height: 50rem;
+		height: auto;
+		max-height: none;
+		@media (min-width: $vp_sm) {
+			max-height: 38rem;
+		}
+		position: static;
+		left: initial;
+		transform: none;
+		max-width: 100%;
+		@media (min-width: $vp_sm) {
+			height: 50rem;
+			max-width: auto;
+			position: relative;
+			left: 50%;
+			transform: translateX(-50%);
+		}
+		@media (min-width: 1400px) {
+			height: auto;
+			max-height: 50rem;
+			position: static;
+			left: initial;
+			transform: none;
+		}
 	}
 }
 .ctnr-archive-attorney-name-title {

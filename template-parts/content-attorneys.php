@@ -31,9 +31,9 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="row main-row">
-		<aside id="attorney-sidebar" class="left-sidebar col-3 pad-bottom">
+		<aside id="attorney-sidebar" class="left-sidebar col-xxl-3 col-lg-4 col-12">
 			<?php the_post_thumbnail( array( 370, null ), array( 'class' => 'card-style' ) ); ?>
-			<nav class="attorney-attributes-nav sidebar-nav">
+			<nav class="attorney-attributes-nav sidebar-nav card-style">
 
 				<?php
 				if ( $attorney_bio ) :
@@ -92,8 +92,8 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 			echo get_sidebar_contact($contact_form_atts);
 			?>
 		</aside>
-		<div class="col-1"></div>
-		<main class="site-main col-8 theme-content pad-bottom">
+		<div class="col-1 d-xxl-block d-none"></div>
+		<main class="site-main col-lg-8 col-12 theme-content pad-bottom">
 			<?php if ( $attorney_full_name || $attorney_title ) : ?>
 				<header class="entry-header">
 					<?php if ( $attorney_full_name ) : ?>
@@ -113,9 +113,18 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 					$last = end($attorney_practice_areas);
 					foreach ( $attorney_practice_areas as $key=>$attorney_practice_area ) :
 						$practice_area_link  = get_permalink( $attorney_practice_area );
-						$practice_area_title = get_the_title( $attorney_practice_area );
+						$long_title          = get_the_title( $attorney_practice_area );
+						$short_title         = esc_attr( get_field( 'short_title', $attorney_practice_area ) );
+						if ( $short_title ) :
+							$practice_area_title      = $short_title;
+							$practice_area_title_attr = ' title="' . $long_title . '"';
+						else:
+							$practice_area_title      = $long_title;
+							$practice_area_title_attr = null;
+						endif;
+
 						?>
-						<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>"><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
+						<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>" <?php echo $practice_area_title_attr; ?>><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
 						<?php
 						// Seperate Each Anchor tag with comma if not last.
 						if ( $last !== $attorney_practice_area ) :
