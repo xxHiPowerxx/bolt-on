@@ -11,6 +11,12 @@
 .site-main {
 	padding-top: 18rem;
 }
+.entry-header {
+	.attorney-title {
+		margin-top: .5em;
+		font-weight: 400;
+	}
+}
 .entry-title {
 	&.attorney-name {
 		text-transform: uppercase;

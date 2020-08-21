@@ -1,17 +1,36 @@
 @import './import/variables';
 
 .archive-list {
-	align-items: stretch;
+	@media (min-width: $vp_m) {
+		align-items: stretch;
+	}
 }
-$archive-list-margin: 3rem;
-.blog-archive-section{
+.blog-archive-section {
+	.section-title {
+		text-align: center;
+		@media (min-width: $vp_m) {
+			text-align: left;
+		}
+	}
 	.archive-list {
+		$archive-list-margin: .75rem;
 		@include flexLayout( $archive-list-margin );
-		justify-content: space-between;
+		@media (min-width: $vp_xl) {
+			$archive-list-margin: 3rem;
+			@include flexLayout( $archive-list-margin );
+		}
 		> * {
 			max-width: 46.4rem;
-			@at-root .blog-archive-section & {
-				width: 33%;
+			width: 100%;
+		}
+		flex-direction: column;
+		align-items: center;
+		@media (min-width: $vp_m) {
+			align-items: stretch;
+			flex-direction: row;
+			justify-content: space-between;
+			> * {
+				width: 33.333%;
 			}
 		}
 	}
@@ -82,4 +101,5 @@ $archive-list-margin: 3rem;
 
 .ctnr-view-all-posts-btn {
 	text-align: center;
+	margin-top: 3rem;
 }

@@ -9,16 +9,36 @@
 	.attorneys-list {
 		display: flex;
 		flex-wrap: wrap;
+		flex: 1 0 60rem;
+		padding-bottom: 0;
+		max-height: 50vh;
+		overflow-y: auto;
+		margin-bottom: 3rem;
+		overflow-x: hidden;
+		max-width: 100%;
+		@media (min-width: $vp_m) {
+			padding-bottom: 6rem;
+			margin-bottom: 0;
+		}
+		@media (min-width: $vp_sm) {
+			max-width: 60rem;
+			max-height: none;
+		}
 		font-size: 2.4rem;
-		padding-bottom: 6rem;
-		flex: 1 1 30%;
+		@media (max-width: 650px) and (min-width: $vp_xs) {
+			font-size: 2.2rem;
+		}
 	}
 	.listed-attorney {
-		flex: 1 0 50%;
+		width: 100%;
+		@media (min-width: 475px) {
+			width: 50%;
+		}
 		display: flex;
 		align-items: center;
 		.archive-attorney-name {
 			color: $dark;
+			white-space: nowrap;
 		}
 	}
 }
@@ -32,14 +52,23 @@
 	background-position: 50% 50%;
 }
 .container-attorneys-archive-image-swap-section {
-	padding-right: 0;
+	@media (min-width: $vp_m) {
+		padding-right: 0;
+	}
 	padding-bottom: 0;
 }
 .image-swap {
 	display: flex;
+	flex-wrap: wrap;
+	@media (min-width: $vp_m) {
+		flex-wrap: nowrap;
+	}
 	.image-swap-imgs {
 		// flex: 1 0 58.4rem;
-		flex: 1 0 63.4rem;
+		width: 100%;
+		@media (min-width: $vp_m){
+			width: 63.4rem;
+		}
 		position: relative;
 	}
 }
@@ -47,6 +76,8 @@
 	position: relative;
 	.ctnr-image-swap-img {
 		position: absolute;
+		width: 100%;
+		height: 100%;
 		left: 50%;
 		transform: translate3d(-50%, 0, 0);
 		bottom: 0;

@@ -20,6 +20,8 @@ html {
 body {
 	font-size: 100%;
 	color: $dark;
+	max-width: 100%;
+	overflow-x: hidden;
 }
 body,
 .font-fam-primary,
@@ -114,7 +116,12 @@ strong {
 .pad-bottom {
 	padding-bottom: 12rem;
 }
-.container {
+.container,
+.container-xxl,
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm {
 	&.container-ext {
 		@media (min-width: 1660px) {
 			max-width: 160rem;
@@ -128,7 +135,15 @@ strong {
 	padding: 6rem;
 }
 .pad-onetwenty {
-	padding: 12rem;
+	padding: 12rem 3rem;
+	@media(min-width: $vp_sm) {
+		padding-left: 6rem;
+		padding-right: 6rem;
+	}
+	@media(min-width: $vp_lg) {
+		padding-left: 12rem;
+		padding-right: 12rem;
+	}
 }
 .input-field {
 	background-color: transparent;

@@ -24,11 +24,36 @@ a[href="#"] {
 }
 
 /*   Fraction Wrap Feature   */
+$pad-val: 6rem;
 .fraction-wrap {
 	display: flex;
+	&.stack-md {
+		flex-wrap: wrap;
+		.one-half {
+			width: 100%;
+			&:first-child {
+				padding-right: 0;
+				margin-bottom: 6rem;
+			}
+			&:last-child {
+				padding-left: 0;
+			}
+			padding-right: 0;
+			padding-left: 0;
+			@media (min-width: $vp_m) {
+				width: 50%;
+				&:first-child {
+					padding-right: $pad-val;
+					margin-bottom: 0;
+				}
+				&:last-child {
+					padding-left: $pad-val;
+				}
+			}
+		}
+	}
 	.one-half {
 		width: 50%;
-		$pad-val: 6rem;
 		&:first-child {
 			padding-right: $pad-val;
 		}

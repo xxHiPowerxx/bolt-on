@@ -28,9 +28,9 @@ function component_contact_section( $contact_form = null ) {
 	ob_start();
 	?>
 	<!--   Contact Section   --->
-	<section class="contact-section pad-top pad-bottom">
-		<div class="container container-ext container-contact">
-			<div class="ctnr-contact-form">
+	<section class="contact-section">
+		<div class="container-fluid container-xxl container-ext container-contact">
+			<div class="ctnr-contact-form pad-onetwenty">
 				<header class="section-header ctnr-section-title">
 					<h2 class="section-title bolt-on-h1">Take The Next Step</h2>
 					<h3 class="section-subtitle bolt-on-h2">Schedule Your Free Consultation Today</h3>
@@ -42,9 +42,9 @@ function component_contact_section( $contact_form = null ) {
 				</div>
 			</div><!-- ./ctnr-contact-form -->
 			<div class="ctnr-contact-info">
-				<div class="contact-info-inner">
+				<div class="contact-info-inner pad-onetwenty">
 					<header class="section-header ctnr-section-title">
-						<h2 class="section-title bolt-on-h1">McCune Wright Arevalo, LLP</h2>
+						<h2 class="section-title bolt-on-h1 nowrap-parent"><span>McCune Wright</span> <span>Arevalo, LLP</span></h2>
 						<a class="phone-number" href="tel:(909) 345-8110">(909) 345-8110</a>
 					</header>
 					<div class="offices-list">

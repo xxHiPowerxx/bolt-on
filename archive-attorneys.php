@@ -92,7 +92,7 @@ get_header();
 		?>
 		<!--   Attorneys Archive Image Swap Section   --->
 		<section id="attorneys-archive-image-swap-section">
-			<div class="container container-ext pad-onetwenty container-attorneys-archive-image-swap-section">
+			<div class="container-fluid container-xxl container-ext pad-onetwenty container-attorneys-archive-image-swap-section">
 				<header class="section-header theme-header">
 					<div class="theme-heading stroke-border">
 						<div class="theme-heading-outer stroke-border-inner">
@@ -100,11 +100,9 @@ get_header();
 								<h2 class="theme-heading-title section-title bolt-on-h1">
 									Our Attorneys
 								</h2>
-								<h3 class="theme-heading-subtitle section-subtitle bolt-on-h2">
-									<span>Experience.</span>
-									<span>Recognition.</span>
-									<span>Service.</span>
-									<span>Reputation.</span>
+								<h3 class="theme-heading-subtitle section-subtitle bolt-on-h2 nowrap-parent">
+									<span>Experience. Recognition.</span>
+									<span>Service. Reputation.</span>
 								</h3>
 							</div>
 						</div>
