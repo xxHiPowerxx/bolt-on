@@ -204,6 +204,12 @@ $bleed-unit: 19vh;
 				margin-top: -$bleed-unit;
 			}
 		}
+		&.container-fluid.container-xxl {
+			margin-top: 0;
+			@media (min-width: $vp_xl) {
+				margin-top: -$bleed-unit;
+			}
+		}
 		position: relative;
 	}
 }

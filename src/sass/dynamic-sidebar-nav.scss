@@ -3,22 +3,38 @@
 @import './import/sidebar-menu';
 
 .sidebar-heading {
-  margin-bottom: 3rem;
-  a {
-    display: block;
-    text-align: center;
-    padding: 0.5em;
-    background-color: $primary-dark;
-    color: $white;
-    text-transform: uppercase;
-    font-size: 3.2rem;
-    text-decoration: none;
-    @include smoothest-transition;
-    &:not([href="#"]) {
-      #{$active} {
-        background-color: $secondary;
-        box-shadow: 0 0.25rem 0.25rem rgba($black, 75%)
-      }
-    }
-  }
+	margin-bottom: 3rem;
+	a {
+		display: block;
+		text-align: center;
+		padding: 0.5em;
+		background-color: $primary-dark;
+		color: $white;
+		text-transform: uppercase;
+		font-size: 3.2rem;
+		text-decoration: none;
+		@include smoothest-transition;
+		&:not([href="#"]) {
+			#{$active} {
+				background-color: $secondary;
+				box-shadow: 0 0.25rem 0.25rem rgba($black, 75%)
+			}
+		}
+		&[aria-expanded] {
+			cursor: pointer;
+			position: relative;
+			&:after {
+				content: '\f078';
+				@include font-awesome-font;
+				@include smoothest-transition;
+				margin-left: .5em;
+				float: right;
+			}
+		}
+		&[aria-expanded="true"] {
+			&:after {
+				transform: translateZ(0) scaleY(-1);
+			}
+		}
+	}
 }

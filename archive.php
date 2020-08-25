@@ -33,15 +33,15 @@ wp_enqueue_style( 'bolt-on-archive-css' );
 		<section id="archive-list-section" class="archive-list-section bleeds-into-above-section">
 			<div class="container container-ext container-archive-list-section bleed-target pad-onetwenty bg-white">
 				<div class="row row-archive-list-section">
-					<aside id="archive-sidebar" class="left-sidebar col-3">
+					<aside id="archive-sidebar" class="left-sidebar col-xxl-3 col-xl-4 col-12 pad-bottom order-3 order-xl-1">
 						<?php
 						// Get Categories Sidebar Nav.
 						echo get_dynamic_sidebar_nav( 'categories' );
 						echo get_dynamic_sidebar_nav( 'archives' );
 						?>
 					</aside>
-					<div class="col-1"></div>
-					<div id="post-content" class="col-8 theme-content">
+					<div class="col-1 d-xxl-block d-none order-2"></div>
+					<div id="post-content" class="col-xl-8 col-12 order-1 order-xl-3">
 						<?php
 						// TODO: Create Settings Page for Site or for Blog Archive
 						// and CMS this ACF.
@@ -52,7 +52,7 @@ wp_enqueue_style( 'bolt-on-archive-css' );
 						<?php
 						if ( have_posts() ) :
 							?>
-							<div class="archive-list">
+							<div class="archive-list theme-content">
 								<?php
 								/* Start the Loop */
 								while ( have_posts() ) :
@@ -69,13 +69,10 @@ wp_enqueue_style( 'bolt-on-archive-css' );
 								?>
 							</div><!-- /.archive-list -->
 							<?php
-							the_posts_pagination(
-								array(
-									'prev_text'          => __( '<i class="fas fa-chevron-left"></i> Newer Posts', 'bolt-on' ),
-									'next_text'          => __( 'Older Posts <i class="fas fa-chevron-right"></i>', 'bolt-on' ),
-									'screen_reader_text' => __( 'Posts Navigation', 'bolt-on' ),
-								)
-							);
+							bootstrap_pagination();
+							else :
+								get_template_part( 'template-parts/content', 'none' );
+							endif; // endif ( have_posts() ) :
 							?>
 					</div><!-- /#post-content -->
 				</div><!-- /.row-archive-intro-section -->
@@ -84,17 +81,9 @@ wp_enqueue_style( 'bolt-on-archive-css' );
 		<!--   /Blog List Section   --->
 
 		<?php
-
 		/*   Contact Section   */
 		echo get_contact_section();
 		/*   Contact Section   */
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-
 		?>
 
 	</main><!--   /#main   -->

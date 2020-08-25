@@ -10,9 +10,17 @@
   margin-bottom: 3rem;
 }
 .post-thumbnail {
-  float: right;
-  max-width: 42rem;
-	margin: 1rem 0 1.5rem 1.5rem;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin: 1rem auto 1.5rem auto;
+	@media (min-width: $vp_sm) {
+		float: right;
+		width: auto;
+		max-width: 42rem;
+		margin-left: 1.5rem;
+		margin-right: 0;
+	}
 	img {
 		max-width: 100%;
 		height: auto;

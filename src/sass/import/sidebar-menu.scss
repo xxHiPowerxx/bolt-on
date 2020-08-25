@@ -66,6 +66,11 @@
 			display: flex;
 			@extend .btn-sidebar-nav;
 			@extend .has-chevron;
+			> :first-child {
+				flex: 1;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 		&.has-count {
 			a {

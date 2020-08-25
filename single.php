@@ -42,17 +42,17 @@ get_header();
 
 		<!--   Blog List Section   --->
 		<section id="single-entry-section" class="single-entry-section bleeds-into-above-section">
-			<div class="container container-ext container-single-entry-section bleed-target pad-onetwenty bg-white">
+			<div class="container-fluid container-xxl container-ext container-single-entry-section bleed-target pad-onetwenty bg-white">
 				<div class="row row-single-entry-section">
-					<aside id="archive-sidebar" class="left-sidebar col-3">
+					<aside id="archive-sidebar" class="left-sidebar col-xxl-3 col-xl-4 col-12 pad-bottom order-3 order-xl-1">
 						<?php
 						// Get Categories Sidebar Nav.
 						echo get_dynamic_sidebar_nav( 'categories' );
 						echo get_dynamic_sidebar_nav( 'archives' );
 						?>
 					</aside>
-					<div class="col-1"></div>
-					<div id="post-content" class="col-8 theme-content">
+					<div class="col-1 d-xxl-block d-none order-2"></div>
+					<div id="post-content" class="col-xl-8 col-12 order-1 order-xl-3 theme-content pad-bottom">
 						<?php
 						while ( have_posts() ) :
 							the_post();

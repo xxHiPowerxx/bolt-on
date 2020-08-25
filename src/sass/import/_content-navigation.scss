@@ -56,7 +56,7 @@ $nav-link-bp: 475px;
 .post-navigation .nav-previous {
 	width: 50%;
 	flex: 1 0 50%;
-	margin-right: auto;
+	margin-right: .75rem;
 }
 
 .comment-navigation .nav-next,
@@ -64,7 +64,7 @@ $nav-link-bp: 475px;
 .post-navigation .nav-next {
 	text-align: end;
 	flex: 1 0 50%;
-	margin-left: auto;
+	margin-left: .75rem;
 }
 
 .post-navigation-sub span {

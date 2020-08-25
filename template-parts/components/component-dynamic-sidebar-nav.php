@@ -61,6 +61,28 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 		$sidebar_nav_content    = $dynamic_archive_menu;
 	endif; // endif ( $type_of_nav === 'archives' ) :
 
+	$sidebar_nav_id = null;
+	if ( ! function_exists( 'setCollapse' ) ) :
+		function setCollapse( $type_of_nav = null, $button = null, $sidebar_nav_id = null ) {
+			if (
+				$type_of_nav &&
+				(
+					$type_of_nav === 'categories' ||
+					$type_of_nav === 'archives'
+				)
+			) :
+				if ( $button && $sidebar_nav_id ) :
+					$return = 'data-toggle="collapse" data-target="#' . $sidebar_nav_id . '" aria-expanded="false" aria-controls="' . $sidebar_nav_id . '"';
+				else :
+					$return = 'collapse';
+				endif;
+				return $return;
+			else :
+				return false;
+			endif;
+		}
+	endif; // endif ( ! function_exists( 'setCollapse' ) ) :
+
 	$sidebar_nav_title_tabindex = $sidebar_nav_title_link === '#' ? '-1' : '0';
 
 	if ( $sidebar_nav_title || $sidebar_nav_content ) :
@@ -69,13 +91,14 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 		<div class="dynamic-sidebar-nav <?php echo esc_attr( $type_of_nav ); ?>-dynamic-sidebar">
 			<?php
 			if ( $sidebar_nav_title ) :
+				$sidebar_nav_id = 'nav-' . $sidebar_nav_title;
 				?>
-				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" tabindex="<?php echo $sidebar_nav_title_tabindex ?>"><?php echo $sidebar_nav_title; ?></a></h3>
+				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" tabindex="<?php echo $sidebar_nav_title_tabindex ?>" <?php echo setCollapse( $type_of_nav, true, $sidebar_nav_id ); ?>><?php echo $sidebar_nav_title; ?></a></h3>
 				<?php
 			endif; // endif ( $last_ancestor_title ) :
 			if ( $sidebar_nav_content ) :
 				?>
-				<nav class="sidebar-nav">
+				<nav id="<?php echo $sidebar_nav_id; ?>" class="sidebar-nav <?php echo setCollapse( $type_of_nav ); ?>">
 					<?php echo $sidebar_nav_content;?>
 				</nav>
 				<?php

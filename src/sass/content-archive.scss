@@ -64,6 +64,9 @@
 	}
 	.anchor-btn-cta {
 		margin-top: auto;
+		display: flex;
+		align-items: center;
+		padding: .75em;
 	}
 }
 .listed-archive-inner {
@@ -96,7 +99,17 @@
 
 .post-category {
 	font-size: 1.6rem;
-	flex: 1;
+	@media (min-width: $vp_lg + 1) and (max-width: 1300px) {
+		font-size: 1.4rem;
+	}
+	flex: 1 1 40%;
+	max-width: 40%;
+	a {
+		max-width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
 }
 
 .ctnr-view-all-posts-btn {
