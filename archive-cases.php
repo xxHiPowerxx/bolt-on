@@ -42,7 +42,7 @@ $styles .= bolt_on_add_inline_style(
 
 		<!--   Intro Section   --->
 		<section id="cases-archive-intro-section" class="intro-section bleeds-into-above-section bleeds-into-below-section">
-			<div class="container container-ext container-cases-archive-intro-section bleed-target pad-onetwenty bg-white">
+			<div class="container-fluid container-xl container-ext container-cases-archive-intro-section bleed-target pad-onetwenty bg-white">
 				<header class="page-header">
 					<h1 class="page-title">Case Results</h1>
 					<h2 class="page-subtitle">Notable Victories Secured by Our Attorneys</h2>
@@ -70,7 +70,7 @@ $styles .= bolt_on_add_inline_style(
 			?>
 			<!--   Cases Archive Section   --->
 			<section id="cases-archive-section" class="pad-top pad-bottom">
-				<div class="container container-ext container-cases-archive-section">
+				<div class="container-fluid container-xl container-ext container-cases-archive-section">
 					<?php
 					while ( $post_query->have_posts() ) :
 						$post_query->the_post();

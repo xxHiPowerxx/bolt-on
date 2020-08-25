@@ -2,34 +2,49 @@
 @import './import/common';
 
 #cases-archive-section {
-  background-color: $primary-lighter;
+	background-color: $primary-lighter;
 }
 .cases {
 	display: flex;
 	align-items: center;
-	padding: 6rem 12rem;
+	flex-direction: column;
+	padding: 3rem;
+	text-align: center;
+	@media (min-width: $vp_sm) {
+		flex-direction: row;
+		padding: 6rem;
+		text-align: left;
+	}
+	@media (min-width: $vp_m) {
+		padding-left: 12rem;
+		padding-right: 12rem;
+	}
 	&:not(:first-child) {
 		margin-top: 6rem;
 	}
 }
 .ctnr-case-result-practice-area {
-  text-align: center;
-  font-weight: 500;
-  flex-basis: 10em;
-  font-size: 3.2rem;
+	text-align: center;
+	font-weight: 500;
+	@media (min-width: $vp_sm) {
+		flex-basis: 10em;
+	}
+	font-size: 3.2rem;
 }
 .anchor-case-practice-area {
-  font-size: 2.5rem;
+	font-size: 2.5rem;
 }
 .case-result {
-  font-weight: 600;
+	font-weight: 600;
 }
 .ctnr-case-title {
-  flex: 1;
-  margin-left: 1em;
-  font-size: 3rem;
+	flex: 1 1 50%;
+	@media (min-width: $vp_sm) {
+		margin-left: 1em;
+	}
+	font-size: 3rem;
 }
 .case-title {
-  font-size: inherit;
-  margin-bottom: 0;
+	font-size: inherit;
+	margin-bottom: 0;
 }
