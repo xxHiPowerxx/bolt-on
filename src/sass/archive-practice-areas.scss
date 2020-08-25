@@ -8,8 +8,16 @@
 		padding-bottom: 0;
 	}
 	.practice-areas-list {
-		padding: 6rem 6rem 6rem 0;
-		width: 55%;
+		padding: 3rem;
+		@media (min-width: $vp_xs) {
+			padding: 6rem;
+		}
+		@media (min-width: $vp_sm) {
+			padding-left: 0;
+		}
+		@media (min-width: $vp_xl) {
+			width: 55%;
+		}
 		max-width: 60rem;
 		background-color: $white;
 		position: relative;
@@ -38,7 +46,10 @@
 	position: relative;
 	.bg-image-swap-tar {
 		position: absolute;
-		width: 60%;
+		width: 100%;
+		@media (min-width: $vp_sm) {
+			width: 60%;
+		}
 		height: 100%;
 		top: 0;
 		right: 0;

@@ -26,16 +26,19 @@
 	}
 	.ctnr-swoosh {
 		position: absolute;
-		bottom: calc(100% - 10rem);
+		bottom: calc(100% - 5rem);
+		@media (min-width: $vp_sm) {
+			bottom: calc(100% - 10rem);
+		}
+		@media (min-width: $vp_lg) {
+			bottom: calc(100% - 14rem);
+		}
 		@media (min-width: 1400px) {
 			bottom: calc(100% - 19rem);
 		}
-		@media (min-width: $vp_sm) {
-			bottom: calc(100% - 5rem);
-		}
-		width: 100vw;
+		width: 100.1vw;
 		left: 50%;
-		transform: translateX(-50%);
+		transform: translateX(-50.1%);
 		&:before {
 			content: '';
 			display: block;

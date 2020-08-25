@@ -107,14 +107,19 @@
 			align-items: center;
 			&:before {
 				content: '';
-				width: 8rem;
-				min-width: 8rem;
-				height: 10rem;
+				width: 6rem;
+				height: 6rem;
+				margin-right: 1.5rem;
+				@media (min-width: 430px) {
+					width: 8rem;
+					min-width: 8rem;
+					height: 10rem;
+					margin-right: 3rem;
+				}
 				background-image: url('../images/callout-1-icon.png');
 				background-size: contain;
 				background-position: 50% 50%;
 				background-repeat: no-repeat;
-				margin-right: 3rem;
 			}
 			> * {
 				margin: 0;

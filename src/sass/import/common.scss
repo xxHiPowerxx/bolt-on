@@ -198,6 +198,12 @@ $bleed-unit: 19vh;
 .bleeds-into-above-section {
 	.bleed-target {
 		margin-top: -$bleed-unit;
+		&.container-fluid.container-xl {
+			margin-top: 0;
+			@media (min-width: $vp_lg) {
+				margin-top: -$bleed-unit;
+			}
+		}
 		position: relative;
 	}
 }

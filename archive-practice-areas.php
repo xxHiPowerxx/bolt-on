@@ -72,14 +72,14 @@ $styles .= bolt_on_add_inline_style(
 			?>
 			<!--   Intro Section   --->
 			<section id="practice-areas-archive-intro-section" class="intro-section bleeds-into-above-section">
-				<div class="container container-ext container-practice-areas-archive-intro-section bleed-target pad-onetwenty bg-white">
+				<div class="container-fluid container-xl container-ext container-practice-areas-archive-intro-section bleed-target pad-onetwenty bg-white">
 					<div class="row row-practice-areas-archive-intro-section">
-						<aside id="practice-areas-sidebar" class="left-sidebar col-3 pad-bottom">
+						<aside id="practice-areas-sidebar" class="left-sidebar col-xxl-3 col-lg-4 col-12 pad-bottom">
 							<h3 class="sidebar-heading"><?php echo $post_type_name; ?></h3>
 							<?php dynamic_sidebar( 'practice-areas-archive-sidebar' ); ?>
 						</aside>
-						<div class="col-1"></div>
-						<div class="col-8 theme-content">
+						<div class="col-1 d-xxl-block d-none"></div>
+						<div class="col-lg-8 col-12 theme-content">
 							<header class="page-header">
 								<h1 class="page-title">Practice Areas</h1>
 								<h2 class="page-subtitle">Restoring Hope Through Justice Across the Inland Empire</h2>
@@ -115,7 +115,7 @@ $styles .= bolt_on_add_inline_style(
 
 			<!--   Listed Practice Areas Section   --->
 			<section id="listed-practice-areas-section">
-				<div class="container container-ext container-listed-practice-areas-header pad-onetwenty">
+				<div class="container-fluid container-xl container-ext container-listed-practice-areas-header pad-onetwenty">
 					<header class="section-header theme-header">
 						<div class="theme-heading stroke-border">
 							<div class="theme-heading-outer stroke-border-inner">
@@ -127,7 +127,7 @@ $styles .= bolt_on_add_inline_style(
 					</header>
 				</div>
 				<div id="practice-areas-image-swap" class="bg-image-swap bgImageSwap">
-					<div class="container container-ext container-listed-practice-areas-image-swap pad-onetwenty">
+					<div class="container-fluid container-xl container-ext container-listed-practice-areas-image-swap pad-onetwenty">
 						<div class="practice-areas-list">
 							<?php
 							$practice_area_index = 0;

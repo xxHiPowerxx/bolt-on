@@ -111,10 +111,22 @@ strong {
 }
 
 .pad-top {
-	padding-top: 12rem;
+	padding-top: 3rem;
+	@media(min-width: $vp_sm) {
+		padding-top: 6rem;
+	}
+	@media(min-width: $vp_lg) {
+		padding-top: 12rem;
+	}
 }
 .pad-bottom {
-	padding-bottom: 12rem;
+	padding-bottom: 3rem;
+	@media(min-width: $vp_sm) {
+		padding-bottom: 6rem;
+	}
+	@media(min-width: $vp_lg) {
+		padding-bottom: 12rem;
+	}
 }
 @media (min-width: $vp_xl) {
 	.container,
@@ -142,14 +154,17 @@ strong {
 	padding: 6rem;
 }
 .pad-onetwenty {
-	padding: 12rem 3rem;
+	padding: 3rem;
 	@media(min-width: $vp_sm) {
-		padding-left: 6rem;
-		padding-right: 6rem;
+		padding: 6rem;
 	}
 	@media(min-width: $vp_lg) {
-		padding-left: 12rem;
-		padding-right: 12rem;
+		padding: 12rem;
+	}
+	&.pad-onetwenty-xxl {
+		@media (min-width: $vp_lg ) and (max-width: $vp_xl - 1 ) {
+			padding: 6rem;
+		}
 	}
 }
 .input-field {
@@ -166,5 +181,4 @@ textarea {
 }
 .anchor-site-phone-number {
 	@include smoothest-transition;
-
 }

@@ -39,9 +39,9 @@ $styles .= bolt_on_add_inline_style(
 
 		<!--   Intro Section   --->
 		<section id="single-practice-areas-intro-section" class="intro-section bleeds-into-above-section">
-			<div class="container container-ext container-single-practice-areas-intro-section bleed-target pad-onetwenty bg-white">
+			<div class="container-fluid container-xl container-ext container-single-practice-areas-intro-section bleed-target pad-onetwenty pad-onetwenty-xxl bg-white">
 				<div class="row row-single-practice-areas-intro-section">
-					<aside id="single-practice-areas-sidebar" class="left-sidebar col-4 pad-bottom">
+					<aside id="single-practice-areas-sidebar" class="left-sidebar col-xxl-3 col-lg-4 col-12 pad-bottom order-3 order-lg-1">
 						<?php
 						// Get Dynamic Sidebar Nav.
 						echo get_dynamic_sidebar_nav();
@@ -53,8 +53,8 @@ $styles .= bolt_on_add_inline_style(
 						echo get_sidebar_contact($contact_form_atts);
 						?>
 					</aside>
-					<div class="col-1"></div>
-					<div id="post-content" class="col-7 theme-content">
+					<div class="col-1 d-xxl-block d-none order-2"></div>
+					<div id="post-content" class="col-xl-8 col-lg-7 col-12 theme-content order-1 order-lg-3">
 						<?php
 						while ( have_posts() ) :
 							the_post();
@@ -104,7 +104,7 @@ $styles .= bolt_on_add_inline_style(
 			<!--   FAQ Section   --->
 			<section id="<?php echo $faqs_section_id; ?>" class="faq-section practice-areas-faq-section">
 				<?php if ( $faqs_section_title || $faqs_section_subtitle ) : ?>
-				<div class="container container-faq-section-header">
+				<div class="container-fluid container-lg container-faq-section-header">
 					<header class="section-header theme-header">
 						<div class="theme-heading stroke-border">
 							<div class="theme-heading-outer stroke-border-inner">
@@ -122,7 +122,7 @@ $styles .= bolt_on_add_inline_style(
 				</div>
 				<?php endif; // endif ( $faqs_section_title || $faqs_section_subtitle ) : ?>
 				<div class="faq-section-lower">
-					<div class="container container-faq-section-lower pad-top pad-bottom fraction-wrap">
+					<div class="container-fluid container-lg container-faq-section-lower pad-top pad-bottom fraction-wrap">
 						<?php
 						if ( $faqs_section_image ) :
 							$faqs_layout_class     = 'one-half';
