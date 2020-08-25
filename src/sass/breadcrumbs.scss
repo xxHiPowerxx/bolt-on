@@ -5,8 +5,11 @@
   font-size: 1.8rem;
 	padding: 0;
 	margin-bottom: 3rem;
+	flex-wrap: nowrap;
+	overflow: hidden;
 }
 .breadcrumb-item {
+	max-width: 55%;
 	padding: .5em 1em;
 	text-decoration: none !important;
 	&.current-breadcrumb-item {
@@ -25,5 +28,11 @@
 			padding-right: 0;
 			margin-right: .5em;
 		}
+	}
+	> * {
+		max-width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 }

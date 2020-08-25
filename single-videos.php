@@ -30,7 +30,7 @@ get_header();
 
 		<!--   Single Videos Section   --->
 		<section id="single-videos-entry-section" class="single-videos-entry-section">
-			<div class="container container-ext container-single-videos-entry-section pad-onetwenty">
+			<div class="container-fluid container-xxl container-ext container-single-videos-entry-section pad-onetwenty">
 				<?php echo get_breadcrumbs(); ?>
 				<div id="post-content" class="theme-content">
 					<?php
@@ -45,18 +45,20 @@ get_header();
 		<!--   /Single Videos Section   --->
 
 		<!--   Related Videos Section   --->
-		<section id="related-videos-section" class="related-videos-section">
-			<div class="container container-ext container-related-videos-section pad-onetwenty">
-				<?php
-				// Videos Archive
-				$args = array( 'videos_to_show' => 6 );
-				echo get_video_archive( $args );
-				?>
-			</div><!-- /.container-related-videos-section -->
-		</section>
-		<!--   /Related Videos Section   --->
-
 		<?php
+		$args          = array( 'videos_to_show' => 6 );
+		$video_archive = get_video_archive( $args );
+		if ( $video_archive !== null) :
+			?>
+			<section id="related-videos-section" class="related-videos-section">
+				<div class="container-fluid container-xxl container-ext container-related-videos-section pad-onetwenty">
+					<?php echo $video_archive; ?>
+				</div><!-- /.container-related-videos-section -->
+			</section>
+			<!--   /Related Videos Section   --->
+		<?php
+		endif; // endif ( $video_archive ) :
+
 		/*   Contact Section   */
 		echo get_contact_section();
 		/*   Contact Section   */

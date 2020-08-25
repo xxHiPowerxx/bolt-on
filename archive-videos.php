@@ -30,7 +30,7 @@ get_header();
 	<main id="main" class="site-main">
 
 		<section id="archive-videos-intro-section" class="archive-videos-entry-section">
-			<div class="container container-ext container-archive-videos-entry-section pad-onetwenty">
+			<div class="container-fluid container-xxl container-ext container-archive-videos-entry-section pad-onetwenty">
 				<?php echo get_breadcrumbs(); ?>
 				<header class="page-header">
 					<h1 class="page-title"><?php echo get_bloginfo(); ?> Videos</h1>
@@ -40,7 +40,7 @@ get_header();
 
 		<!--   Archive Videos Section   --->
 		<section id="archive-videos-section" class="archive-videos-section">
-			<div class="container container-ext container-archive-videos-section pad-onetwenty">
+			<div class="container-fluid container-xxl container-ext container-archive-videos-section pad-onetwenty">
 				<?php
 				// Videos Archive
 				$args = array( 'videos_to_show' => 6 );

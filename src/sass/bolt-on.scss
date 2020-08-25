@@ -20,8 +20,11 @@ html {
 body {
 	font-size: 100%;
 	color: $dark;
-	max-width: 100%;
-	overflow-x: hidden;
+	min-width: 340px;
+	@media (min-width: 340px) {
+		max-width: 100%;
+		overflow-x: hidden;
+	} 
 }
 body,
 .font-fam-primary,

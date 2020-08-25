@@ -75,8 +75,14 @@ $archive-list-margin: 1.5rem;
 	@include flexLayout( $archive-list-margin );
 }
 .listed-archive {
-  width: 45rem;
-	max-width: 33%;
+	width: 100%;
+	@media (min-width: $vp_xs) {
+		width: 45rem;
+		max-width: 50%;
+	}
+	@media (min-width: $vp_lg) {
+		max-width: 33%;
+	}
 	.post-body {
 		border-top: 1px solid $primary-lighter;
 	}
@@ -97,6 +103,14 @@ $archive-list-margin: 1.5rem;
 	align-items: center;
 	margin-left: auto;
 	margin-right: auto;
+	&:after {
+		position: absolute;
+		right: 0;
+	}
+	.btn-cta-inner {
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 .listed-archive {
 	&.videos {

@@ -37,6 +37,9 @@ function component_video_archive( $args = array() ) {
 		$video_categories = get_the_terms( $post, 'video-category' );
 	endif; // endif ( $is_tax ) :
 	if ( $video_categories ) :
+
+		ob_start();
+
 		foreach ( $video_categories as $video_category ) :
 			$video_category_id   = $video_category->term_id;
 			$video_category_name = esc_attr( $video_category->name );
@@ -103,5 +106,8 @@ function component_video_archive( $args = array() ) {
 				<?php
 			endif; // endif ( have_posts( $posts_of_category ) ) :
 		endforeach; // endforeach ( $video_categories as $video_category ) :
+		return ob_get_clean();
+	else :
+			return false;
 	endif; // endif ( $video_categories ) :
 }

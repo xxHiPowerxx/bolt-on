@@ -26,7 +26,10 @@
 		box-shadow: 0 .1rem 0.5rem .05rem rgba(0, 0, 0, 0.11);
 		border-radius: .5rem;
 		padding: 1.5rem;
-		width: calc(50% - .75rem);
+		width: calc(100% - .75rem);
+		@media (min-width: 450px) {
+			width: calc(50% - .75rem);
+		}
 		margin-bottom: 1.5rem;
 	}
 }
