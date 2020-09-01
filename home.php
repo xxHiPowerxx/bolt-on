@@ -10,14 +10,7 @@
 // Start Inline Styles.
 $styles = '';
 
-$bg_banner_src = get_the_post_thumbnail_url( get_queried_object()
-, 'full' );
-$styles .= bolt_on_add_inline_style(
-	'.bolt-on-banner:before',
-	array(
-		'background-image' => 'url(' . $bg_banner_src . ')',
-	)
-);
+$styles .= bolt_on_banner( $styles );
 
 get_header();
 

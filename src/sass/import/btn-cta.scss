@@ -23,7 +23,6 @@ $btn-stroke-full-width: 100%;
 		backface-visibility: hidden;
 	}
 }
-
 .btn-cta-outer {
 	position: relative;
 	text-align: center;
@@ -64,6 +63,11 @@ $btn-stroke-full-width: 100%;
 	.fa-chevron-left {
 		position: absolute;
 		left: .5em;
+	}
+	&.has-chevron {
+		&:after {
+			position: relative;
+		}
 	}
 }
 .btn-cta-inner {

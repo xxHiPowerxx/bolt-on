@@ -92,12 +92,11 @@
 					top: calc(50% - 0.333em);
 					left: 0;
 					opacity: 0;
-					transition: $smooth-transition;
+					@include smoothest-transition;
 				}
 				#{$active} {
-					padding-left: 2em;
 					color: $secondary;
-					padding-right: 0.5em;
+					transform: translate3d(1em, 0, 0);
 					&:before {
 						opacity: 1;
 						transform: translateX(1em);

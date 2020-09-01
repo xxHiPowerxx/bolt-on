@@ -11,7 +11,7 @@
  * @param WP_Customize_Manager $wp_customize Header Customizer object.
  */
 function bolt_on_customize_header_register( $wp_customize ) {
-/**
+	/**
 	 * Header options.
 	 */
 	$wp_customize->add_section(

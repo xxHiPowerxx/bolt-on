@@ -208,7 +208,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 0,
+            "media_upload": 1,
             "delay": 0
         },
         {
@@ -643,5 +643,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Configure the Attorney with these Attributes. These Attributes can be used in different places throughout the website.",
-    "modified": 1596141474
+    "modified": 1598465198
 }

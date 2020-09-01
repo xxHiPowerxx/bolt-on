@@ -2,15 +2,22 @@
 /**
  * This Component Renders the Contact Form and the Office List.
  * 
+ * TODO: Allow $contact_form to be passed in via shortcode.
+ * 
  * @package bolt-on
  */
 function component_contact_section( $contact_form = null ) {
-	// Die if no Contact Form
-	if ( ! $contact_form ) :
-		return;
+
+	$contact_form_override = get_field( 'contact_form_override' );
+
+	if ( $contact_form_override ) :
+		$contact_form_id    = $contact_form_override->ID;
+		$contact_form_title = $contact_form_override->post_title;
+		$contact_form_shortcode = '[contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"]';
+	else :
+		$contact_form_shortcode = get_first_contact_form();
 	endif;
 	// Turn $contact_form string into  shortcode.
-	$contact_form_shortcode = '[' . $contact_form . ']';
 
 	// Enqueue Contact Section Stylesheet.
 	$contact_section_css_path = '/assets/css/contact-section.css';
@@ -36,9 +43,7 @@ function component_contact_section( $contact_form = null ) {
 					<h3 class="section-subtitle bolt-on-h2">Schedule Your Free Consultation Today</h3>
 				</header>
 				<div class="contact-form">
-					<?php
-					echo do_shortcode( $contact_form_shortcode );
-					?>
+					<?php echo do_shortcode( $contact_form_shortcode ); ?>
 				</div>
 			</div><!-- ./ctnr-contact-form -->
 			<div class="ctnr-contact-info">
@@ -47,104 +52,7 @@ function component_contact_section( $contact_form = null ) {
 						<h2 class="section-title bolt-on-h1 nowrap-parent"><span>McCune Wright</span> <span>Arevalo, LLP</span></h2>
 						<a class="phone-number" href="tel:(909) 345-8110">(909) 345-8110</a>
 					</header>
-					<div class="offices-list">
-						<div class="listed-office">
-							<h3 class="office-title">Main Office:</h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/McCune+Wright+Arevalo,+LLP/@34.065147,-117.5822282,17z/data=!3m1!4b1!4m5!3m4!1s0x80c335b9858fe0f5:0x4599ecb937df3499!8m2!3d34.065147!4d-117.5800395" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">3281 East Guasti Road</span>
-									<span class="office-address-line-2">Suite 100</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">Ontario,</span>
-									&nbsp;
-									<span class="office-state">CA</span>
-									&nbsp;
-									<span class="office-zip">91761</span>
-								</div>
-							</a>
-						</div>
-						<div class="listed-office">
-							<h3 class="office-title">Orange County Office:</h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/18565+Jamboree+Rd+%23550,+Irvine,+CA+92612/@33.6700884,-117.8530455,17z/data=!3m1!4b1!4m5!3m4!1s0x80dcde61b4172e7b:0x75f1ae014236794f!8m2!3d33.6700884!4d-117.8508568" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">18565 Jamboree Road</span>
-									<span class="office-address-line-2">Suite 550</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">Irvine,</span>
-									&nbsp;
-									<span class="office-state">CA</span>
-									&nbsp;
-									<span class="office-zip">92612</span>
-								</div>
-							</a>
-						</div>
-						<div class="listed-office">
-							<h3 class="office-title nowrap-parent"><span>Inland Empire</span> – <span>East Office:</span></h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/McCune+Wright+Arevalo,+LLP/@34.0662623,-117.2887363,17z/data=!3m1!4b1!4m5!3m4!1s0x80dcad0c099da5c7:0xa29e6e639e5745e!8m2!3d34.0662623!4d-117.2865476" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">164 W. Hospitality Lane</span>
-									<span class="office-address-line-2">Suite 109</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">San Bernardino,</span>
-									&nbsp;
-									<span class="office-state">CA</span>
-									&nbsp;
-									<span class="office-zip">92408</span>
-								</div>
-							</a>
-						</div>
-						<div class="listed-office">
-							<h3 class="office-title">Coachella Valley Office:</h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/73255+El+Paseo+%2310,+Palm+Desert,+CA+92260/@33.7194799,-116.3887936,17z/data=!3m1!4b1!4m5!3m4!1s0x80dafe7051879e63:0xec3535fb004c628c!8m2!3d33.7194799!4d-116.3866049" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">73255 El Paseo</span>
-									<span class="office-address-line-2">Suite 10</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">Palm Desert,</span>
-									&nbsp;
-									<span class="office-state">CA</span>
-									&nbsp;
-									<span class="office-zip">92260</span>
-								</div>
-							</a>
-						</div>
-						<div class="listed-office">
-							<h3 class="office-title">Midwest Office:</h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/231+N+Main+St+%2320,+Edwardsville,+IL+62025/@38.8135514,-89.960748,17z/data=!4m5!3m4!1s0x8875f9d3dbf21543:0x2dfd270b6540929c!8m2!3d38.8135514!4d-89.9585593" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">231 North Main Street</span>
-									<span class="office-address-line-2">Suite 20</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">Edwardsville,</span>
-									&nbsp;
-									<span class="office-state">IL</span>
-									&nbsp;
-									<span class="office-zip">62025</span>
-								</div>
-							</a>
-						</div>
-						<div class="listed-office">
-							<h3 class="office-title">East Coast Office:</h3>
-							<a class="anchor-office-location" href="https://www.google.com/maps/place/Regus+-+New+Jersey,+Newark+-+One+Gateway/@40.7342,-74.1680887,17z/data=!3m1!4b1!4m5!3m4!1s0x89c253838543e53d:0xa6d637cdded3fd8c!8m2!3d40.7342!4d-74.1659" target="_blank" rel="noopener noreferrer">
-								<div class="office-address">
-									<span class="office-address-line-1">One Gateway Center</span>
-									<span class="office-address-line-2">Suite 2600</span>
-								</div>
-								<div class="office-city-state-zip nowrap-parent">
-									<span class="office-city">Newark,</span>
-									&nbsp;
-									<span class="office-state">NJ</span>
-									&nbsp;
-									<span class="office-zip">07102</span>
-								</div>
-							</a>
-						</div>
-					</div>
+					<?php echo get_offices_list(); ?>
 				</div>
 			</div><!-- /.ctnr-contact-info -->
 		</div><!-- /.container-contact -->

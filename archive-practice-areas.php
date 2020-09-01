@@ -89,10 +89,12 @@ $styles .= bolt_on_add_inline_style(
 								<ul>
 									<li><a href="/class-actions/">Class Actions</a></li>
 									<li><a href="/commercial-litigation/">Commercial Litigation</a></li>
+									<li><a href="/government-unfair-deceptive-acts-practices-civil-penalties/">Government UDAP Civil Penalties</a></li>
 									<li><a href="/medical-devices-pharmaceuticals/">Defective medical devices and pharmaceuticals</a></li>
 									<li><a href="/nursing-home-elder-abuse/">Nursing Home & Elder Abuse</a></li>
 									<li><a href="/personal-injury/">Personal injury</a></li>
 									<li><a href="/product-liability/">Product liability</a></li>
+									<li><a target="" href="/racial-economic-justice/">Racial &amp; Economic Justice</a></li>
 									<li><a href="/personal-injury/wrongful-death/">Wrongful death</a></li>
 								</ul>
 								<h3>Over $1 Billion in Verdicts & Settlements</h3>

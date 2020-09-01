@@ -80,6 +80,16 @@
 		}
 	}
 	/*   Wordpress Block Overrides   */
+	img {
+		&.alignright {
+			float: right;
+			margin-left: 1.5rem;
+		}
+		&.alignleft {
+			float: left;
+			margin-right: 1.5rem;
+		}
+	}
 }
 
 .page-header {
@@ -97,34 +107,49 @@
 }
 
 .text-highlight {
-	@extend .theme-style-border;
-	&.v-1 {
-		padding-left: 3rem;
-		padding-right: 3rem;
-		font-size: 2rem;
-		> * {
+	padding-left: 3rem;
+	padding-right: 3rem;
+	font-size: 2rem;
+	> * {
+		display: block;
+		@media (min-width: $vp_xs) {
 			display: flex;
-			align-items: center;
-			&:before {
-				content: '';
-				width: 6rem;
-				height: 6rem;
-				margin-right: 1.5rem;
-				@media (min-width: 430px) {
-					width: 8rem;
-					min-width: 8rem;
-					height: 10rem;
-					margin-right: 3rem;
-				}
-				background-image: url('../images/callout-1-icon.png');
-				background-size: contain;
-				background-position: 50% 50%;
-				background-repeat: no-repeat;
+		}
+		align-items: center;
+		&:before {
+			content: '';
+			width: 8rem;
+			height: 6rem;
+			float: left;
+			margin-right: 3rem;
+			@media (min-width: $vp_xs) {
+				float: none;
+				width: 8rem;
+				min-width: 8rem;
+				height: 10rem;
 			}
-			> * {
-				margin: 0;
-				margin-bottom: 0;
-				flex: 1;
+			background-size: contain;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+		}
+		> * {
+			margin: 0;
+			margin-bottom: 0;
+			flex: 1;
+		}
+	}
+	&.v-1 {
+		@extend .theme-style-border;
+		> * {
+			&:before {
+				background-image: url('../images/callout-1-icon.png');
+			}
+		}
+	}
+	&.v-2 {
+		> * {
+			&:before {
+				background-image: url('../images/callout-2-icon.png');
 			}
 		}
 	}

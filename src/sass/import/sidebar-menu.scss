@@ -90,7 +90,37 @@
 				}
 			}
 		}
+		&.has-children {
+			position: relative;
+			&:after {
+				content: '';
+				position: absolute;
+				height: 100%;
+				width: 6rem;
+				right: 0;
+				display: block;
+				top: 0;
+			}
+			> a {
+				&:after {
+					margin-bottom: auto;
+					transform: rotate(90deg) translate3d(0, -.3em, 0);
+				}
+				#{$active} {
+					&:after {
+						transform: translateZ(0) !important;
+					}
+				}
+			}
+		}
 		#{$active} {
+			&.has-children {
+				> a {
+					&:after {
+						transform: scaleY(-1) rotate(90deg) translate3d(0, -.3em, 0);
+					}
+				}
+			}
 			> .sub-menu {
 				> .menu-item {
 					font-size: 1.8rem;

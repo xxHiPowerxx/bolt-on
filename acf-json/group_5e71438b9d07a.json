@@ -29,6 +29,13 @@
                 "operator": "==",
                 "value": "page-templates\/fixed-width-page-template.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/contact-us-page-template.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -39,5 +46,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1596141479
+    "modified": 1598459535
 }

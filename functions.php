@@ -195,6 +195,9 @@ function bolt_on_assets() {
 	$bolt_on_search_css_path = '/assets/css/search.css';
 	wp_register_style( 'bolt-on-search-css', get_theme_file_uri( $bolt_on_search_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $bolt_on_search_css_path ), 'all' );
 
+	$fixed_width_page_css_path = '/assets/css/fixed-width-page.css';
+	wp_register_style( 'fixed-width-page-css', get_theme_file_uri( $fixed_width_page_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $fixed_width_page_css_path ), 'all' );
+
 	// Register Scripts
 	$bolt_on_js_path = '/assets/js/bolt-on.js';
 	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js', 'bolt-on-vendor-slick-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
@@ -215,11 +218,6 @@ add_action( 'wp_enqueue_scripts', 'bolt_on_assets' );
  * Include ACF Functions
  */
 require get_template_directory() . '/inc/acf-functions.php';
-
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -287,6 +285,11 @@ require get_template_directory() . '/inc/custom-taxonomies.php';
  * Custom Post Types.
  */
 require get_template_directory() . '/inc/custom-post-types.php';
+
+/**
+ * Site Settings
+ */
+require get_template_directory() . '/inc/site-settings.php';
 
 
 /**
@@ -429,3 +432,26 @@ add_action( 'save_post', 'bolt_on_set_default_video_terms', 100, 2 );
  * Store mobile_nav_breakpoint in GLOBAL variable.
  */
 $GLOBALS['mobile_nav_breakpoint'] = get_theme_mod( 'mobile_nav_breakpoint', 1050 );
+
+function google_tag_manager_head() {
+	?> 
+
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KL8F6KS');</script>
+	<!-- End Google Tag Manager -->
+
+	<?php
+}
+add_action('wp_head','google_tag_manager_head', 20);
+
+
+function google_tag_manager_body(){
+	?>
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL8F6KS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+	<?php
+}
+add_action('__before_header','google_tag_manager_body', 20);

@@ -64,28 +64,11 @@ function get_contact_section( $atts = '' ) {
 	// Ensure that this gets converted to an array.
 	$atts = $atts === '' ? array() : $atts;
 
-	// If no Contact Form Provided, default to first.
-	if ( ! isset( $atts['contact_form'] ) ) :
-		$contact_form = get_posts(
-			array(
-				'post_type' => 'wpcf7_contact_form',
-				'numberposts' => 1
-			)
-		)[0];
-		// var_dump($contact_form);
-		$contact_form_id    = $contact_form->ID;
-		$contact_form_title = $contact_form->post_title;
-		$contact_form_shortcode_string = 'contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"';
-		$atts['contact_form'] = $contact_form_shortcode_string;
-	endif;
-
 	// Get Component Function.
 	$file_path = get_template_directory() . '/template-parts/components/component-contact-section.php';
 	require_once( $file_path );
 
-	if ( $atts['contact_form'] ) :
-		return component_contact_section( $atts['contact_form'] );
-	endif;
+	return component_contact_section( $atts );
 }
 add_shortcode( 'contact_section', 'get_contact_section' );
 
@@ -198,27 +181,10 @@ function get_sidebar_contact( $atts = '' ) {
 	// Ensure that this gets converted to an array.
 	$atts = $atts === '' ? array() : $atts;
 
-	// If no Contact Form Provided, default to first.
-	if ( ! isset( $atts['contact_form'] ) ) :
-		$contact_form = get_posts(
-			array(
-				'post_type' => 'wpcf7_contact_form',
-				'numberposts' => 1
-			)
-		)[0];
-		$contact_form_id    = $contact_form->ID;
-		$contact_form_title = $contact_form->post_title;
-		$contact_form_shortcode_string = 'contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"';
-		$atts['contact_form'] = $contact_form_shortcode_string;
-	endif;
-
 	// Get Component Function.
 	$file_path = get_template_directory() . '/template-parts/components/component-sidebar-contact.php';
 	require_once( $file_path );
-
-	if ( $atts['contact_form'] ) :
-		return component_sidebar_contact( $atts );
-	endif;
+	return component_sidebar_contact( $atts );
 }
 add_shortcode( 'sidebar_contact', 'get_sidebar_contact' );
 
@@ -230,10 +196,6 @@ function get_video_archive( $atts = '' ) {
 	// When Shortcode is used $atts defaults to ''.
 	// Ensure that this gets converted to an array.
 	$atts = $atts === '' ? array() : $atts;
-
-	// $videos_to_show = isset( $atts['videos_to_show'] ) ?
-	// 	$atts['videos_to_show'] :
-	// 	null;
 
 	// Get Component Function.
 	$file_path = get_template_directory() . '/template-parts/components/component-video-archive.php';
@@ -259,3 +221,55 @@ function get_breadcrumbs( $atts = '' ) {
 	return component_breadcrumbs();
 }
 add_shortcode( 'breadcrumbs', 'get_breadcrumbs' );
+
+/**
+ * Site URL
+ * @return string - the Site URL
+ */
+function bolt_on_site_url( $atts = null, $content = null ) {
+	return site_url();
+}
+add_shortcode( 'site_url', 'bolt_on_site_url' );
+
+/**
+ * Template Directory URI
+ * @return string - template directory uri
+ */
+function bolt_on_template_directory_uri( $atts = null, $content = null ) {
+	return get_template_directory_uri();
+}
+add_shortcode( 'template_directory_uri', 'bolt_on_template_directory_uri' );
+
+/**
+ * Get Offices List
+ * @return string - the offices list markup.
+ */
+function get_offices_list( $atts = null, $content = null ) {
+	// Get Component Function.
+	$file_path = get_template_directory() . '/template-parts/components/component-offices-list.php';
+	require_once( $file_path );
+
+	return component_offices_list();
+}
+add_shortcode( 'offices_list', 'get_offices_list' );
+
+/**
+ * Captorra Case ID
+ * Select Either Default Case ID or Override.
+ * @return string - Chosen Captorra Case ID
+ */
+function get_captorra_case_guid( $atts = null, $content = null ) {
+	$captorra_case_guid_override = get_field( 'captorra_case_guid_override' );
+
+	if ( $captorra_case_guid_override ) :
+		$case_id = $captorra_case_guid_override;
+	elseif( $default_captorra_case_guid = get_field( 'default_captorra_case_guid', 'options' ) ) :
+		$case_id = $default_captorra_case_guid;
+	endif;
+	$content = str_replace( 'value=""', 'value="' . $case_id . '"', $content);
+	return do_shortcode($content);
+}
+add_shortcode( 'captorra_case_guid', 'get_captorra_case_guid' );
+
+
+

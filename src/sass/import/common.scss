@@ -180,15 +180,18 @@ $pad-val: 6rem;
 	&:before {
 		content: '';
 		display: block;
-		padding-bottom: 20.9%;
-		background-size: 100% auto;
+		padding-bottom: 35vmin;
+		@media (min-width: $vp_m) and (min-height: $vp_m) {
+			padding-bottom: 20.9%;
+		}
+		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
 	}
 }
 
 /*   Bleeds Into Section Feature   */
-$bleed-unit: 19vh;
+$bleed-unit: 19vmin;
 // $bleed-unit: 6rem;
 .below-section-bleeds-in {
 	.bleed-target {
@@ -198,6 +201,12 @@ $bleed-unit: 19vh;
 .bleeds-into-above-section {
 	.bleed-target {
 		margin-top: -$bleed-unit;
+		&.container {
+			margin-top: 0;
+			@media (min-width: $vp_sm) {
+				margin-top: -$bleed-unit;
+			}
+		}
 		&.container-fluid.container-xl {
 			margin-top: 0;
 			@media (min-width: $vp_lg) {

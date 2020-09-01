@@ -6,8 +6,7 @@
  */
 
 // Enqueue Styles
-$home_page_template_css_path = '/assets/css/fixed-width-page.css';
-wp_enqueue_style( 'fixed-width-page-css', get_theme_file_uri( $home_page_template_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $home_page_template_css_path ), 'all' );
+wp_enqueue_style( 'fixed-width-page-css' );
 $extended_container = get_field('extended_container') ? 'container-ext': '';
 
 get_header();

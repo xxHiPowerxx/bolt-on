@@ -242,7 +242,7 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": 4,
-                    "new_lines": ""
+                    "new_lines": "wpautop"
                 }
             ]
         },
@@ -281,5 +281,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Configure the Practice Areas with these Attributes.",
-    "modified": 1596141483
+    "modified": 1598572722
 }

@@ -63,7 +63,12 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 
 	$sidebar_nav_id = null;
 	if ( ! function_exists( 'setCollapse' ) ) :
-		function setCollapse( $type_of_nav = null, $button = null, $sidebar_nav_id = null ) {
+		function setCollapse(
+			$type_of_nav = null,
+			$button = null,
+			$sidebar_nav_id = null,
+			$sidebar_nav_title_tabindex = null
+		) {
 			if (
 				$type_of_nav &&
 				(
@@ -72,13 +77,13 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 				)
 			) :
 				if ( $button && $sidebar_nav_id ) :
-					$return = 'data-toggle="collapse" data-target="#' . $sidebar_nav_id . '" aria-expanded="false" aria-controls="' . $sidebar_nav_id . '"';
+					$return = 'data-toggle="collapse" data-target="#' . $sidebar_nav_id . '" aria-expanded="false" aria-controls="' . $sidebar_nav_id . '" tabindex="1"';
 				else :
 					$return = 'collapse';
 				endif;
 				return $return;
 			else :
-				return false;
+				return 'tabindex="' . $sidebar_nav_title_tabindex . '"';
 			endif;
 		}
 	endif; // endif ( ! function_exists( 'setCollapse' ) ) :
@@ -93,7 +98,7 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 			if ( $sidebar_nav_title ) :
 				$sidebar_nav_id = 'nav-' . $sidebar_nav_title;
 				?>
-				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" tabindex="<?php echo $sidebar_nav_title_tabindex ?>" <?php echo setCollapse( $type_of_nav, true, $sidebar_nav_id ); ?>><?php echo $sidebar_nav_title; ?></a></h3>
+				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" <?php echo setCollapse( $type_of_nav, true, $sidebar_nav_id, $sidebar_nav_title_tabindex ); ?>><?php echo $sidebar_nav_title; ?></a></h3>
 				<?php
 			endif; // endif ( $last_ancestor_title ) :
 			if ( $sidebar_nav_content ) :

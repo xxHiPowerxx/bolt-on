@@ -4,16 +4,21 @@
  * 
  * @package bolt-on
  */
-function component_sidebar_contact(	$atts ) {
-	// Die if no Contact Form
-	if ( ! $atts['contact_form'] ) :
-		return;
-	endif;
-	$contact_form = $atts['contact_form'];
-	$contact_form_title = $atts['contact_form_title'];
+function component_sidebar_contact(	$atts = null ) {
 
-	// Turn $contact_form string into  shortcode.
-	$contact_form_shortcode = '[' . $contact_form . ']';
+	$contact_form_override = get_field( 'contact_form_override' );
+	if ( $contact_form_override ) :
+		$contact_form_id               = $contact_form_override->ID;
+		$contact_form_title            = $contact_form_override->post_title;
+		$contact_form_shortcode        = do_shortcode( '[contact-form-7 id="' . $contact_form_id . '" title="' . $contact_form_title . '"]');
+	elseif ( isset( $atts['contact_form'] ) ) :
+		$contact_form_shortcode_string = $atts['contact_form'];
+		$contact_form_shortcode        = '[' . $contact_form_shortcode_string . ']';
+	else :
+		$contact_form_shortcode = get_first_contact_form();
+	endif;
+
+	$contact_form_title = $atts['contact_form_title'];
 
 	// Enqueue Stylesheet.
 	$sidebar_contact_css_path = '/assets/css/sidebar-contact.css';

@@ -3,8 +3,10 @@
 	align-items: center;
 	flex-wrap: wrap;
 	> * {
-		flex: 1 1 50%;
-		min-width: 50rem;
+		@media (min-width: $vp_lg) {
+			flex: 1 1 50%;
+			min-width: 50rem;
+		}
 	}
 }
 .theme-heading {

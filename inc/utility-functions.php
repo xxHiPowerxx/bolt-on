@@ -320,3 +320,55 @@ if ( ! function_exists( 'bolt_on_get_video_thumbnail' ) ) :
 	endif;
 }
 endif; // endif ( ! function_exists( 'bolt_on_get_video_thumbnail' ) ) :
+
+if ( ! function_exists( 'get_first_contact_form' ) ) :
+	/**
+	 * Get First Contact Form.
+	 * 
+	 * @return string Contact Form 7 Markup.
+	 */
+	function get_first_contact_form() {
+		$args = array(
+			'numberposts' => 1,
+			'order'       => 'ASC',
+			'orderby'     => 'date',
+			'post_type'   => 'wpcf7_contact_form',
+		);
+		$contact_forms_array = get_posts( $args );
+		if ( is_array( $contact_forms_array ) ) :
+			 $contact_form = $contact_forms_array[0];
+			 return do_shortcode( '[contact-form-7 id="' . $contact_form->ID . '" title="' . $contact_form->post_title . '"]' );
+		else:
+			return false;
+		endif;
+	}
+endif; // endif ( ! function_exists( 'get_first_contact_form' ) ) :
+
+if ( ! function_exists( 'bolt_on_banner' ) ) :
+	/**
+	 * Get Set up Bolt On Banner.
+	 *
+	 * @param string $styles pass the styles tag in so the inline style can be contantenated.
+	 * 
+	 * @return string $styles.
+	 */
+	function bolt_on_banner( $styles ) {
+		$bg_banner_src = null;
+		$banner_size = array(1920, null);
+		if ( has_post_thumbnail() ) :
+			$bg_banner_src = get_the_post_thumbnail_url( get_queried_object()
+			, $banner_size );
+		elseif( $default_post_image = get_theme_mod( 'default_banner_image', null ) ) :
+			$bg_banner_src =  wp_get_attachment_image_url( $default_post_image, $banner_size );
+		endif;
+		if ( $bg_banner_src ) :
+			$styles .= bolt_on_add_inline_style(
+				'.bolt-on-banner:before',
+				array(
+					'background-image' => 'url(' . $bg_banner_src . ')',
+				)
+			);
+		endif;
+		return $styles;
+	}
+endif; // endif ( ! function_exists( 'bolt_on_banner' ) ) :

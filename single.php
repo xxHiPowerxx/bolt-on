@@ -70,12 +70,11 @@ get_header();
 		<!--   /Blog List Section   --->
 
 		<?php
-
 		/*   Contact Section   */
 		echo get_contact_section();
 		/*   Contact Section   */
-	?>
-</main><!--   /#main   -->
+		?>
+	</main><!--   /#main   -->
 </div> <!--   /#primary   -->
 
 <?php

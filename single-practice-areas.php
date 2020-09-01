@@ -24,14 +24,7 @@ $styles = '';
 
 get_header();
 
-$default_banner = get_template_directory_uri() . '/assets/images/Banners/banner.jpg';
-$bg_banner_src  = get_the_post_thumbnail_url( null, 'full' ) ? : $default_banner;
-$styles .= bolt_on_add_inline_style(
-	'.bolt-on-banner:before',
-	array(
-		'background-image' => 'url(' . $bg_banner_src . ')',
-	)
-);
+$styles .= bolt_on_banner( $styles );
 
 ?>
 <div id="primary" class="content-area bolt-on-banner">
@@ -148,7 +141,7 @@ $styles .= bolt_on_add_inline_style(
 								$faq_q_id     = $faqs_section_id . '-q-' . get_row_index();
 								$faq_a_id     = $faqs_section_id . '-a-' . get_row_index();
 								$faq_question = esc_attr( get_sub_field( 'faq_question' ) );
-								$faq_answer   = esc_attr( get_sub_field( 'faq_answer' ) );
+								$faq_answer   = wp_kses_post( get_sub_field( 'faq_answer' ) );
 								if ( $faq_question && $faq_answer ) :
 									?>
 									<div class="faq-q-and-a">

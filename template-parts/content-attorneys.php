@@ -255,7 +255,6 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 								if ( $max_num_pages ) :
 									//render a CTA btn.
 									$more_videos_link = get_field( 'more_videos_link' );
-									// var_dump($more_videos_link);
 									if( $more_videos_link ) :
 										$more_videos_link_url  = get_category_link( $more_videos_link );
 										$more_videos_link_name = $more_videos_link->name;
@@ -268,11 +267,11 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 									<div class="ctnr-btn-view-more-videos">
 										<a class="anchor-btn-cta btn-cta-outer stroke-border has-chevron btn-view-more-videos" href="<?php echo $more_videos_link_url; ?>">
 											<span class="btn-cta btn-cta-inner stroke-border-inner">
-												<span class="btn-cta-text stroke-border-lvl-three">
-													<span>View All</span>&nbsp;
+												<span class="btn-cta-text stroke-border-lvl-three nowrap-parent">
+													<span>View All</span>
 													<span>Videos</span>
 													<?php if( $more_videos_link_name ) : ?>
-														&nbsp;<span>of</span>&nbsp;
+														<span>of</span>
 														<span><?php echo $more_videos_link_name; ?></span>
 													<?php endif;?>
 												</span>

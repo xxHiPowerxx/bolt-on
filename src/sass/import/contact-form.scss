@@ -16,6 +16,13 @@
 	}
 	.input-field {
 		width: 100%;
+		display: block;
+		> :first-child {
+			margin-left: 0;
+		}
+	}
+	.mail-recipients {
+		display: none !important;
 	}
 }
 /*   /Contact Form   */

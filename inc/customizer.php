@@ -39,6 +39,11 @@ require get_template_directory() . '/inc/customizer/new-fields.php';
 require get_template_directory() . '/inc/customizer/header-options.php';
 
 /**
+ * Layout Options.
+ */
+require get_template_directory() . '/inc/customizer/layout-options.php';
+
+/**
  * Render the site title for the selective refresh partial.
  *
  * @return void

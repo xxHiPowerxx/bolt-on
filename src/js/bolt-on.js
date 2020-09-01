@@ -6,6 +6,44 @@ jQuery(document).ready(function($) {
 		$header = $('#masthead').first(),
 		transitionEnd =
 			'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
+
+	function detectMac() {
+		if (-1 != navigator.userAgent.indexOf('Mac OS X')) {
+			$body.addClass('browser-mac');
+			return true;
+		}
+	}
+
+	function detectIe() {
+		if (
+			/MSIE 10/i.test(navigator.userAgent) ||
+			/MSIE 9/i.test(navigator.userAgent) ||
+			/rv:11.0/i.test(navigator.userAgent) ||
+			/Edge\/\d./i.test(navigator.userAgent)
+		) {
+			if (/Edge\/\d./i.test(navigator.userAgent)) {
+				$body.addClass('browser-edge');
+			} else {
+				$body.addClass('browser-ie');
+			}
+			return true;
+		}
+	}
+
+	function detectIOS() {
+		var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+			$body.addClass('os-ios');
+			return 'iOS';
+		}
+	}
+
+	function detectPlatform() {
+		detectMac();
+		detectIe();
+		detectIOS();
+	}
+
 	var count = 0;
 	function collapseOnHover() {
 		$('.has-dropdown').each(function() {
@@ -175,8 +213,26 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+	// Select hidden Option on change.
+	function selectHiddenOption() {
+		var $selectHiddenOption = $('.selectHiddenOption');
+		$selectHiddenOption.each(function() {
+			var $parent = $(this).closest('form'),
+			$target = $parent.find('.selectHiddenOptionTar');
+			$(this).on('change', function(){
+				var selectedIndex = this.selectedIndex,
+				$option = $(':nth-child(' + selectedIndex + ')', $target);
+				if ( $option.length )
+					$option.prop('selected', true);
+				else {
+					$target[0].selectedIndex = -1;
+				}
+			});
+		});
+	}
 
 	function readyFuncs() {
+		detectPlatform();
 		collapseOnHover();
 		activateMobileMenu();
 		sizeHeaderPad();
@@ -188,6 +244,7 @@ jQuery(document).ready(function($) {
 		preventExpandedCollapse();
 		configureBleedSections();
 		mobileMenuToggler();
+		selectHiddenOption();
 	}
 	function resizeFuncs() {
 		activateMobileMenu();

@@ -1,0 +1,67 @@
+@import './import/variables.scss';
+@import './import/common';
+
+@import './import/contact-form';
+@import './import/offices-list';
+
+.contact-us-section {
+	.section-header {
+		margin-bottom: 3rem;
+	}
+}
+.fraction-wrap {
+	flex-direction: column;
+	@media (min-width: 1440px) {
+		flex-direction: row;
+	}
+	.one-half {
+		width: 100%;
+		@media (min-width: 1440px) {
+			width: 50%;
+		}
+		&:first-child {
+			padding-bottom: 3rem;
+			padding-right: 0;
+			@media (min-width: 1440px) {
+				padding-bottom: 0;
+				padding-right: 3rem;
+			}
+			@media (min-width: $vp_xxl) {
+				padding-right: 6rem;
+			}
+		}
+		&:last-child {
+			padding-top: 3rem;
+			padding-left: 0;
+			@media (min-width: 1440px) {
+				padding-top: 0;
+				padding-left: 3rem;
+			}
+			@media (min-width: $vp_xxl) {
+				padding-left: 6rem;
+			}
+		}
+	}
+}
+#contact-us {
+	.offices-list {
+		display: flex;
+		flex-wrap: wrap;
+		.listed-office {
+			flex: 1 0 50%;
+			padding: 1.5rem;
+			border-bottom: none;
+			display: flex;
+			flex-direction: column;
+			margin-top: 1.5rem;
+			margin-bottom: 1.5rem;
+			.office-title {
+				font-family: $font-fam-primary;
+			}
+			.office-address > * {
+				display: block;
+				white-space: nowrap;
+			}
+		}
+	}
+}

@@ -64,9 +64,10 @@ function component_dynamic_post_menu( $args ) {
 					'orderby'        => 'menu_order',
 					'order'          => 'ASC'
 				);
-				$_imm_children = get_children( $_imm_children_args );
+				$_imm_children       = get_children( $_imm_children_args );
+				$_imm_children_class = $_imm_children ? ' has-children' : null;
 				?>
-				<li class="menu-item<?php echo $current_post_class; ?>">
+				<li class="menu-item<?php echo $current_post_class; ?> <?php echo $_imm_children_class; ?>">
 					<a href="<?php echo $post_link; ?>" title="<?php echo $long_title; ?>"><?php echo $post_title; ?></a>
 					<?php if ( $_imm_children && $args['child_level'] > 0 ) : ?>
 						<ul class="sub-menu">
@@ -90,9 +91,10 @@ function component_dynamic_post_menu( $args ) {
 									'orderby'        => 'menu_order',
 									'order'          => 'ASC'
 								);
-								$__imm_children = get_children( $__imm_children_args );
+								$__imm_children       = get_children( $__imm_children_args );
+								$__imm_children_class = $__imm_children ? ' has-children' : null;
 								?>
-								<li class="menu-item<?php echo $current_post_class; ?>">
+								<li class="menu-item<?php echo $current_post_class; ?><?php echo $__imm_children_class; ?>">
 									<a href="<?php echo $_post_link; ?>" title="<?php echo $_long_title; ?>"><?php echo $_post_title; ?></a>
 									<?php if ( $__imm_children && $args['child_level'] > 1 ) : ?>
 										<ul class="sub-menu">

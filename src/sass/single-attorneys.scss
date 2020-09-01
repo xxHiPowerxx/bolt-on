@@ -64,7 +64,10 @@
 		width: auto;
 		height: auto;
 		max-height: 35rem;
-		max-width: 100%;
+		max-width: 40%;
+		@media (min-width: $vp_xs) {
+			max-width: 100%;
+		}
 		@media (min-width: $vp_m) {
 			max-height: none;
 		}

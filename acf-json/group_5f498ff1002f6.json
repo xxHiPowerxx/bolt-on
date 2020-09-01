@@ -1,0 +1,86 @@
+{
+    "key": "group_5f498ff1002f6",
+    "title": "Contact Form",
+    "fields": [
+        {
+            "key": "field_5f49902dd29ae",
+            "label": "Contact Form Override",
+            "name": "contact_form_override",
+            "type": "post_object",
+            "instructions": "Select Which Contact Form to use for this post or page.\r\nWill ignore Contact Form chosen for this Category in Contact Form Widget.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "wpcf7_contact_form"
+            ],
+            "taxonomy": "",
+            "allow_null": 1,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
+            "key": "field_5f4d1cadc540d",
+            "label": "Captorra Case GUID Override",
+            "name": "captorra_case_guid_override",
+            "type": "text",
+            "instructions": "Override the default Captorra Case Type GUID.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "practice-areas"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "videos"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1598901361
+}

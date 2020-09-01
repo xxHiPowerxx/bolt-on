@@ -1,45 +1,11 @@
 @import './import/variables.scss';
 @import './import/common';
 
-@import './import/contact-form';
-@import './import/offices-list';
-
-.site-main {
-	padding: 6rem 12rem;
-}
 
 .site-content {
 	@extend .stripes-banner;
 	> * {
 		position: relative;
 		background-color: $white;
-	}
-}
-
-.contact-us-section {
-	.section-header {
-		margin-bottom: 3rem;
-	}
-}
-
-#contact-us {
-	.offices-list {
-		display: flex;
-		flex-wrap: wrap;
-		.listed-office {
-			flex: 1 0 50%;
-			padding: 1.5rem;
-			border-bottom: none;
-			display: flex;
-			flex-direction: column;
-			margin-top: 1.5rem;
-			margin-bottom: 1.5rem;
-			.office-title {
-				font-family: $font-fam-primary;
-			}
-			.office-address > * {
-				display: block;
-			}
-		}
 	}
 }
