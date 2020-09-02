@@ -1,6 +1,5 @@
 @import './import/variables.scss';
-@import './import/common';
-
+@import './import/common.scss';
 
 .site-content {
 	@extend .stripes-banner;
