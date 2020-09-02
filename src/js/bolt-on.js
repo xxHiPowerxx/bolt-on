@@ -4,6 +4,8 @@ jQuery(document).ready(function($) {
 		fixedHeader = false,
 		$body = $('body'),
 		$header = $('#masthead').first(),
+		transitionStart =
+			'webkitTransitionStart otransitionstart oTransitionStart msTransitionStart transitionstart',
 		transitionEnd =
 			'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 
@@ -44,47 +46,62 @@ jQuery(document).ready(function($) {
 		detectIOS();
 	}
 
-	var count = 0;
 	function collapseOnHover() {
 		$('.has-dropdown').each(function() {
 			var collapse = $(this).children('.collapse'),
+				otherCollapses = $(this).siblings('.has-dropdown').children('.collapse'),
 				className1 = 'active',
 				className2 = 'header-dropdown-active',
 				dropDownHovered = false;
-			$(this).hover(
-				function() {
-					$(this).addClass(className1);
+			this.collapseShown = false;
+			function showCollapse($elem) {
+				otherCollapses.collapse('hide');
+				$elem.addClass(className1);
+				if (! $header.is('.transitioning') ) {
 					collapse.collapse('show').one('shown.bs.collapse', function() {
-						console.log('Im shown');
-						$(this).one(transitionEnd, function() {
+						$elem.one(transitionEnd, function() {
 							$(this)
 								.one('mouseenter', function() {
-									count++;
-									console.log('count', count);
 									dropDownHovered = true;
 									if ($(this).closest('#masthead').length) {
 										$body.addClass(className2);
 									}
 								})
 								.one('mouseleave', function() {
-									count--;
-									console.log('count', count);
 									dropDownHovered = false;
 									collapse.collapse('hide');
 									if ($(this).closest('#masthead').length) {
 										$body.removeClass(className2);
 									}
 								});
+								return $elem[0].collapseShown = true;
 						});
 					});
+				}
+			}
+			function hideCollapse($elem) {
+				$elem.removeClass(className1);
+				if (! dropDownHovered) {
+					collapse.collapse('hide');
+					return $elem[0].collapseShown = false;
+				}
+			}
+			$(this).hover(
+				function() {
+					showCollapse($(this));
 				},
 				function() {
-					$(this).removeClass(className1);
-					if (!dropDownHovered) {
-						collapse.collapse('hide');
+					hideCollapse($(this));
+				}
+			).on('click', function(e){
+				if (e.target === this) {
+					if ( ! this.collapseShown) {
+						showCollapse($(this));
+					} else {
+						hideCollapse($(this));
 					}
 				}
-			);
+			});
 		});
 	}
 	function activateMobileMenu() {
@@ -103,7 +120,7 @@ jQuery(document).ready(function($) {
 		$('.sizeHeaderPad').each(function() {
 			fixedHeader = getComputedStyle(this).position === 'fixed';
 			if (fixedHeader) {
-				var sizeHeaderPadTar = $('.sizeHeaderPadTar').first();
+				var sizeHeaderPadTar = $('.sizeHeaderPadTar');
 				headerHeight = headerHeight || this.getBoundingClientRect().height;
 				headerPad = headerHeight;
 				sizeHeaderPadTar.css('padding-top', headerPad);
@@ -113,8 +130,6 @@ jQuery(document).ready(function($) {
 	function scrolledPastHeader() {
 		$('.scrolledPastHeaderRef').each(function() {
 			var thisRect = this.getBoundingClientRect();
-			console.log($(window).scrollTop());
-			console.log(thisRect.height + this.offsetTop);
 			if ($(window).scrollTop() >= thisRect.height + this.offsetTop) {
 				$body.addClass('scrolledPastHeader');
 			} else {
@@ -171,6 +186,19 @@ jQuery(document).ready(function($) {
 				}
 				// Use event.pageX / event.pageY here
 			}
+		}
+	}
+	function watchHeaderTransition() {
+		if (fixedHeader) {
+			$header.on(transitionStart, function(e){
+				if (e.target === this) {
+					$(this).addClass('transitioning');
+				}
+			}).on(transitionEnd, function(e){
+				if (e.target === this) {
+					$(this).removeClass('transitioning');
+				}
+			})
 		}
 	}
 	function bleedIntoHeader() {
@@ -237,6 +265,7 @@ jQuery(document).ready(function($) {
 		activateMobileMenu();
 		sizeHeaderPad();
 		scrolledPastHeader();
+		watchHeaderTransition();
 		bleedIntoHeader();
 		initSlick();
 		checkIfMouseIsOverHeader();
@@ -249,6 +278,7 @@ jQuery(document).ready(function($) {
 	function resizeFuncs() {
 		activateMobileMenu();
 		sizeHeaderPad();
+		bleedIntoHeader();
 	}
 	function scrollFuncs() {
 		scrolledPastHeader();
