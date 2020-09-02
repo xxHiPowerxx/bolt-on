@@ -103,7 +103,7 @@ body {
 			width: 100%;
 			left: 0;
 			top: 0;
-			background-color: rgba(255, 255, 255, 0.975);
+			background-color: rgba($white, 0.975);
 			padding: 3rem;
 			z-index: 999;
 			display: block;
@@ -124,6 +124,7 @@ body {
 			align-items: flex-start;
 			justify-content: flex-start;
 			.menu-item {
+				@include smoothest-transition;
 				width: 100%;
 				border-bottom: 1px solid black;
 				&:first-child {
@@ -146,25 +147,31 @@ body {
 				&:before {
 					content: "\f078";
 					@include font-awesome-font;
+					@include smoothest-transition;
 					font-size: $menu-item-font-size;
 					line-height: 1;
 					padding: 0.5em 1.5rem;
 					float: right;
+					cursor: pointer;
+				}
+				&.active {
+					&:before {
+						transform: translateZ(0) scaleY(-1);
+					}
 				}
 			}
 			.sub-menu {
 				position: relative;
 				flex-direction: column;
 				padding: 0 0 0 1rem;
-				margin-left: 1rem;
-				border-left: .5rem solid $primary;
 				&:before,
 				&:after {
 					content: none;
 				}
 				.menu-item {
 					max-width: none;
-					padding: 0;
+					padding: 0 0 0 1rem;
+					border-left: .5rem solid $primary;
 					&:last-child {
 						border-bottom: 0;
 					}
