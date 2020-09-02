@@ -144,7 +144,7 @@ class BoltOn_Walker extends Walker_Nav_Menu {
 			return;
 		$id_field = $this->db_fields['id'];
 		$element->has_children = !empty( $children_elements[$element->ID] );
-		$element->classes[] = ( $element->current || $element->current_item_ancestor ) ? 'active' : '';
+		$element->classes[] = ( $element->current || $element->current_item_ancestor ) ? 'current-item' : '';
 		$element->classes[] = ( $element->has_children ) ? 'has-dropdown' : '';
 		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
