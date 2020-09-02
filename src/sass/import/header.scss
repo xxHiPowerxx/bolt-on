@@ -7,6 +7,18 @@
 	@at-root #{$trans-header} & {
 		background-color: transparent;
 		box-shadow: none;
+		> * {
+			position: relative;
+		}
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.04) 90%, rgba(0, 0, 0, 0) 100%);
+		}
 	}
 	.site-branding {
 		text-align: center;
@@ -15,6 +27,13 @@
 	.custom-logo {
 		svg {
 			width: 100%;
+		}
+	}
+	&.transitioning {
+		.menu-item {
+			a {
+				pointer-events: none;
+			}
 		}
 	}
 }
@@ -29,6 +48,11 @@ body {
 				&.scrolledPastHeader {
 					.site-header {
 						transform: translate3d(0, -110%, 0);
+					}
+					#primary-menu {
+						.sub-menu {
+							display: none;
+						}
 					}
 				}
 			}
