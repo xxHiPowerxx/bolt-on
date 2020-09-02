@@ -113,6 +113,32 @@
 				}
 			}
 		}
+		// Using a hackey trick here to give a height transition to sub-menu items.
+		$hackey-pad: .5em;
+		&.has-children {
+			.sub-menu {
+				.menu-item {
+					.sub-menu {
+						 > .menu-item {
+							a {
+								height: 0;
+							}
+						}
+					}
+					#{$active} {
+						.sub-menu {
+							> .menu-item {
+								> a {
+									height: 2.5em;
+									margin-top: -$hackey-pad;
+									margin-bottom: -$hackey-pad;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		#{$active} {
 			&.has-children {
 				> a {
@@ -124,9 +150,9 @@
 			> .sub-menu {
 				> .menu-item {
 					font-size: 1.8rem;
-					padding-top: .5em;
-					padding-bottom: .5em;
-					a {
+					padding-top: $hackey-pad;
+					padding-bottom: $hackey-pad;
+					> a {
 						height: 2.5em;
 					}
 				}
