@@ -24,7 +24,7 @@ wp_enqueue_style( 'bolt-on-archive-css' );
 
 		<!--   Blog List Section   --->
 		<section id="archive-list-section" class="archive-list-section bleeds-into-above-section">
-			<div class="container container-ext container-archive-list-section bleed-target pad-onetwenty bg-white">
+			<div class="container-fluid container-xxl container-ext container-archive-list-section bleed-target pad-onetwenty bg-white">
 				<div class="row row-archive-list-section">
 					<aside id="archive-sidebar" class="left-sidebar col-xxl-3 col-xl-4 col-12 pad-bottom order-3 order-xl-1">
 						<?php
