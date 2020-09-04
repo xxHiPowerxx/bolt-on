@@ -74,7 +74,7 @@ function component_dynamic_post_menu_section( $args ) {
 	?>
 	<!--   Dynamic Post Menu Section   -->
 	<section class="dynamic-post-menu-section pad-bottom">
-		<div class="container-fluid container-lg container-ext container-dynamic-post-menu-section pad-onetwenty bleed-target">
+		<div class="container-fluid container-sm container-ext container-dynamic-post-menu-section pad-onetwenty bleed-target">
 			<?php
 			if ( ! empty( $greatest_case_result ) ) :
 				$greatest_case_result_id  = esc_attr( $greatest_case_result[0]->ID );
