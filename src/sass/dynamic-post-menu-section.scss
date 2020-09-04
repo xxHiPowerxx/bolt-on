@@ -27,16 +27,25 @@
 			backface-visibility: hidden;
 			text-decoration: none;
 			margin-right: .5em;
+			display: flex;
 			#{$active} {
 				transform: translate3d(.5em, 0, 0);
 				color: $primary-light;
 			}
 			&:after {
+				margin-left: 0;
 				color: inherit;
 			}
 		}
 	}
 	/*   /Dynamic Post Menu   */
+	&.below-section-bleeds-in {
+		.bleed-target {
+			@media (max-width: $vp_sm - 1) {
+				padding-bottom: 0;
+			}
+		}
+	}
 }
 .ctnr-section-title-dynamic-post-nav {
 	color: $white;
