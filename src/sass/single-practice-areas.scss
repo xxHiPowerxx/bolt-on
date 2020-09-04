@@ -20,7 +20,20 @@
 		max-width: 90rem;
 		margin-left: auto;
 		margin-right: auto;
+		> :first-child {
+			margin-top: 0;
+		}
 	}
+	img {
+		&.float-right,
+		&.alignright,
+		&.float-left,
+		&.alignleft {
+			height: auto;
+			max-width: calc(55vw - 3rem);
+		}
+	}
+
 }
 /*   /Call To Action Section   */
 
