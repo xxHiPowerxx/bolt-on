@@ -353,11 +353,11 @@ if ( ! function_exists( 'bolt_on_banner' ) ) :
 	 * @return string $styles.
 	 */
 	function bolt_on_banner( $styles ) {
-		$bg_banner_src = null;
-		$banner_size = array(1920, null);
-		if ( has_post_thumbnail() ) :
-			$bg_banner_src = get_the_post_thumbnail_url( get_queried_object()
-			, $banner_size );
+		$bg_banner_src  = null;
+		$banner_size    = array(1920, null);
+		$queried_object = get_queried_object();
+		if ( $queried_object && has_post_thumbnail( $queried_object ) ) :
+			$bg_banner_src = get_the_post_thumbnail_url( $queried_object, $banner_size );
 		elseif( $default_post_image = get_theme_mod( 'default_banner_image', null ) ) :
 			$bg_banner_src =  wp_get_attachment_image_url( $default_post_image, $banner_size );
 		endif;
