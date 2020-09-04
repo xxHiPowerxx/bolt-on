@@ -271,5 +271,17 @@ function get_captorra_case_guid( $atts = null, $content = null ) {
 }
 add_shortcode( 'captorra_case_guid', 'get_captorra_case_guid' );
 
-
-
+/**
+ * Get Swoosh
+ * Render's swoosh with wp_get_attachment_image();
+ * @return string - Chosen Captorra Case ID
+ */
+function get_swoosh( $atts = null, $content = null ) {
+	$swoosh_image_id = get_field( 'swoosh_image' );
+	if ( $swoosh_image_id ) :
+		$size = array( null, 500 );
+		$attr = array('class' => 'swoosh');
+		return wp_get_attachment_image( $swoosh_image_id, $size, false, $attr );
+	endif;
+}
+add_shortcode( 'swoosh', 'get_swoosh' );
