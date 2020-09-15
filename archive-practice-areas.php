@@ -53,22 +53,11 @@ $styles .= bolt_on_add_inline_style(
 <div id="primary" class="content-area bolt-on-banner">
 	<main id="main" class="site-main">
 		<?php
-		$queried_object = get_queried_object();
-		$post_type      = $queried_object->name;
-		$post_type_name = esc_attr( $queried_object->label );
-
-		$args = array(
-			'post_type'      => $post_type,
-			'posts_per_page' => -1,
-			'post_parent'    => 0,
-			'orderby'        => array(
-				'menu_order',
-				'date'
-			),
-			'order'          => 'ASC'
-		);
-		$post_query = new WP_Query($args);
+		$post_query     = get_practice_area_parents();
 		if( $post_query->have_posts() ) :
+			$queried_object = get_queried_object();
+			$post_type      = $queried_object->name;
+			$post_type_name = esc_attr( $queried_object->label );
 			?>
 			<!--   Intro Section   --->
 			<section id="practice-areas-archive-intro-section" class="intro-section bleeds-into-above-section">
@@ -138,11 +127,10 @@ $styles .= bolt_on_add_inline_style(
 							while ( $post_query->have_posts() ) :
 								$post_query->the_post();
 								$post_link         = esc_url( get_the_permalink() );
-								$post_title        = esc_attr( get_the_title() );
+								$long_title        = get_the_title();
+								$short_title       = esc_attr( get_field( 'short_title' ) );
+								$post_title        = $short_title ? : $long_title;
 
-								if ( strtolower( html_entity_decode( $post_title ) ) === strtolower( 'Government Unfair & Deceptive Acts & Practices Civil Penalties' ) ) :
-									$post_title = 'Government UDAP Civil Penalties';
-								endif;
 								$bg_image_swap_url = esc_url( get_the_post_thumbnail_url() );
 								?>
 								<a class="listed-practice-area line-left bgImageSwapController" href="<?php echo $post_link; ?>" data-bg-image-swap-url="<?php echo $bg_image_swap_url; ?>"><?php echo $post_title; ?></a>
