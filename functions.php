@@ -200,7 +200,7 @@ function bolt_on_assets() {
 
 	// Register Scripts
 	$bolt_on_js_path = '/assets/js/bolt-on.js';
-	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js', 'bolt-on-vendor-slick-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
+	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js', 'bolt-on-vendor-slick-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), true );
 
 	$bolt_on_navigation_path = '/assets/js/navigation.js';
 	wp_enqueue_script( 'bolt-on-navigation-js', get_theme_file_uri( $bolt_on_navigation_path ), array(), filemtime( get_template_directory() . $bolt_on_navigation_path ), true );
@@ -212,7 +212,7 @@ function bolt_on_assets() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'bolt_on_assets' );
+add_action( 'wp_enqueue_scripts', 'bolt_on_assets', -1 );
 
 /**
  * Include ACF Functions
@@ -455,3 +455,26 @@ function google_tag_manager_body(){
 	<?php
 }
 add_action('__before_header','google_tag_manager_body', 20);
+
+/*
+// $geo = geoip_detect2_get_external_ip_adress();
+// $geo = geoip_detect2_get_info_from_ip($geo);
+$geo = geoip_detect2_get_info_from_current_ip();
+	?><pre><?php var_dump($geo->); ?></pre><?php
+	die;
+function wpcf7_geolocation_spam( $spam ) {
+  if ( $spam ) {
+    return $spam;
+	}
+	// geoip_detect2_get_info_from_current_ip($locales = array('en'), $options = array());
+	$geo = geoip_detect2_get_info_from_current_ip($locales = array('en'), $options = array());
+	var_dump($geo);
+	// if (  )
+  if ( false !== stripos( $_POST['your-message'], 'viagra' ) ) {
+    $spam = true;
+  }
+ 
+  return $spam;
+}
+add_filter( 'wpcf7_spam', 'wpcf7_geolocation_spam', 10, 1 );
+*/
