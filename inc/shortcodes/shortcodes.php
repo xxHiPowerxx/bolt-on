@@ -266,7 +266,7 @@ function get_captorra_case_guid( $atts = null, $content = null ) {
 	elseif( $default_captorra_case_guid = get_field( 'default_captorra_case_guid', 'options' ) ) :
 		$case_id = $default_captorra_case_guid;
 	endif;
-	$content = str_replace( 'value=""', 'value="' . $case_id . '"', $content);
+	$content = str_replace( 'value=""', 'value="' . $case_id . '"', $content );
 	return do_shortcode($content);
 }
 add_shortcode( 'captorra_case_guid', 'get_captorra_case_guid' );
@@ -285,3 +285,50 @@ function get_swoosh( $atts = null, $content = null ) {
 	endif;
 }
 add_shortcode( 'swoosh', 'get_swoosh' );
+
+function custom_code_generator(){
+    wpcf7_add_form_tag('mail_recipients', 'custom_code_handler');
+}
+add_action('wpcf7_init', 'custom_code_generator');
+
+function custom_code_handler($tag){
+	// var_dump($tag);
+	$select_name = 'default-mail-recipients-name';
+	if ( ! empty( $tag->options ) ) :
+		$select_name = $tag->options[0];
+	endif;
+
+	// Get Parent Level Practice Areas
+	$parent_query = get_practice_area_parents();
+	if ( $parent_query->have_posts() ) :
+		$posts_data = array();
+		while ( $parent_query->have_posts() ) :
+			$parent_query->the_post();
+			$mail_recipients = get_field( 'mail_recipients' );
+			if ( $mail_recipients ) :
+				$long_title              = get_the_title();
+				$short_title             = esc_attr( get_field( 'short_title' ) );
+				$post_title              = $short_title ? : $long_title;
+				$posts_data[$post_title] = $mail_recipients;
+			endif;
+		endwhile;
+		// TODO figure out why wp_localize_script is not passing data.
+		// function localize_script($posts_data) {
+			// Register Scripts
+			$handle = 'bolt-on-mail-recipients-js';
+			$path   = '/assets/js/bolt-on-mail-recipients.js';
+			// wp_register_script( $handle, get_theme_file_uri( $path ), array( 'jquery', 'bolt-on-js' ), filemtime( get_template_directory() . $path ), true );
+			// var_dump($posts_data);
+			wp_localize_script( 'bolt-on-js', 'postsData', $posts_data );
+			// wp_enqueue_script( $handle );
+		// }
+		// add_action('wp_enqueue_scripts', 'pass_var_to_js',99);
+		// add_action( 'wp_enqueue_scripts', 'localize_script', 99 );
+	endif;
+	//create html and return
+
+	$html = '<input type="hidden" disabled class="selectHiddenOptionTar" name="' . $select_name . '" />';
+
+	return $html;
+
+}
