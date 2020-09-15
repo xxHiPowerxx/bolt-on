@@ -245,17 +245,56 @@ jQuery(document).ready(function($) {
 	function selectHiddenOption() {
 		var $selectHiddenOption = $('.selectHiddenOption');
 		$selectHiddenOption.each(function() {
-			var $parent = $(this).closest('form'),
-			$target = $parent.find('.selectHiddenOptionTar');
-			$(this).on('change', function(){
-				var selectedIndex = this.selectedIndex,
-				$option = $(':nth-child(' + selectedIndex + ')', $target);
-				if ( $option.length )
-					$option.prop('selected', true);
-				else {
-					$target[0].selectedIndex = -1;
+			var $parent = $(this).closest('.wpcf7'),
+			$target = $parent.find('.selectHiddenOptionTar'),
+			that = this;
+			function coreFunc(that) {
+				var practiceArea = that.value;
+				console.log('postsData', postsData);
+				console.log('postsData[practiceArea]', postsData[practiceArea]);
+				if ( postsData[practiceArea] !== undefined ) {
+					$target.val( postsData[practiceArea]);
+				} else {
+					$target.val('');
 				}
+				console.log('$target.val()', $target.val());
+			}
+			$(this).on('change', function(){
+				// use 'this' here because it's quicker than 'that'
+				// even though 'that' === 'this';
+				coreFunc(this);
 			});
+			$parent.on('wpcf7submit', function () {
+				$target.prop('disabled', false);
+				coreFunc(that);
+			}).on('wpcf7mailsent', function(){
+				console.log('here');
+				setTimeout(function(){
+					$target.prop('disabled', true);
+				}, 100);
+			});
+		});
+	}
+
+	function boltOnBanner() {
+		$('.bolt-on-banner').each(function(index) {
+			var styleTagId = 'bolt-on-banner-style-' + index,
+			$styleTag = $('#' + styleTagId),
+			headerHeight = headerHeight || $header[0].getBoundingClientRect().height,
+			paddingTop = parseFloat($(this).css('padding-top')),
+			$adminBar = $('#wpadminbar').first(),
+			adminBarHeight = 0;
+			if ( ! $styleTag.length ) {
+				$styleTagHTML = '<style id="' + styleTagId + '"></style>';
+				$body.append($styleTagHTML);
+				$styleTag = $('#' + styleTagId);
+			}
+			if ( $adminBar.length ) {
+				adminBarHeight = $adminBar[0].getBoundingClientRect().height;
+			}
+			var bannerPad = headerHeight + paddingTop + adminBarHeight,
+			css = '.bolt-on-banner:before{padding-bottom:' + bannerPad + 'px;}';
+			$styleTag.html(css);
 		});
 	}
 
@@ -264,6 +303,7 @@ jQuery(document).ready(function($) {
 		collapseOnHover();
 		activateMobileMenu();
 		sizeHeaderPad();
+		boltOnBanner();
 		scrolledPastHeader();
 		watchHeaderTransition();
 		bleedIntoHeader();
@@ -279,6 +319,7 @@ jQuery(document).ready(function($) {
 		activateMobileMenu();
 		sizeHeaderPad();
 		bleedIntoHeader();
+		boltOnBanner();
 	}
 	function scrollFuncs() {
 		scrolledPastHeader();
