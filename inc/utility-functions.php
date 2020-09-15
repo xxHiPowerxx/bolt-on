@@ -346,7 +346,7 @@ endif; // endif ( ! function_exists( 'get_first_contact_form' ) ) :
 
 if ( ! function_exists( 'bolt_on_banner' ) ) :
 	/**
-	 * Get Set up Bolt On Banner.
+	 * Set up Bolt On Banner.
 	 *
 	 * @param string $styles pass the styles tag in so the inline style can be contantenated.
 	 * 
@@ -372,3 +372,27 @@ if ( ! function_exists( 'bolt_on_banner' ) ) :
 		return $styles;
 	}
 endif; // endif ( ! function_exists( 'bolt_on_banner' ) ) :
+
+if ( ! function_exists( 'get_practice_area_parents' ) ) :
+	/**
+	 * Get Practice Area Parents.
+	 *
+	 * @return WP_Query - object with found parent-level practice areas.
+	 */
+	function get_practice_area_parents() {
+		$post_type = 'practice-areas';
+
+		$args = array(
+			'post_type'      => $post_type,
+			'posts_per_page' => -1,
+			'post_parent'    => 0,
+			'orderby'        => array(
+				'menu_order',
+				'date'
+			),
+			'order'          => 'ASC'
+		);
+		$post_query = new WP_Query($args);
+		return $post_query;
+	}
+endif; // endif ( ! function_exists( 'get_practice_area_parents' ) ) :
