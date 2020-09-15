@@ -262,6 +262,59 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 1
+        },
+        {
+            "key": "field_5f5c101178b42",
+            "label": "Contact Form Mail Recipients",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_5f5c0fc978b41",
+            "label": "Mail Recipients",
+            "name": "mail_recipients",
+            "type": "textarea",
+            "instructions": "List of E-Mail Recipients for this Practice Area listed in the Contact Form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_5f5c102078b43",
+            "label": "Contact Form Mail Recipients Accordion Endpoint",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 1
         }
     ],
     "location": [
@@ -281,5 +334,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Configure the Practice Areas with these Attributes.",
-    "modified": 1598572722
+    "modified": 1599868978
 }
