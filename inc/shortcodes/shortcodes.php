@@ -309,21 +309,21 @@ function custom_code_handler($tag){
 				$long_title              = get_the_title();
 				$short_title             = esc_attr( get_field( 'short_title' ) );
 				$post_title              = $short_title ? : $long_title;
-				$posts_data[$post_title] = $mail_recipients;
+				$key = strrev( $post_title );
+				$encrypted_mail_recipients = crypto_js_aes_encrypt(
+					$key,
+					$mail_recipients
+				);
+				$posts_data[$post_title] = $encrypted_mail_recipients;
+				$posts_data['key'] = $key;
 			endif;
 		endwhile;
-		// TODO figure out why wp_localize_script is not passing data.
-		// function localize_script($posts_data) {
-			// Register Scripts
-			$handle = 'bolt-on-mail-recipients-js';
-			$path   = '/assets/js/bolt-on-mail-recipients.js';
-			// wp_register_script( $handle, get_theme_file_uri( $path ), array( 'jquery', 'bolt-on-js' ), filemtime( get_template_directory() . $path ), true );
-			// var_dump($posts_data);
-			wp_localize_script( 'bolt-on-js', 'postsData', $posts_data );
-			// wp_enqueue_script( $handle );
-		// }
-		// add_action('wp_enqueue_scripts', 'pass_var_to_js',99);
-		// add_action( 'wp_enqueue_scripts', 'localize_script', 99 );
+		// Register Scripts
+		$handle = 'bolt-on-mail-recipients-js';
+		$path   = '/assets/js/bolt-on-mail-recipients.js';
+		wp_register_script( $handle, get_theme_file_uri( $path ), array( 'jquery', 'contact-form-7', 'bolt-on-vendor-cryptojs-js' ), filemtime( get_template_directory() . $path ), true );
+		wp_localize_script( $handle, 'postsData', $posts_data );
+		wp_enqueue_script( $handle );
 	endif;
 	//create html and return
 
