@@ -396,3 +396,27 @@ if ( ! function_exists( 'get_practice_area_parents' ) ) :
 		return $post_query;
 	}
 endif; // endif ( ! function_exists( 'get_practice_area_parents' ) ) :
+
+if ( ! function_exists( 'crypto_js_aes_encrypt' ) ) :
+	/**
+	 * Encrypt value to a cryptojs compatiable json encoding string
+	 *
+	 * @param mixed $passphrase
+	 * @param mixed $value
+	 * @return string
+	*/
+	function crypto_js_aes_encrypt($passphrase, $value){
+		$salt = openssl_random_pseudo_bytes(8);
+		$salted = '';
+		$dx = '';
+		while (strlen($salted) < 48) {
+				$dx = md5($dx.$passphrase.$salt, true);
+				$salted .= $dx;
+		}
+		$key = substr($salted, 0, 32);
+		$iv  = substr($salted, 32,16);
+		$encrypted_data = openssl_encrypt(json_encode($value), 'aes-256-cbc', $key, true, $iv);
+		$data = array("ct" => base64_encode($encrypted_data), "iv" => bin2hex($iv), "s" => bin2hex($salt));
+		return json_encode($data);
+	}
+endif; // endif ( ! function_exists( 'crypto_js_aes_encrypt' ) ) :
