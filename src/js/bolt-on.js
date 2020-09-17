@@ -241,40 +241,7 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
-	// Select hidden Option on change.
-	function selectHiddenOption() {
-		var $selectHiddenOption = $('.selectHiddenOption');
-		$selectHiddenOption.each(function() {
-			var $parent = $(this).closest('.wpcf7'),
-			$target = $parent.find('.selectHiddenOptionTar'),
-			that = this;
-			function coreFunc(that) {
-				var practiceArea = that.value;
-				console.log('postsData', postsData);
-				console.log('postsData[practiceArea]', postsData[practiceArea]);
-				if ( postsData[practiceArea] !== undefined ) {
-					$target.val( postsData[practiceArea]);
-				} else {
-					$target.val('');
-				}
-				console.log('$target.val()', $target.val());
-			}
-			$(this).on('change', function(){
-				// use 'this' here because it's quicker than 'that'
-				// even though 'that' === 'this';
-				coreFunc(this);
-			});
-			$parent.on('wpcf7submit', function () {
-				$target.prop('disabled', false);
-				coreFunc(that);
-			}).on('wpcf7mailsent', function(){
-				console.log('here');
-				setTimeout(function(){
-					$target.prop('disabled', true);
-				}, 100);
-			});
-		});
-	}
+	
 
 	function boltOnBanner() {
 		$('.bolt-on-banner').each(function(index) {
@@ -313,7 +280,6 @@ jQuery(document).ready(function($) {
 		preventExpandedCollapse();
 		configureBleedSections();
 		mobileMenuToggler();
-		selectHiddenOption();
 	}
 	function resizeFuncs() {
 		activateMobileMenu();
