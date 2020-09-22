@@ -266,6 +266,11 @@ add_filter('wpcf7_autop_or_not', '__return_false');
 require get_template_directory() . '/inc/shortcodes/shortcodes.php';
 
 /**
+ * Include WPCF7 Custom Tags
+ */
+require get_template_directory() . '/inc/wpcf7-custom-tags.php';
+
+/**
  * Archive Excerpt.
  */
 require get_template_directory() . '/inc/archive-excerpt.php';
@@ -482,3 +487,27 @@ function wpcf7_geolocation_spam( $spam ) {
 }
 add_filter( 'wpcf7_spam', 'wpcf7_geolocation_spam', 10, 1 );
 */
+
+function add_mail_recipients_on_wpcf7_submit($array) {
+	if ( isset( $array['practice-area'] ) ) :
+		$practice_area_title = $array['practice-area'];
+		$args = array(
+			'numberposts' => 1,
+			'post_type'   => 'practice-areas',
+			'meta_query'  => array(
+				array(
+					'key'     => 'short_title',
+					'value'   => $practice_area_title,
+					'compare' => 'LIKE',
+				),
+			),
+		);
+		$practice_area_post = reset( get_posts( $args ) );
+		$mail_recipients    = get_field( 'mail_recipients', $practice_area_post );
+		if ( $mail_recipients ) :
+			$array["mail-recipients"] = $mail_recipients;
+		endif;
+	endif;
+	return $array;
+}
+add_filter( 'wpcf7_posted_data', 'add_mail_recipients_on_wpcf7_submit', 10, 1 );
