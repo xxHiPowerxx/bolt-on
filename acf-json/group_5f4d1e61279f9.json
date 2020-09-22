@@ -39,6 +39,76 @@
             "maxlength": ""
         },
         {
+            "key": "field_5f68e96042df7",
+            "label": "Contact Form Practice Areas",
+            "name": "contact_form_practice_areas_repeater",
+            "type": "repeater",
+            "instructions": "Select which Practice Areas to display in the \"Practice Area\" Select Drop Down in the corresponding Contact Form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_5f68f49c42df8",
+            "min": 1,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Add Practice Areas Group",
+            "sub_fields": [
+                {
+                    "key": "field_5f68f49c42df8",
+                    "label": "Contact Form",
+                    "name": "contact_form",
+                    "type": "post_object",
+                    "instructions": "Select The Contact Form to display the Practice Areas in.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "wpcf7_contact_form"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1
+                },
+                {
+                    "key": "field_5f68f54742df9",
+                    "label": "Practice Areas",
+                    "name": "practice_areas",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "practice-areas"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search"
+                    ],
+                    "elements": [
+                        "featured_image"
+                    ],
+                    "min": 1,
+                    "max": "",
+                    "return_format": "object"
+                }
+            ]
+        },
+        {
             "key": "field_5f4d2012d5412",
             "label": "Contact Forms Accordion Endpoint",
             "name": "",
@@ -73,5 +143,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1598890289
+    "modified": 1600714213
 }
