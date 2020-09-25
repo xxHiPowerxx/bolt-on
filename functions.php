@@ -490,20 +490,25 @@ add_filter( 'wpcf7_spam', 'wpcf7_geolocation_spam', 10, 1 );
 
 function add_mail_recipients_on_wpcf7_submit($array) {
 	if ( isset( $array['practice-area'] ) ) :
-		$practice_area_title = $array['practice-area'];
-		$args = array(
-			'numberposts' => 1,
-			'post_type'   => 'practice-areas',
-			'meta_query'  => array(
-				array(
-					'key'     => 'short_title',
-					'value'   => $practice_area_title,
-					'compare' => 'LIKE',
-				),
-			),
+		$contact_form_practice_areas_repeater = get_field(
+			'contact_form_practice_areas_repeater',
+			'options'
 		);
-		$practice_area_post = reset( get_posts( $args ) );
-		$mail_recipients    = get_field( 'mail_recipients', $practice_area_post );
+		foreach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
+			$practice_area_mail_recipients_repeater = $contact_form_practice_area['practice_area_mail_recipients_repeater'];
+			foreach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+				$practice_area = $practice_area_mail_recipient['practice_area'];
+				$long_title    = $practice_area->post_title;
+				$short_title   = $practice_area->short_title;
+				$post_title    = $short_title ? : $long_title;
+				$post_title    = esc_attr( $post_title );
+				if ( $post_title === $array['practice-area'] ) :
+					$mail_recipients = $practice_area_mail_recipient['mail_recipients'];
+					break;
+				endif;
+			endforeach;// endforeach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+		endforeach ; // endforeach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
+
 		if ( $mail_recipients ) :
 			$array["mail-recipients"] = $mail_recipients;
 		endif;
