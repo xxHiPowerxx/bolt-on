@@ -62,31 +62,30 @@ function bolt_on_contact_form_practice_areas(){
 	);
 	$practice_area_titles                 = array();
 
-	if ( isset( $contact_form_practice_areas_repeater ) ) :
-		foreach ( $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
-			$contact_form   = $contact_form_practice_area['contact_form'];
-			if (
-				property_exists( $contact_form, 'ID' ) &&
-				property_exists( $current_contact_form, 'id' )
-			) :
-				if( $contact_form->ID === $current_contact_form->id ) :
-					$practice_areas = $contact_form_practice_area['practice_areas'];
-					if ( $practice_areas ) :
-						foreach ( $practice_areas as $practice_area ) :
-							$long_title  = $practice_area->post_title;
-							$short_title = $practice_area->short_title;
-							$post_title  = $short_title ? : $long_title;
-							$post_title  = esc_attr( $post_title );
+	foreach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
+		$contact_form = $contact_form_practice_area['contact_form'];
+		if (
+			property_exists( $contact_form, 'ID' ) &&
+			property_exists( $current_contact_form, 'id' )
+		) :
+			if( $contact_form->ID === $current_contact_form->id ) :
+				$practice_area_mail_recipients_repeater = $contact_form_practice_area['practice_area_mail_recipients_repeater'];
+				foreach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+					$practice_area = $practice_area_mail_recipient['practice_area'];
+					if ( $practice_area ) :
+						$long_title  = $practice_area->post_title;
+						$short_title = $practice_area->short_title;
+						$post_title  = $short_title ? : $long_title;
+						$post_title  = esc_attr( $post_title );
 
-							$practice_area_titles[$post_title] = $post_title;
-						endforeach;
+						$practice_area_titles[$post_title] = $post_title;
 					endif; // endif ( $practice_areas ) :
-					// Break foreach loop.
-					break; 
-				endif; // endif( $contact_form->ID === $current_contact_form->id ) :
-			endif;
-		endforeach ; // endforeach ( $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
-	endif; // endif ( isset( $contact_form_practice_areas_repeater ) ) :
+				endforeach;// endforeach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+				// Break foreach loop.
+				break; 
+			endif; // endif( $contact_form->ID === $current_contact_form->id ) :
+		endif;
+	endforeach ; // endforeach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
 
 	return $practice_area_titles;
 }
