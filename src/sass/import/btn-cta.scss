@@ -94,8 +94,10 @@ $btn-stroke-full-width: 100%;
 }
 .btn-cta-outer,
 .btn-cta-inner {
-	outline: none;
 	background-color: transparent;
+	&:focus {
+		outline: none;
+	}
 }
 .btn-cta-inner,
 .btn-cta-text {
