@@ -59,6 +59,14 @@ body {
 			max-height: 15vh;
 		}
 		.navbar-nav  {
+			&#nav-primary-menu {
+				.menu-item {
+					a {
+						padding-top: 1.25em;
+						padding-bottom: 1.25em;
+					}
+				}
+			}
 			.menu-item {
 				a {
 					font-size: 1.7rem;
@@ -127,6 +135,9 @@ body {
 				@include smoothest-transition;
 				width: 100%;
 				border-bottom: 1px solid black;
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
 				&:first-child {
 					border-top: 1px solid black;
 				}
@@ -136,6 +147,8 @@ body {
 			}
 			> .menu-item {
 				> a {
+					padding-top: 1.25em;
+					padding-bottom: 1.25em;
 					font-size: $menu-item-font-size;
 					width: auto;
 					margin-right: auto;
@@ -150,9 +163,9 @@ body {
 					@include smoothest-transition;
 					font-size: $menu-item-font-size;
 					line-height: 1;
-					padding: 0.5em 1.5rem;
-					float: right;
+					padding: 1.25em 1.5rem;
 					cursor: pointer;
+					order: 2;
 				}
 				&.active {
 					&:before {
@@ -164,6 +177,8 @@ body {
 				position: relative;
 				flex-direction: column;
 				padding: 0 0 0 1rem;
+				width: 100%;
+				order: 3;
 				&:before,
 				&:after {
 					content: none;
