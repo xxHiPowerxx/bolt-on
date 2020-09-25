@@ -31,40 +31,86 @@ jQuery(document).ready(function($) {
 	function selectHiddenOption() {
 		var $selectHiddenOption = $('.selectHiddenOption');
 		$selectHiddenOption.each(function() {
-			var $parent = $(this).closest('.wpcf7'),
-			$target = $parent.find('.selectHiddenOptionTar'),
-			that = this;
-			function coreFunc(that, event) {
-				var practiceArea = that.value,
+			var $wpcf7 = $(this).closest('.wpcf7'),
+			$form = $(this).closest('form'),
+			$target = $wpcf7.find('.selectHiddenOptionTar'),
+			targetName,
+			that = this,
+			mailRecipient,
+			dMailRecipient;
+			if ($target.length) {
+				targetName = $target.attr('name');
+			}
+			function coreFunc(that, event, $that) {
+				var practiceArea = that.value;
 				mailRecipient = postsData[practiceArea];
+				// console.log('that.value', that.value);
 				console.log('postsData[practiceArea]', postsData[practiceArea]);
 				if ( postsData[practiceArea] !== undefined ) {
 					// If Event is submit, decrypt string;
-					if ( event.type === 'wpcf7submit' ) {
-						var key = reverseString(practiceArea);
-						mailRecipient = cryptoJsAES.decrypt(key, mailRecipient);
-						console.log('mailRecipient after decrypt', mailRecipient);
+					// console.log(event);
+					if ( event !== undefined && event.type === 'submit' ) {
+						var key = reverseString(practiceArea),
+						dMailRecipient = cryptoJsAES.decrypt(key, mailRecipient);
+						console.log('mailRecipient after decrypt', dMailRecipient);
+						// Set $target val to decrypted mailRecipient.
+						$target.val( dMailRecipient );
+					} else {
+						$target.val( mailRecipient );
 					}
-					$target.val( mailRecipient );
 				} else {
 					$target.val('');
 				}
-				console.log('$target.val()', $target.val());
+				if ( $that !== undefined && $that.is($form) ) {
+					$form.trigger('coreFunc');
+				}
+				console.log('$target.val() at end of coreFunc()', $target.val());
 			}
 			$(this).on('change', function(){
 				// use 'this' here because it's quicker than 'that'
 				// even though 'that' === 'this';
 				coreFunc(this);
 			});
-			$parent.on('wpcf7submit', function (event) {
-				console.log('event', event);
-				$target.prop('disabled', false);
-				coreFunc(that, event);
-			}).on('wpcf7mailsent', function(){
-				console.log('here');
+			$form.submit(function (event) {
+				if ( event.boltOnStopped === undefined ) {
+					event.stopImmediatePropagation();
+					event.preventDefault();
+					console.log('$form submit');
+					$target.prop('disabled', false);
+					this.cachedSubmit = event;
+					coreFunc(that, event, $(this));
+				}
+			}).on('coreFunc', function(event){
+				// event.boltOnStopped = true;
+				console.log(this);
+				console.log('this.cachedSubmit', this.cachedSubmit);
+				$(this).trigger(this.cachedSubmit);
+			});
+			$wpcf7.on('wpcf7mailsent', function(event){
+				// console.log('wpcf7mailsent', event);
+				// Trigger decryptedSent with encrypted mailRecipient.
+				// $(this).trigger('decryptedSent', [mailRecipient]);
+				console.log('$target.val() on wpcf7mailsent', $target.val());
+				var inputsArray = event.detail.inputs;
+				inputsArray.filter(function(obj) {
+					if (obj.name === targetName) {
+						return obj.value = dMailRecipient;
+					}
+				});
+				console.log('inputsArray', inputsArray);
+				console.log('wpcf7mailsent', event);
+
+				var $that = $(this);
 				setTimeout(function(){
-					$target.prop('disabled', true);
-				}, 100);
+					// $that.trigger('decryptedSent', [mailRecipient]);
+					console.log('$target.val() on wpcf7mailsent setTimeout', $target.val());
+				;
+				// 	$target.prop('disabled', true);
+				}, 1000);
+			}).on('decryptedSent', function(event, mailRecipient) {
+
+				$target.val( mailRecipient );
+				console.log('$target.val( mailRecipient )', $target.val());
 			});
 		});
 	}
