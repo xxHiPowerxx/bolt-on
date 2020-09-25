@@ -32,12 +32,6 @@ function wpcf7_mail_recipients_tag_handler($tag){
 				$posts_data['key'] = $key;
 			endif;
 		endwhile;
-		// Register Scripts
-		// $handle = 'bolt-on-mail-recipients-js';
-		// $path   = '/assets/js/bolt-on-mail-recipients.js';
-		// wp_register_script( $handle, get_theme_file_uri( $path ), array( 'jquery', 'contact-form-7', 'bolt-on-vendor-cryptojs-js' ), filemtime( get_template_directory() . $path ), true );
-		// wp_localize_script( $handle, 'postsData', $posts_data );
-		// wp_enqueue_script( $handle );
 	endif;
 	//create html and return
 

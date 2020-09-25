@@ -176,10 +176,7 @@ function bolt_on_assets() {
 		wp_register_style( $handle, get_theme_file_uri( '/vendor/slick/slick.min.css' ), array(), $slick_version, 'all' );
 	}
 
-	// CryptoJS
-	$handle = 'bolt-on-vendor-cryptojs-js';
-	wp_register_script( $handle, get_theme_file_uri( '/vendor/cryptojs/cryptojs.js' ), array(), '3.1.2', true );
-
+	// TODO: Remove Slick from Bolt On Dependancies.
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
 	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css', 'bolt-on-vendor-slick-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
