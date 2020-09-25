@@ -72,11 +72,20 @@
 		.alignright {
 			margin-right: 1.5rem;
 		}
+		.alignleft,
+		.alignright {
+			@media (min-width: $vp_xs) {
+				max-width: 50%;
+			}
+		}
 		figcaption {
 			font-size: 1.6rem;
 			text-align: center;
 			margin-top: .5em;
 			margin-bottom: .5em;
+		}
+		img {
+			height: auto;
 		}
 	}
 	/*   Wordpress Block Overrides   */
