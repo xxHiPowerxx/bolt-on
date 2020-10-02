@@ -1,12 +1,15 @@
 .site-footer {
+	position: relative;
+	z-index: 1;
 	.footer-navigation {
 		padding: 1rem 2%;
+		background-color: $white;
 	}
 	.custom-logo svg > * {
 		fill: $white;
 	}
 	a {
-		color: $primary;
+		color: $primary-light;
 	}
 	.anchor-social-icon {
 		padding: 0.75em;
@@ -62,15 +65,19 @@
 		font-weight: 700;
 		font-size: 2.2rem;
 		color: $white;
+		margin-bottom: .25em;
 	}
+	.anchor-office-phone-number,
 	.anchor-office-location {
 		font-size: 1.8rem;
 		text-decoration: none;
 		transition: $smooth-transition;
-		color: rgba($white, 0.8);
 		#{$active} {
 			color: $white;
 		}
+	}
+	.anchor-office-location {
+		color: rgba($white, 0.8);
 	}
 }
 .footer-main {
@@ -105,7 +112,7 @@
 		@media (min-width: $vp_m) {
 			margin-left: 6rem;
 		}
-		flex: 1;
+		flex: auto;
 	}
 }
 .site-info-footer-wrapper {
