@@ -354,12 +354,33 @@ if ( ! function_exists( 'bolt_on_banner' ) ) :
 	 */
 	function bolt_on_banner( $styles ) {
 		$bg_banner_src  = null;
+		$use_featured_image_as_banner = get_field( 'use_featured_image_as_banner' );
+		$use_featured_image_as_banner = $use_featured_image_as_banner === null ? true : $use_featured_image_as_banner;
 		$banner_size    = array(1920, null);
 		$queried_object = get_queried_object();
-		if ( $queried_object && has_post_thumbnail( $queried_object ) ) :
-			$bg_banner_src = get_the_post_thumbnail_url( $queried_object, $banner_size );
+		if (
+			$use_featured_image_as_banner &&
+			$queried_object &&
+			has_post_thumbnail( $queried_object )
+		) :
+			$bg_banner_src = get_the_post_thumbnail_url(
+				$queried_object,
+				$banner_size
+			);
+		elseif( get_post_type() === 'post' ) :
+			// Get Blog Post Thumbnail.
+			$blog_thumbnail = get_the_post_thumbnail_url(
+				get_option('page_for_posts', true),
+				$banner_size
+			);
+			if ( $blog_thumbnail ) :
+				$bg_banner_src = $blog_thumbnail;
+			endif;
 		elseif( $default_post_image = get_theme_mod( 'default_banner_image', null ) ) :
-			$bg_banner_src =  wp_get_attachment_image_url( $default_post_image, $banner_size );
+			$bg_banner_src = wp_get_attachment_image_url(
+				$default_post_image,
+				$banner_size
+			);
 		endif;
 		if ( $bg_banner_src ) :
 			$styles .= bolt_on_add_inline_style(
