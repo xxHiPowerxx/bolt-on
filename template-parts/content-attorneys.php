@@ -291,7 +291,7 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 			</div><!-- #attorney-attributes-sections -->
 			<footer class="attorney-footer">
 				<a href="tel:<?php echo $site_phone_number ?>" class="anchor-attorney-footer-phone-number">
-					Contact <?php echo $attorney_first_name . ' ' . $attorney_last_name; ?> today by calling <span class="attorney-footer-phone-number"><?php echo $site_phone_number ?></span>
+					Contact <?php echo $attorney_first_name . ' ' . $attorney_last_name; ?> today by calling <span class="attorney-footer-phone-number"><?php echo $site_phone_number ?></span>.
 				</a>
 				<?php bolt_on_entry_footer(); ?>
 			</footer><!-- ./attorney-footer -->
