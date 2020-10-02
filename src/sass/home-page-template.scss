@@ -58,11 +58,11 @@ $bleed-unit: 15vmin;
 			max-width: none;
 		}
 	}
-	&.below-section-bleeds-in {
+	/*&.below-section-bleeds-in {
 		.bleed-target {
-			padding-bottom: $bleed-unit;
+			// padding-bottom: $bleed-unit;
 		}
-	}
+	}*/
 }
 .ctnr-hero {
 	height: auto;
@@ -93,11 +93,11 @@ $bleed-unit: 15vmin;
 	justify-content: space-between;
 }
 .about-section {
-	&.bleeds-into-above-section {
+	/*&.bleeds-into-above-section {
 		.bleed-target {
 			margin-top: -$bleed-unit;
 		}
-	}
+	}*/
 	.container-about-section {
 		background-color: $white;
 	}
@@ -243,6 +243,7 @@ $bleed-unit: 15vmin;
 	background-image: url('../images/value-statement-bg.jpg');
 	background-size: cover;
 	background-position: 50% 50%;
+	background-attachment: fixed;
 	.section-content > * {
 		padding-top: 3rem;
 		padding-bottom: 3rem;
@@ -252,14 +253,22 @@ $bleed-unit: 15vmin;
 	background-color: $white;
 	box-shadow: 0 1.1rem 2rem rgba($dark, 0.9);
 }
+.ctnr-listed-case-categories {
+  display: flex;
+  flex-direction: column;
+}
 /*   Categories List   */
 .case-categories-list {
 	&[class*='case-categories-list'] {
 		line-height: 1;
 		display: flex;
 		flex-wrap: wrap;
+		align-self: center;
+		max-width: 86.5rem;
+		margin-left: auto;
+		margin-right: auto;
 		@media (min-width: 480px) {
-			justify-content: space-around;
+			justify-content: space-between;
 		}
 		text-transform: uppercase;
 		font-weight: 600;
@@ -277,6 +286,7 @@ $bleed-unit: 15vmin;
 		flex: 1 1 100%;
 		@media (min-width: 480px) {
 			flex-basis: 50%;
+			max-width: 50%;
 		}
 		margin-bottom: 3rem;
 		max-width: 37rem;
@@ -290,11 +300,26 @@ $bleed-unit: 15vmin;
 .anchor-listed-cast-category {
 	display: flex;
 	align-items: center;
+	&,
+	.case-category-icon {
+		@include smoothest-transition;
+	}
+	.case-category-icon {
+		transform-origin: 100% 50%;
+	}
+	#{$active} {
+		.case-category-icon {
+			transform: scale(1.2);
+		}
+	}
 }
 .case-category-icon {
 	font-size: 4rem;
 	max-width: 4rem;
 	max-height: 4rem;
+	.fa-scroll {
+		font-size: .8em;
+	}
 	> svg {
 		display: block;
 		width: 1em;
