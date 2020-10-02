@@ -25,4 +25,19 @@
 		display: none !important;
 	}
 }
+/*   CF7 Overrides   */
+div {
+	&.wpcf7 {
+		.btn-cta-outer {
+			.ajax-loader {
+				position: absolute;
+				margin: 0;
+				bottom: -1em;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+	}
+}
+/*   CF7 Overrides   */
 /*   /Contact Form   */
