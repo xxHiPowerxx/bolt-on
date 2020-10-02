@@ -15,14 +15,16 @@
 		padding-bottom: 0;
 	}
 	.ctnr-contact-form {
+		width: 100%;
 		@media (min-width: $vp_lg) {
 			padding-left: 6rem;
 			padding-right: 6rem;
+			flex: 1 0 50%;
+			max-width: 50%;
 		}
 		@media (min-width: $vp_xs) {
 			min-width: 50rem;
 		}
-		max-width: 100%;
 	}
 }
 
@@ -31,18 +33,15 @@
 	padding-right: 0;
 	display: flex;
 	flex-wrap: wrap;
-	@media (min-width: $vp_lg) {
-		> * {
-			flex: 1 0 50%;
-			max-width: 50%;
-		}
-	}
 }
 @import './import/contact-form';
 .ctnr-contact-info {
 	text-shadow: 0 0.05em 0.05em rgba($dark, 0.35);
 	position: relative;
+	width: 100%;
 	@media (min-width: $vp_lg) {
+		flex: 1 0 50%;
+		max-width: 50%;
 		position: static;
 	}
 	&:before {
