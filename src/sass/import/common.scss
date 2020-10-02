@@ -34,9 +34,10 @@
 	&:before {
 		content: '';
 		background-image: $stripes;
-		padding: 9rem 14.4rem;
+		background-attachment: fixed;
 		background-size: cover;
 		background-position: 50% 50%;
+		padding: 9rem 14.4rem;
 		width: 100%;
 		display: block;
 		position: absolute;
