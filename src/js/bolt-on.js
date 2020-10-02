@@ -245,24 +245,33 @@ jQuery(document).ready(function($) {
 
 	function boltOnBanner() {
 		$('.bolt-on-banner').each(function(index) {
-			var styleTagId = 'bolt-on-banner-style-' + index,
-			$styleTag = $('#' + styleTagId),
-			headerHeight = headerHeight || $header[0].getBoundingClientRect().height,
-			paddingTop = parseFloat($(this).css('padding-top')),
-			$adminBar = $('#wpadminbar').first(),
-			adminBarHeight = 0;
-			if ( ! $styleTag.length ) {
-				$styleTagHTML = '<style id="' + styleTagId + '"></style>';
-				$body.append($styleTagHTML);
-				$styleTag = $('#' + styleTagId);
+			var paddingTop = parseFloat($(this).css('padding-top'));
+			// If no paddingTop then mediaQuery is not active and we don't need to run this.
+			if ( paddingTop > 0 ) {
+				var styleTagId = 'bolt-on-banner-style-' + index,
+				$styleTag = $('#' + styleTagId),
+				headerHeight = headerHeight || $header[0].getBoundingClientRect().height,
+				$adminBar = $('#wpadminbar').first(),
+				adminBarHeight = 0;
+				if ( ! $styleTag.length ) {
+					$styleTagHTML = '<style id="' + styleTagId + '"></style>';
+					$body.append($styleTagHTML);
+					$styleTag = $('#' + styleTagId);
+				}
+				if ( $adminBar.length ) {
+					adminBarHeight = $adminBar[0].getBoundingClientRect().height;
+				}
+				var bannerPad = headerHeight + paddingTop + adminBarHeight,
+				css = '.bolt-on-banner:before{padding-bottom:' + bannerPad + 'px;}';
+				$styleTag.html(css);
 			}
-			if ( $adminBar.length ) {
-				adminBarHeight = $adminBar[0].getBoundingClientRect().height;
-			}
-			var bannerPad = headerHeight + paddingTop + adminBarHeight,
-			css = '.bolt-on-banner:before{padding-bottom:' + bannerPad + 'px;}';
-			$styleTag.html(css);
 		});
+	}
+
+	function preventPaste() {
+		$('.preventPaste').on('paste', function (e) {
+			e.preventDefault();
+	 });
 	}
 
 	function readyFuncs() {
@@ -280,6 +289,7 @@ jQuery(document).ready(function($) {
 		preventExpandedCollapse();
 		configureBleedSections();
 		mobileMenuToggler();
+		preventPaste();
 	}
 	function resizeFuncs() {
 		activateMobileMenu();
@@ -298,4 +308,12 @@ jQuery(document).ready(function($) {
 	$(window).on('scroll', function() {
 		scrollFuncs();
 	});
+	function dispatchResize() {
+		var resizeEvent = window.document.createEvent('UIEvents');
+		resizeEvent.initUIEvent('resize', true, false, window, 0);
+		window.dispatchEvent(resizeEvent);
+	}
+	window.onload = new function() {
+		dispatchResize();
+	};
 });
