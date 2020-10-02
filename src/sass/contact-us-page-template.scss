@@ -44,14 +44,10 @@
 }
 #contact-us {
 	.offices-list {
-		display: flex;
-		flex-wrap: wrap;
 		.listed-office {
 			flex: 1 0 50%;
 			padding: 1.5rem;
 			border-bottom: none;
-			display: flex;
-			flex-direction: column;
 			margin-top: 1.5rem;
 			margin-bottom: 1.5rem;
 			.office-title {
