@@ -1,7 +1,8 @@
 #attorneys-archive-slider {
 	background-image: url(../images/attorneys-bg.jpg);
 	background-size: cover;
-	background-position: 50% 50%;
+	background-position: 100% 100%;
+	background-attachment: fixed;
 	min-height: 71.25vh;
 	display: flex;
 	align-items: flex-end;
@@ -72,26 +73,18 @@
 	> img {
 		height: auto;
 		max-height: none;
-		@media (min-width: $vp_sm) {
-			max-height: 38rem;
-		}
-		position: static;
-		left: initial;
-		transform: none;
 		max-width: 100%;
 		@media (min-width: $vp_sm) {
+			max-height: 38rem;
 			height: 50rem;
 			max-width: auto;
-			position: relative;
-			left: 50%;
-			transform: translateX(-50%);
+		}
+		@media (max-width: 1400px - 1) {
+			width: auto;
 		}
 		@media (min-width: 1400px) {
 			height: auto;
 			max-height: 50rem;
-			position: static;
-			left: initial;
-			transform: none;
 		}
 	}
 }
