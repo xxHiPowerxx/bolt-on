@@ -9,7 +9,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		flex: 1 0 calc( 60rem + 1em );
-		padding-right: 1em;
 		padding-bottom: 0;
 		max-height: 50vh;
 		overflow-y: auto;
@@ -17,6 +16,7 @@
 		overflow-x: hidden;
 		max-width: 100%;
 		@media (min-width: $vp_m) {
+			padding-right: 1em;
 			padding-bottom: 6rem;
 			margin-bottom: 0;
 		}
@@ -50,6 +50,7 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+	background-attachment: fixed;
 }
 .container-attorneys-archive-image-swap-section {
 	@media (min-width: $vp_m) {
@@ -60,11 +61,12 @@
 .image-swap {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	@media (min-width: $vp_m) {
 		flex-wrap: nowrap;
+		justify-content: initial;
 	}
 	.image-swap-imgs {
-		// flex: 1 0 58.4rem;
 		width: 100%;
 		@media (min-width: $vp_m){
 			width: 63.4rem;
@@ -99,9 +101,8 @@
 	@media (min-width: 1100px) {
 		height: auto;
 	}
-	max-height: 50vh;
 	@media (min-width: $vp_m) {
-		max-height: none;
+		height: 100%;
 	}
 	@at-root .ctnr-image-swap-img:first-child & {
 		position: relative;
@@ -111,7 +112,10 @@
 		width: auto;
 		height: auto;
 		max-width: 100%;
-		max-height: 100%;
+		max-height: 50vh;
+		@media (min-width: $vp_m) {
+			max-height: 100%;
+		}
 		margin-left: auto;
 		margin-right: auto;
 	}
