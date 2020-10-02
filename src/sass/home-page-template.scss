@@ -201,6 +201,9 @@ $bleed-unit: 15vmin;
 .bolt-on-video {
 	max-width: 100%;
 	height: auto;
+	@at-root body.browser-ie & {
+		width: 100%;
+	}
 }
 .media-recognition-section {
 	> .display-flex {
@@ -264,6 +267,7 @@ $bleed-unit: 15vmin;
 		display: flex;
 		flex-wrap: wrap;
 		align-self: center;
+		width: 100%;
 		max-width: 86.5rem;
 		margin-left: auto;
 		margin-right: auto;
@@ -322,7 +326,8 @@ $bleed-unit: 15vmin;
 	}
 	> svg {
 		display: block;
-		width: 1em;
+		max-width: 1em;
+		max-height: 1em;
 	}
 }
 .case-category-title {
