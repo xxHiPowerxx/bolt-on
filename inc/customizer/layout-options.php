@@ -43,7 +43,7 @@ function bolt_on_customize_layout_register( $wp_customize ) {
 				'label'       => __( 'Default Banner Image', 'bolt-on' ),
 				'description' => __( 'Select the image, when banner is present, to be used when no featured image is added.', 'bolt-on' ),
 				'width'       => 1920,
-				'height'      => 402,
+				'height'      => 575,
 				'flex_width'  => true,
 				'flex_height' => true,
 			)
