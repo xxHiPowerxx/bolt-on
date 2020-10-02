@@ -20,6 +20,25 @@
             "maxlength": "",
             "rows": 4,
             "new_lines": ""
+        },
+        {
+            "key": "field_5f7243b694b4f",
+            "label": "Use Featured Image as Banner?",
+            "name": "use_featured_image_as_banner",
+            "type": "true_false",
+            "instructions": "This only applies to posts\/pages that use a Banner.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -39,5 +58,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1596141449
+    "modified": 1601324068
 }
