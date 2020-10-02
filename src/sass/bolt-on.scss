@@ -12,7 +12,10 @@
 @import './import/theme-content.scss';
 
 html {
-	font-size: 8px;
+	font-size: 2vmin;
+	@media (min-width: 400px) and (min-height: 400px) {
+		font-size: 8px;
+	}
 	@media (min-width: 576px) {
 		font-size: 10px;
 	}
@@ -20,8 +23,8 @@ html {
 body {
 	font-size: 100%;
 	color: $dark;
-	min-width: 340px;
 	@media (min-width: 340px) {
+		min-width: 340px;
 		max-width: 100%;
 		overflow-x: hidden;
 	} 
@@ -197,6 +200,16 @@ a[href="#"] {
 	border: none;
 	border-bottom: 1px solid $dark;
 	padding: 0.5em;
+	&.form-control {
+		font-size: inherit;
+		border-radius: 0;
+	}
+}
+select {
+	&.input-field {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 }
 textarea {
 	&.input-field {
@@ -255,23 +268,53 @@ textarea {
 		background-color: $primary;
 	}
 }
-
 .bolt-on-banner {
-	&:before {
-		content: '';
-		display: block;
-		padding-bottom: 35vmin;
-		@media (min-width: $vp_m) and (min-height: $vp_m) {
-			padding-bottom: 20.9%;
+	position: relative;
+	overflow: hidden;
+	@media (min-width: $vp_sm) {
+		padding-top: 35vmin;
+	}
+	@media (min-width: $vp_m) and (min-height: $vp_m) {
+		padding-top: 20.9%;
+	}
+	&:before,
+	&:after {
+		@media (min-width: $vp_sm) {
+			content: '';
 		}
+		display: block;
+	}
+	&:before {
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
+		position: fixed;
+		z-index: -1;
+		padding-bottom: calc(35vmin + 226.433px);
+		@media (min-width: $vp_m) and (min-height: $vp_m) {
+			padding-bottom: calc(20.9% + 226.433px);
+		}
+		width: 100%;
+		top: 0;
+	}
+	&:after {
+		position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $white;
+		top: 35vmin;
+		@media (min-width: $vp_m) and (min-height: $vp_m) {
+			top: 20.9%;
+		}
+	}
+	> * {
+		z-index: 1;
+    position: relative;
 	}
 }
 
 /*   Bleeds Into Section Feature   */
-$bleed-unit: 19vmin;
+$bleed-unit: 13vmin;
 // $bleed-unit: 6rem;
 .below-section-bleeds-in {
 	.bleed-target {
