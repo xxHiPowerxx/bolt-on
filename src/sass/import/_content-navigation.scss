@@ -6,6 +6,7 @@ $nav-link-bp: 475px;
 .site-main .comment-navigation,
 .site-main .posts-navigation,
 .site-main .post-navigation {
+	clear: both;
 	margin-top: 3rem;
 	overflow: hidden;
 }
