@@ -99,6 +99,17 @@
 			margin-right: 1.5rem;
 		}
 	}
+	a {
+		&:not([class]) {
+			text-decoration: underline;
+		}
+	}
+	.posted-on,
+	.cat-links {
+		a {
+			text-decoration: none;
+		}
+	}
 }
 
 .page-header {
