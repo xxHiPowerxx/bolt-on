@@ -29,7 +29,9 @@ function component_dynamic_post_menu( $args ) {
 		$last_ancestor      = $post;
 		$last_ancestor_link = '#';
 	endif;
-	$last_ancestor_title = get_the_title( $last_ancestor );
+	$last_ancestor_long_title  = get_the_title( $last_ancestor );
+	$last_ancestor_short_title = get_field( 'short_title', $last_ancestor );
+	$last_ancestor_title = $last_ancestor_short_title ? : $last_ancestor_long_title;
 	$imm_children_args   = array(
 		'posts_per_page' => -1,
 		'post_parent'    => $last_ancestor->ID,
@@ -129,9 +131,10 @@ function component_dynamic_post_menu( $args ) {
 	endif; // endif ( $imm_children ) :
 	$markup = ob_get_clean();
 	$return_result = array (
-		'markup'              => $markup,
-		'last_ancestor_title' => $last_ancestor_title,
-		'last_ancestor_link'  => $last_ancestor_link,
+		'markup'                   => $markup,
+		'last_ancestor_long_title' => $last_ancestor_long_title,
+		'last_ancestor_title'      => $last_ancestor_title,
+		'last_ancestor_link'       => $last_ancestor_link,
 	);
 	return $return_result;
 }
