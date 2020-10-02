@@ -34,7 +34,11 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 		if ( ! $dynamic_post_menu_array ) :
 			return;
 		endif;
+		$sidebar_nav_long_title = $dynamic_post_menu_array['last_ancestor_long_title'];
 		$sidebar_nav_title      = $dynamic_post_menu_array['last_ancestor_title'];
+		$sidebar_nav_title_attr = $sidebar_nav_long_title ?
+			' title="' . $sidebar_nav_long_title . '"' :
+			null;
 		$sidebar_nav_title_link = $dynamic_post_menu_array['last_ancestor_link'];
 		$sidebar_nav_content    = $dynamic_post_menu_array['markup'];
 	endif; // endif ( $type_of_nav === 'ancestor' ) :
@@ -98,7 +102,7 @@ function component_dynamic_sidebar_nav( $type_of_nav = null ) {
 			if ( $sidebar_nav_title ) :
 				$sidebar_nav_id = 'nav-' . $sidebar_nav_title;
 				?>
-				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" <?php echo setCollapse( $type_of_nav, true, $sidebar_nav_id, $sidebar_nav_title_tabindex ); ?>><?php echo $sidebar_nav_title; ?></a></h3>
+				<h3 class="sidebar-heading"><a href="<?php echo $sidebar_nav_title_link; ?>" <?php echo setCollapse( $type_of_nav, true, $sidebar_nav_id, $sidebar_nav_title_tabindex ); ?><?php echo $sidebar_nav_title_attr; ?>><?php echo $sidebar_nav_title; ?></a></h3>
 				<?php
 			endif; // endif ( $last_ancestor_title ) :
 			if ( $sidebar_nav_content ) :
