@@ -3,20 +3,34 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	width: 100%;
+	.listed-office {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		height: 100%;
+		> :first-child {
+			margin-bottom: auto;
+		}
+		> :not(:first-child) {
+			margin-top: .25em;
+		}
+	}
+	.anchor-office-phone-number,
 	.anchor-office-location {
 		font-size: 2.2rem;
-		display: inline-block;
+		display: block;
+		transition: $smooth-transition;
+	}
+	.anchor-office-location {
 		margin-top: auto;
 		margin-right: auto;
-		transition: $smooth-transition;
 		* {
 			text-decoration: inherit;
 		}
 	}
 	.anchor-office-phone-number {
-		font-size: 3rem;
 		font-weight: 600;
-		transition: $smooth-transition;
 	}
 }
 .ctnr-contact-info {
