@@ -35,7 +35,12 @@ if ( ! function_exists( 'get_attorneys_archive' ) ) :
 					$attorney_title             = esc_attr( get_field( 'attorney_title' ) );
 					$attorney_permalink         = get_permalink();
 					$attorneys_isolated_picture = get_field( 'attorneys_isolated_picture' );
-					$attorney_pic               = wp_get_attachment_image( $attorneys_isolated_picture['id'], array(null, 500) );
+					$attorney_pic               = wp_get_attachment_image(
+						$attorneys_isolated_picture['id'],
+						array(null, 500),
+						false,
+						array('class'=>'archive-attorney-img')
+					);
 					?>
 					<div id="archive-attorney-<?php echo $attorney_id; ?>" data-post-id="<?php echo $this_post_id; ?>" class="archive-attorney">
 						<div class="ctnr-archive-attorney-img">
