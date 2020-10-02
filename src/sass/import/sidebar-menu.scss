@@ -130,9 +130,7 @@
 						.sub-menu {
 							> .menu-item {
 								> a {
-									height: 2.5em;
-									margin-top: -$hackey-pad;
-									margin-bottom: -$hackey-pad;
+									height: auto;
 								}
 							}
 						}
@@ -151,10 +149,15 @@
 			> .sub-menu {
 				> .menu-item {
 					font-size: 1.8rem;
-					padding-top: $hackey-pad;
-					padding-bottom: $hackey-pad;
+					&:not(:first-child) {
+						> a {
+							border-top: 1px solid $white;
+						}
+					}
 					> a {
-						height: 2.5em;
+						height: auto;
+						padding-top: $hackey-pad;
+						padding-bottom: $hackey-pad;
 					}
 				}
 				height: auto;
