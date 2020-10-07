@@ -164,28 +164,48 @@ jQuery(document).ready(function($) {
 		}
 		return event;
 	}
-	function checkIfMouseIsOverHeader() {
-		$header.on('mouseover', function(){
-			this.mouseIsOver = true;
-		}).on('mouseout', function(){
-			this.mouseIsOver = false;
-		});
+	var checkMouseOverTarget = function(event) {
+		if ($($(event.target).closest($header)).length) {
+			$header[0].mouseIsOver = true;
+		} else {
+			$header[0].mouseIsOver = false;
+		}
+		return $header[0].mouseIsOver;
+	}
+	function bindCheckMouseOverTarget() {
+		document.addEventListener('mousemove', checkMouseOverTarget);
+		$header.on('focusin', checkMouseOverTarget);
+	}
+	function handleMouseMove(event) {
+		// var headerHeightFromTop = headerHeight + $header[0].offsetTop;
+		var headerHeightFromTop = window.innerHeight * .10;
+		event = getMousePosition(event),
+		isMouseOverTarget = checkMouseOverTarget(event);
+		// Get Mouse Y Position relative to window and compare to Header Height.
+		if (
+			fixedHeader && event.clientY <= headerHeightFromTop ||
+			isMouseOverTarget === true
+		) {
+			$body.addClass('mouseInHeaderArea');
+		} else {
+			if (isMouseOverTarget !== true) {
+				$body.removeClass('mouseInHeaderArea');
+			}
+		}
+		// Use event.pageX / event.pageY here
 	}
 	function mouseInHeaderArea() {
 		if (fixedHeader) {
-			document.onmousemove = handleMouseMove;
-			function handleMouseMove(event) {
-				// var headerHeightFromTop = headerHeight + $header[0].offsetTop;
-				var headerHeightFromTop = window.innerHeight * .10;
-				event = getMousePosition(event);
-				// Get Mouse Y Position relative to window and compare to Header Height.
-				if (fixedHeader && event.clientY <= headerHeightFromTop ) {
-					$body.addClass('mouseInHeaderArea');
-				} else if ($header[0].mouseIsOver === false) {
-					$body.removeClass('mouseInHeaderArea');
-				}
-				// Use event.pageX / event.pageY here
-			}
+			document.addEventListener('mousemove', handleMouseMove);
+			$header.on('focusin', handleMouseMove);
+			// document.onmousemove = handleMouseMove;
+		}
+	}
+	function triggerMouseMoveOnScroll() {
+		if (fixedHeader) {
+			document.addEventListener('scroll', function() {
+				handleMouseMove();
+			});
 		}
 	}
 	function watchHeaderTransition() {
@@ -284,12 +304,13 @@ jQuery(document).ready(function($) {
 		watchHeaderTransition();
 		bleedIntoHeader();
 		initSlick();
-		checkIfMouseIsOverHeader();
+		bindCheckMouseOverTarget();
 		mouseInHeaderArea();
 		preventExpandedCollapse();
 		configureBleedSections();
 		mobileMenuToggler();
 		preventPaste();
+		triggerMouseMoveOnScroll();
 	}
 	function resizeFuncs() {
 		activateMobileMenu();
