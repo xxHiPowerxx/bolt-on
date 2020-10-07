@@ -136,12 +136,12 @@ $smooth-transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 	transition: $smooth-transition;
 }
 @mixin smoother-transition {
-	transform: translateZ(0);
+	transition: $smooth-transition;
 	backface-visibility: hidden;
 }
 @mixin smoothest-transition {
-	transition: $smooth-transition;
 	@include smoother-transition;
+	transform: translateZ(0);
 }
 .smoother-transition {
 	@include smoother-transition;

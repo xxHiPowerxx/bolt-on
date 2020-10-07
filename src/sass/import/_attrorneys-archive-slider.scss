@@ -11,6 +11,9 @@
 		display: flex;
 		align-items: flex-end;
 	}
+	.slick-slide {
+		outline: none
+	}
 	/*   Slick Nav Overrides  */
 	.slick-arrow {
 		bottom: calc(-1em - 1.5rem);

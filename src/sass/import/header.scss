@@ -47,7 +47,13 @@ body {
 			&:not(.header-dropdown-active) {
 				&.scrolledPastHeader {
 					.site-header {
-						transform: translate3d(0, -110%, 0);
+						transform: translate3d(0, -100%, 0);
+					}
+					#show-header {
+						transform: scaleY(1) translateZ(0);
+					}
+					.show-header-icon {
+						display: block;
 					}
 					#primary-menu {
 						.sub-menu {
@@ -69,7 +75,8 @@ body {
 }
 
 .header-top {
-	margin-bottom: 3rem;
+	font-size: 1rem;
+	margin-bottom: 3em;
 	> * {
 		flex: 1;
 	}
@@ -99,9 +106,9 @@ input[type='search'] {
 		border-radius: 0%;
 		box-shadow: none;
 		flex: 1 1 auto;
-		margin-bottom: 0.75rem;
+		margin-bottom: 0.75em;
 		@at-root .site-header & {
-			font-size: 1.6rem;
+			font-size: 1.6em;
 			max-width: 15em;
 			+ .btn-submit {
 				transform: translate3d(0, 100%, 0);
@@ -115,7 +122,7 @@ input[type='search'] {
 			}
 		}
 		+ .btn-submit {
-			font-size: 1.6rem;
+			font-size: 1.6em;
 			transition: $smooth-transition;
 			backface-visibility: hidden;
 			border: 0;
@@ -123,7 +130,7 @@ input[type='search'] {
 	}
 }
 .icon-search {
-	font-size: 2rem;
+	font-size: 2em;
 	padding: 0.4em 0.4em 0.4em 0;
 	margin-bottom: 0;
 	cursor: pointer;
@@ -165,11 +172,11 @@ input[type='search'] {
 			@at-root #{$trans-header} & {
 				color: $white;
 			}
-			font-size: 1.7267rem;
+			font-size: 1.7267em;
 			padding-right: 0.25em;
 		}
 		> :last-child {
-			font-size: 2.8rem;
+			font-size: 2.8em;
 			font-weight: 700;
 			display: inline-block;
 			letter-spacing: 0.1em;
@@ -184,5 +191,75 @@ input[type='search'] {
 	}
 }
 /*   /Header Info Widget   */
+
+/*   #show-header   */
+#show-header {
+	display: block;
+	align-items: center;
+	// height: 7rem;
+	height: 3.889em;
+	width: 100%;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: rgba($white, 0.9);
+	border-bottom: solid .6rem $primary;
+	border-left: 0;
+	border-right: 0;
+	text-align: center;
+	padding: .5em 3rem;
+	box-shadow: 0 0 2.2rem $dark;
+	font-size: 2.665vmin;
+	@media (min-width: $vp_xs) and (min-height: $vp_xs) {
+		font-size: 1.8rem;
+	}
+	@include smoother-transition;
+	transform: scaleY(0) translateZ(0);
+	transform-origin: 0% 0%;
+	.fa-bars {
+		display: none;
+		font-size: 1.666667em;
+	}
+	@at-root body.bolt-on-mobile-menu-active & {
+		display: flex;
+		.show-header-icon {
+			margin-left: 0;
+			padding-bottom: 0;
+			height: 100%;
+			max-width: none;
+			> img,
+			> svg {
+				height: 100%;
+			}
+		}
+		.fa-bars {
+			display: block;
+		}
+		.fa-chevron-down {
+			display: none;
+		}
+	}
+	.fa-chevron-down {
+		font-size: .75em;
+		display: block;
+	}
+}
+.show-header-icon {
+	display: none;
+	max-width: 8.6em;
+	padding-bottom: .5em;
+	height: calc(100% - .75em);
+  margin-left: auto;
+  margin-right: auto;
+	padding-bottom: 0.5em;
+	> img,
+	> svg {
+		max-height: 100%;
+		max-width: 100%;
+		width: auto;
+		height: auto;
+	}
+}
+/*   /#show-header   */
 
 @import './navigation.scss';

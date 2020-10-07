@@ -3,12 +3,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	align-items: stretch;
 	width: 100%;
 	.listed-office {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-		height: 100%;
 		> :first-child {
 			margin-bottom: auto;
 		}
