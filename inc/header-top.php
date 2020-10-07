@@ -24,9 +24,9 @@
 			$image_alt_text = esc_attr( get_bloginfo( 'name', 'display' ) . ' Logo' );
 			?>
 			<a href="<?php echo esc_url( home_url( '/' ) ) ?>" class="custom-logo-link" rel="home">
-			<div class="custom-logo">
-				<?php include $logo_svg_src; ?>
-			</div>
+				<div class="custom-logo">
+					<?php include $logo_svg_src; ?>
+				</div>
 				<?php /*<img class="custom-logo" src="<?php echo $logo_svg_src; ?>" alt="<?php echo $image_alt_text; ?>" /> */ ?>
 			</a>
 			<?php
