@@ -111,6 +111,63 @@ function bolt_on_customize_header_register( $wp_customize ) {
 	);
 	$wp_customize->get_setting( 'logo_svg_path' )->transport = 'postMessage';
 
+	/**
+	 * Add field to accept path for SVG image instead of png image.
+	 */
+	// Icon SVG Path Relative or Absolute.
+	$wp_customize->add_setting(
+		'icon_svg_path_radio',
+		array(
+			'default'           => 'relative',
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'icon_svg_path_radio',
+			array(
+				'priority'    => 9,
+				'label'       => __( 'Icon SVG Path Absolute or Relative?', 'bolt-on' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'icon_svg_path_radio',
+				'description' => __( 'Select Whether Icon SVG path is relative to theme directory or absolute', 'bolt-on' ),
+				'type'        => 'radio',
+				'choices' => array(
+					'relative' => __( 'example: /images/svg/icon.svg' ),
+					'absolute'  => __( 'example: https://somesite.com/images/icon.svg' ),
+				),
+			)
+		)
+	);
+	$wp_customize->get_setting( 'icon_svg_path_radio' )->transport = 'postMessage';
+
+	// Icon SVG Path.
+	$wp_customize->add_setting(
+		'icon_svg_path',
+		array(
+			'default'           => null,
+			'transport'         => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Control(
+			$wp_customize,
+			'icon_svg_path',
+			array(
+				'priority'    => 9,
+				'label'       => __( 'Icon SVG Path', 'bolt-on' ),
+				'section'     => 'title_tagline',
+				'settings'    => 'icon_svg_path',
+				'description' => __( 'Input the Icon SVG Path', 'bolt-on' ),
+				'type'        => 'text',
+			)
+		)
+	);
+	$wp_customize->get_setting( 'icon_svg_path' )->transport = 'postMessage';
+
 	// Site Phone Number.
 	$wp_customize->add_setting(
 		'site_phone_number',
