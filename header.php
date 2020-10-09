@@ -42,7 +42,33 @@
 			<?php include $template_directory . '/inc/header-nav.php'; ?>
 			<div id="show-header">
 				<a href="<?php echo esc_url( home_url( '/' ) ) ?>" rel="home" class="show-header-icon" tabindex="0">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67.64 34.73"><path d="M4.85,28.34C3.9,34.29,0,34.73,0,34.73H9.7S5.8,34.29,4.85,28.34Z" style="fill:#345073"/><polygon points="22.63 34.73 23.86 34.73 36.7 11.82 35.75 11.29 27.03 26.86 13.24 0 3.49 0 5.5 1.38 22.63 34.73" style="fill:#345073"/><path d="M67.64,34.73,49.81,0H40.06l2,1.37,8.66,16.87H43.78s7.77,2.65,11.91,9.67l3.5,6.82Z" style="fill:#345073"/><polygon points="45.14 27.05 31.25 0 21.5 0 23.51 1.38 40.63 34.73 45.14 27.05" style="fill:#ad976e"/></svg>
+					<?php
+					$icon_svg_path = get_theme_mod('icon_svg_path', null);
+					if ( $icon_svg_path ) :
+						$icon_svg_path_radio = get_theme_mod('icon_svg_path_radio', 'relative');
+						$icon_svg_src = $icon_svg_path_radio === 'relative' ?
+														get_stylesheet_directory() . $icon_svg_path :
+														esc_url( $icon_svg_path );
+						// $image_alt_text = esc_attr( get_bloginfo( 'name', 'display' ) . ' Logo' );
+						include $icon_svg_src;
+					else:
+						$site_icon_id = get_option( 'site_icon' );
+						if ( $site_icon_id ) :
+							$custom_icon = wp_get_attachment_image( $site_icon_id, array(null, 24), true );
+							echo $custom_icon;
+						else:
+							if ( is_front_page() && is_home() ) :
+								?>
+								<h2 class="site-title"><?php bloginfo( 'name' ); ?></h2>
+								<?php
+							else :
+								?>
+								<p class="site-title"><?php bloginfo( 'name' ); ?></p>
+								<?php
+							endif;
+						endif; // endif ( $custom_icon ) :
+					endif; // endif ( $icon_svg_path ) :
+					?>
 				</a>
 				<i class="fa fas fa-chevron-down"></i>
 				<i class="fa fas fa-bars"></i>
