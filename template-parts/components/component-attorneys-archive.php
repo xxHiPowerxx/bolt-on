@@ -8,6 +8,9 @@
  */
 // TODO: Componentize Styles.
 // wp_enqueue_style( 'bolt-on-attorneys-archive-css' );
+wp_enqueue_style( 'bolt-on-vendor-slick-css' );
+// Enqueue Scripts
+wp_enqueue_script( 'bolt-on-vendor-slick-js' );
 if ( ! function_exists( 'get_attorneys_archive' ) ) :
 	function get_attorneys_archive() {
 		ob_start();

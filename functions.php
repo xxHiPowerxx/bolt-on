@@ -179,7 +179,7 @@ function bolt_on_assets() {
 	// TODO: Remove Slick from Bolt On Dependancies.
 	// Register Styles
 	$bolt_on_css_path = '/assets/css/bolt-on.css';
-	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css', 'bolt-on-vendor-slick-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
+	wp_enqueue_style( 'bolt-on-css', get_theme_file_uri( $bolt_on_css_path ), array( 'bolt-on-vendor-fontawesome-css' ), filemtime( get_template_directory() . $bolt_on_css_path ), 'all' );
 
 	$archive_css_path = '/assets/css/archive.css';
 	wp_register_style( 'bolt-on-archive-css', get_theme_file_uri( $archive_css_path ), array( 'bolt-on-css' ), filemtime( get_template_directory() . $archive_css_path ), 'all' );
@@ -201,7 +201,7 @@ function bolt_on_assets() {
 
 	// Register Scripts
 	$bolt_on_js_path = '/assets/js/bolt-on.js';
-	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js', 'bolt-on-vendor-slick-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
+	wp_enqueue_script( 'bolt-on-js', get_theme_file_uri( $bolt_on_js_path ), array( 'jquery', 'bolt-on-vendor-bootstrap-js' ), filemtime( get_template_directory() . $bolt_on_js_path ), false );
 
 	$bolt_on_navigation_path = '/assets/js/navigation.js';
 	wp_enqueue_script( 'bolt-on-navigation-js', get_theme_file_uri( $bolt_on_navigation_path ), array(), filemtime( get_template_directory() . $bolt_on_navigation_path ), true );
