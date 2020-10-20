@@ -230,7 +230,7 @@ jQuery(document).ready(function($) {
 	}
 	function initSlick() {
 		$('.slickSlider').each(function() {
-			if ($.isFunction($(this).slick)) {
+			if (typeof $(this).slick === 'function') {
 				$(this).slick();
 			}
 		});
@@ -294,6 +294,27 @@ jQuery(document).ready(function($) {
 	 });
 	}
 
+	function searchSubmitTabIndex() {
+		$('.input-search').on('input', function(){
+			var tabIndex = -1;
+			if ( this.checkValidity() ) {
+					tabIndex = 0;
+			}
+			$(this).siblings('[type="submit"]').attr('tabindex', tabIndex);
+		});
+	}
+	function changeSelectTitleOnChange() {
+		$('.wpcf7 select').each(function(){
+			function handleChange($this) {
+				$this.attr('title', $this.children(':selected').html());
+			}
+			handleChange($(this));
+			$(this).on('change', function(){
+				handleChange($(this));
+			});
+		});
+	}
+
 	function readyFuncs() {
 		detectPlatform();
 		collapseOnHover();
@@ -311,6 +332,8 @@ jQuery(document).ready(function($) {
 		mobileMenuToggler();
 		preventPaste();
 		triggerMouseMoveOnScroll();
+		searchSubmitTabIndex();
+		changeSelectTitleOnChange();
 	}
 	function resizeFuncs() {
 		activateMobileMenu();
