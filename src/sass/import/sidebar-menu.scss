@@ -58,6 +58,7 @@
 	}
 	.count {
 		margin-left: auto;
+		text-align: right;
 	}
 	.menu-item {
 		a {
@@ -184,9 +185,11 @@
 				height: 0;
 				background-color: $primary-light;
 				color: $secondary-dark;
-				&:before,
-				&:after {
+				&:before {
 					content: none;
+				}
+				&:after {
+					visibility: hidden;
 				}
 				#{$active} {
 					transform: none;
