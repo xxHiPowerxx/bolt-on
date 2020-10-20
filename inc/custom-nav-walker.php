@@ -168,8 +168,11 @@ class BoltOn_Walker_Category extends Walker_Category {
 		$args=array(),
 		$current_object_id = 0
 	) {
+		$has_children = get_term_children( $item->term_id, $item->taxonomy ) ?
+			' has-children' :
+			null;
 		$item_link = get_category_link($item);
-		$output.= "<li class='menu-item listed-category has-count'><a class='cat-link' href='" . $item_link . "'><span class='cat-name'>" . esc_attr($item->name) . "</span><span class='cat-count count'>(" . $item->count . ")</span></a>";
+		$output.= "<li class='menu-item listed-category has-count" . $has_children . "'><a class='cat-link' href='" . $item_link . "'><span class='cat-name'>" . esc_attr($item->name) . "</span><span class='cat-count count'>(" . $item->count . ")</span></a>";
 	}
 	 
 	function end_el( &$output, $item, $depth=0, $args=array() ) {
