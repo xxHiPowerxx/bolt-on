@@ -51,6 +51,19 @@
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	background-attachment: fixed;
+	&:before {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		@media (min-width: $vp_m) {
+			background-image: linear-gradient(90deg, rgba(255, 255, 255, .4) 50%, transparent);
+		}
+		background-image: linear-gradient(180deg, rgba(255, 255, 255, .4) 50%, transparent);
+	}
 }
 .container-attorneys-archive-image-swap-section {
 	@media (min-width: $vp_m) {
@@ -150,14 +163,6 @@
 		transition: $smooth-transition;
 		backface-visibility: hidden;
 		opacity: 0;
-		&:not(:first-child) {
-			// display: none;
-		}
-		&.shown,
-		&.showing,
-		&.hiding {
-			// display: block;
-		}
 		&.shown {
 			opacity: 1;
 		}
