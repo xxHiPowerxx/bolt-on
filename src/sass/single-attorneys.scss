@@ -60,8 +60,14 @@
 		padding-bottom: 12rem;
 	}
 	.wp-post-image {
-		width: auto;
-		height: auto;
+		&.lazyload {
+			width: initial;
+			height: initial;
+		}
+		&:not(.lazyload) {
+			width: auto;
+			height: auto;
+		}
 		max-height: 35rem;
 		max-width: 40%;
 		@media (min-width: $vp_xs) {
