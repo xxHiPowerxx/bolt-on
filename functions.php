@@ -549,3 +549,12 @@ function bolt_on_add_size_to_wpcf7_multiple_select( $content ) {
 	return $new_content;
 }
 add_filter( 'wpcf7_form_elements', 'bolt_on_add_size_to_wpcf7_multiple_select' );
+
+function bolt_on_mod_attorneys_archive_query( $query ) {
+	if ( $query->is_post_type_archive( 'attorneys' ) && $query->is_main_query() ) :
+			$query->set( 'posts_per_page', -1 );
+			$query->set( 'orderby', 'menu_order date' );
+			$query->set( 'order', 'ASC' );
+	endif;
+}
+add_filter( 'pre_get_posts', 'bolt_on_mod_attorneys_archive_query' );

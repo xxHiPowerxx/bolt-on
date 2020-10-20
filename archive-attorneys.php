@@ -46,6 +46,7 @@ get_header();
 	$queried_object = get_queried_object();
 	$post_type      = $queried_object->name;
 
+	/* TODO: Use this query with Page Template.
 	$args = array(
 		'post_type'      => $post_type,
 		'posts_per_page' => -1,
@@ -53,6 +54,10 @@ get_header();
 		'order'          => 'ASC'
 	);
 	$post_query = new WP_Query($args);
+	*/
+
+	global $wp_query;
+	$post_query = $wp_query;
 	if( $post_query->have_posts() ) :
 		// Start Inline Styles.
 		// TODO: Set this bg-image through CMS.
@@ -94,7 +99,7 @@ get_header();
 		<section id="attorneys-archive-image-swap-section">
 			<div class="container-fluid container-xxl container-ext pad-onetwenty container-attorneys-archive-image-swap-section">
 				<header class="section-header theme-header">
-					<div class="theme-heading stroke-border">
+					<div class="theme-heading stroke-border contrast-for-dark-bg">
 						<div class="theme-heading-outer stroke-border-inner">
 							<div class="theme-heading-inner stroke-border-lvl-three">
 								<h2 class="theme-heading-title section-title bolt-on-h1">
