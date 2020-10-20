@@ -14,6 +14,12 @@
 	padding: 1em .5em;
 	font-size: 3.2rem;
 	line-height: 1;
+	&.contrast-for-dark-bg {
+		text-shadow: 0 0.035em 0.025em rgba(0, 0, 0, 0.6);
+		&:before {
+			background-image: radial-gradient(rgba(255, 255, 255, .65), rgba(255, 255, 255, .16) 50%, transparent 70%);
+		}
+	}
 }
 .theme-heading,
 .theme-heading-inner {
