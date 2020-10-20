@@ -513,3 +513,39 @@ function add_mail_recipients_on_wpcf7_submit($array) {
 	return $array;
 }
 add_filter( 'wpcf7_posted_data', 'add_mail_recipients_on_wpcf7_submit', 10, 1 );
+
+/**
+ * Find Select Tags in WPCF7 forms and
+ * set size attribute to options Length up to a maximum of 5.
+ * @link https://stackoverflow.com/questions/46274317/how-to-add-a-custom-attribute
+ * @link https://stackoverflow.com/questions/9478330/php-how-can-i-retrieve-a-div-tag-attribute-value
+ * @link https://www.php.net/manual/en/book.dom.php
+ *
+ * @param string - $content - The html loaded from WPCF7 Shortcodes
+ * @return string - returns doc $content after size attribute has been added to select tags.
+ */
+function bolt_on_add_size_to_wpcf7_multiple_select( $content ) {
+	$doc     = DOMDocument::loadHTML($content);
+	$xpath   = new DOMXPath($doc);
+	$query   = "//select";
+	$entries = $xpath->query($query);
+	// we are replacing content with the Doc Body's children
+	foreach ($entries as $entry) :
+		$first_option_text = $entry->firstChild->textContent;
+		$first_option_text = str_replace( array('-- ',' --'), '', $first_option_text );
+		$child_nodes       = $entry->childNodes;
+		foreach ( $child_nodes as $key=>$child_node ) :
+			$text_content = $child_node->textContent;
+			$child_node->setAttribute('title', $text_content);
+			if ( $key === 0 ) :
+				$first_option_text = str_replace( array('-- ',' --'), '', $text_content );
+				$entry->setAttribute('title', $first_option_text);
+			endif;
+		endforeach;
+	endforeach;
+	$doc_body    = $doc->getElementsByTagName('body')->childNodes;
+	$new_content = $doc->saveHTML( $doc_body );
+
+	return $new_content;
+}
+add_filter( 'wpcf7_form_elements', 'bolt_on_add_size_to_wpcf7_multiple_select' );
