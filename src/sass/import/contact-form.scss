@@ -21,6 +21,12 @@
 			margin-left: 0;
 		}
 	}
+	select {
+		&.input-field {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
 	.mail-recipients {
 		display: none !important;
 	}
