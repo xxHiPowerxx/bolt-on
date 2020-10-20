@@ -90,8 +90,7 @@
             ],
             "taxonomy": "",
             "filters": [
-                "search",
-                "post_type"
+                "search"
             ],
             "elements": [
                 "featured_image"
@@ -99,6 +98,46 @@
             "min": "",
             "max": "",
             "return_format": "object"
+        },
+        {
+            "key": "field_5f84a5b0ba075",
+            "label": "Extra Attorney Practice Areas",
+            "name": "extra_attorney_practice_areas",
+            "type": "repeater",
+            "instructions": "Enter Practice Areas that are not featured on this website. All Entries will follow the <b>Attorney Practice Areas<\/b> and will be Comma Delimited.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5f84a62aba076",
+                    "label": "Extra Attorney Practice Area",
+                    "name": "extra_attorney_practice_area",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
         },
         {
             "key": "field_5e728c66285f5",
@@ -643,5 +682,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Configure the Attorney with these Attributes. These Attributes can be used in different places throughout the website.",
-    "modified": 1598465198
+    "modified": 1602529027
 }

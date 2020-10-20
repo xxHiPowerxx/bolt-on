@@ -6,16 +6,17 @@
  *
  * @package bolt-on
  */
-$attorney_full_name       = get_the_title();
-$attorney_full_name_array = explode(' ', $attorney_full_name );
-$attorney_first_name      = $attorney_full_name_array[0];
-$attorney_last_name       = end($attorney_full_name_array);
-$attorney_middle_initial  = isset( $attorney_full_name_array[2] ) ?
-													 $attorney_full_name_array[1] :
-													 '';
-$attorney_title           = esc_attr( get_field( 'attorney_title' ) );
-$attorney_practice_areas  = get_field( 'attorney_practice_areas' );
-$site_phone_number        = get_theme_mod( 'site_phone_number', '' );
+$attorney_full_name             = get_the_title();
+$attorney_full_name_array       = explode(' ', $attorney_full_name );
+$attorney_first_name            = $attorney_full_name_array[0];
+$attorney_last_name             = end($attorney_full_name_array);
+$attorney_middle_initial        = isset( $attorney_full_name_array[2] ) ?
+	$attorney_full_name_array[1] :
+	'';
+$attorney_title                 = esc_attr( get_field( 'attorney_title' ) );
+$attorney_practice_areas        = get_field( 'attorney_practice_areas' );
+$extra_attorney_practice_areas  = get_field( 'extra_attorney_practice_areas' );
+$site_phone_number              = get_theme_mod( 'site_phone_number', '' );
 
 // Content Sections.
 // Only store these for now, the rest are repeaters and require validation.
@@ -104,14 +105,16 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 					<?php endif; ?>
 				</header><!-- .entry-header -->
 			<?php endif; //endif ( $attorney_full_name || $attorney_title ) : ?>
-			<?php if ( $attorney_practice_areas ) : ?>
+			<?php if ( $attorney_practice_areas || $extra_attorney_practice_areas ) : ?>
 				<div class="practice-areas">
 					<h3 class="practice-areas-title">Practice Areas:</h3>
 					<?php
 					ob_start();
 					// Loop Through Attorney Practice Areas.
-					$last = end($attorney_practice_areas);
-					foreach ( $attorney_practice_areas as $key=>$attorney_practice_area ) :
+					$last = $extra_attorney_practice_areas ?
+						end( $extra_attorney_practice_areas ) :
+						end( $attorney_practice_areas );
+					foreach ( $attorney_practice_areas as $attorney_practice_area ) :
 						$practice_area_link  = get_permalink( $attorney_practice_area );
 						$long_title          = get_the_title( $attorney_practice_area );
 						$short_title         = esc_attr( get_field( 'short_title', $attorney_practice_area ) );
@@ -133,11 +136,24 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 							<?php
 						endif;
 					endforeach; //endforeach ($attorney_practice_areas as $attorney_practice_area) :
+					foreach ( (array) $extra_attorney_practice_areas as $ex_attorney_practice_area ) :
+						$ex_practice_area_title = $ex_attorney_practice_area['extra_attorney_practice_area'];
+						if ( $ex_practice_area_title ) :
+							?>
+							<span class="anchor-attorney-practice-area anchor-practice-area"><span class="attorney-practice-area practice-area"><?php echo $ex_practice_area_title; ?></span></span>
+							<?php
+							if ( $last !== $ex_attorney_practice_area ) :
+								?>
+								<span class="comma-sperator">,&nbsp;</span>
+								<?php
+							endif;
+						endif;
+					endforeach; // endforeach ( (array) $extra_attorney_practice_areas as $ex_attorney_practice_area ) :
 					$content = ob_get_clean();
 					echo preg_replace('/>\s+</m', '><', $content);
 					?>
 				</div><!-- /.practice-areas -->
-			<?php endif; // endif ( $attorney_practice_areas ) : ?>
+			<?php endif; // endif ( $attorney_practice_areas || $extra_attorney_practice_areas ) : ?>
 
 			<div id="attorney-attributes-sections">
 
