@@ -269,10 +269,10 @@ jQuery(document).ready(function($) {
 			// If no paddingTop then mediaQuery is not active and we don't need to run this.
 			if ( paddingTop > 0 ) {
 				var styleTagId = 'bolt-on-banner-style-' + index,
-				$styleTag = $('#' + styleTagId),
-				headerHeight = headerHeight || $header[0].getBoundingClientRect().height,
-				$adminBar = $('#wpadminbar').first(),
-				adminBarHeight = 0;
+					$styleTag = $('#' + styleTagId),
+					headerHeight = headerHeight || $header[0].getBoundingClientRect().height,
+					$adminBar = $('#wpadminbar').first(),
+					adminBarHeight = 0;
 				if ( ! $styleTag.length ) {
 					$styleTagHTML = '<style id="' + styleTagId + '"></style>';
 					$body.append($styleTagHTML);
@@ -282,8 +282,8 @@ jQuery(document).ready(function($) {
 					adminBarHeight = $adminBar[0].getBoundingClientRect().height;
 				}
 				var bannerPad = headerHeight + paddingTop + adminBarHeight,
-				css = '.bolt-on-banner:before{padding-bottom:' + bannerPad + 'px;}';
-				$styleTag.html(css);
+					css = '.bolt-on-banner:before{padding-bottom:' + bannerPad + 'px;}';
+					$styleTag.html(css);
 			}
 		});
 	}
@@ -291,6 +291,14 @@ jQuery(document).ready(function($) {
 	function preventPaste() {
 		$('.preventPaste').on('paste', function (e) {
 			e.preventDefault();
+			var $wpcf7NotValid = $(this).siblings('.wpcf7-not-valid-tip'),
+				output = 'Pasting has been prevented for security purposes.';
+			if ( ! $wpcf7NotValid.length ) {
+				var wpcf7NotValidHTML = '<span class="wpcf7-not-valid-tip" aria-hidden="true"></span>'
+				$(this).parent().append(wpcf7NotValidHTML);
+				$wpcf7NotValid = $(this).siblings('.wpcf7-not-valid-tip');
+			}
+			$wpcf7NotValid.text(output);
 	 });
 	}
 
