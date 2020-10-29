@@ -40,10 +40,10 @@
         },
         {
             "key": "field_5f68e96042df7",
-            "label": "Contact Form Practice Areas",
+            "label": "Contact Form Extra Settings",
             "name": "contact_form_practice_areas_repeater",
             "type": "repeater",
-            "instructions": "Select which Practice Areas to display in the \"Practice Area\" Select Drop Down in the corresponding Contact Form.",
+            "instructions": "These are extra Settings for WPCF7 Contact forms for this site.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -55,7 +55,7 @@
             "min": 1,
             "max": 0,
             "layout": "block",
-            "button_label": "Add Practice Areas Group",
+            "button_label": "Add Contact Form",
             "sub_fields": [
                 {
                     "key": "field_5f68f49c42df8",
@@ -84,7 +84,7 @@
                     "label": "Practice Area Mail Recipients",
                     "name": "practice_area_mail_recipients_repeater",
                     "type": "repeater",
-                    "instructions": "",
+                    "instructions": "Select which Practice Areas to display in the \"Practice Area\" Select Drop Down in the corresponding Contact Form.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -93,7 +93,7 @@
                         "id": ""
                     },
                     "collapsed": "field_5f68f54742df9",
-                    "min": 1,
+                    "min": 0,
                     "max": 0,
                     "layout": "block",
                     "button_label": "Add Practice Area",
@@ -126,6 +126,103 @@
                             "name": "mail_recipients",
                             "type": "textarea",
                             "instructions": "List of E-Mail Recipients for this Practice Area listed in the Contact Form.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 2,
+                            "new_lines": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_5f90740ac93fb",
+                    "label": "Captorra Case GUID Overrides for Contact Form Inputs",
+                    "name": "ccgofcfi_repeater",
+                    "type": "repeater",
+                    "instructions": "Override Captorra Case GUID and\/or Mail Recipients based on WPCF7 Input being filled or select being changed.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_5f907523c93fc",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Case GUID",
+                    "sub_fields": [
+                        {
+                            "key": "field_5f907523c93fc",
+                            "label": "Input Name",
+                            "name": "input_name",
+                            "type": "text",
+                            "instructions": "Name of WPCF7 Input Field\/Select\/Textarea",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5f9075edc93fd",
+                            "label": "Input Value",
+                            "name": "input_value",
+                            "type": "text",
+                            "instructions": "<i>optional<\/i> - Case GUID will override when input field value matches this value. Leave Blank for <b>Any Value<\/b>",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5f907811c93fe",
+                            "label": "Captorra Case GUID Override for Input",
+                            "name": "captorra_case_guid_override_for_input",
+                            "type": "text",
+                            "instructions": "Captorra Case GUID",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5f907970c9400",
+                            "label": "Extra Mail Recipients",
+                            "name": "extra_mail_recipients",
+                            "type": "textarea",
+                            "instructions": "List of extra E-Mail Recipients that are added when this is Name and\/or Value meet conditions.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -178,5 +275,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1600973874
+    "modified": 1603326620
 }
