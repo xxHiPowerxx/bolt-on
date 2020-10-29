@@ -141,12 +141,13 @@
 			width: 8rem;
 			height: 6rem;
 			float: left;
-			margin-right: 3rem;
+			margin-right: 1em;
 			@media (min-width: $vp_xs) {
 				float: none;
 				width: 8rem;
 				min-width: 8rem;
 				height: 10rem;
+				margin-right: 1.7647em;
 			}
 			background-size: contain;
 			background-position: 50% 50%;
