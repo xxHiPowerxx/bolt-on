@@ -84,6 +84,18 @@ function bolt_on_contact_form_practice_areas(){
 	return $practice_area_titles;
 }
 
+function wpcf7_post_id_tag_handler($tag){
+	$tag_name = 'post-id';
+
+	global $post;
+	$post_id = $post->ID;
+	//create html and return
+	$html = '<input type="hidden"  name="' . $tag_name . '" value="' . $post_id . '" />';
+
+	return $html;
+
+}
+
 /**
  * Create Practice Areas Custom Contact Form 7 Tag.
  * 
@@ -148,6 +160,7 @@ function bolt_on_wpcf7_tag_generator() {
 	wpcf7_add_form_tag( array( 'practice_areas', 'practice_areas*' ), 
 	'wpcf7_practice_areas_tag_handler', true );
 	wpcf7_add_form_tag('mail_recipients', 'wpcf7_mail_recipients_tag_handler');
+	wpcf7_add_form_tag('post_id', 'wpcf7_post_id_tag_handler');
 }
 add_action( 'wpcf7_init', 'bolt_on_wpcf7_tag_generator' );
 
