@@ -42,6 +42,25 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5f9aec45c17a8",
+            "label": "Extra Mail Recipients",
+            "name": "extra_mail_recipients",
+            "type": "textarea",
+            "instructions": "List of extra E-Mail Recipients that are added when Contact Form is Submitted on this post.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 2,
+            "new_lines": ""
         }
     ],
     "location": [
@@ -81,6 +100,6 @@
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
-    "description": "",
-    "modified": 1598901361
+    "description": "Contact Form Settings for <b>Post, Practice Area, Page, and Video <i>Post Types<\/i><\/b>",
+    "modified": 1603988698
 }

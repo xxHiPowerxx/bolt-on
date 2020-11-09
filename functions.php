@@ -484,55 +484,74 @@ function wpcf7_geolocation_spam( $spam ) {
 }
 add_filter( 'wpcf7_spam', 'wpcf7_geolocation_spam', 10, 1 );
 */
-
 function add_mail_recipients_on_wpcf7_submit($array) {
-	$mail_recipients = '';
+	$array['mail-recipients']             = $array['mail-recipients'] ? : '';
 	$contact_form_practice_areas_repeater = get_field(
 		'contact_form_practice_areas_repeater',
 		'options'
 	);
-	foreach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
-		if ( isset( $array['practice-area'] ) ) :
-			$practice_area_mail_recipients_repeater = $contact_form_practice_area['practice_area_mail_recipients_repeater'];
-			foreach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
-				$practice_area = $practice_area_mail_recipient['practice_area'];
-				$long_title    = $practice_area->post_title;
-				$short_title   = $practice_area->short_title;
-				$post_title    = $short_title ? : $long_title;
-				$post_title    = esc_attr( $post_title );
-				if ( $post_title === $array['practice-area'] ) :
-					$mail_recipients .= $practice_area_mail_recipient['mail_recipients'];
-					break;
-				endif;
-			endforeach;// endforeach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
-		endif; // endif ( isset( $array['practice-area'] ) ) :
-		// ccgofcfi_repeater = Captorra Case GUID Overrides for Contact Form Inputs Repeater
-		$ccgofcfi_repeater = $contact_form_practice_area['ccgofcfi_repeater'];
-		foreach ( (array) $ccgofcfi_repeater as $ccgofcfi_entry ) :
-			$input_name = $ccgofcfi_entry['input_name'];
-			// Make sure that submitted information has a field that matches field from override.
-			if ( isset( $array[$input_name] ) ) :
-				$input_value = $ccgofcfi_entry['input_value'];
-				if ( ! $input_value || (array) $input_value === (array) $array[$input_name][0] ) :
-					$case_guid_override    = $ccgofcfi_entry['captorra_case_guid_override_for_input'];
-					$extra_mail_recipients = $ccgofcfi_entry['extra_mail_recipients'];
-					if ( $array['ccguid'] && $case_guid_override ) :
-						$array['ccguid'] = $case_guid_override;
-					endif;
-					if ( $extra_mail_recipients ) :
-						// Ensure that Extra Mail Recipients has a leading comma.
-						if ( strpos( substr( trim( $extra_mail_recipients ), 0, 2), ',' ) === false ) :
-							$extra_mail_recipients = ', ' . $extra_mail_recipients;
-						endif;
-						$mail_recipients .= $extra_mail_recipients;
-					endif;
-				endif; // endif ( ! $input_value && $input_value === $array[$input_name] ) :
-			endif; // endif ( isset( $array[$input_name] ) ) :
-		endforeach;
-		if ( $mail_recipients !== '' ) :
-			$array["mail-recipients"] = $mail_recipients;
+	$current_contact_form = WPCF7_ContactForm::get_current();
+
+	// Utility Function to Ensure Leading Commas.
+	function ensure_leading_commas( $string ) {
+		if ( strpos( substr( trim( $string ), 0, 2), ',' ) === false ) :
+			$string = ', ' . $string;
 		endif;
+		return $string;
+	}
+
+	foreach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
+		if ( $current_contact_form->id === $contact_form_practice_area['contact_form']->ID ) :
+			$mail_recipients                      = '';
+			// Add Extra Mail Recipients set in Post, Practice Area, Page, and Video Post Types
+			$post_id = $array['post-id'];
+			$_extra_mail_recipients = get_field( 'extra_mail_recipients', $post_id );
+			if ( $_extra_mail_recipients ) :
+				$array['mail-recipients'] .= ', ' . $_extra_mail_recipients;
+			elseif ( isset( $array['practice-area'] ) ) : // ! if ( $_extra_mail_recipients ) :
+				$practice_area_mail_recipients_repeater = $contact_form_practice_area['practice_area_mail_recipients_repeater'];
+				foreach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+					$practice_area        = $practice_area_mail_recipient['practice_area'];
+					$long_title           = $practice_area->post_title;
+					$short_title          = $practice_area->short_title;
+					$post_title           = $short_title ? : $long_title;
+					$post_title           = wp_specialchars_decode( esc_attr( $post_title ) );
+					$decode_practice_area = wp_specialchars_decode( $array['practice-area'] );
+					if ( $post_title === $decode_practice_area ) :
+						$mail_recipients .= ensure_leading_commas( $practice_area_mail_recipient['mail_recipients'] );
+						break;
+					endif;
+				endforeach;// endforeach ( (array) $practice_area_mail_recipients_repeater as $practice_area_mail_recipient ) :
+			endif; // endif ( isset( $array['practice-area'] ) ) :
+
+			// ccgofcfi_repeater = Captorra Case GUID Overrides for Contact Form Inputs Repeater
+			$ccgofcfi_repeater = $contact_form_practice_area['ccgofcfi_repeater'];
+			foreach ( (array) $ccgofcfi_repeater as $ccgofcfi_entry ) :
+				$input_name = $ccgofcfi_entry['input_name'];
+				// Make sure that submitted information has a field that matches field from override.
+				if ( isset( $array[$input_name] ) ) :
+					$input_value = $ccgofcfi_entry['input_value'];
+					if ( ! $input_value || (array) $input_value === (array) $array[$input_name][0] ) :
+						$case_guid_override    = $ccgofcfi_entry['captorra_case_guid_override_for_input'];
+						$extra_mail_recipients = $ccgofcfi_entry['extra_mail_recipients'];
+						if ( $array['ccguid'] && $case_guid_override ) :
+							$array['ccguid'] = $case_guid_override;
+						endif;
+						if ( $extra_mail_recipients ) :
+							// Ensure that Extra Mail Recipients has a leading comma.
+							$mail_recipients .= ensure_leading_commas( $extra_mail_recipients );
+						endif;
+					endif; // endif ( ! $input_value && $input_value === $array[$input_name] ) :
+				endif; // endif ( isset( $array[$input_name] ) ) :
+			endforeach;
+
+			if ( $mail_recipients !== '' ) :
+				$array['mail-recipients'] .= ensure_leading_commas( $mail_recipients );
+			endif;
+			break;
+		endif; // endif ( $current_contact_form->id === $contact_form_practice_area['contact_form']->ID ) :
 	endforeach ; // endforeach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
+
 	return $array;
 }
 add_filter( 'wpcf7_posted_data', 'add_mail_recipients_on_wpcf7_submit', 10, 1 );
@@ -581,3 +600,14 @@ function bolt_on_mod_attorneys_archive_query( $query ) {
 	endif;
 }
 add_filter( 'pre_get_posts', 'bolt_on_mod_attorneys_archive_query' );
+
+//     // define the wpcf7_submit callback 
+// function action_wpcf7_submit( $instance, $result ) {
+// 	$submission = WPCF7_Submission::get_instance();
+// 	$post_id = $submission->get_meta( 'container_post_id' );
+// 	var_dump($submission);
+// 	die;
+// }; 
+					 
+// 	// add the action 
+// 	add_action( 'wpcf7_submit', 'action_wpcf7_submit', 10, 2 ); 
