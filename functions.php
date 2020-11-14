@@ -305,7 +305,7 @@ function change_posts_order_relationship( $args, $field, $post ) {
 	$args['post_parent'] = 0;
 	return $args;
 }
-add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change_posts_order_relationship', 10, 3);
+// add_filter('acf/fields/relationship/query/name=attorney_practice_areas', 'change_posts_order_relationship', 10, 3);
 add_filter('acf/fields/relationship/query/name=case_practice_area', 'change_posts_order_relationship', 10, 3);
 
 
