@@ -130,21 +130,25 @@ $contact_form_title = 'Connect With ' . $attorney_first_name;
 						<a class="anchor-attorney-practice-area anchor-practice-area" href="<?php echo $practice_area_link; ?>" <?php echo $practice_area_title_attr; ?>><span class="attorney-practice-area practice-area"><?php echo $practice_area_title; ?></span></a>
 						<?php
 						// Seperate Each Anchor tag with comma if not last.
-						if ( $last !== $attorney_practice_area ) :
+						if ( $practice_area_title && $last !== $attorney_practice_area ) :
 							?>
-							<span class="comma-sperator">,&nbsp;</span>
+							<span class="comma-seperator">,&nbsp;</span>
 							<?php
 						endif;
 					endforeach; //endforeach ($attorney_practice_areas as $attorney_practice_area) :
 					foreach ( (array) $extra_attorney_practice_areas as $ex_attorney_practice_area ) :
-						$ex_practice_area_title = $ex_attorney_practice_area['extra_attorney_practice_area'];
+						$ex_practice_area_title   = $ex_attorney_practice_area['extra_attorney_practice_area'];
+						$last_practice_area_title = is_array( $last ) ? $last['extra_attorney_practice_area'] : null;
 						if ( $ex_practice_area_title ) :
 							?>
 							<span class="anchor-attorney-practice-area anchor-practice-area"><span class="attorney-practice-area practice-area"><?php echo $ex_practice_area_title; ?></span></span>
 							<?php
-							if ( $last !== $ex_attorney_practice_area ) :
+							if (
+								$last_practice_area_title !== '' &&
+								$last !== $ex_attorney_practice_area
+							) :
 								?>
-								<span class="comma-sperator">,&nbsp;</span>
+								<span class="comma-seperator">,&nbsp;</span>
 								<?php
 							endif;
 						endif;
