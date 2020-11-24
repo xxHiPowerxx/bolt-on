@@ -220,6 +220,9 @@ textarea {
 .anchor-site-phone-number {
 	@include smoothest-transition;
 }
+.site-phone-number {
+	white-space: nowrap;
+}
 
 
 /*   Collapse Control Indicator   */
