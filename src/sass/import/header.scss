@@ -98,7 +98,11 @@ input[type='search'] {
 		color: $primary-darker;
 		@at-root #{$trans-header} & {
 			border-color: $white;
-			color: $tertiary;
+			color: $white;
+			filter: saturate(0) brightness(5);
+			+ .btn-submit {
+				color: $white;
+			}
 		}
 		border-bottom-width: 2px;
 		padding: 0;
@@ -131,7 +135,7 @@ input[type='search'] {
 }
 .icon-search {
 	font-size: 2em;
-	padding: 0.4em 0.4em 0.4em 0;
+	padding: .6em .4em .6em 0;
 	margin-bottom: 0;
 	cursor: pointer;
 	@at-root .site-header & {
