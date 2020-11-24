@@ -44,11 +44,12 @@ add_shortcode('recent-posts', 'recent_posts_function');
  * Will Render Site Phone Number in Widget or Content.
  */
 function get_site_phone_number_func( $atts = '' ) {
-	$site_phone_number = esc_attr( get_theme_mod('site_phone_number', '') );
+	$site_phone_number   = esc_attr( get_theme_mod('site_phone_number', '') );
+	$phone_number_markup = '<span class="desktop site-phone-number">' . $site_phone_number . '</span>';
 	if ( $atts !== '' && $atts !== false ) :
-		$return_result = '<a class="anchor-site-phone-number" href="tel:' . $site_phone_number . '"><span class="desktop site-phone-number">' . $site_phone_number . '</span></a>';
+		$return_result = '<a class="anchor-site-phone-number" href="tel:' . $site_phone_number . '">' . $phone_number_markup . '</a>';
 	else :
-		$return_result = $site_phone_number;
+		$return_result = $phone_number_markup;
 	endif;
 	return $return_result;
 }
