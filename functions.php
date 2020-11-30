@@ -490,7 +490,9 @@ function add_mail_recipients_on_wpcf7_submit($array) {
 		'contact_form_practice_areas_repeater',
 		'options'
 	);
-	$current_contact_form = WPCF7_ContactForm::get_current();
+	$current_contact_form                 = WPCF7_ContactForm::get_current();
+	$message                              = $array['message'] ? : '';
+	// var_dump($array);
 
 	// Utility Function to Ensure Leading Commas.
 	function ensure_leading_commas( $string ) {
@@ -500,11 +502,28 @@ function add_mail_recipients_on_wpcf7_submit($array) {
 		return $string;
 	}
 
+	// Utility Function to Compare Posted Values with Values Provided in Settings
+	// using Exact or Contains Operators to perform the check.
+	function compare_ccgofcfi_values( $exact_comparison, $comparand, $comparator ) {
+		$comparison = false;
+		if ( $exact_comparison ) :
+			$comparison = $comparand === $comparator;
+		else:
+			$comparison = strpos(
+				strtolower( $comparand ),
+				strtolower( $comparator )
+			) !== false ?
+				true :
+				false;
+		endif;
+		return $comparison;
+	}
+
 	foreach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
 		if ( $current_contact_form->id === $contact_form_practice_area['contact_form']->ID ) :
-			$mail_recipients                      = '';
+			$mail_recipients        = '';
 			// Add Extra Mail Recipients set in Post, Practice Area, Page, and Video Post Types
-			$post_id = $array['post-id'];
+			$post_id                = $array['post-id'];
 			$_extra_mail_recipients = get_field( 'extra_mail_recipients', $post_id );
 			if ( $_extra_mail_recipients ) :
 				$array['mail-recipients'] .= ', ' . $_extra_mail_recipients;
@@ -527,31 +546,62 @@ function add_mail_recipients_on_wpcf7_submit($array) {
 			// ccgofcfi_repeater = Captorra Case GUID Overrides for Contact Form Inputs Repeater
 			$ccgofcfi_repeater = $contact_form_practice_area['ccgofcfi_repeater'];
 			foreach ( (array) $ccgofcfi_repeater as $ccgofcfi_entry ) :
-				$input_name = $ccgofcfi_entry['input_name'];
+				$input_name                           = $ccgofcfi_entry['input_name'];
+				$input_value_equals_array_input_value = false;
 				// Make sure that submitted information has a field that matches field from override.
 				if ( isset( $array[$input_name] ) ) :
-					$input_value = $ccgofcfi_entry['input_value'];
-					if ( ! $input_value || (array) $input_value === (array) $array[$input_name][0] ) :
-						$case_guid_override    = $ccgofcfi_entry['captorra_case_guid_override_for_input'];
-						$extra_mail_recipients = $ccgofcfi_entry['extra_mail_recipients'];
-						if ( $array['ccguid'] && $case_guid_override ) :
-							$array['ccguid'] = $case_guid_override;
+					$input_values_repeater = $ccgofcfi_entry['input_values_repeater'];
+					foreach ( $input_values_repeater as $input_value_entry ) :
+						$input_value       = $input_value_entry['input_value'];
+						$input_value_exact = $input_value_entry['input_value_exact'];
+						if ( is_array( $array[$input_name] ) ) :
+							// If Input Val from Contact Form is array,
+							// Loop through and check to see Contact Form input value is equal
+							// to our input value in Field.
+							$array_input_values = $array[$input_name];
+							foreach ( $array_input_values as $array_input_value ) :
+								$input_value_equals_array_input_value = compare_ccgofcfi_values(
+									$input_value_exact,
+									$array_input_value,
+									$input_value
+								);
+								// If we find our value, break the loop.
+								if ( $input_value_equals_array_input_value ) :
+									break;
+								endif;
+							endforeach;
+						else:
+							$input_value_equals_array_input_value = compare_ccgofcfi_values(
+								$input_value_exact,
+								$array[$input_name],
+								$input_value
+							);
 						endif;
-						if ( $extra_mail_recipients ) :
-							// Ensure that Extra Mail Recipients has a leading comma.
-							$mail_recipients .= ensure_leading_commas( $extra_mail_recipients );
-						endif;
-					endif; // endif ( ! $input_value && $input_value === $array[$input_name] ) :
+						if (
+							! $input_value ||
+							$input_value_equals_array_input_value !== false
+						) :
+							$case_guid_override    = $ccgofcfi_entry['captorra_case_guid_override_for_input'];
+							$extra_mail_recipients = $ccgofcfi_entry['extra_mail_recipients'];
+							if ( $array['ccguid'] && $case_guid_override ) :
+								$array['ccguid'] = $case_guid_override;
+							endif;
+							if ( $extra_mail_recipients ) :
+								// Ensure that Extra Mail Recipients has a leading comma.
+								$mail_recipients .= ensure_leading_commas( $extra_mail_recipients );
+							endif;
+						endif; // endif ( ! $input_value && $input_value === $array[$input_name] ) :
+					endforeach; //endforeach ( $input_values_repeater as $input_value ) :
 				endif; // endif ( isset( $array[$input_name] ) ) :
-			endforeach;
-
+			endforeach; // endforeach ( (array) $ccgofcfi_repeater as $ccgofcfi_entry ) :
 			if ( $mail_recipients !== '' ) :
-				$array['mail-recipients'] .= ensure_leading_commas( $mail_recipients );
+				$array['mail-recipients'] .= $mail_recipients;
 			endif;
 			break;
 		endif; // endif ( $current_contact_form->id === $contact_form_practice_area['contact_form']->ID ) :
 	endforeach ; // endforeach ( (array) $contact_form_practice_areas_repeater as $contact_form_practice_area ) :
-
+		var_dump($array);
+die;
 	return $array;
 }
 add_filter( 'wpcf7_posted_data', 'add_mail_recipients_on_wpcf7_submit', 10, 1 );
