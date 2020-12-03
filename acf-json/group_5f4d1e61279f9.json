@@ -146,7 +146,7 @@
                     "label": "Captorra Case GUID Overrides for Contact Form Inputs",
                     "name": "ccgofcfi_repeater",
                     "type": "repeater",
-                    "instructions": "Override Captorra Case GUID and\/or Mail Recipients based on WPCF7 Input being filled or select being changed.",
+                    "instructions": "OVERRIDE Captorra Case GUID and\/or ADD Mail Recipients based on WPCF7 Input being filled or select being changed.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -169,7 +169,7 @@
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
@@ -180,23 +180,63 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5f9075edc93fd",
-                            "label": "Input Value",
-                            "name": "input_value",
-                            "type": "text",
-                            "instructions": "<i>optional<\/i> - Case GUID will override when input field value matches this value. Leave Blank for <b>Any Value<\/b>",
+                            "key": "field_5fbd5dd2d99df",
+                            "label": "Input Value(s)",
+                            "name": "input_values_repeater",
+                            "type": "repeater",
+                            "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "50",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "default_value": "",
-                            "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
+                            "collapsed": "field_5f9075edc93fd",
+                            "min": 1,
+                            "max": 0,
+                            "layout": "block",
+                            "button_label": "Add Input Value",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5f9075edc93fd",
+                                    "label": "Input Value",
+                                    "name": "input_value",
+                                    "type": "text",
+                                    "instructions": "<i>optional<\/i> - Case GUID will OVERRIDE and\/or Mail Recipients will be ADDED when input field value matches this value. Leave Blank for <b>Any Value<\/b><br \/>\r\nNote: this is case insensitive.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_5fbd5c8fd99de",
+                                    "label": "Input Value Exact",
+                                    "name": "input_value_exact",
+                                    "type": "true_false",
+                                    "instructions": "Select whether the <b><i>Contact Form<\/i> Input Value<\/b> must be exact or contain <b><i>THIS<\/i> Input Value<\/b>.",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "message": "",
+                                    "default_value": 0,
+                                    "ui": 1,
+                                    "ui_on_text": "Exact",
+                                    "ui_off_text": "Contains"
+                                }
+                            ]
                         },
                         {
                             "key": "field_5f907811c93fe",
@@ -222,7 +262,7 @@
                             "label": "Extra Mail Recipients",
                             "name": "extra_mail_recipients",
                             "type": "textarea",
-                            "instructions": "List of extra E-Mail Recipients that are added when this is Name and\/or Value meet conditions.",
+                            "instructions": "List of extra E-Mail Recipients that are added when this <b>Input Name<\/b> <i>and\/or<\/i> <b>Input Value<\/b> meet conditions.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -235,6 +275,25 @@
                             "maxlength": "",
                             "rows": 2,
                             "new_lines": ""
+                        },
+                        {
+                            "key": "field_5fbd96a4616a7",
+                            "label": "Override Mail Recipients?",
+                            "name": "override_mail_recipients",
+                            "type": "true_false",
+                            "instructions": "Select whether the Mail Recipients will Override or be Added to the current Mail Recipients List (aside from the defaults set in the Contact Form Itself) when the Input Name\/Value Conditions are met.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "message": "",
+                            "default_value": 0,
+                            "ui": 1,
+                            "ui_on_text": "Override",
+                            "ui_off_text": "Add To"
                         }
                     ]
                 }
@@ -275,5 +334,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1603326620
+    "modified": 1606336375
 }
