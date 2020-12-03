@@ -51,9 +51,14 @@
 	}
 	p,
 	ul,
-	ol {
+	ol,
+	.wp-block-table.table,
+	.table {
 		font-size: 1.7rem;
 		line-height: 2;
+	}
+	.table {
+		line-height: 1.5;
 	}
 	strong {
 		> p {
@@ -62,7 +67,31 @@
 	}
 
 	/*   Wordpress Block Overrides   */
+	.wp-block-table,
+	table:not(.wp-block-table) {
+		&:not(:first-child) {
+			margin-top: 3rem;
+		}
+	}
+	.wp-block-columns {
+		&:not(:first-child) {
+			margin-top: 3rem;
+		}
+		> .wp-block-column {
+			&:not(:first-child) {
+				@media (max-width: 599px) {
+					margin-top: 6rem;
+				}
+			}
+		}
+	}
 	.wp-block-image {
+		&.card-style {
+			box-shadow: none;
+			img {
+				@include card-style;
+			}
+		}
 		figure {
 			margin-bottom: 1.5rem;
 		}
@@ -88,7 +117,22 @@
 			height: auto;
 		}
 	}
-	/*   Wordpress Block Overrides   */
+	.wp-block-group {
+    clear: both;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+		}
+
+		hr {
+			margin-top: 3rem;
+			margin-bottom: 3rem;
+			&.wp-block-separator {
+				+ .wp-block-group {
+					padding-top: 0;
+				}
+			}
+		}  
+	/*   /Wordpress Block Overrides   */
 	img {
 		&.alignright {
 			float: right;

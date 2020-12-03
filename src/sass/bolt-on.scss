@@ -85,6 +85,13 @@ h1,
 		font-size: 2.2rem;
 		color: $primary-dark;
 		font-family: $font-fam-primary;
+		@at-root .theme-content &{
+			+ h3,
+			+ .bolt-on-h3 {
+				font-size: 2rem;
+				font-family: $font-fam-primary;
+			}
+		}
 	}
 }
 h2,
@@ -114,6 +121,30 @@ a {
 b,
 strong {
 	font-weight: 700;
+}
+
+.table {
+	thead,
+	tfoot {
+		tr {
+			text-align: center;
+			color: $white;
+			background-color: $secondary;
+			font-family: $font-fam-primary;
+		}
+	}
+}
+.table-striped {
+	tbody {
+		tr {
+			&:nth-of-type(odd) {
+				background-color: $primary-lighter;
+				th {
+					background-color: $secondary-light;
+				}
+			}
+		}
+	}
 }
 
 .bg-white {
