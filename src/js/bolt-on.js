@@ -322,9 +322,72 @@ jQuery(document).ready(function($) {
 			});
 		});
 	}
+	function scrollToTarget($target) {
+		// Make sure $target is a jQuery object.
+		$target = $target instanceof jQuery ? $target : $($target);
+		var targetTop = $target.offset().top,
+			siteHeaderHeight = window.siteHeaderHeight
+				? parseFloat(window.siteHeaderHeight)
+				: $(".site-header")[0].getBoundingClientRect().height,
+			padding = 30,
+			scrollPosition = targetTop - siteHeaderHeight - padding;
+		console.log('siteHeaderHeight', siteHeaderHeight);
+		console.log('$target', $target);
+		console.log('targetTop', targetTop);
+		console.log('scrollPosition', scrollPosition);
+		$("html, body").animate({ scrollTop: scrollPosition }, 350);
+	}
+	function interceptHashChange($target) {
+		$target = $target || null;
+		$(window).on("load hashchange", function (e) {
+			if (window.location.hash && $(window.location.hash).length) {
+				$target = $target || $(window.location.hash);
+			}
+			if ($target !== null && $target.length) {
+				scrollToTarget($target);
+			}
+		});
+	}
+	function contactUsClick() {
+		var _hash = '#contact-us';
+		function coreFunc($this) {
+			var targetForm = $('.wpcf7:visible').first();
+			scrollToTarget(targetForm);
+
+			// $this is only defined on the click/keyup events
+			// Not the initial load _hash check usage.
+			if ( $this !== undefined ) {
+				history.replaceState(
+					null,
+					null,
+					document.location.pathname + $this.attr("href")
+				);
+			}
+			targetForm.find('input:visible, select:visible, textarea:visible').first().focus();
+		}
+		$('[href*="' + _hash + '"]').on("click keyup", function (e) {
+			var key = e.key || e.keyCode;
+			if (key) {
+				var enterKey = key === "Enter" || key === 13;
+				var spaceKey = key === " " || key === 32;
+				if (!(enterKey || spaceKey)) {
+					return;
+				}
+			}
+			e.stopImmediatePropagation();
+			e.preventDefault();
+			coreFunc( $(this) );
+		});
+		// Fire on Load if location hash is _hash
+		if ( location.hash === _hash ) {
+			coreFunc();
+		}
+	}
 
 	function readyFuncs() {
 		detectPlatform();
+		interceptHashChange();
+		contactUsClick();
 		collapseOnHover();
 		activateMobileMenu();
 		sizeHeaderPad();
