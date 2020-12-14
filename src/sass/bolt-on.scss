@@ -35,6 +35,7 @@ h2,
 .bolt-on-h2 {
 	font-family: $font-fam-primary;
 }
+
 h1,
 .bolt-on-h1,
 h2,
@@ -76,6 +77,23 @@ h6,
 .font-fam-secondary {
 	font-family: $font-fam-secondary;
 }
+h1,
+.bolt-on-h1,
+h2,
+.bolt-on-h2,
+h3,
+.bolt-on-h3,
+h4,
+.bolt-on-h4,
+h5,
+.bolt-on-h5,
+h6,
+.bolt-on-h6 {
+	&.font-fam-primary {
+		font-family: $font-fam-primary;
+	}
+}
+
 h1,
 .bolt-on-h1 {
 	font-size: 4.5rem;
