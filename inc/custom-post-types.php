@@ -28,10 +28,10 @@ function bolt_on_custom_post_types() {
 		$post_handle      = str_replace( ' ','-', strtolower( $post_plural ) );
 
 		$return_result    = array(
-			'post_singular' => $post_singular,
-			'post_plural' => $post_plural,
+			'post_singular'    => $post_singular,
+			'post_plural'      => $post_plural,
 			'post_description' => $post_description,
-			'post_handle' => $post_handle,
+			'post_handle'      => $post_handle,
 		);
 
 		return $return_result;
@@ -250,7 +250,7 @@ function bolt_on_custom_post_types() {
 	/*   /Cases   */
 
 	/**
-	 * Create Cases Custom Post Type.
+	 * Create Video Custom Post Type.
 	 */
 	$post_singular    = 'Video';
 	$post_names       = create_post_labels( $post_singular );
