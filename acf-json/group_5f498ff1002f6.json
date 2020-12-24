@@ -3,11 +3,30 @@
     "title": "Contact Form",
     "fields": [
         {
+            "key": "field_5fe4cd2ecba67",
+            "label": "Remove Contact Form?",
+            "name": "remove_contact_form",
+            "type": "true_false",
+            "instructions": "Choose Whether to remove the Contact Form altogether from this post.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_5f49902dd29ae",
             "label": "Contact Form Override",
             "name": "contact_form_override",
             "type": "post_object",
-            "instructions": "Select Which Contact Form to use for this post or page.\r\nWill ignore Contact Form chosen for this Category in Contact Form Widget.",
+            "instructions": "Select Which Contact Form to use for this post or page.\r\nWill ignore Contact Form chosen for this Category in Contact Form Widget.\r\nTo Remove Contact Form, Toggle <b>Remove Contact Form<\/b> Setting to <b><i>Yes<\/i><\/b>.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -101,5 +120,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "Contact Form Settings for <b>Post, Practice Area, Page, and Video <i>Post Types<\/i><\/b>",
-    "modified": 1603988698
+    "modified": 1608830737
 }
